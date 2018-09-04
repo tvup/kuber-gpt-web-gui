@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Certificato;
 use App\User;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Auth;
 
 use Symfony\Component\Process\Process;
@@ -138,6 +139,28 @@ class CertificatoController extends Controller
     }
 
 
+
+
+
+    public function download($cert)
+    {
+        
+        $certificato = \App\Certificato::find($cert);
+        $name = $certificato->user;
+        $user = User::where('name', $name)->get()->first();
+        $tipo_vpn = $user->tipo_vpn;
+        
+        $file="/etc/openvpn/ca/keys/conf/".$name."_".$tipo_vpn.".ovpn";
+        return \Response::download($file);
+        
+    }
+
+
+
+
+
+
+
     //public function revoke(Certificato $certificato, User $user)
     public function revoke($cert)
     {
@@ -199,14 +222,24 @@ class CertificatoController extends Controller
         }
         //dd($certificati_attivi);
         if ($certificati_attivi == true) {
-            return view('admin.error', ['errore' => "Esitono già certificati validi per l'utente"]);
+            //return view('admin.error', ['errore' => "Esitono già certificati validi per l'utente"]);
+            return redirect()->back()->with('msg-danger', 'Errore: Esitono già certificati validi');
         }
 
         //procedo se non ha certificati validi attivi
 
         //$certificato = new \App\Certificato;
         
-        $process = new Process(array('/usr/bin/sudo', '/etc/openvpn/ca/build-key-pass-batch-web.sh', $user->name, $user->password_clear));
+
+        if ($user->tipo_vpn == "FULL"){
+            $process = new Process(array('/usr/bin/sudo', '/etc/openvpn/ca/build-key-pass-batch-web_FULLTCP.sh', $user->name, $user->password_clear));
+        }
+        else {
+            $process = new Process(array('/usr/bin/sudo', '/etc/openvpn/ca/build-key-pass-batch-web_TS.sh', $user->name, $user->password_clear));
+        }
+
+
+        
         //dd($process);
         $process->start();
 
@@ -222,7 +255,8 @@ class CertificatoController extends Controller
 
         $certs = $certificati_utente;
         //return view('admin.showuser', ['user' => $user, 'certs' => $certs]);
-        return redirect()->route('admin.admin_showuserfromname', ['name' => $user->name])->with('msg-success', 'Profile updated!');
+        //return redirect()->route('admin.admin_showuserfromname', ['name' => $user->name])->with('msg-success', 'Profile updated!');
+        return redirect()->back()->with('msg-success', 'Profile updated!');
     }
 
 

@@ -1,0 +1,1 @@
+apache ALL = (ALL) NOPASSWD: /etc/openvpn/ca/script-revoke-web.sh, /etc/openvpn/ca/revoke-full, /etc/openvpn/ca/pkitool, /usr/bin/mailx, /etc/openvpn/ca/build-key-pass-batch-web.sh, /etc/openvpn/ca/build-key-pass-batch-web_FULLTCP.sh, /etc/openvpn/ca/build-key-pass-batch-web_TS.sh

@@ -57,11 +57,17 @@
                                 <td>{{ $user->email }} </td>
                                 <td>{{ $user->tipo_vpn }} </td>
                                 <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pwdModal">
-                                       V. Password
+                                       <i class="fas fa-key"></i>
                                     </button>
                                     @if(Auth::user()->isAdmin())
+                                        <a  href="{{ action('UserController@edit', ['user' => $user]) }}" class="btn btn-primary">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+
                                         <a  href="{{ action('CertificatoController@release', ['user' => $user]) }}" class="btn btn-success">
-                                            <i class="fas fa-plus"></i></a>
+                                            <i class="fas fa-plus"></i>
+                                        </a>
+
                                     @endif
                                 </td>
                                 <td></td>
@@ -94,6 +100,8 @@
                                         @if ($cert->stato == "V")
                                             <a href="{{ action('CertificatoController@revoke', ['cert' => $cert]) }}" class="btn btn-danger">
                                             <i class="fas fa-trash-alt"></i></a>
+                                            <a href="{{ action('CertificatoController@download', ['cert' => $cert]) }}" class="btn btn-success">
+                                            <i class="fas fa-download"></i></a>
                                         @endif
                                     @endif
                                 </td>
@@ -106,7 +114,8 @@
 
                     <div class="form-row text-center">
                         <div class="col-12">
-                            <a class="btn btn-primary justify-content-center" href=" {{ action('CertificatoController@popolate_db') }} "> Torna all DashBoard</a>
+                            <a class="btn btn-primary justify-content-center" href=" {{ action('CertificatoController@popolate_db') }} "> Torna alla DashBoard</a>
+                            <a class="btn btn-primary justify-content-center" href=" {{ action('UserController@index') }} "> Utenti</a>
                         </div>
                     </div>
                 </div>

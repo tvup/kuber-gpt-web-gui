@@ -77,7 +77,7 @@
                         </thead>
                         <tbody>
                             @foreach($certs as $cert)
-                                @if (($cert->stato == 'V') && ( ((new \Carbon\Carbon($cert->dt_scadenza))->isPast()) || (((new \Carbon\Carbon($cert->dt_scadenza))->isFuture()) && ((new \Carbon\Carbon($cert->dt_scadenza))->isCurrentMonth())) )) 
+                                @if (($cert->stato == 'V') && ( ((new \Carbon\Carbon($cert->dt_scadenza))->isPast()) || (((new \Carbon\Carbon($cert->dt_scadenza))->isFuture()) && ((new \Carbon\Carbon($cert->dt_scadenza))->isCurrentMonth()) && ((new \Carbon\Carbon($cert->dt_scadenza))->isCurrentYear()) ) )) 
                                     @if ((new \Carbon\Carbon($cert->dt_scadenza))->isPast())
                                     <tr class="table-danger">
                                     @elseif (((new \Carbon\Carbon($cert->dt_scadenza))->isFuture()) && ((new \Carbon\Carbon($cert->dt_scadenza))->isCurrentMonth()))

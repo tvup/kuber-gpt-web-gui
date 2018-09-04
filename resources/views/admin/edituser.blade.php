@@ -8,6 +8,7 @@
         <div class="col-md-8">
 
 
+            @include('partials.msg')
 
 
             <div class="card">
@@ -129,6 +130,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Salva') }}
                                 </button>
+                                <a class="btn btn-primary justify-content-center" href=" {{ action('UserController@index') }} "> Torna su Utenti</a>
                             </div>
                         </div>
                     </form>

@@ -4,6 +4,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
+
+        @include('partials.msg')
+            
         <div class="card">
             <div class="card-header">Tutti gli Utenti Registrati</div>
             <div class="card-body">
@@ -34,7 +37,12 @@
                                 <td>
                                     @if(Auth::user()->isAdmin())
                                         <a  href="{{ action('UserController@edit', ['user' => $user]) }}" class="btn btn-success">
-                                            <i class="fas fa-edit"></i></a>
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+
+                                        <a  href="{{ action('UserController@show_from_name', ['name' => $user->name]) }}" class="btn btn-success">
+                                            <i class="fas fa-user"></i>
+                                        </a>
                                     @endif
 
                                 </td>

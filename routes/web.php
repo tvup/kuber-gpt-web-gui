@@ -24,7 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/read_index', 'CertificatoController@read_index')->name('readindex');
 
-
+Route::get('/downloadmycert', 'UserController@downloadmycert')->name('user_downloadmycert');
 
 
 
@@ -37,6 +37,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], f
     Route::get('popolate_db', 'CertificatoController@popolate_db')->name('admin_popolatedb');
     
     //Route::get('revokecert/{cert}/{user}', 'CertificatoController@revoke')->name('admin_revokecert');
+    Route::get('download/{cert}', 'CertificatoController@download')->name('admin_downloadcert');
     Route::get('revokecert/{cert}', 'CertificatoController@revoke')->name('admin_revokecert');
     Route::get('releasecert/{user}', 'CertificatoController@release')->name('admin_releasecert');
     

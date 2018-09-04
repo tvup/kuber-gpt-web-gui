@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Certificato;
 use App\User;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -129,10 +130,9 @@ class UserController extends Controller
         //dd($user);
         $user->save();
 
-        //Session::flash('message', 'Successfully updated user!');
-        //return Redirect::to('nerds');
-        //return redirect()->route('admin.admin_showallusers');
-        return redirect()->route('admin.admin_showallusers')->with('status', 'Profile updated!');
+        //return redirect()->route('admin.admin_showallusers')->with('status', 'Profile updated!');
+        //return redirect()->route('admin.admin_showallusers')->with('msg-success', 'Profile updated!');
+        return redirect()->back()->with('msg-success', 'Profile updated!');
 
     }
 
@@ -146,4 +146,28 @@ class UserController extends Controller
     {
         //
     }
+
+
+
+    public function downloadmycert()
+    {
+        $user = Auth::user();
+        $my_user_id = Auth::id();
+        $certificato = \App\Certificato::where('user_id', $my_user_id)
+            ->where('stato', 'V')
+            ->firstOrFail();
+        $name = $certificato->user;
+        //$user = User::where('name', $name)->get()->first();
+        $tipo_vpn = $user->tipo_vpn;
+        //dd($user);
+
+
+        $file="/etc/openvpn/ca/keys/conf/".$name."_".$tipo_vpn.".ovpn";
+        return \Response::download($file);
+        
+    }
+
+
+
+
 }

@@ -14,7 +14,6 @@
                         </div>
                     @endif
 
-                    {{$rule}}
                     @if(($rule == 'ADMIN') || ($rule == 'MANAGER_RO'))
                     <ul>
                         
@@ -26,10 +25,37 @@
                     @else
                     
                     <ul>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
+                        <li><a href="{{ route('user_downloadmycert') }}" class="btn btn-success">
+                                Scarica il tuo accesso vpn
+                                <i class="fas fa-download"></i>
+                            </a>
+                        </li>
+                        <hr>
+                        <li>
+                            <a href="https://swupdate.openvpn.org/community/releases/openvpn-install-2.4.6-I602.exe" class="btn btn-info">
+                                Scarica il client openVPN
+                                <i class="fas fa-download"></i>
+                            </a></li>
+                        <hr>
+                        <li>
+                            <a href="#" class="btn btn-primary">
+                                Guida - In progress
+                                <i class="fas fa-spinner"></i>
+                            </a>
+                        </li>
+                        
+                        <hr>
+                        <li>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                <button type="submit" class="btn btn-danger">
+                                    Logout 
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </button>
+                                                                    
+                                    </form>
+                            
+                        </li>
                     
 
 

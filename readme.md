@@ -88,8 +88,8 @@ gpgcheck=1
 
 ## Issue
 
-The first user (admin) have to be created by hand
-I will solve this problem in future
+
+
 
 
 

@@ -67,7 +67,7 @@ gpgcheck=1
 * CREATE DATABASE openvpn DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_unicode_ci;
 * GRANT ALL ON openvpn.* TO 'openvpn'@'localhost'  IDENTIFIED BY 'your_pass' WITH GRANT OPTION;
 * set your .env file
-* vi .env  :
+* edit .env  (vi .env) :
 * INDEX_PATH="/etc/openvpn/ca/keys/"
 * INDEX_FULL_PATH="/etc/openvpn/ca/keys/index.txt"
 * DB_CONNECTION=mysql
@@ -78,10 +78,13 @@ gpgcheck=1
 * DB_PASSWORD=your_pass
 * 
 * php artisan migrate
+* php artisan command:CreateFirstAdminUser
+* user: admin@admin.admin
 * visudo
 * paste in visudo:
 * apache ALL = (ALL) NOPASSWD: /etc/openvpn/ca/script-revoke-web.sh, /etc/openvpn/ca/revoke-full, /etc/openvpn/ca/pkitool, /usr/bin/mailx, /etc/openvpn/ca/build-key-pass-batch-web.sh, /etc/openvpn/ca/build-key-pass-batch-web_FULLTCP.sh, /etc/openvpn/ca/build-key-pass-batch-web_TS.sh
-
+* make sure your openvpn's "index.txt" path is set correctly in .env
+* 
 
 ## Issue
 

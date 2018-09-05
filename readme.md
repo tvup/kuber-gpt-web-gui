@@ -1,4 +1,8 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+<p align="center">
+<img src="https://laravel.com/assets/img/components/logo-laravel.svg">
+<img src="https://docs.openvpn.net/wp-content/uploads/ovpntech_logo-s.png">
+
+</p>
 
 ## OpenVPN web gui manager - Laravel
 

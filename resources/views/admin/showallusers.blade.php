@@ -6,11 +6,19 @@
         <div class="col-md-10">
 
         @include('partials.msg')
-            
+
         <div class="card">
-            <div class="card-header">Tutti gli Utenti Registrati</div>
+            <div class="card-header">
+                Tutti gli Utenti Registrati
+                <p class="text-right">
+                    <a href="{{ action('UserController@new', ['name' => 'Nuovo']) }}" class="btn btn-success">
+                        Nuovo Utente
+                        <i class="fa fa-plus-square" aria-hidden="true"></i>
+                    </a>
+                </p>
+            </div>
             <div class="card-body">
-                   
+
                 <table class="table table-sm table-hover">
                     <thead>
                         <tr>
@@ -20,7 +28,7 @@
                             <th>CF</th>
                             <th>Societ&agrave;</th>
                             <th>E-Mail</th>
-                            <th>Tipo VPN</th>    
+                            <th>Tipo VPN</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -50,12 +58,12 @@
                         @endforeach
                     </tbody>
                 </table>
-    
+
             </div>
         </div>
         </div>
 
-        
+
 
 
     </div>

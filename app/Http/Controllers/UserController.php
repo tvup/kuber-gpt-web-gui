@@ -92,6 +92,11 @@ class UserController extends Controller
 
     }
 
+    public function new($name)
+    {
+        return view('auth.register', ['user' => $name]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -126,7 +131,7 @@ class UserController extends Controller
         $user->cf = $data['cf'];
         $user->societa = $data['societa'];
         $user->tipo_vpn = $data['tipo_vpn'];
-        
+
         //dd($user);
         $user->save();
 
@@ -164,7 +169,7 @@ class UserController extends Controller
 
         $file="/etc/openvpn/ca/keys/conf/".$name."_".$tipo_vpn.".ovpn";
         return \Response::download($file);
-        
+
     }
 
 

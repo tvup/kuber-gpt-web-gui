@@ -30,6 +30,7 @@
                             <th>E-Mail</th>
                             <th>Tipo VPN</th>
                             <th>Action</th>
+                            <th>Del</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,13 +45,22 @@
                                 <td>{{$user->tipo_vpn}}</td>
                                 <td>
                                     @if(Auth::user()->isAdmin())
-                                        <a  href="{{ action('UserController@edit', ['user' => $user]) }}" class="btn btn-success">
+                                        <a  href="{{ action('UserController@edit', ['user' => $user]) }}" class="btn btn-success"title="Edit Utente">
                                             <i class="fas fa-edit"></i>
                                         </a>
 
-                                        <a  href="{{ action('UserController@show_from_name', ['name' => $user->name]) }}" class="btn btn-success">
+                                        <a  href="{{ action('UserController@show_from_name', ['name' => $user->name]) }}" class="btn btn-success"title="Mostra Utente">
                                             <i class="fas fa-user"></i>
                                         </a>
+                                    @endif
+
+                                </td>
+                                <td>
+                                    @if(Auth::user()->isAdmin())
+                                    <a href="{{ action('UserController@del', ['id' => $user->id]) }}" class="btn btn-danger" title="Elimina Utente">
+                                        <i class="fas fa-user-times"></i>
+                                    </a>
+
                                     @endif
 
                                 </td>

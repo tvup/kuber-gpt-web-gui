@@ -154,6 +154,19 @@ class UserController extends Controller
 
 
 
+
+    public function del($id)
+    {
+        //
+        $user = User::find($id);
+        //dd($user);
+
+        $user->delete($user->id);
+
+        return redirect()->back();
+    }
+
+
     public function downloadmycert()
     {
         $user = Auth::user();

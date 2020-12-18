@@ -44,6 +44,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], f
     Route::get('showallusers', 'UserController@index')->name('admin_showallusers');
     Route::get('edituser/{user}', 'UserController@edit')->name('admin_edituser');
     Route::post('updateuser/{user}', 'UserController@update')->name('admin_updateuser');
+    Route::get('del/{user}', 'UserController@del')->name('admin_deluser');
 
     Route::get('showuserfromname/{name}', 'UserController@show_from_name')->name('admin_showuserfromname');
     Route::get('new/{name}', 'UserController@new')->name('admin_newuser');

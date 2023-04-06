@@ -45,7 +45,7 @@
                                 <td>{{$user->tipo_vpn}}</td>
                                 <td>
                                     @if(Auth::user()->isAdmin())
-                                        <a  href="{{ action('UserController@edit', ['user' => $user]) }}" class="btn btn-success"title="{__('showallusers.edit_user')}}">
+                                        <a  href="{{ action('UserController@edit', ['user' => $user]) }}" class="btn btn-success"title="{{__('showallusers.edit_user')}}">
                                             <i class="fas fa-edit"></i>
                                         </a>
 

@@ -114,8 +114,8 @@
 
                     <div class="form-row text-center">
                         <div class="col-12">
-                            <a class="btn btn-primary justify-content-center" href=" {{ action('CertificatoController@popolate_db') }} "> {{__('showallusersfromname.return_to_dashboard')}}</a>
-                            <a class="btn btn-primary justify-content-center" href=" {{ action('UserController@index') }} "> Utenti</a>
+                            <a class="btn btn-primary justify-content-center" href=" {{ action('CertificatoController@popolate_db') }} "> {{__('showallusers.return_to_dashboard')}}</a>
+                            <a class="btn btn-primary justify-content-center" href=" {{ action('UserController@index') }} "> {{__('showallusers.users')}}</a>
                         </div>
                     </div>
                 </div>

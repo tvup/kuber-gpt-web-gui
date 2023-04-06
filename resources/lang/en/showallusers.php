@@ -6,6 +6,7 @@ return [
     'all_registered_users' => 'All registered users',
     'new_user' => 'New user',
     'user' => 'User',
+    'users' => 'Users',
     'name' => 'Name',
     'surname' => 'Surname',
     'CF' => 'CF',

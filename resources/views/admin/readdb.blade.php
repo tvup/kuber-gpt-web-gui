@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-5">
         <div class="card">
-            <div class="card-header">Tutti i Certificati</div>
+            <div class="card-header">{{__('certdashboard.all_certificates')}}</div>
             <div class="card-body">
                 @if (session('status'))
                     <div class="alert alert-success" role="alert">
@@ -17,10 +17,10 @@
                     <thead>
                         <tr>
                             <!-- <th>ID</th> -->
-                            <th>Stato</th>
-                            <th>Scadenza  </th>
-                            <th>Revocato </th>
-                            <th>User</th>
+                            <th>{{__('certdashboard.state')}}</th>
+                            <th>{{__('certdashboard.expiration')}}  </th>
+                            <th>{{__('certdashboard.revoked')}} </th>
+                            <th>{{__('certdashboard.user')}}</th>
                             <!--   <th>User ID </th> -->
                         </tr>
                     </thead>
@@ -28,7 +28,7 @@
                         @foreach($certs as $cert)
                             @if ($cert->stato == 'V')
                                 <tr class="table-success">
-                            @else 
+                            @else
                                 <tr class="table-danger">
                             @endif
                               
@@ -54,7 +54,7 @@
         
         <div class="col-md-5">
         <div class="card">
-            <div class="card-header">Certificati scaduti e in scadenza</div>
+            <div class="card-header">{{__('expired_and_expiring_certificates')}}</div>
 
             <div class="card-body">
                     @if (session('status'))
@@ -68,16 +68,16 @@
                     <table class="table table-sm table-hover">
                         <thead>
                             <tr>
-                              
-                                <th>Stato</th>
-                                <th>Scadenza  </th>
-                                <th>User</th>
-                              
+
+                                <th>{{__('certdashboard.state')}}</th>
+                                <th>{{__('certdashboard.expiration')}}  </th>
+                                <th>{{__('certdashboard.user')}}</th>
+
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($certs as $cert)
-                                @if (($cert->stato == 'V') && ( ((new \Carbon\Carbon($cert->dt_scadenza))->isPast()) || (((new \Carbon\Carbon($cert->dt_scadenza))->isFuture()) && ((new \Carbon\Carbon($cert->dt_scadenza))->isCurrentMonth()) && ((new \Carbon\Carbon($cert->dt_scadenza))->isCurrentYear()) ) )) 
+                                @if (($cert->stato == 'V') && ( ((new \Carbon\Carbon($cert->dt_scadenza))->isPast()) || (((new \Carbon\Carbon($cert->dt_scadenza))->isFuture()) && ((new \Carbon\Carbon($cert->dt_scadenza))->isCurrentMonth()) && ((new \Carbon\Carbon($cert->dt_scadenza))->isCurrentYear()) ) ))
                                     @if ((new \Carbon\Carbon($cert->dt_scadenza))->isPast())
                                     <tr class="table-danger">
                                     @elseif (((new \Carbon\Carbon($cert->dt_scadenza))->isFuture()) && ((new \Carbon\Carbon($cert->dt_scadenza))->isCurrentMonth()))

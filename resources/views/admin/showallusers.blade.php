@@ -9,10 +9,10 @@
 
         <div class="card">
             <div class="card-header">
-                Tutti gli Utenti Registrati
+                {{__('showallusers.all_registered_users')}}
                 <p class="text-right">
                     <a href="{{ action('UserController@new', ['name' => 'Nuovo']) }}" class="btn btn-success">
-                        Nuovo Utente
+                        {{__('showallusers.new_user')}}
                         <i class="fa fa-plus-square" aria-hidden="true"></i>
                     </a>
                 </p>
@@ -22,15 +22,15 @@
                 <table class="table table-sm table-hover">
                     <thead>
                         <tr>
-                            <th>User</th>
-                            <th>Nome</th>
-                            <th>Cognome</th>
-                            <th>CF</th>
-                            <th>Societ&agrave;</th>
-                            <th>E-Mail</th>
-                            <th>Tipo VPN</th>
-                            <th>Action</th>
-                            <th>Del</th>
+                            <th>{{__('showallusers.user')}}</th>
+                            <th>{{__('showallusers.name')}}</th>
+                            <th>{{__('showallusers.surname')}}</th>
+                            <th>{{__('showallusers.CF')}}</th>
+                            <th>{{__('showallusers.company')}}</th>
+                            <th>{{__('showallusers.e_mail')}}</th>
+                            <th>{{__('showallusers.vpn_type')}}</th>
+                            <th>{{__('showallusers.action')}}</th>
+                            <th>{{__('showallusers.delete')}}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,11 +45,11 @@
                                 <td>{{$user->tipo_vpn}}</td>
                                 <td>
                                     @if(Auth::user()->isAdmin())
-                                        <a  href="{{ action('UserController@edit', ['user' => $user]) }}" class="btn btn-success"title="Edit Utente">
+                                        <a  href="{{ action('UserController@edit', ['user' => $user]) }}" class="btn btn-success"title="{__('showallusers.edit_user')}}">
                                             <i class="fas fa-edit"></i>
                                         </a>
 
-                                        <a  href="{{ action('UserController@show_from_name', ['name' => $user->name]) }}" class="btn btn-success"title="Mostra Utente">
+                                        <a  href="{{ action('UserController@show_from_name', ['name' => $user->name]) }}" class="btn btn-success"title="{{__('showallusers.show_user')}}">
                                             <i class="fas fa-user"></i>
                                         </a>
                                     @endif
@@ -57,7 +57,7 @@
                                 </td>
                                 <td>
                                     @if(Auth::user()->isAdmin())
-                                    <a href="{{ action('UserController@del', ['user' => $user]) }}" class="btn btn-danger" title="Elimina Utente">
+                                    <a href="{{ action('UserController@del', ['user' => $user]) }}" class="btn btn-danger" title="{{__('delete_user')}}">
                                         <i class="fas fa-user-times"></i>
                                     </a>
 

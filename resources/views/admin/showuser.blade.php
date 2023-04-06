@@ -31,20 +31,20 @@
 
 
             <div class="card">
-                <div class="card-header">{{ __('Detail') }} - {{ $user->name }}</div>
+                <div class="card-header">{{ __('showallusers.detail') }} - {{ $user->name }}</div>
 
                 <div class="card-body">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>User</th>
-                                <th>Nome</th>
-                                <th>Cognome</th>
-                                <th>CF</th>
-                                <th>Societ&agrave;</th>
-                                <th>E-Mail</th>
-                                <th>TipoVPN</th>
-                                <th>Action</th>
+                                <th>{{__('showallusers.user')}}</th>
+                                <th>{{__('showallusers.name')}}</th>
+                                <th>{{__('showallusers.surname')}}</th>
+                                <th>{{__('showallusers.CF')}}</th>
+                                <th>{{__('showallusers.company')}}</th>
+                                <th>{{__('showallusers.e_mail')}}</th>
+                                <th>{{__('showallusers.vpn_type')}}</th>
+                                <th>{{__('showallusers.action')}}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -114,7 +114,7 @@
 
                     <div class="form-row text-center">
                         <div class="col-12">
-                            <a class="btn btn-primary justify-content-center" href=" {{ action('CertificatoController@popolate_db') }} "> Torna alla DashBoard</a>
+                            <a class="btn btn-primary justify-content-center" href=" {{ action('CertificatoController@popolate_db') }} "> {{__('showallusersfromname.return_to_dashboard')}}</a>
                             <a class="btn btn-primary justify-content-center" href=" {{ action('UserController@index') }} "> Utenti</a>
                         </div>
                     </div>

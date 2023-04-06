@@ -162,7 +162,7 @@ return [
 
 
 
-        //Skydiver\LaravelMaterializeCSS\MaterializeCSSServiceProvider::class,
+        Skydiver\LaravelMaterializeCSS\MaterializeCSSServiceProvider::class,
 
     ],
 
@@ -214,7 +214,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
 
-        //'MaterializeCSS' => Skydiver\LaravelMaterializeCSS\MaterializeCSS::class,
+        'MaterializeCSS' => Skydiver\LaravelMaterializeCSS\MaterializeCSS::class,
 
     ],
 

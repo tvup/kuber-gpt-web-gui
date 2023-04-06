@@ -19,17 +19,16 @@ Auth::routes();
 
 
 
+Route::middleware('locale')->group(function () {
+    Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/read_index', 'CertificatoController@read_index')->name('readindex');
 
-Route::get('/read_index', 'CertificatoController@read_index')->name('readindex');
+    Route::get('/downloadmycert', 'UserController@downloadmycert')->name('user_downloadmycert');
 
-Route::get('/downloadmycert', 'UserController@downloadmycert')->name('user_downloadmycert');
+});
 
-
-
-
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin','locale']], function () {
 
     //Route::redirect('/', '/admin/dashboard', 301);
     Route::get('/', 'CertificatoController@popolate_db')->name('admin_popolatedb');

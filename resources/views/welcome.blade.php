@@ -92,13 +92,13 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Vpn Manager
+                    {{ __('welcome.vpn_manager') }}
                 </div>
                 <div>
-                    Comune di Prato
+                    {{ __('welcome.prato_commune') }}
                 </div>
                 <div class="m-b-md">
-                    Gestore dei certificati e relative utenze
+                    {{ __('welcome.certificate_manager_and_related_users') }}
                 </div>
                                 
                 @guest

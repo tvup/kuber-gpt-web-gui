@@ -23,8 +23,20 @@
     },
     "repositories": [
         {
-            "type": "vcs",
-            "url": "git@github.com:tvup/laravel-materialize-css.git"
+            "type": "package",
+            "package": {
+                "name": "skydiver/laravel-materialize-css",
+                "version": "dev-master",
+                "dist": {
+                    "type": "zip",
+                    "url": "https://github.com/skydiver/laravel-materialize-css/archive/refs/tags/v1.0.0.zip"
+                },
+                "autoload": {
+                    "psr-4": {
+                        "Skydiver\\LaravelMaterializeCSS\\": "src/"
+                    }
+                }
+            }
         }
     ],
     "autoload": {

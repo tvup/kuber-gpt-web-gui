@@ -146,11 +146,4 @@
 
 @section('scripts')
 
-<script type="text/javascript">
-$(document).ready(function(){
-    $('#show-password').on('change', function(){
-        $('.password').attr('type',$('#show-password').prop('checked')==true?"text":"password"); 
-    });
-});
-</script>
 @endsection

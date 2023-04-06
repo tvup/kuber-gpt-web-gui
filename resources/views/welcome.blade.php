@@ -77,8 +77,8 @@
             }
         </style>
     </head>
-    <body id="app">
-        <div class="flex-center position-ref full-height">
+    <body>
+        <div id="app" class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth

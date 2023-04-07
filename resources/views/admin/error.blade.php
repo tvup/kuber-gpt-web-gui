@@ -17,7 +17,7 @@
 
                     <div class="form-row text-center">
                         <div class="col-12">
-                            <a class="btn btn-primary justify-content-center" href=" {{ action('CertificatoController@popolate_db') }} "> Torna all DashBoard</a>
+                            <a class="btn btn-primary justify-content-center" href=" {{ action('CertificateController@popolate_db') }} "> Torna all DashBoard</a>
                         </div>
                     </div>
                 </div>

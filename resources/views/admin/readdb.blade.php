@@ -12,7 +12,7 @@
                         {{ session('status') }}
                     </div>
                 @endif
-                   
+
                 <table class="table table-sm table-hover">
                     <thead>
                         <tr>
@@ -31,11 +31,11 @@
                             @else
                                 <tr class="table-danger">
                             @endif
-                              
+
                                 <!--  <td> {{$cert->id}} </td> -->
                                 <td> {{$cert->stato}} </td>
                                 <td>{{ (new \Carbon\Carbon($cert->dt_scadenza))->format('d/m/Y') }}</td>
-                                <td> {{--$cert->dt_revoca--}} 
+                                <td> {{--$cert->dt_revoca--}}
                                     @if ($cert->dt_revoca != "")
                                         {{ (new \Carbon\Carbon($cert->dt_revoca))->format('d/m/Y') }}
                                     @endif
@@ -46,15 +46,15 @@
                         @endforeach
                     </tbody>
                 </table>
-    
+
             </div>
         </div>
         </div>
 
-        
+
         <div class="col-md-5">
         <div class="card">
-            <div class="card-header">{{__('expired_and_expiring_certificates')}}</div>
+            <div class="card-header">{{__('certdashboard.expired_and_expiring_certificates')}}</div>
 
             <div class="card-body">
                     @if (session('status'))
@@ -63,8 +63,8 @@
                         </div>
                     @endif
 
-                   
-                
+
+
                     <table class="table table-sm table-hover">
                         <thead>
                             <tr>
@@ -83,19 +83,19 @@
                                     @elseif (((new \Carbon\Carbon($cert->dt_scadenza))->isFuture()) && ((new \Carbon\Carbon($cert->dt_scadenza))->isCurrentMonth()))
                                     <tr class="table-warning">
                                     @endif
-                                
+
                                   <td> {{$cert->stato}} </td>
                                   <td>{{ (new \Carbon\Carbon($cert->dt_scadenza))->format('d/m/Y') }}</td>
-                                
+
                                 <td> <a href="{{ action('UserController@show_from_name', ['name' => $cert->user]) }}" >{{$cert->user}} </a></td>
-                                
+
                               </tr>
                               @endif
                              @endforeach
                        </tbody>
                     </table>
 
-                    
+
             </div>
         </div>
     </div>

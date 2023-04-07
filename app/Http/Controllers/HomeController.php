@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserRoleEnum;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -19,20 +23,19 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|Factory|View|Application
      */
     public function index()
     {
         $user = Auth::user();
-        //dd($user);
-        if ($user->rule == 'admin') {
-            $rule = 'ADMIN';
-        } elseif ($user->rule == 'manager_ro') {
-            $rule = 'MANAGER_RO';
+        if ($user->role == UserRoleEnum::Admin) {
+            $role = UserRoleEnum::Admin;
+        } elseif ($user->role == UserRoleEnum::Manager) {
+            $role = UserRoleEnum::Manager;
         } else {
-            $rule = 'USER';
+            $role = UserRoleEnum::User;
         }
 
-        return view('home')->with('rule', $rule);
+        return view('home')->with('role', $role);
     }
 }

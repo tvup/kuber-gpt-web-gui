@@ -12,17 +12,31 @@
 
 
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">{{ __('edituser.register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.admin_updateuser',['user' => $user]) }}" aria-label="{{ __('Salva') }}">
+                    <form method="POST" action="{{ route('admin.admin_updateuser',['user' => $user]) }}" aria-label="{{ __('edituser.save') }}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('User - coincide con il certificato') }}</label>
+                            <label for="user_name" class="col-md-4 col-form-label text-md-right">{{ __('edituser.user_matches_the_certificate') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ $user->name }}" required autofocus readonly>
+                                <input id="user_name" type="text" class="form-control{{ $errors->has('user_name') ? ' is-invalid' : '' }}" name="user_name" value="{{ $user->user_name }}" required autofocus readonly>
+
+                                @if ($errors->has('name'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('user_name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('edituser.name') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ $user->name }}" required autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="invalid-feedback" role="alert">
@@ -33,28 +47,14 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="nome" class="col-md-4 col-form-label text-md-right">{{ __('Nome') }}</label>
+                            <label for="surname" class="col-md-4 col-form-label text-md-right">{{ __('edituser.surname') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nome" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="nome" value="{{ $user->nome }}" required autofocus>
+                                <input id="surname" type="text" class="form-control{{ $errors->has('surname') ? ' is-invalid' : '' }}" name="surname" value="{{ $user->surname }}" required autofocus>
 
-                                @if ($errors->has('nome'))
+                                @if ($errors->has('surname'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('nome') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="cognome" class="col-md-4 col-form-label text-md-right">{{ __('Cognome') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="cognome" type="text" class="form-control{{ $errors->has('cognome') ? ' is-invalid' : '' }}" name="cognome" value="{{ $user->cognome }}" required autofocus>
-
-                                @if ($errors->has('cognome'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('cognome') }}</strong>
+                                        <strong>{{ $errors->first('surname') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -75,33 +75,33 @@
                         </div>
 
                         <div class="form-group row">
-                                <label for="societa" class="col-md-4 col-form-label text-md-right">{{ __('Societa') }}</label>
-    
+                                <label for="company" class="col-md-4 col-form-label text-md-right">{{ __('edituser.company') }}</label>
+
                                 <div class="col-md-6">
-                                    <input id="societa" type="text" class="form-control{{ $errors->has('societa') ? ' is-invalid' : '' }}" name="societa" value="{{ $user->societa }}" required autofocus>
-    
-                                    @if ($errors->has('societa'))
+                                    <input id="company" type="text" class="form-control{{ $errors->has('company') ? ' is-invalid' : '' }}" name="company" value="{{ $user->company }}" required autofocus>
+
+                                    @if ($errors->has('company'))
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('societa') }}</strong>
+                                            <strong>{{ $errors->first('company') }}</strong>
                                         </span>
                                     @endif
                                 </div>
                             </div>
-    
+
                         <div class="form-group row">
-                            <label for="tipo_vpn" class="col-md-4 col-form-label text-md-right">{{ __('Tipo VPN') }}</label>
+                            <label for="vpn_type" class="col-md-4 col-form-label text-md-right">{{ __('edituser.vpn_type') }}</label>
 
                             <div class="col-md-6">
-                                
-                                <select id="tipo_vpn" class="form-control{{ $errors->has('tipo_vpn') ? ' is-invalid' : '' }}" name="tipo_vpn"  required autofocus>
-                                    <option value="TS" {{ ($user->tipo_vpn == 'TS' ? "selected" : "") }} >TS</option>
-                                    <option value="FULL" {{ ($user->tipo_vpn == 'FULL' ? "selected" : "") }} >FULL</option>
-                                <select>
+
+                                <select id="vpn_type" class="form-control{{ $errors->has('vpn_type') ? ' is-invalid' : '' }}" name="vpn_type"  required autofocus>
+                                    <option value="TS" {{ ($user->vpn_type == 'TS' ? "selected" : "") }} >TS</option>
+                                    <option value="FULL" {{ ($user->vpn_type == 'FULL' ? "selected" : "") }} >FULL</option>
+                                </select>
 
 
-                                @if ($errors->has('tipo_vpn'))
+                                @if ($errors->has('vpn_type'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('tipo_vpn') }}</strong>
+                                        <strong>{{ $errors->first('vpn_type') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -109,7 +109,7 @@
 
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address - Univoco per login') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('edituser.email_address_unique') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ $user->email }}"  required readonly>
@@ -123,14 +123,14 @@
                         </div>
 
 
-                        
-                        
+
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Salva') }}
+                                    {{ __('edituser.save') }}
                                 </button>
-                                <a class="btn btn-primary justify-content-center" href=" {{ action('UserController@index') }} "> Torna su Utenti</a>
+                                <a class="btn btn-primary justify-content-center" href=" {{ action('UserController@index') }} "> {{__('edituser.go_back_to_users')}}</a>
                             </div>
                         </div>
                     </form>

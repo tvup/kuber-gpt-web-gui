@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -60,7 +61,7 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @return \App\User
+     * @return \App\Models\User
      */
     protected function create(array $data)
     {
@@ -71,7 +72,7 @@ class RegisterController extends Controller
         }
 
         return User::create([
-            'name' => $data['name'],
+            'user_name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'nome' => $data['nome'],
@@ -88,16 +89,13 @@ class RegisterController extends Controller
      * Aggiungo questo metodo - mao
      * Override default register method from RegistersUsers trait
      *
-     * @param  array  $request
-     * @return redirect to $redirectTo
+     * @return Redirector|mixed to $redirectTo
      */
     public function register(Request $request)
     {
 
-        //dd($request);
         $this->validator($request->all())->validate();
 
-        //dd($request->all());
         $user = $this->create($request->all());
 
         //$this->guard()->login($user);

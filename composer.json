@@ -5,23 +5,22 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "ext-intl": "*",
         "ext-mbstring": "*",
         "laravel/framework": "^10.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^4.2",
-        "skydiver/laravel-materialize-css": "dev-master",
-        "symfony/process": "6.2"
+        "skydiver/laravel-materialize-css": "dev-master"
     },
     "require-dev": {
-        "filp/whoops": "^2.0",
-        "fzaninotto/faker": "^1.4",
         "laravel/pint": "^1.8",
         "laravel/sail": "^1.21",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^7.0",
-        "phpunit/phpunit": "^10.0"
+        "nunomaduro/larastan": "^2.0",
+        "phpunit/phpunit": "^10.0",
+        "spatie/laravel-ignition": "^2.0"
     },
     "repositories": [
         {
@@ -35,7 +34,7 @@
                 },
                 "autoload": {
                     "psr-4": {
-                        "Skydiver\\LaravelMaterializeCSS\\": "src/"
+                        "Skydiver\\LaravelMaterializeCSS\\": "vendor/skydiver/laravel-materialize-css/src/"
                     }
                 }
             }

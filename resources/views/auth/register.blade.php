@@ -32,17 +32,31 @@
 
 
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">{{ __('register.register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
+                    <form method="POST" action="{{ route('register') }}" aria-label="{{ __('register.register') }}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('User - coincide con il certificato') }}</label>
+                            <label for="user_name" class="col-md-4 col-form-label text-md-right">{{ __('register.user_matches_the_certificate') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ $user }}" required autofocus>
+                                <input id="user_name" type="text" class="form-control{{ $errors->has('user_name') ? ' is-invalid' : '' }}" name="user_name" value="{{ $user }}" required autofocus>
+
+                                @if ($errors->has('user_name'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('user_name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('register.name') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="invalid-feedback" role="alert">
@@ -53,28 +67,14 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="nome" class="col-md-4 col-form-label text-md-right">{{ __('Nome') }}</label>
+                            <label for="surname" class="col-md-4 col-form-label text-md-right">{{ __('register.surname') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nome" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="nome" value="{{ old('nome') }}" required autofocus>
+                                <input id="surname" type="text" class="form-control{{ $errors->has('surname') ? ' is-invalid' : '' }}" name="surname" value="{{ old('surname') }}" required autofocus>
 
-                                @if ($errors->has('nome'))
+                                @if ($errors->has('surname'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('nome') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="cognome" class="col-md-4 col-form-label text-md-right">{{ __('Cognome') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="cognome" type="text" class="form-control{{ $errors->has('cognome') ? ' is-invalid' : '' }}" name="cognome" value="{{ old('cognome') }}" required autofocus>
-
-                                @if ($errors->has('cognome'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('cognome') }}</strong>
+                                        <strong>{{ $errors->first('surname') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -95,33 +95,69 @@
                         </div>
 
                         <div class="form-group row">
-                                <label for="societa" class="col-md-4 col-form-label text-md-right">{{ __('Societa') }}</label>
-    
+                                <label for="company" class="col-md-4 col-form-label text-md-right">{{ __('register.company') }}</label>
+
                                 <div class="col-md-6">
-                                    <input id="societa" type="text" class="form-control{{ $errors->has('societa') ? ' is-invalid' : '' }}" name="societa" value="{{ old('societa') }}" required autofocus>
-    
-                                    @if ($errors->has('societa'))
+                                    <input id="company" type="text" class="form-control{{ $errors->has('company') ? ' is-invalid' : '' }}" name="company" value="{{ old('company') }}" required autofocus>
+
+                                    @if ($errors->has('company'))
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('societa') }}</strong>
+                                            <strong>{{ $errors->first('company') }}</strong>
                                         </span>
                                     @endif
                                 </div>
                             </div>
-    
+
                         <div class="form-group row">
-                            <label for="tipo_vpn" class="col-md-4 col-form-label text-md-right">{{ __('Tipo VPN') }}</label>
+                            <label for="vpn_type" class="col-md-4 col-form-label text-md-right">{{ __('register.vpn_type') }}</label>
 
                             <div class="col-md-6">
-                                
-                                <select id="tipo_vpn" class="form-control{{ $errors->has('tipo_vpn') ? ' is-invalid' : '' }}" name="tipo_vpn"  required autofocus>
-                                    <option value="TS">TS</option>
-                                    <option value="FULL">FULL</option>
+
+                                <select id="vpn_type" class="form-control{{ $errors->has('vpn_type') ? ' is-invalid' : '' }}" name="vpn_type"  required autofocus>
+                                    <option value="{{ \App\Enums\VPNTypeEnum::TS->value }}">{{ __(\App\Enums\VPNTypeEnum::TS->value) }}</option>
+                                    <option value="{{ __(\App\Enums\VPNTypeEnum::FULL->value) }}">{{ __(\App\Enums\VPNTypeEnum::FULL->value) }}</option>
+                                </select>
+
+
+                                @if ($errors->has('vpn_type'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('vpn_type') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="e_mail" class="col-md-4 col-form-label text-md-right">{{ __('register.e_mail_address_unique') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="e_mail" type="e_mail" class="form-control{{ $errors->has('e_mail') ? ' is-invalid' : '' }}" name="e_mail" value="{{ old('e_mail') }}" required>
+
+                                @if ($errors->has('e_mail'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('e_mail') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('register.privileges') }}</label>
+
+                            <div class="col-md-6">
+
+                                <select id="role" class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" name="role"  required autofocus>
+                                    <option value="{{ \App\Enums\UserRoleEnum::User->value }}">{{ __('register.'.\App\Enums\UserRoleEnum::User->value) }}</option>
+                                    <option value="{{ \App\Enums\UserRoleEnum::Admin->value }}">{{ __('register.'.\App\Enums\UserRoleEnum::Admin->value) }}</option>
+                                    <option value="{{ \App\Enums\UserRoleEnum::Manager->value }}">{{ __('register.'.\App\Enums\UserRoleEnum::Manager->value) }}</option>
                                 <select>
 
 
-                                @if ($errors->has('tipo_vpn'))
+                                @if ($errors->has('role'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('tipo_vpn') }}</strong>
+                                        <strong>{{ $errors->first('role') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -129,43 +165,7 @@
 
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address - Univoco per login') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-
-                        <div class="form-group row">
-                            <label for="rule" class="col-md-4 col-form-label text-md-right">{{ __('Privilegi') }}</label>
-
-                            <div class="col-md-6">
-                                
-                                <select id="rule" class="form-control{{ $errors->has('rule') ? ' is-invalid' : '' }}" name="rule"  required autofocus>
-                                    <option value="user">user</option>
-                                    <option value="admin">admin</option>
-                                    <option value="manager_ro">manager read only</option>
-                                <select>
-
-
-                                @if ($errors->has('rule'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('rule') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('register.password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} password" name="password" required>
@@ -179,7 +179,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('register.confirm_password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control password" name="password_confirmation" required>
@@ -188,7 +188,7 @@
 
 
                         <div class="form-group row">
-                            <label for="show-password" class="col-md-4 col-form-label text-md-right">{{ __('Mostra Password') }}</label>
+                            <label for="show-password" class="col-md-4 col-form-label text-md-right">{{ __('register.show_password') }}</label>
 
                             <div class="col-md-1">
                                 <input id="show-password" type="checkbox" class="form-control" name="show-password" onchange="myFunction()">
@@ -196,11 +196,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="show-password2" class="col-md-4 col-form-label text-md-right">{{ __('Mostra Password') }}</label>
+                            <label for="show-password2" class="col-md-4 col-form-label text-md-right">{{ __('register.show_password') }}</label>
 
                             <div class="col-md-1">
                                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#pwdModal">
-                                    Suggerisci una password
+                                    {{__('suggest_password')}}
                                 </button>
                             </div>
                         </div>
@@ -208,7 +208,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ __('register.register') }}
                                 </button>
                             </div>
                         </div>
@@ -236,12 +236,5 @@ function myFunction() {
 }
 
 
-/*
-$(document).ready(function(){
-    $('#show-password').on('change', function(){
-        $('.password').attr('type',$('#show-password').prop('checked')==true?"text":"password"); 
-    });
-});
-*/
 </script>
 @endsection

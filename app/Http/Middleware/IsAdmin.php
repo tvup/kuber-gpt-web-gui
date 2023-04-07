@@ -15,7 +15,7 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user() && (Auth::user()->isAdmin() || Auth::user()->isManagerRO())) {
+        if (Auth::user() && (Auth::user()->isAdmin() || Auth::user()->isManager())) {
             return $next($request);
         }
 

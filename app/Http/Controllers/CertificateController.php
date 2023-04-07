@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Certificato;
-use App\User;
-use Illuminate\Http\Request;
+use App\Models\Certificate;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Symfony\Component\Process\Process;
 
-class CertificatoController extends Controller
+class CertificateController extends Controller
 {
     //necessaria autenticazione
     public function __construct()
@@ -24,6 +23,9 @@ class CertificatoController extends Controller
 
     public function read_index()
     {
+        //Array for return
+        $array_index = [];
+
         $i = 0;
         $array_contents = file(config('filesystems.key_folder'), FILE_SKIP_EMPTY_LINES);
         foreach ($array_contents as $line) {
@@ -57,24 +59,22 @@ class CertificatoController extends Controller
 
         //DB::table('certificati')->delete();
         //cancello
-        Certificato::truncate();
+        Certificate::truncate();
 
         $i = 0;
         $array_contents = file(config('filesystems.key_file'), FILE_SKIP_EMPTY_LINES);
         foreach ($array_contents as $line) {
 
-            $certificato = new Certificato;
+            $certificate = app(Certificate::class);
 
             $array_temp = explode("\t", $line);
 
             $date = \DateTime::createFromFormat('ymdHisZ', $array_temp[1]);
-            $array_temp[1] = $date->format('d/m/Y H:i:s');
             $array_temp[1] = $date->format('Y-m-d H:i:s');
             if ($array_temp[2] != '') {
                 $date = \DateTime::createFromFormat('ymdHisZ', $array_temp[2]);
-                $array_temp[2] = $date->format('d/m/Y H:i:s');
                 $array_temp[2] = $date->format('Y-m-d H:i:s');
-                $certificato->dt_revoca = $array_temp[2];
+                $certificate->dt_revoca = $array_temp[2];
             }
 
             //leggo il cert (mi interessa solo il nome "utente")
@@ -86,27 +86,27 @@ class CertificatoController extends Controller
             $array_index[$i] = $array_temp;
             $i++;
 
-            $certificato->stato = $array_temp[0];
-            $certificato->dt_scadenza = $array_temp[1];
+            $certificate->stato = $array_temp[0];
+            $certificate->dt_scadenza = $array_temp[1];
 
-            $certificato->idcert = $array_temp[3];
+            $certificate->idcert = $array_temp[3];
             //$certificato->cert = $array_temp[5];
-            $certificato->user = $array_temp[5];
+            $certificate->user = $array_temp[5];
             //$certificato->link_conf = $array_temp[];
 
             //$user = \App\User::where('name','=',$certificato->user)->get();
-            $user = \App\User::where('name', '=', $certificato->user)->first();
+            $user = \App\Models\User::where('user_name', '=', $certificate->user)->first();
            // dd($user->id);
             if (isset($user->id)) {
                 //dd($user);
-                $certificato->user_id = $user->id;
+                $certificate->user_id = $user->id;
             }
 
-            $certificato->save();
+            $certificate->save();
 
         }
 
-        $certs = Certificato::orderBy('id', 'desc')->get();
+        $certs = Certificate::orderBy('id', 'desc')->get();
 
         //return view('home')->with('rule', $rule);
         //return view('home', ['rule' => $rule, 'array_index' => $array_index]);
@@ -118,7 +118,7 @@ class CertificatoController extends Controller
     {
 
         $this->auto_popolate_db();
-        $certs = Certificato::orderBy('id', 'desc')->get();
+        $certs = Certificate::orderBy('id', 'desc')->get();
 
         return view('admin.readdb', ['certs' => $certs]);
     }
@@ -126,25 +126,26 @@ class CertificatoController extends Controller
     public function download($cert)
     {
 
-        $certificato = \App\Certificato::find($cert);
-        $name = $certificato->user;
-        $user = User::where('name', Str::remove(PHP_EOL, $name))->first();
-        $tipo_vpn = $user->tipo_vpn;
+        /** @var Certificate $certificate */
+        $certificate = Certificate::find($cert);
+        $name = $certificate->user;
+        /** @var User $user */
+        $user = User::where('user_name', Str::remove(PHP_EOL, $name))->first();
+        $vpn_type = $user->vpn_type;
 
-        $file = config('filesystems.certificate_folder').Str::afterLast($name, '=').'_'.$tipo_vpn.'.ovpn';
+        $file = sprintf('%s%s_%s.ovpn', config('filesystems.certificate_folder'), Str::afterLast($name, '='), $vpn_type);
 
-        return \Response::download($file);
+        return response()->download($file);
 
     }
 
-    //public function revoke(Certificato $certificato, User $user)
     public function revoke($cert)
     {
         //
         // the array can contain any number of arguments and options
         ///etc/openvpn/easy-rsa/pki/script-revoke-web.sh
         //echo $cert;
-        $certificato = \App\Certificato::find($cert);
+        $certificato = Certificate::find($cert);
 
         $process = new Process(['/usr/bin/sudo', config('filesystems.script_folder').'script-revoke-web.sh', $certificato->user]);
         $process->start();
@@ -157,7 +158,6 @@ class CertificatoController extends Controller
             }
         }
 
-        //dd($certificato->stato);
         $certificato->stato = 'R';
         $certificato->save();
 
@@ -165,24 +165,21 @@ class CertificatoController extends Controller
 
         $this->auto_popolate_db();
 
-        $user = User::where('name', $name)->get()->first();
+        $user = User::where('user_name', $name)->first();
 
-        $certs = Certificato::where('user', $name)->get();
-
-        //dd($user->name);
+        $certs = Certificate::where('user', $name)->get();
 
         return redirect()->route('admin.admin_showuserfromname', ['name' => $user->name])->with('msg-success', 'Profile updated!');
 
     }
 
-    //public function revoke(Certificato $certificato, User $user)
     public function release($user)
     {
 
-        $user = \App\User::find($user);
+        $user = \App\Models\User::find($user);
         //dd($user->name);
         //controllo che l'utente non abbia certificati attivi validi
-        $certificati_utente = \App\Certificato::where('user', $user->name)->get();
+        $certificati_utente = \App\Models\Certificate::where('user', $user->name)->get();
         //dd($certificati_utente);
         $certificati_attivi = false;
         foreach ($certificati_utente as $cert) {
@@ -200,7 +197,7 @@ class CertificatoController extends Controller
 
         //$certificato = new \App\Certificato;
 
-        if ($user->tipo_vpn == 'FULL') {
+        if ($user->vpn_type == 'FULL') {
             $process = new Process(['/usr/bin/sudo', config('filesystems.script_folder').'build-key-pass-batch-web_FULLTCP.sh', $user->name, $user->password_clear]);
         } else {
             $process = new Process(['/usr/bin/sudo', config('filesystems.script_folder').'build-key-pass-batch-web_TS.sh', $user->name, $user->password_clear]);
@@ -223,75 +220,5 @@ class CertificatoController extends Controller
         //return view('admin.showuser', ['user' => $user, 'certs' => $certs]);
         //return redirect()->route('admin.admin_showuserfromname', ['name' => $user->name])->with('msg-success', 'Profile updated!');
         return redirect()->back()->with('msg-success', 'Profile updated!');
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Certificato $certificato)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Certificato $certificato)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Certificato $certificato)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Certificato $certificato)
-    {
-        //
     }
 }

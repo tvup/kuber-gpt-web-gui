@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{__('home.dashboard')}} - {{ $rule }}</div>
+                <div class="card-header">{{__('home.dashboard')}} - {{ $role }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    @if(($rule == 'ADMIN') || ($rule == 'MANAGER_RO'))
+                    @if(($role == \App\Enums\UserRoleEnum::Admin) || ($role == \App\Enums\UserRoleEnum::Manager))
                     <ul>
 
                         <li><a href={{route('admin.admin_popolatedb')}}> {{ __('home.open_certificate_dashboard') }}</a></li>
@@ -23,7 +23,7 @@
                     </ul>
 
                     @else
-                    
+
                     <ul>
                         <li><a href="{{ route('user_downloadmycert') }}" class="btn btn-success">
                                 {{ __('home.download_vpn_access') }}
@@ -43,7 +43,7 @@
                                 <i class="fas fa-spinner"></i>
                             </a>
                         </li>
-                        
+
                         <hr>
                         <li>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST">
@@ -52,18 +52,18 @@
                                     {{ __('auth.logout') }}
                                     <i class="fas fa-sign-out-alt"></i>
                                 </button>
-                                                                    
+
                             </form>
-                            
+
                         </li>
-                    
+
 
 
                     @endif
 
 
-                  
-                    
+
+
                 </div>
             </div>
         </div>

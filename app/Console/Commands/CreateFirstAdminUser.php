@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Console\Command;
 
 class CreateFirstAdminUser extends Command
@@ -57,7 +57,7 @@ class CreateFirstAdminUser extends Command
                 //'cognome' => $last_name,
                 //'cf' => $cf,
                 //'email' => $email,
-                'name' => 'admin',
+                'user_name' => 'admin',
                 'nome' => 'admin',
                 'cognome' => 'admin',
                 'cf' => 'admin',

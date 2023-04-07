@@ -34,7 +34,7 @@
                 },
                 "autoload": {
                     "psr-4": {
-                        "Skydiver\\LaravelMaterializeCSS\\": "vendor/skydiver/laravel-materialize-css/src/"
+                        "Skydiver\\LaravelMaterializeCSS\\": "src/"
                     }
                 }
             }

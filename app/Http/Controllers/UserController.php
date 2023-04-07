@@ -86,7 +86,7 @@ class UserController extends Controller
             return view('auth.register', ['user' => $name]);
         }
 
-        $certs = Certificato::where('user',$name)->get();
+        $certs = Certificato::where('user','like','%'.$name.'%')->get();
         return view('admin.showuser', ['user' => $user, 'certs' => $certs]);
 
 

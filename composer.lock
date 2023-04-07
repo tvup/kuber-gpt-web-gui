@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "412d7b6e22b034cb5e2e0c456cb944f4",
+    "content-hash": "d82be5e46d0879493cb3ae86f783bfaf",
     "packages": [
         {
             "name": "brick/math",
@@ -2415,7 +2415,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Skydiver\\LaravelMaterializeCSS\\": "vendor/skydiver/laravel-materialize-css/src/"
+                    "Skydiver\\LaravelMaterializeCSS\\": "src/"
                 }
             }
         },

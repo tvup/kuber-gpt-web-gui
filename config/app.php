@@ -185,7 +185,7 @@ return [
         /*
          * Package Service Providers...
          */
-        Skydiver\LaravelMaterializeCSS\MaterializeCSSServiceProvider::class,
+        //Skydiver\LaravelMaterializeCSS\MaterializeCSSServiceProvider::class,
 
         /*
          * Application Service Providers...

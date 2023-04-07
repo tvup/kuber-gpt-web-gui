@@ -62,7 +62,7 @@ gpgcheck=1
 ## Installation
 
 * Setup openvpn server with your parameter and preferences or use your already working openvpn server
-* go to /etc/openvpn/ca: cd /etc/openvpn/ca
+* go to /etc/openvpn/easy-rsa/pki: cd /etc/openvpn/easy-rsa/pki
 * git clone https://github.com/MaoX17/openvpn-web-gui.git
 * cd openvpn-web-gui
 * chmod ugo+x addon/*
@@ -72,8 +72,8 @@ gpgcheck=1
 * GRANT ALL ON openvpn.* TO 'openvpn'@'localhost'  IDENTIFIED BY 'your_pass' WITH GRANT OPTION;
 * set your .env file
 * edit .env  (vi .env) :
-* INDEX_PATH="/etc/openvpn/ca/keys/"
-* INDEX_FULL_PATH="/etc/openvpn/ca/keys/index.txt"
+* INDEX_PATH="/etc/openvpn/easy-rsa/pki/private/"
+* INDEX_FULL_PATH="/etc/openvpn/easy-rsa/pki/private/index.txt"
 * DB_CONNECTION=mysql
 * DB_HOST=127.0.0.1
 * DB_PORT=3306
@@ -86,7 +86,7 @@ gpgcheck=1
 * user: admin@admin.admin
 * visudo
 * paste in visudo:
-* apache ALL = (ALL) NOPASSWD: /etc/openvpn/ca/script-revoke-web.sh, /etc/openvpn/ca/revoke-full, /etc/openvpn/ca/pkitool, /usr/bin/mailx, /etc/openvpn/ca/build-key-pass-batch-web.sh, /etc/openvpn/ca/build-key-pass-batch-web_FULLTCP.sh, /etc/openvpn/ca/build-key-pass-batch-web_TS.sh
+* apache ALL = (ALL) NOPASSWD: /etc/openvpn/easy-rsa/pki/script-revoke-web.sh, /etc/openvpn/easy-rsa/pki/revoke-full, /etc/openvpn/easy-rsa/pki/pkitool, /usr/bin/mailx, /etc/openvpn/easy-rsa/pki/build-key-pass-batch-web.sh, /etc/openvpn/easy-rsa/pki/build-key-pass-batch-web_FULLTCP.sh, /etc/openvpn/easy-rsa/pki/build-key-pass-batch-web_TS.sh
 * make sure your openvpn's "index.txt" path is set correctly in .env
 * 
 

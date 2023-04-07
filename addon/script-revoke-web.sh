@@ -5,7 +5,7 @@ if [[ -z $1 ]]; then
 	echo "Errore aggiungere id utente come parametro. Es script-revoke.sh ub32"
 	exit
 fi
-cd /etc/openvpn/ca
+cd /etc/openvpn/easy-rsa/pki
 . ./vars
 
  ./revoke-full $UTENTE_ID

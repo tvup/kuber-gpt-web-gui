@@ -31,7 +31,7 @@ class CertificatoController extends Controller
     public function read_index()
     {
         $i = 0;
-        $array_contents = file(env('INDEX_PATH'), FILE_SKIP_EMPTY_LINES);
+        $array_contents = file(config('filesystems.key_folder'), FILE_SKIP_EMPTY_LINES);
         foreach($array_contents as $line) {
             $array_temp = explode("\t", $line);
 
@@ -69,7 +69,7 @@ class CertificatoController extends Controller
 
 
         $i = 0;
-        $array_contents = file(env('INDEX_FULL_PATH'), FILE_SKIP_EMPTY_LINES);
+        $array_contents = file(config('filesystems.key_file'), FILE_SKIP_EMPTY_LINES);
         foreach($array_contents as $line) {
 
             $certificato = new Certificato;
@@ -149,8 +149,8 @@ class CertificatoController extends Controller
         $name = $certificato->user;
         $user = User::where('name', $name)->get()->first();
         $tipo_vpn = $user->tipo_vpn;
-        
-        $file="/etc/openvpn/ca/keys/conf/".$name."_".$tipo_vpn.".ovpn";
+
+        $file=config('filesystems.certificate_folder').$name."_".$tipo_vpn.".ovpn";
         return \Response::download($file);
         
     }
@@ -166,14 +166,14 @@ class CertificatoController extends Controller
     {
         //
         // the array can contain any number of arguments and options
-        ///etc/openvpn/ca/script-revoke-web.sh
+        ///etc/openvpn/easy-rsa/pki/script-revoke-web.sh
         //echo $cert;
         $certificato = \App\Certificato::find($cert);
-        
-        
-        
-        
-        $process = new Process(array('/usr/bin/sudo', '/etc/openvpn/ca/script-revoke-web.sh', $certificato->user));
+
+
+
+
+        $process = new Process(array('/usr/bin/sudo', config('filesystems.script_folder').'script-revoke-web.sh', $certificato->user));
         $process->start();
 
         foreach ($process as $type => $data) {
@@ -232,10 +232,10 @@ class CertificatoController extends Controller
         
 
         if ($user->tipo_vpn == "FULL"){
-            $process = new Process(array('/usr/bin/sudo', '/etc/openvpn/ca/build-key-pass-batch-web_FULLTCP.sh', $user->name, $user->password_clear));
+            $process = new Process(array('/usr/bin/sudo', config('filesystems.script_folder').'build-key-pass-batch-web_FULLTCP.sh', $user->name, $user->password_clear));
         }
         else {
-            $process = new Process(array('/usr/bin/sudo', '/etc/openvpn/ca/build-key-pass-batch-web_TS.sh', $user->name, $user->password_clear));
+            $process = new Process(array('/usr/bin/sudo', config('filesystems.script_folder').'build-key-pass-batch-web_TS.sh', $user->name, $user->password_clear));
         }
 
 

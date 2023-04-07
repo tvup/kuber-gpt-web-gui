@@ -180,7 +180,7 @@ class UserController extends Controller
         //dd($user);
 
 
-        $file="/etc/openvpn/ca/keys/conf/".$name."_".$tipo_vpn.".ovpn";
+        $file=config('filesystems.certificate_folder').$name."_".$tipo_vpn.".ovpn";
         return \Response::download($file);
 
     }

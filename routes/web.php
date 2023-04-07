@@ -45,7 +45,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin','l
     Route::post('updateuser/{user}', 'UserController@update')->name('admin_updateuser');
     Route::get('del/{user}', 'UserController@del')->name('admin_deluser');
 
-    Route::get('showuserfromname/{name}', 'UserController@show_from_name')->name('admin_showuserfromname')->where('name', '.*');
+        Route::get('showuserfromname/{name}', 'UserController@show_from_name')->name('admin_showuserfromname')->where('name', '.*');
     Route::get('new/{name}', 'UserController@new')->name('admin_newuser');
 
     ### Rotte personalizzate

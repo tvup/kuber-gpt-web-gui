@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Str;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 
@@ -144,15 +145,15 @@ class CertificatoController extends Controller
 
     public function download($cert)
     {
-        
+
         $certificato = \App\Certificato::find($cert);
         $name = $certificato->user;
-        $user = User::where('name', $name)->get()->first();
+        $user = User::where('name',Str::remove(PHP_EOL,$name))->first();
         $tipo_vpn = $user->tipo_vpn;
 
-        $file=config('filesystems.certificate_folder').$name."_".$tipo_vpn.".ovpn";
+        $file=config('filesystems.certificate_folder').Str::afterLast($name,'=')."_".$tipo_vpn.".ovpn";
         return \Response::download($file);
-        
+
     }
 
 

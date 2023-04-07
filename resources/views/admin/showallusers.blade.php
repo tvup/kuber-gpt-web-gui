@@ -11,7 +11,7 @@
                     <div class="card-header">
                         {{__('showallusers.all_registered_users')}}
                         <p class="text-right">
-                            <a href="{{ action('UserController@new', ['name' => __('new')]) }}" class="btn btn-success">
+                            <a href="{{ action('UserController@new', ['name' => __('showallusers.new')]) }}" class="btn btn-success">
                                 {{__('showallusers.new_user')}}
                                 <i class="fa fa-plus-square" aria-hidden="true"></i>
                             </a>

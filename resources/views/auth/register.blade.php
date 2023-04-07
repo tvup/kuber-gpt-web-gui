@@ -200,7 +200,7 @@
 
                             <div class="col-md-1">
                                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#pwdModal">
-                                    {{__('suggest_password')}}
+                                    {{__('register.suggest_password')}}
                                 </button>
                             </div>
                         </div>
@@ -227,7 +227,7 @@
 
 <script type="text/javascript">
 function myFunction() {
-    var x = document.getElementById("password");
+    let x = document.getElementById("password");
     if (x.type === "password") {
         x.type = "text";
     } else {

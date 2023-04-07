@@ -49,13 +49,13 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td scope="row">{{ $user->name }}</td>
-                                <td>{{ $user->nome }} </td>
-                                <td>{{ $user->cognome }} </td>
+                                <td scope="row">{{ $user->user_name }}</td>
+                                <td>{{ $user->name }} </td>
+                                <td>{{ $user->surname }} </td>
                                 <td>{{ $user->cf }} </td>
-                                <td>{{ $user->societa }} </td>
+                                <td>{{ $user->company }} </td>
                                 <td>{{ $user->email }} </td>
-                                <td>{{ $user->tipo_vpn }} </td>
+                                <td>{{ $user->vpn_type }} </td>
                                 <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pwdModal">
                                        <i class="fas fa-key"></i>
                                     </button>

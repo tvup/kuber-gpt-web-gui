@@ -20,7 +20,7 @@ return [
     'user' => 'User',
     'password' => 'Password',
     'confirm_password' => 'Confirm Password',
-    'show_password' => 'Show Passwords',
+    'show_password' => 'Show Password',
     'suggest_password' => 'Suggest a password',
     'TS' => 'TS',
     'FULL' => 'FULL',

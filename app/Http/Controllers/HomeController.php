@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -26,15 +25,14 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         //dd($user);
-        if ($user->rule == "admin")
-            $rule = "ADMIN";
-        elseif ($user->rule == "manager_ro") {
-            $rule = "MANAGER_RO";
+        if ($user->rule == 'admin') {
+            $rule = 'ADMIN';
+        } elseif ($user->rule == 'manager_ro') {
+            $rule = 'MANAGER_RO';
+        } else {
+            $rule = 'USER';
         }
-        else {
-            $rule ="USER";
-        }
-            
+
         return view('home')->with('rule', $rule);
     }
 }

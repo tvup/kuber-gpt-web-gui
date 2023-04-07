@@ -2,9 +2,8 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -16,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','nome', 'cognome', 'cf', 'rule','password_clear','societa','tipo_vpn'
+        'name', 'email', 'password', 'nome', 'cognome', 'cf', 'rule', 'password_clear', 'societa', 'tipo_vpn',
     ];
 
     /**
@@ -28,15 +27,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
-
     public function certificati()
     {
         return $this->hasMany('\App\Certificato');
     }
 
-
-    public function isAdmin() {
+    public function isAdmin()
+    {
 
         if ($this->rule == 'admin') {
             return true;
@@ -46,7 +43,8 @@ class User extends Authenticatable
 
     }
 
-    public function isManagerRO() {
+    public function isManagerRO()
+    {
 
         if ($this->rule == 'manager_ro') {
             return true;
@@ -55,6 +53,4 @@ class User extends Authenticatable
         return false;
 
     }
-
-
 }

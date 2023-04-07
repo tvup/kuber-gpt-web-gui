@@ -2,12 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\User;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Auth\Events\Registered;
+use Illuminate\Console\Command;
 
 class CreateFirstAdminUser extends Command
 {
@@ -44,7 +40,7 @@ class CreateFirstAdminUser extends Command
     {
         //
 
-        if (is_null(User::where('email', 'admin@admin.admin')->first())){
+        if (is_null(User::where('email', 'admin@admin.admin')->first())) {
             //dd('ok');
             //if (User::where('email', 'admin@admin.admin'))
 
@@ -67,13 +63,12 @@ class CreateFirstAdminUser extends Command
                 'cf' => 'admin',
                 'email' => 'admin@admin.admin',
                 'rule' => 'admin',
-                'password' => bcrypt($password)
+                'password' => bcrypt($password),
             ]);
 
-            $this->info("User admin: admin@admin.admin was created - now you can login with email-password");
-        }
-        else {
-            $this->info("User admin: admin@admin.admin exist. Exit.");
+            $this->info('User admin: admin@admin.admin was created - now you can login with email-password');
+        } else {
+            $this->info('User admin: admin@admin.admin exist. Exit.');
         }
 
     return 0;

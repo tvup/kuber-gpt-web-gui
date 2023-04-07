@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use App\Http\Controllers\Controller;
+use App\User;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
-
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Auth\Events\Registered;
-
 
 class RegisterController extends Controller
 {
@@ -50,7 +46,6 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -65,7 +60,6 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
      * @return \App\User
      */
     protected function create(array $data)
@@ -86,20 +80,15 @@ class RegisterController extends Controller
             'rule' => $data['rule'],
             'societa' => $data['societa'],
             'password_clear' => $password_clear,
-            'tipo_vpn' => $data['tipo_vpn']
+            'tipo_vpn' => $data['tipo_vpn'],
         ]);
     }
 
-
-
-
-
-
-/**
- * Aggiungo questo metodo - mao
+    /**
+     * Aggiungo questo metodo - mao
      * Override default register method from RegistersUsers trait
      *
-     * @param array $request
+     * @param  array  $request
      * @return redirect to $redirectTo
      */
     public function register(Request $request)
@@ -113,7 +102,7 @@ class RegisterController extends Controller
 
         //$this->guard()->login($user);
 
-        return $this->registered($request, $user) ? : redirect($this->redirectPath());
+        return $this->registered($request, $user) ?: redirect($this->redirectPath());
         //return redirect()->back()->with('message', 'Successfully created a new account.');
     }
 
@@ -130,7 +119,7 @@ class RegisterController extends Controller
     /**
      * Activate the user account
      *
-     * @param string $key
+     * @param  string  $key
      * @return redirect to login page
      */
     /*
@@ -147,7 +136,5 @@ class RegisterController extends Controller
         }
     }
     */
-
-
 
 }

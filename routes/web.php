@@ -17,8 +17,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-
-
 Route::middleware('locale')->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
 
@@ -28,7 +26,7 @@ Route::middleware('locale')->group(function () {
 
 });
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin','locale']], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin', 'locale']], function () {
 
     //Route::redirect('/', '/admin/dashboard', 301);
     Route::get('/', 'CertificatoController@popolate_db')->name('admin_popolatedb');
@@ -48,10 +46,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin','l
         Route::get('showuserfromname/{name}', 'UserController@show_from_name')->name('admin_showuserfromname')->where('name', '.*');
     Route::get('new/{name}', 'UserController@new')->name('admin_newuser');
 
-    ### Rotte personalizzate
+    //## Rotte personalizzate
     //Route::get('show_calendar', 'DashboardController@show_calendar')->name('show_calendar');
     //Route::post('store_calendar', 'DashboardController@store_calendar')->name('store_calendar');
 
 });
-
-

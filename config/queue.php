@@ -66,16 +66,16 @@ return [
 //            'retry_after' => 90,
 //            'block_for' => null,
 //        ],
-        'redis' => [
-            'host' => env('REDIS_HOST'),
-            'port' => env('REDIS_PORT'),
-            'driver' => 'redis',
-            'connection' => 'default',
-            'queue' => env('REDIS_QUEUE', 'default'),
-            'retry_after' => 90,
-            'block_for' => null,
-            'after_commit' => false,
-        ],
+//        'redis' => [
+//            'host' => env('REDIS_HOST'),
+//            'port' => env('REDIS_PORT'),
+//            'driver' => 'redis',
+//            'connection' => 'default',
+//            'queue' => env('REDIS_QUEUE', 'default'),
+//            'retry_after' => 90,
+//            'block_for' => null,
+//            'after_commit' => false,
+//        ],
     ],
 
     /*

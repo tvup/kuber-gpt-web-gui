@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Redis;
 use Predis\Client;
 
 class ConnectToRedis extends Command
@@ -25,29 +26,9 @@ class ConnectToRedis extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
-
-        $config = config()->get('database.redis.default');
-
-        //$config = Arr::except($config, ['transport']);
-
-        $redis = new Client($config);
-
-        $pubsub = $redis->pubSub();
-        $pubsub->subscribe('test-channel');
-
-        foreach ($pubsub as $message)
-        {
-            switch ($message->kind) {
-                case 'subscribe':
-                    echo "Subscribed to {$message->channel}\n";
-                    break;
-
-                case 'message':
-                    // do something
-                    break;
-            }
-        }
+        Redis::publish('my-channel', 'jytte tvupper+2@gmail.com');
     }
+
 }

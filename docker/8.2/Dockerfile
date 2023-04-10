@@ -12,8 +12,13 @@ ENV TZ=UTC
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN apt-get update \
-    && apt-get install -y gnupg gosu curl ca-certificates zip unzip git supervisor libcap2-bin libpng-dev python2 dnsutils \
+RUN apt-get update
+RUN apt-get install -y locales apt-utils
+RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+    dpkg-reconfigure locales && \
+    update-locale LANG=en_US.UTF-8
+ENV LANG en_US.UTF-8
+RUN apt-get install -y gnupg gosu curl ca-certificates zip unzip git supervisor libcap2-bin libpng-dev python2 dnsutils \
     && curl -sS 'https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x14aa40ec0831756756d7f66c4f4ea0aae5267a6c' | gpg --dearmor | tee /etc/apt/keyrings/ppa_ondrej_php.gpg > /dev/null \
     && echo "deb [signed-by=/etc/apt/keyrings/ppa_ondrej_php.gpg] https://ppa.launchpadcontent.net/ondrej/php/ubuntu jammy main" > /etc/apt/sources.list.d/ppa_ondrej_php.list \
     && apt-get update \
@@ -35,6 +40,10 @@ RUN apt-get update \
     && apt-get update \
     && apt-get install -y yarn \
     && apt-get install -y mysql-client \
+    && apt-get install -y redis-tools
+
+RUN apt-get install -y ssmtp \
+    && apt-get install -y mailutils \
     && apt-get -y autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -83,21 +92,18 @@ RUN cd /etc/openvpn/easy-rsa \
 RUN cd /etc/openvpn/easy-rsa/pki/ \
     && git clone https://github.com/tvup/openvpn-web-gui.git \
     && cd openvpn-web-gui \
-    && echo HEJ \
     && git checkout origin/feature/tvup-magic \
     && composer install \
-    && php -r "copy('.env.example', '.env');" \
-    && head -n20 .env \
-    && chmod ugo+x addon/* \
-    && cp addon/* ../
+    && php -r "copy('.env.example', '.env');"
 
-RUN chmod 777 /etc/openvpn/easy-rsa/pki
-RUN chmod -R 755 /etc/openvpn/easy-rsa/pki/*
-RUN chmod +x /etc/openvpn/easy-rsa/pki/script-revoke-web.sh
-RUN chmod +x /etc/openvpn/easy-rsa/pki/build-key-pass-batch-web_FULLTCP.sh
-RUN chmod +x /etc/openvpn/easy-rsa/pki/build-key-pass-batch-web_TS.sh
 
-RUN echo "www-data ALL = (ALL) NOPASSWD: /etc/openvpn/easy-rsa/pki/script-revoke-web.sh, /etc/openvpn/easy-rsa/pki/revoke-full, /etc/openvpn/easy-rsa/pki/pkitool, /usr/bin/mailx, /etc/openvpn/easy-rsa/pki/build-key-pass-batch-web.sh, /etc/openvpn/easy-rsa/pki/build-key-pass-batch-web_FULLTCP.sh, /etc/openvpn/easy-rsa/pki/build-key-pass-batch-web_TS.sh" >> /etc/sudoers
+#RUN chmod 777 /etc/openvpn/easy-rsa/pki
+#RUN chmod -R 755 /etc/openvpn/easy-rsa/pki/*
+#RUN chmod +x /etc/openvpn/easy-rsa/pki/script-revoke-web.sh
+#RUN chmod +x /etc/openvpn/easy-rsa/pki/build-key-pass-batch-web_FULLTCP.sh
+#RUN chmod +x /etc/openvpn/easy-rsa/pki/build-key-pass-batch-web_TS.sh
+
+#RUN echo "sail ALL = (ALL) NOPASSWD: /etc/openvpn/easy-rsa/pki/script-revoke-web.sh, /etc/openvpn/easy-rsa/pki/revoke-full, /etc/openvpn/easy-rsa/pki/pkitool, /usr/bin/mailx, /etc/openvpn/easy-rsa/pki/build-key-pass-batch-web.sh, /etc/openvpn/easy-rsa/pki/build-key-pass-batch-web_FULLTCP.sh, /etc/openvpn/easy-rsa/pki/build-key-pass-batch-web_TS.sh" >> /etc/sudoers
 
 COPY ./server.conf /etc/openvpn/
 
@@ -110,6 +116,8 @@ RUN useradd -ms /bin/bash --no-user-group -g $WWWGROUP -u 1337 sail
 COPY start-container /usr/local/bin/start-container
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY php.ini /etc/php/8.2/cli/conf.d/99-sail.ini
+COPY ssmtp.conf /etc/ssmtp/
+COPY revaliases /etc/ssmtp/
 RUN chmod +x /usr/local/bin/start-container
 
 EXPOSE 8000

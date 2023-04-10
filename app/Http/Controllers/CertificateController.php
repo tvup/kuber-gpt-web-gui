@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Certificate;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Str;
 use Symfony\Component\Process\Process;
 
@@ -175,50 +176,26 @@ class CertificateController extends Controller
 
     public function release($user)
     {
-
         $user = \App\Models\User::find($user);
-        //dd($user->name);
         //controllo che l'utente non abbia certificati attivi validi
         $certificati_utente = \App\Models\Certificate::where('user', $user->name)->get();
-        //dd($certificati_utente);
         $certificati_attivi = false;
         foreach ($certificati_utente as $cert) {
             if ($cert->stato == 'V') {
                 $certificati_attivi = true;
             }
         }
-        //dd($certificati_attivi);
         if ($certificati_attivi == true) {
-            //return view('admin.error', ['errore' => "Esitono già certificati validi per l'utente"]);
             return redirect()->back()->with('msg-danger', 'Errore: Esitono già certificati validi');
         }
 
         //procedo se non ha certificati validi attivi
-
-        //$certificato = new \App\Certificato;
-
         if ($user->vpn_type == 'FULL') {
-            $process = new Process(['/usr/bin/sudo', config('filesystems.script_folder').'build-key-pass-batch-web_FULLTCP.sh', $user->name, $user->password_clear]);
+            Redis::publish('my-channel', $user->name . ' ' . $user->email);
         } else {
-            $process = new Process(['/usr/bin/sudo', config('filesystems.script_folder').'build-key-pass-batch-web_TS.sh', $user->name, $user->password_clear]);
+            Redis::publish('my-channel', $user->name . ' ' . $user->email);
         }
 
-        //dd($process);
-        $process->start();
-
-        foreach ($process as $type => $data) {
-            if ($process::OUT === $type) {
-                echo "\nRead from stdout: ".$data;
-            } else { // $process::ERR === $type
-                echo "\nRead from stderr: ".$data;
-            }
-        }
-
-        $this->auto_popolate_db();
-
-        $certs = $certificati_utente;
-        //return view('admin.showuser', ['user' => $user, 'certs' => $certs]);
-        //return redirect()->route('admin.admin_showuserfromname', ['name' => $user->name])->with('msg-success', 'Profile updated!');
         return redirect()->back()->with('msg-success', 'Profile updated!');
     }
 }

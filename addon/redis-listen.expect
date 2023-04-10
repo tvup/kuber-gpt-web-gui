@@ -1,3 +1,0 @@
-#!/usr/bin/expect
-spawn redis-cli psubscribe redis://default:ead96f5d32784459ada183674d3a3152@eu1-glorious-meerkat-38042.upstash.io:38042
-expect

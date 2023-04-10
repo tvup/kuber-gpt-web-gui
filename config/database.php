@@ -115,6 +115,7 @@ return [
         //the `default` connection of the redis driver
         //Note: The Laravel Redis facade is hard coded to use this connection unless its connection is explicitly specified
         'default' => [
+            'scheme' => 'tls',
             'host' => env('REDIS_HOST', '127.0.0.1'),
             'password' => env('REDIS_PASSWORD', null),
             'port' => env('REDIS_PORT', '6379'),

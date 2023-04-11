@@ -20,7 +20,7 @@ function on_message_received() {
   EASYRSA_BATCH=1 /opt/EasyRSA-3.1.2/easyrsa sign-req client "${message}"
 
   cd /etc/openvpn/easy-rsa/pki || exit
-  cat /var/www/html/addon/vpn_FULL_TCP_conf.ovpn > ./"${message}"_FULL.ovpn
+  cat /home/forge/secure.torbenit.dk/addon/vpn_FULL_TCP_conf.ovpn > ./"${message}"_FULL.ovpn
 
   echo "<ca>" >> ./"${message}"_FULL.ovpn
   cat ca.crt  >> ./"${message}"_FULL.ovpn
@@ -35,7 +35,7 @@ function on_message_received() {
   echo "</key>" >> ./"${message}"_FULL.ovpn
 
   echo "<tls-auth>" >> ./"${message}"_FULL.ovpn
-  cat ../../ta.key  >> ./"${message}"_FULL.ovpn
+  cat ../ta.key  >> ./"${message}"_FULL.ovpn
   echo "</tls-auth>" >> ./"${message}"_FULL.ovpn
 
   /usr/bin/mailx "${email}" -s "VPN per "${message}" con password" -a From:admin@torbenit.dk -A "${message}"_FULL.ovpn < /etc/openvpn/easy-rsa/pki/private/"${message}".password.txt

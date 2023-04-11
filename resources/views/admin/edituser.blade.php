@@ -94,8 +94,10 @@
                             <div class="col-md-6">
 
                                 <select id="vpn_type" class="form-control{{ $errors->has('vpn_type') ? ' is-invalid' : '' }}" name="vpn_type"  required autofocus>
-                                    <option value="TS" {{ ($user->vpn_type == 'TS' ? "selected" : "") }} >TS</option>
-                                    <option value="FULL" {{ ($user->vpn_type == 'FULL' ? "selected" : "") }} >FULL</option>
+                                    <option value="TS" {{ ($user->vpn_type == \App\Enums\VPNTypeEnum::TS ? "selected" : "") }} >
+                                        {{\App\Enums\VPNTypeEnum::TS->value}}</option>
+                                    <option value="FULL" {{ ($user->vpn_type == \App\Enums\VPNTypeEnum::FULL ? "selected" : "") }} >
+                                        {{\App\Enums\VPNTypeEnum::FULL->value}}</option>
                                 </select>
 
 

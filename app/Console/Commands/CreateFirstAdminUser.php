@@ -52,18 +52,14 @@ class CreateFirstAdminUser extends Command
             $password = $this->secret('What is the password?');
 
             User::create([
-                //'name' => $name,
-                //'nome' => $first_name,
-                //'cognome' => $last_name,
-                //'cf' => $cf,
-                //'email' => $email,
                 'user_name' => 'admin',
-                'nome' => 'admin',
-                'cognome' => 'admin',
+                'name' => 'admin',
+                'surname' => 'admin',
                 'cf' => 'admin',
                 'email' => 'admin@admin.admin',
-                'rule' => 'admin',
+                'role' => 'admin',
                 'password' => bcrypt($password),
+
             ]);
 
             $this->info('User admin: admin@admin.admin was created - now you can login with email-password');

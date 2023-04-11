@@ -129,14 +129,14 @@
 
 
                         <div class="form-group row">
-                            <label for="e_mail" class="col-md-4 col-form-label text-md-right">{{ __('register.e_mail_address_unique') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('register.e_mail_address_unique') }}</label>
 
                             <div class="col-md-6">
-                                <input id="e_mail" type="e_mail" class="form-control{{ $errors->has('e_mail') ? ' is-invalid' : '' }}" name="e_mail" value="{{ old('e_mail') }}" required>
+                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
 
-                                @if ($errors->has('e_mail'))
+                                @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('e_mail') }}</strong>
+                                        <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
                             </div>

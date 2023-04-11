@@ -67,7 +67,7 @@ class RegisterController extends Controller
     {
 
         $password_clear = '';
-        if ($data['rule'] == 'user') {
+        if ($data['role'] == 'user') {
             $password_clear = $data['password'];
         }
 
@@ -75,13 +75,13 @@ class RegisterController extends Controller
             'user_name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'nome' => $data['nome'],
-            'cognome' => $data['cognome'],
+            'name' => $data['name'],
+            'surname' => $data['surname'],
             'cf' => $data['cf'],
-            'rule' => $data['rule'],
-            'societa' => $data['societa'],
+            'role' => $data['role'],
+            'company' => $data['company'],
             'password_clear' => $password_clear,
-            'tipo_vpn' => $data['tipo_vpn'],
+            'vpn_type' => $data['vpn_type'],
         ]);
     }
 

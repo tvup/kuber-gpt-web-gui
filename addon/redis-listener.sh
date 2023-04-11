@@ -34,9 +34,9 @@ function on_message_received() {
   cat private/"${message}".key  >> ./"${message}"_FULL.ovpn
   echo "</key>" >> ./"${message}"_FULL.ovpn
 
-  echo "<ta>" >> ./"${message}"_FULL.ovpn
+  echo "<tls-auth>" >> ./"${message}"_FULL.ovpn
   cat ../../ta.key  >> ./"${message}"_FULL.ovpn
-  echo "</ta>" >> ./"${message}"_FULL.ovpn
+  echo "</tls-auth>" >> ./"${message}"_FULL.ovpn
 
   echo "<dh>" >> ./"${message}"_FULL.ovpn
   cat ../../dh2048.pem  >> ./"${message}"_FULL.ovpn

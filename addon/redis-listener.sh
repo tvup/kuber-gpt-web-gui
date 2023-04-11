@@ -34,8 +34,12 @@ function on_message_received() {
   cat private/"${message}".key  >> ./"${message}"_FULL.ovpn
   echo "</key>" >> ./"${message}"_FULL.ovpn
 
+  echo "<ta>" >> ./"${message}"_FULL.ovpn
+  cat ../../ta.crt  >> ./"${message}"_FULL.ovpn
+  echo "</ta>" >> ./"${message}"_FULL.ovpn
+
   echo "<dh>" >> ./"${message}"_FULL.ovpn
-  cat ../ta.key  >> ./"${message}"_FULL.ovpn
+  cat ../../dh2048.pem  >> ./"${message}"_FULL.ovpn
   echo "</dh>" >> ./"${message}"_FULL.ovpn
 
   /usr/bin/mailx "${email}" -s "VPN per "${message}" con password" -a From:admin@torbenit.dk -A "${message}"_FULL.ovpn < /etc/openvpn/easy-rsa/pki/private/"${message}".password.txt

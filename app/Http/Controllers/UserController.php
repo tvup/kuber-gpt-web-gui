@@ -10,6 +10,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -50,7 +51,7 @@ class UserController extends Controller
     public function show_from_name($name)
     {
         /** @var User $user */
-        $user = User::where('user_name', 'like', '%'.$name.'%')->first();
+        $user = User::where('user_name', Str::remove(PHP_EOL, $name))->first();
         if (null === $user) {
             return view('auth.register', ['user' => $name]);
         }

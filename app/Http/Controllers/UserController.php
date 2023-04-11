@@ -50,7 +50,7 @@ class UserController extends Controller
     public function show_from_name($name)
     {
         /** @var User $user */
-        $user = User::where('user_name', $name)->first();
+        $user = User::where('user_name', 'like', '%'.$name.'%')->first();
         if (null === $user) {
             return view('auth.register', ['user' => $name]);
         }

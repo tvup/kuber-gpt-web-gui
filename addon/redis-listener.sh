@@ -35,7 +35,7 @@ function on_message_received() {
   echo "</key>" >> ./"${message}"_FULL.ovpn
 
   echo "<ta>" >> ./"${message}"_FULL.ovpn
-  cat ../../ta.crt  >> ./"${message}"_FULL.ovpn
+  cat ../../ta.key  >> ./"${message}"_FULL.ovpn
   echo "</ta>" >> ./"${message}"_FULL.ovpn
 
   echo "<dh>" >> ./"${message}"_FULL.ovpn

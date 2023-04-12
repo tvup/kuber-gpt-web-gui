@@ -6,6 +6,7 @@ use App\Enums\StatusEnum;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Str;
 
 /**
  * @property int $id
@@ -29,5 +30,10 @@ class Certificate extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo('\App\Models\User');
+    }
+
+    public function getStrippedUserNameAttribute(): string
+    {
+        return Str::afterLast($this->idcert, '=');
     }
 }

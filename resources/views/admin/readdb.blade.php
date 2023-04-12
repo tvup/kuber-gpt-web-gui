@@ -44,7 +44,10 @@
                                             <td>
                                                 <a href="{{ action('UserController@show_from_name', ['name' => rawurlencode($certificate->user->user_name)]) }}">{{$certificate->user->user_name}} </a>
                                             </td>
-                                            <!-- <td> {{$certificate->user_id}} </td> -->
+                                        @else
+                                            <td>
+                                                <a href="{{ action('UserController@new', ['name' => rawurlencode($certificate->idcert)]) }}">{{$certificate->idcert}} </a>
+                                            </td>
                                         @endif
                                     </tr>
                                     @endforeach

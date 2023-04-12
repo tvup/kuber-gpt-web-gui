@@ -87,6 +87,6 @@ class User extends Authenticatable
 
     public function getStrippedUserNameAttribute(): string
     {
-        return Str::remove(PHP_EOL, Str::afterLast($this->user_name, '='));
+        return Str::afterLast($this->user_name, '=');
     }
 }

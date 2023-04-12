@@ -18,7 +18,6 @@ class RegisterControllerTest extends TestCase
         $registerController = new RegisterController();
         $reflection = new \ReflectionClass($registerController);
         $method = $reflection->getMethod('validator');
-        $method->setAccessible(true);
 
         // Test with valid data
         $validData = [

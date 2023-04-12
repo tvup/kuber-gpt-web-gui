@@ -22,6 +22,7 @@ class CertificateControllerTest extends TestCase
         parent::setUp();
 
         // Authenticate a user for the test
+        /** @var User $user */
         $user = User::factory()->create();
         $user->role = UserRoleEnum::Admin;
         $this->actingAs($user);

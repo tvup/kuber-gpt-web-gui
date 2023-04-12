@@ -4,6 +4,8 @@ parameters:
     level: 7
     paths:
         - app/
+        - resources/
+        - config/
     ignoreErrors: # All these errors are weird to fix. We will do that lastly,
     excludes_analyse:
     excludePaths:

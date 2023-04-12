@@ -19,7 +19,7 @@ class RegisterController extends Controller
     |--------------------------------------------------------------------------
     |
     | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
+    | validation and creation. By default, this controller uses a trait to
     | provide this functionality without requiring any additional code.
     |
     */
@@ -38,7 +38,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        //altrimenti non esegue se sei autenticato
+        //otherwise it doesn't execute if you are authenticated
         //$this->middleware('guest');
     }
 
@@ -86,7 +86,7 @@ class RegisterController extends Controller
     }
 
     /**
-     * Aggiungo questo metodo - mao
+     * I add this method - mao
      * Override default register method from RegistersUsers trait
      *
      * @return Redirector|mixed to $redirectTo
@@ -97,10 +97,7 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
         $user = $this->create($request->all());
 
-        //$this->guard()->login($user);
-
         return $this->registered($request, $user) ?: redirect($this->redirectPath());
-        //return redirect()->back()->with('message', 'Successfully created a new account.');
     }
 
     /**

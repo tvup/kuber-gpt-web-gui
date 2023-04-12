@@ -185,7 +185,6 @@ return [
         /*
          * Package Service Providers...
          */
-        //Skydiver\LaravelMaterializeCSS\MaterializeCSSServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -209,7 +208,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        'MaterializeCSS' => Skydiver\LaravelMaterializeCSS\MaterializeCSS::class,
+        //
     ])->toArray(),
 
 ];

@@ -131,7 +131,7 @@ class CertificateController extends Controller
 
     public function revoke(Certificate $certificate)
     {
-        Redis::publish(config('database.redis.default.create_channel'), $certificate->user->strippedUserName);
+        Redis::publish(config('database.redis.default.revoke_channel'), $certificate->user->strippedUserName);
 
         $certificate->stato = StatoEnum::R;
         $certificate->save();

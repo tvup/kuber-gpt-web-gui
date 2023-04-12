@@ -23,7 +23,7 @@ class RegisterControllerTest extends TestCase
 
         // Test with valid data
         $validData = [
-            'name' => 'John Doe',
+            'user_name' => 'John Doe',
             'email' => 'john@example.com',
             'role' => UserRoleEnum::User->value,
             'password' => 'password123',
@@ -93,7 +93,6 @@ class RegisterControllerTest extends TestCase
             'company' => fake()->company,
             'vpn_type' => fake()->randomElement([VPNTypeEnum::FULL->value, VPNTypeEnum::TS->value]),
         ];
-
         $response = $this->post('/register', $userData);
 
         $response->assertRedirect('/admin/popolate_db');
@@ -123,7 +122,7 @@ class RegisterControllerTest extends TestCase
         $response->assertSessionHasErrors([
             'email',
             'password',
-            'name',
+            'user_name',
             'role',
         ]);
     }

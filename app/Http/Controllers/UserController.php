@@ -17,7 +17,7 @@ class UserController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'user_name' => 'required|string|max:255',
+            'user_name' => 'sometimes|string|max:255',
             'email' => 'sometimes|string|email|max:255|unique:users',
             'password' => 'sometimes|string|min:8|confirmed',
             'role' => 'sometimes|in:admin,user,manager_ro',

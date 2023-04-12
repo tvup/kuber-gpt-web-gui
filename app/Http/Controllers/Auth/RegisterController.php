@@ -28,11 +28,8 @@ class RegisterController extends Controller
 
     /**
      * Where to redirect users after registration.
-     *
-     * @var string
      */
-    //protected $redirectTo = '/home';
-    protected $redirectTo = '/admin/popolate_db';
+    protected string $redirectTo = '/admin/popolate_db';
 
     /**
      * Create a new controller instance.
@@ -53,10 +50,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'role' => 'required|in:admin,user,manager',
+            'user_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
+            'role' => 'required|in:admin,user,manager_ro',
         ]);
     }
 

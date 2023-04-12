@@ -56,7 +56,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('register.name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="invalid-feedback" role="alert">
@@ -70,7 +70,7 @@
                             <label for="surname" class="col-md-4 col-form-label text-md-right">{{ __('register.surname') }}</label>
 
                             <div class="col-md-6">
-                                <input id="surname" type="text" class="form-control{{ $errors->has('surname') ? ' is-invalid' : '' }}" name="surname" value="{{ old('surname') }}" required autofocus>
+                                <input id="surname" type="text" class="form-control{{ $errors->has('surname') ? ' is-invalid' : '' }}" name="surname" value="{{ old('surname') }}" autofocus>
 
                                 @if ($errors->has('surname'))
                                     <span class="invalid-feedback" role="alert">
@@ -84,7 +84,7 @@
                             <label for="vat_number" class="col-md-4 col-form-label text-md-right">{{ __('edituser.vat_number') }}</label>
 
                             <div class="col-md-6">
-                                <input id="vat_number" type="text" class="form-control{{ $errors->has('vat_number') ? ' is-invalid' : '' }}" name="vat_number" value="{{ old('vat_number') }}" required autofocus>
+                                <input id="vat_number" type="text" class="form-control{{ $errors->has('vat_number') ? ' is-invalid' : '' }}" name="vat_number" value="{{ old('vat_number') }}" autofocus>
 
                                 @if ($errors->has('vat_number'))
                                     <span class="invalid-feedback" role="alert">
@@ -98,7 +98,7 @@
                                 <label for="company" class="col-md-4 col-form-label text-md-right">{{ __('register.company') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="company" type="text" class="form-control{{ $errors->has('company') ? ' is-invalid' : '' }}" name="company" value="{{ old('company') }}" required autofocus>
+                                    <input id="company" type="text" class="form-control{{ $errors->has('company') ? ' is-invalid' : '' }}" name="company" value="{{ old('company') }}" autofocus>
 
                                     @if ($errors->has('company'))
                                         <span class="invalid-feedback" role="alert">
@@ -113,7 +113,7 @@
 
                             <div class="col-md-6">
 
-                                <select id="vpn_type" class="form-control{{ $errors->has('vpn_type') ? ' is-invalid' : '' }}" name="vpn_type"  required autofocus>
+                                <select id="vpn_type" class="form-control{{ $errors->has('vpn_type') ? ' is-invalid' : '' }}" name="vpn_type"  autofocus>
                                     <option value="{{ \App\Enums\VPNTypeEnum::TS->value }}">{{ __(\App\Enums\VPNTypeEnum::TS->value) }}</option>
                                     <option value="{{ __(\App\Enums\VPNTypeEnum::FULL->value) }}">{{ __(\App\Enums\VPNTypeEnum::FULL->value) }}</option>
                                 </select>

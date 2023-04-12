@@ -24,16 +24,18 @@ class UserControllerTest extends TestCase
 
         // Test with valid data
         $validData = [
-            'name' => 'John Doe',
-            'cf' => 'AB12345',
+            'user_name' => fake()->firstName,
+            'email' => fake()->email,
+            'role' => fake()->randomElement([UserRoleEnum::User->value, UserRoleEnum::Manager->value, UserRoleEnum::Admin->value]),
         ];
         $validator = $method->invokeArgs($userController, [$validData]);
         $this->assertFalse($validator->fails());
 
         // Test with invalid data
         $invalidData = [
-            'name' => '',
-            'cf' => '',
+            'user_name' => '',
+            'email' => 'aa',
+            'role' => '',
         ];
         $validator = $method->invokeArgs($userController, [$invalidData]);
         $this->assertTrue($validator->fails());

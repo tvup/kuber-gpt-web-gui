@@ -55,6 +55,8 @@ function on_message_received() {
   echo "</tls-auth>" >> ./"${message}"_FULL.ovpn
 
   /usr/bin/mailx "${email}" -s "VPN per "${message}" con password" -a From:admin@torbenit.dk -A "${message}"_FULL.ovpn < /etc/openvpn/easy-rsa/pki/private/"${message}".password.txt
+  sudo setfacl -m u:forge:rwx /etc/openvpn/easy-rsa/pki
+  sudo setfacl -m u:forge:rw /etc/openvpn/easy-rsa/pki/index.txt
 }
 
 # Connect to Redis server using TLS, authenticate and subscribe to the channel

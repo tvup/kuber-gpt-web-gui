@@ -4,8 +4,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-5">
-                <div class="card">
-                    <div class="card-header">{{__('certdashboard.all_certificates')}}</div>
+                <div class="card shadow-lg">
+                    <div class="card-header bg-primary text-white">{{__('certdashboard.all_certificates')}}</div>
                     <div class="card-body">
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
@@ -16,12 +16,10 @@
                         <table class="table table-sm table-hover">
                             <thead>
                             <tr>
-                                <!-- <th>ID</th> -->
                                 <th>{{__('certdashboard.state')}}</th>
-                                <th>{{__('certdashboard.expiration')}}  </th>
-                                <th>{{__('certdashboard.revoked')}} </th>
+                                <th>{{__('certdashboard.expiration')}}</th>
+                                <th>{{__('certdashboard.revoked')}}</th>
                                 <th>{{__('certdashboard.user')}}</th>
-                                <!--   <th>User ID </th> -->
                             </tr>
                             </thead>
                             <tbody>
@@ -31,11 +29,9 @@
                                 @else
                                     <tr class="table-danger">
                                         @endif
-
-                                        <!--  <td> {{$certificate->id}} </td> -->
                                         <td> {{ Str::title($certificate->status->value) }} </td>
                                         <td>{{ (new \Carbon\Carbon($certificate->expires_at))->format('d/m/Y') }}</td>
-                                        <td> {{--$cert->dt_revoca--}}
+                                        <td>
                                             @if ($certificate->revoked_at != "")
                                                 {{ (new \Carbon\Carbon($certificate->revoked_at))->format('d/m/Y') }}
                                             @endif
@@ -53,32 +49,24 @@
                                     @endforeach
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </div>
-
-
             <div class="col-md-5">
-                <div class="card">
-                    <div class="card-header">{{__('certdashboard.expired_and_expiring_certificates')}}</div>
-
+                <div class="card shadow-lg">
+                    <div class="card-header bg-primary text-white">{{__('certdashboard.expired_and_expiring_certificates')}}</div>
                     <div class="card-body">
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('status') }}
                             </div>
                         @endif
-
-
                         <table class="table table-sm table-hover">
                             <thead>
                             <tr>
-
                                 <th>{{__('certdashboard.state')}}</th>
-                                <th>{{__('certdashboard.expiration')}}  </th>
+                                <th>{{__('certdashboard.expiration')}}</th>
                                 <th>{{__('certdashboard.user')}}</th>
-
                             </tr>
                             </thead>
                             <tbody>
@@ -102,12 +90,10 @@
                                     @endforeach
                             </tbody>
                         </table>
-
-
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 @endsection
+

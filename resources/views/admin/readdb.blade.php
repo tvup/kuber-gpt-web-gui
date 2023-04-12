@@ -26,7 +26,7 @@
                     </thead>
                     <tbody>
                         @foreach($certs as $cert)
-                            @if ($cert->stato == 'V')
+                            @if ($cert->stato == \App\Enums\StatoEnum::V)
                                 <tr class="table-success">
                             @else
                                 <tr class="table-danger">

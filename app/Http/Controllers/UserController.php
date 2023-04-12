@@ -89,7 +89,7 @@ class UserController extends Controller
     {
         /** @var User $user */
         $user = User::find($id);
-        $this->validator($request->all())->validate();
+        $this->validator($request->except('email'))->validate();
         $data = $request->all();
         $user->name = $data['name'];
         $user->surname = $data['surname'];

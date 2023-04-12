@@ -196,11 +196,13 @@ class CertificateController extends Controller
             return redirect()->back()->with('msg-danger', 'Errore: Esitono già certificati validi');
         }
 
+        $strippedUserName = Str::remove(PHP_EOL,Str::afterLast($user->user_name, '='));
+
         //procedo se non ha certificati validi attivi
         if ($user->vpn_type == VPNTypeEnum::FULL) {
-            Redis::publish('my-channel', $user->user_name . ' ' . $user->email);
+            Redis::publish('my-channel', $strippedUserName . ' ' . $user->email);
         } else {
-            Redis::publish('my-channel', $user->user_name . ' ' . $user->email);
+            Redis::publish('my-channel', $strippedUserName . ' ' . $user->email);
         }
 
         return redirect()->back()->with('msg-success', 'Profile updated!');

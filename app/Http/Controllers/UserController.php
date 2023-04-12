@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -58,7 +59,7 @@ class UserController extends Controller
 
     public function new($user_name)
     {
-        return view('auth.register', ['user_name' => $user_name]);
+        return view('auth.register')->with('user_name', $user_name);
     }
 
     /**

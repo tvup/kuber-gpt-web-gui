@@ -47,7 +47,7 @@ class UserController extends Controller
 
     public function show_from_name($name)
     {
-        $user = User::where('user_name', Str::remove(PHP_EOL, $name))->first();
+        $user = User::where('user_name', $name)->first();
         if (null === $user) {
             return view('auth.register', ['user' => $name]);
         }
@@ -56,9 +56,9 @@ class UserController extends Controller
 
     }
 
-    public function new($name)
+    public function new($user_name)
     {
-        return view('auth.register', ['user' => $name]);
+        return view('auth.register', ['user_name' => $user_name]);
     }
 
     /**

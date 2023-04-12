@@ -45,7 +45,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin', '
     Route::get('del/{user}', 'UserController@del')->name('admin_deluser');
 
         Route::get('showuserfromname/{name}', 'UserController@show_from_name')->name('admin_showuserfromname')->where('name', '.*');
-    Route::get('new/{name}', 'UserController@new')->name('admin_newuser');
+    Route::get('new/{user_name}', 'UserController@new')->name('admin_newuser');
 
     //## Rotte personalizzate
     //Route::get('show_calendar', 'DashboardController@show_calendar')->name('show_calendar');

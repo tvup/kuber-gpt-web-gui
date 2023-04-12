@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 
 class CertificateController extends Controller
 {
-    //necessaria autenticazione
+    //required authentication
     public function __construct()
     {
         $this->middleware('auth');

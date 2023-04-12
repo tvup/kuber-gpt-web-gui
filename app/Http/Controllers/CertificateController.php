@@ -8,6 +8,7 @@ use App\Models\Certificate;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class CertificateController extends Controller
@@ -24,25 +25,29 @@ class CertificateController extends Controller
         $array_index = [];
 
         $i = 0;
-        $array_contents = file(config('filesystems.key_folder'), FILE_SKIP_EMPTY_LINES);
-        foreach ($array_contents as $line) {
-            $lineItems = explode("\t", $line);
+        $files = Storage::disk('ca')->files();
 
-            $date = Carbon::createFromFormat('ymdHisZ', $lineItems[1]);
-            $lineItems[1] = $date->format('d/m/Y H:i:s');
-            if ($lineItems[2] != '') {
-                $date = Carbon::createFromFormat('ymdHisZ', $lineItems[2]);
-                $lineItems[2] = $date->format('d/m/Y H:i:s');
+        foreach ($files as $file) {
+            $array_contents = file($file, FILE_SKIP_EMPTY_LINES);
+            foreach ($array_contents as $line) {
+                $lineItems = explode("\t", $line);
+
+                $date = Carbon::createFromFormat('ymdHisZ', $lineItems[1]);
+                $lineItems[1] = $date->format('d/m/Y H:i:s');
+                if ($lineItems[2] != '') {
+                    $date = Carbon::createFromFormat('ymdHisZ', $lineItems[2]);
+                    $lineItems[2] = $date->format('d/m/Y H:i:s');
+                }
+
+                //I read the cert (I'm only interested in the "username")
+                $array_cert = explode('/', $lineItems[5]);
+                $lineItems[5] = $array_cert[6];
+                $lineItems[5] = substr($lineItems[5], 3);
+
+                $array_index[$i] = $lineItems;
+                $i++;
+
             }
-
-            //I read the cert (I'm only interested in the "username")
-            $array_cert = explode('/', $lineItems[5]);
-            $lineItems[5] = $array_cert[6];
-            $lineItems[5] = substr($lineItems[5], 3);
-
-            $array_index[$i] = $lineItems;
-            $i++;
-
         }
 
         return view('admin.readindex', ['array_index' => $array_index]);

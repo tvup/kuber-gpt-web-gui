@@ -46,7 +46,11 @@ class UserController extends Controller
         return view('admin.showuser', ['user' => $user]);
     }
 
-    public function show_from_name($name)
+    /**
+     * @param string $name
+     * @return Application|Factory|View|\Illuminate\Foundation\Application
+     */
+    public function show_from_name(string $name)
     {
         $user = User::where('user_name', $name)->first();
         if (null === $user) {
@@ -57,7 +61,11 @@ class UserController extends Controller
 
     }
 
-    public function new($user_name)
+    /**
+     * @param string $user_name
+     * @return Application|Factory|View|\Illuminate\Foundation\Application
+     */
+    public function new(string $user_name)
     {
         return view('auth.register')->with('user_name', $user_name);
     }

@@ -40,8 +40,10 @@
                                         {{ (new \Carbon\Carbon($cert->dt_revoca))->format('d/m/Y') }}
                                     @endif
                                 </td>
-                                <td> <a href="{{ action('UserController@show_from_name', ['name' => rawurlencode($cert->user?->user_name)]) }}" >{{$cert->user?->user_name}} </a></td>
+                                    @if($cert->user)
+                                        <td> <a href="{{ action('UserController@show_from_name', ['name' => rawurlencode($cert->user->user_name)]) }}" >{{$cert->user->user_name}} </a></td>
                                 <!-- <td> {{$cert->user_id}} </td> -->
+                                    @endif
                             </tr>
                         @endforeach
                     </tbody>

@@ -23,8 +23,8 @@ use Illuminate\Support\Str;
  */
 class Certificate extends Model
 {
-
     use HasFactory;
+
     protected $casts = [
         'status' => StatusEnum::class,
         'link_conf' => 'array',

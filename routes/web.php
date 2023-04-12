@@ -45,5 +45,4 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin', '
     Route::get('showuserfromname/{name}', 'UserController@show_from_name')->name('admin_showuserfromname')->where('name', '.*');
     Route::get('new/{user_name?}', 'UserController@new')->name('admin_newuser')->where('user_name', '.*');
 
-
 });

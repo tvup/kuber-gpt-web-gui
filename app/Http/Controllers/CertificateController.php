@@ -80,7 +80,7 @@ class CertificateController extends Controller
 
             //A1status/A13expiration/A13revocationA4reason/A32serial_number/A16file_name/A20distinguished_name
             $lineItems = explode("\t", $line);
-            if(count($lineItems)>=6) {
+            if (count($lineItems) >= 6) {
                 $status = $lineItems[0];
                 $expiration = $lineItems[1];
                 $revocationAndReason = $lineItems[2];
@@ -115,7 +115,6 @@ class CertificateController extends Controller
 
                 $certificate->save();
             }
-
 
         }
 

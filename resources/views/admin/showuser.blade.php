@@ -92,17 +92,17 @@
                             <tbody>
                             @foreach ($user->certificates as $certificate)
                                 <tr>
-                                    <td scope="row"> {{ Str::title($certificate->stato->value) }} </td>
-                                    <td>{{ (new \Carbon\Carbon($certificate->dt_scadenza))->format('d/m/Y H:i') }}</td>
+                                    <td scope="row"> {{ Str::title($certificate->status->value) }} </td>
+                                    <td>{{ (new \Carbon\Carbon($certificate->expires_at))->format('d/m/Y H:i') }}</td>
                                     <td>
-                                        @if ($certificate->dt_revoca != "")
-                                            {{ (new \Carbon\Carbon($certificate->dt_revoca))->format('d/m/Y H:i') }}
+                                        @if ($certificate->revoked_at != "")
+                                            {{ (new \Carbon\Carbon($certificate->revoked_at))->format('d/m/Y H:i') }}
                                         @endif
 
                                     </td>
                                     <td>
                                         @if(Auth::user()->isAdmin())
-                                            @if ($certificate->stato == \App\Enums\StatoEnum::V)
+                                            @if ($certificate->status == \App\Enums\StatusEnum::V)
                                                 <a href="{{ action('CertificateController@revoke', ['certificate' => $certificate]) }}"
                                                    class="btn btn-danger">
                                                     <i class="fas fa-trash-alt"></i></a>

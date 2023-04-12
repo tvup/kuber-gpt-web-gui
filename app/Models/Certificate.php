@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
-use App\Enums\StatoEnum;
+use App\Enums\StatusEnum;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int $id
- * @property StatoEnum $stato
- * @property Carbon $dt_scadenza
- * @property Carbon $dt_revoca
+ * @property StatusEnum $status
+ * @property Carbon $expires_at
+ * @property Carbon $revoked_at
  * @property string $idcert
  * @property string $cert
  * @property User $user
@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Certificate extends Model
 {
     protected $casts = [
-        'stato' => StatoEnum::class,
+        'status' => StatusEnum::class,
         'link_conf' => 'array',
     ];
 

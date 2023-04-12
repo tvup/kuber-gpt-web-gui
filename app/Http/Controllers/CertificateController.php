@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\StatoEnum;
+use App\Enums\StatusEnum;
 use App\Enums\VPNTypeEnum;
 use App\Models\Certificate;
 use App\Models\User;
@@ -75,32 +75,22 @@ class CertificateController extends Controller
             if ($revocation != '') {
                 $date = Carbon::createFromFormat('ymdHisZ', $revocation);
                 $revocation = $date->format('Y-m-d H:i:s');
-                $certificate->dt_revoca = $revocation;
+                $certificate->revoked_at = $revocation;
             }
 
             $array_index[$i] = $lineItems;
             $i++;
 
-            $certificate->stato = StatoEnum::to($status);
-            $certificate->dt_scadenza = $expiration;
+            $certificate->status = StatusEnum::to($status);
+            $certificate->expires_at = $expiration;
 
             $certificate->idcert = $serial_number;
             $certificate->cert = $distinguished_name;
-            $user = User::where('user_name', '=', $distinguished_name)->firstOrNew();
-            if (! $user->exists) {
-                $user->user_name = $distinguished_name;
-                $user->email = '';
-                $user->password = '';
-                $user->vat_number = '';
-                $user->name = '';
-                $user->surname = '';
-                $user->remember_token = '';
-                $user->password_clear = '';
-                $user->company = '';
-                $user->save();
-            }
+            $user = User::where('user_name', '=', $distinguished_name)->first();
 
-            $certificate->user()->associate($user);
+            if ($user) {
+                $certificate->user()->associate($user);
+            }
             $certificate->link_conf = $lineItems;
 
             $certificate->save();
@@ -133,7 +123,7 @@ class CertificateController extends Controller
     {
         Redis::publish(config('database.redis.default.revoke_channel'), $certificate->user->strippedUserName);
 
-        $certificate->stato = StatoEnum::R;
+        $certificate->status = StatusEnum::R;
         $certificate->save();
 
         $this->auto_popolate_db();
@@ -146,7 +136,7 @@ class CertificateController extends Controller
     {
         //check that the user does not have valid active certificates
         foreach ($user->certificates as $cert) {
-            if ($cert->stato == StatoEnum::V) {
+            if ($cert->status == StatusEnum::V) {
                 return redirect()->back()->with('msg-danger', 'Error: Valid certificate(s) already exist');
             }
         }

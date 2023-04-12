@@ -53,10 +53,8 @@ class UserController extends Controller
         if (null === $user) {
             return view('auth.register', ['user' => $name]);
         }
-        /** @var Certificate[] $certificates */
-        $certificates = Certificate::where('user', 'like', '%'.$name.'%')->get();
 
-        return view('admin.showuser', ['user' => $user, 'certs' => $certificates]);
+        return view('admin.showuser', ['user' => $user, 'certs' => $user->certificates]);
 
     }
 
@@ -117,14 +115,8 @@ class UserController extends Controller
     public function downloadmycert()
     {
         $user = Auth::user();
-        $my_user_id = Auth::id();
-        $certificate = Certificate::where('user_id', $my_user_id)
-            ->where('stato', 'V')
-            ->firstOrFail();
-        $name = $certificate->user;
-        $vpn_type = $user->vpn_type->value;
 
-        $file = sprintf('%s%s_%s.ovpn', Str::remove(PHP_EOL,Str::afterLast($name, '=')), $name, $vpn_type);
+        $file = sprintf('%s%s_%s.ovpn', Str::remove(PHP_EOL,Str::afterLast($user->user_name, '=')), $user->user_name, $user->vpn_type->value);
 
         return response()->download($file);
 

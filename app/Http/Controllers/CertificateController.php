@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\VPNTypeEnum;
 use App\Models\Certificate;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -92,11 +93,11 @@ class CertificateController extends Controller
 
             $certificate->idcert = $array_temp[3];
             //$certificato->cert = $array_temp[5];
-            $certificate->user = $array_temp[5];
+            $user = \App\Models\User::where('user_name', '=', $array_temp[5])->first();
+            $certificate->user = $user;
             //$certificato->link_conf = $array_temp[];
 
             //$user = \App\User::where('name','=',$certificato->user)->get();
-            $user = \App\Models\User::where('user_name', '=', $certificate->user)->first();
            // dd($user->id);
             if (isset($user->id)) {
                 //dd($user);
@@ -126,15 +127,11 @@ class CertificateController extends Controller
 
     public function download($cert)
     {
-
         /** @var Certificate $certificate */
         $certificate = Certificate::find($cert);
-        $name = $certificate->user;
-        /** @var User $user */
-        $user = User::where('user_name', Str::remove(PHP_EOL, $name))->first();
-        $vpn_type = $user->vpn_type->value;
+        $name = $certificate->user->user_name;
 
-        $file = sprintf('%s%s_%s.ovpn', config('filesystems.certificate_folder'), Str::remove(PHP_EOL,Str::afterLast($name, '=')), $vpn_type);
+        $file = sprintf('%s%s_%s.ovpn', config('filesystems.certificate_folder'), Str::remove(PHP_EOL,Str::afterLast($name, '=')), $certificate->user->vpn_type->value);
 
         return response()->download($file);
 
@@ -148,7 +145,7 @@ class CertificateController extends Controller
         //echo $cert;
         $certificato = Certificate::find($cert);
 
-        $process = new Process(['/usr/bin/sudo', config('filesystems.script_folder').'script-revoke-web.sh', $certificato->user]);
+        $process = new Process(['/usr/bin/sudo', config('filesystems.script_folder').'script-revoke-web.sh', $certificato->user->user_name]);
         $process->start();
 
         foreach ($process as $type => $data) {
@@ -162,15 +159,10 @@ class CertificateController extends Controller
         $certificato->stato = 'R';
         $certificato->save();
 
-        $name = $certificato->user;
-
         $this->auto_popolate_db();
 
-        $user = User::where('user_name', $name)->first();
 
-        $certs = Certificate::where('user', $name)->get();
-
-        return redirect()->route('admin.admin_showuserfromname', ['name' => $user->user_name])->with('msg-success', 'Profile updated!');
+        return redirect()->route('admin.admin_showuserfromname', ['name' => $certificato->user->user_name])->with('msg-success', 'Profile updated!');
 
     }
 
@@ -178,7 +170,7 @@ class CertificateController extends Controller
     {
         $user = \App\Models\User::find($user);
         //controllo che l'utente non abbia certificati attivi validi
-        $certificati_utente = \App\Models\Certificate::where('user', $user->name)->get();
+        $certificati_utente = $user->certificates;
         $certificati_attivi = false;
         foreach ($certificati_utente as $cert) {
             if ($cert->stato == 'V') {
@@ -190,10 +182,10 @@ class CertificateController extends Controller
         }
 
         //procedo se non ha certificati validi attivi
-        if ($user->vpn_type == 'FULL') {
-            Redis::publish('my-channel', $user->name . ' ' . $user->email);
+        if ($user->vpn_type == VPNTypeEnum::FULL) {
+            Redis::publish('my-channel', $user->user_name . ' ' . $user->email);
         } else {
-            Redis::publish('my-channel', $user->name . ' ' . $user->email);
+            Redis::publish('my-channel', $user->user_name . ' ' . $user->email);
         }
 
         return redirect()->back()->with('msg-success', 'Profile updated!');

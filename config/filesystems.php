@@ -3,9 +3,7 @@
 return [
 
     'key_file' => env('INDEX_FILE', 'index.txt'),
-    'key_folder' => env('INDEX_PATH', '/etc/openvpn/easy-rsa/pki/'),
-    'certificate_folder' => env('CERTIFICATE_FOLDER', '/etc/openvpn/easy-rsa/pki/'),
-    'script_folder' => env('SCRIPT_FOLDER', '/etc/openvpn/easy-rsa/pki/'),
+    'key_folder' => env('PKI_PATH', '/etc/openvpn/easy-rsa/pki/'),
 
     /*
     |--------------------------------------------------------------------------
@@ -53,9 +51,9 @@ return [
             'root' => storage_path('app'),
         ],
 
-        'ca' => [
+        'pki' => [
             'driver' => 'local',
-            'root' => env('INDEX_PATH'),
+            'root' => env('PKI_PATH'),
         ],
 
         'public' => [

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 use InvalidArgumentException;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class CertificateController extends Controller
 {
@@ -30,7 +30,7 @@ class CertificateController extends Controller
         $array_index = [];
 
         $i = 0;
-        $files = Storage::disk('ca')->files();
+        $files = Storage::disk('pki')->files();
 
         foreach ($files as $file) {
             try {
@@ -77,7 +77,7 @@ class CertificateController extends Controller
         Certificate::truncate();
 
         $i = 0;
-        foreach (explode(PHP_EOL, Storage::disk('ca')->get(config('filesystems.key_file'))) as $line) {
+        foreach (explode(PHP_EOL, Storage::disk('pki')->get(config('filesystems.key_file'))) as $line) {
             $certificate = app(Certificate::class);
 
             //A1status/A13expiration/A13revocationA4reason/A32serial_number/A16file_name/A20distinguished_name
@@ -127,11 +127,11 @@ class CertificateController extends Controller
         return view('admin.readdb', ['certificates' => $certificates]);
     }
 
-    public function download(Certificate $certificate): BinaryFileResponse
+    public function download(Certificate $certificate): StreamedResponse
     {
-        $file = sprintf('%s%s.ovpn', config('filesystems.certificate_folder'), $certificate->user->strippedUserName);
+        $fileName = sprintf('%s.ovpn', $certificate->strippedUserName);
 
-        return response()->download($file);
+        return Storage::disk('pki')->download($fileName);
 
     }
 

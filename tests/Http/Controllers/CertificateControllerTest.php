@@ -11,7 +11,6 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 use Mockery;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 use Tests\TestCase;
 
 class CertificateControllerTest extends TestCase
@@ -52,23 +51,24 @@ class CertificateControllerTest extends TestCase
 
     public function testDownload()
     {
+        Storage::fake('ca');
         // Create a Certificate for the test
         /** @var Certificate $certificate */
         $certificate = Certificate::factory()->create();
 
-        $this->instance(
-            ResponseFactory::class, Mockery::mock(ResponseFactory::class, function ($mock) use ($certificate) {
-                $stream = new StreamedResponse();
+        $fileName = sprintf('%s.ovpn', $certificate->strippedUserName);
+        Storage::disk('pki')->put($fileName, 'content');
 
+        $this->instance(
+            ResponseFactory::class, Mockery::mock(ResponseFactory::class, function ($mock) use ($fileName) {
             $mock->shouldReceive('download')
-                ->with(sprintf('%s%s.ovpn', config('filesystems.certificate_folder'), $certificate->user->strippedUserName))
-                ->andReturn(['header' => 'data']);
+                ->with(Storage::disk('pki')->path($fileName))
+                ->andReturn(Storage::disk('pki')->download($fileName));
         }));
 
         $response = $this->get('/admin/download/'.$certificate->id);
 
         $response->assertStatus(200);
-        $response->assertJson(['header' => 'data']);
     }
 
     public function testRevoke()

@@ -18,6 +18,7 @@ use Illuminate\Support\Str;
  * @property string $cert
  * @property User $user
  * @property array<int, string> $link_conf
+ * @property string $strippedUserName;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
@@ -40,6 +41,6 @@ class Certificate extends Model
 
     public function getStrippedUserNameAttribute(): string
     {
-        return Str::afterLast($this->idcert, '=');
+        return Str::afterLast($this->cert, '=');
     }
 }

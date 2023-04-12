@@ -6,8 +6,9 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class UserController extends Controller
 {
@@ -99,13 +100,13 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-    public function downloadmycert(): BinaryFileResponse
+    public function downloadmycert(): StreamedResponse
     {
         $user = Auth::user();
 
-        $file = sprintf('%s%s.ovpn', config('filesystems.certificate_folder'), $user->strippedUserName);
+        $fileName = sprintf('%s.ovpn', $user->strippedUserName);
 
-        return response()->download($file);
+        return Storage::disk('pki')->download($fileName);
 
     }
 }

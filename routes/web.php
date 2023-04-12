@@ -28,12 +28,10 @@ Route::middleware('locale')->group(function () {
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin', 'locale']], function () {
 
-    //Route::redirect('/', '/admin/dashboard', 301);
     Route::get('/', 'CertificateController@popolate_db')->name('admin_popolatedb');
     Route::get('read_index', 'CertificateController@read_index')->name('admin_readindex');
     Route::get('popolate_db', 'CertificateController@popolate_db')->name('admin_popolatedb');
 
-    //Route::get('revokecert/{certificate}/{user}', 'CertificateController@revoke')->name('admin_revokecert');
     Route::get('download/{certificate}', 'CertificateController@download')->name('admin_downloadcert');
     Route::get('revokecert/{certificate}', 'CertificateController@revoke')->name('admin_revokecert');
     Route::get('releasecert/{user}', 'CertificateController@release')->name('admin_releasecert');
@@ -47,8 +45,5 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin', '
     Route::get('showuserfromname/{name}', 'UserController@show_from_name')->name('admin_showuserfromname')->where('name', '.*');
     Route::get('new/{user_name?}', 'UserController@new')->name('admin_newuser')->where('user_name', '.*');
 
-    //## Rotte personalizzate
-    //Route::get('show_calendar', 'DashboardController@show_calendar')->name('show_calendar');
-    //Route::post('store_calendar', 'DashboardController@store_calendar')->name('store_calendar');
 
 });

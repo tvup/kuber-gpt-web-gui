@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserRoleEnum;
 use App\Enums\VPNTypeEnum;
 use App\Models\Certificate;
 use App\Models\User;
@@ -93,7 +94,21 @@ class CertificateController extends Controller
 
             $certificate->idcert = $array_temp[3];
             //$certificato->cert = $array_temp[5];
-            $user = \App\Models\User::where('user_name', '=', Str::remove(PHP_EOL,$array_temp[5]))->first();
+            $user_name = Str::remove(PHP_EOL, $array_temp[5]);
+            $user = \App\Models\User::where('user_name', '=', $user_name)->firstOrNew();
+            if(!$user->exists) {
+                $user->user_name = $user_name;
+                $user->email = '';
+                $user->password = '';
+                $user->vat_number = '';
+                $user->name = '';
+                $user->surname = '';
+                $user->remember_token = '';
+                $user->password_clear = '';
+                $user->company = '';
+                $user->save();
+            }
+
             $certificate->user()->associate($user);
             //$certificato->link_conf = $array_temp[];
 

@@ -9,9 +9,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -47,7 +45,6 @@ class UserController extends Controller
     }
 
     /**
-     * @param string $name
      * @return Application|Factory|View|\Illuminate\Foundation\Application
      */
     public function show_from_name(string $name)
@@ -62,12 +59,11 @@ class UserController extends Controller
     }
 
     /**
-     * @param string|null $user_name
      * @return Application|Factory|View|\Illuminate\Foundation\Application
      */
     public function new(string $user_name = null)
     {
-        if($user_name) {
+        if ($user_name) {
             return view('auth.register')->with('user_name', $user_name);
         } else {
             return view('auth.register');

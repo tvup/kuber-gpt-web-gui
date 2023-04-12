@@ -87,11 +87,9 @@ class UserController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        $request->remove('password');
-
         /** @var User $user */
         $user = User::find($id);
-        $this->validator($request->all())->validate();
+        $this->validator($request->except('email'))->validate();
         $data = $request->all();
         $user->name = $data['name'];
         $user->surname = $data['surname'];

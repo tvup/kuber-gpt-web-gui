@@ -28,19 +28,19 @@ class CertificateController extends Controller
         $files = Storage::disk('ca')->files();
 
         foreach ($files as $file) {
-            $array_contents = file(config('filesystems.key_folder') . $file, FILE_SKIP_EMPTY_LINES);
+            $array_contents = file(config('filesystems.key_folder').$file, FILE_SKIP_EMPTY_LINES);
             foreach ($array_contents as $line) {
                 $lineItems = explode("\t", $line);
 
-                $date = Carbon::createFromFormat('ymdHisZ', $lineItems[1]);
+                $date = Carbon::createFromFormat('ymdHisZ', array_key_exists(1, $lineItems) ? $lineItems[1] : Carbon::now('Europe/Copenhagen'));
                 $lineItems[1] = $date->format('d/m/Y H:i:s');
-                if ($lineItems[2] != '') {
+                if (array_key_exists(2, $lineItems) && $lineItems[2] != '') {
                     $date = Carbon::createFromFormat('ymdHisZ', $lineItems[2]);
                     $lineItems[2] = $date->format('d/m/Y H:i:s');
                 }
 
                 //I read the cert (I'm only interested in the "username")
-                $array_cert = explode('/', $lineItems[5]);
+                $array_cert = explode('/', array_key_exists(5, $lineItems) ? $lineItems[5] : []);
                 $lineItems[5] = $array_cert[6];
                 $lineItems[5] = substr($lineItems[5], 3);
 

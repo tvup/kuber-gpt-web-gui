@@ -7,6 +7,7 @@ use App\Enums\VPNTypeEnum;
 use App\Models\Certificate;
 use App\Models\User;
 use Carbon\Carbon;
+use ErrorException;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -29,7 +30,11 @@ class CertificateController extends Controller
         $files = Storage::disk('ca')->files();
 
         foreach ($files as $file) {
-            $array_contents = file(config('filesystems.key_folder').$file, FILE_SKIP_EMPTY_LINES);
+            try {
+                $array_contents = file(config('filesystems.key_folder') . $file, FILE_SKIP_EMPTY_LINES);
+            } catch (ErrorException $e) {
+                $array_contents = [];
+            }
             foreach ($array_contents as $line) {
                 $lineItems = explode("\t", $line);
 

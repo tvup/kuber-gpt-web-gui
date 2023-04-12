@@ -36,7 +36,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin', '
     //Route::get('revokecert/{certificate}/{user}', 'CertificateController@revoke')->name('admin_revokecert');
     Route::get('download/{certificate}', 'CertificateController@download')->name('admin_downloadcert');
     Route::get('revokecert/{certificate}', 'CertificateController@revoke')->name('admin_revokecert');
-    Route::get('releasecert/{certificate}', 'CertificateController@release')->name('admin_releasecert');
+    Route::get('releasecert/{user}', 'CertificateController@release')->name('admin_releasecert');
 
     Route::get('showallusers', 'UserController@index')->name('admin_showallusers');
     Route::get('edituser/{user}', 'UserController@edit')->name('admin_edituser');

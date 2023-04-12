@@ -103,9 +103,9 @@ class CertificateController extends Controller
     {
 
         $this->auto_popolate_db();
-        $certs = Certificate::orderBy('id', 'desc')->get();
+        $certificates = Certificate::orderBy('id', 'desc')->get();
 
-        return view('admin.readdb', ['certs' => $certs]);
+        return view('admin.readdb', ['certificates' => $certificates]);
     }
 
     public function download($cert)

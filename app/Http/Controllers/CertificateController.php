@@ -83,7 +83,7 @@ class CertificateController extends Controller
             $array_index[$i] = $lineItems;
             $i++;
 
-            $certificate->stato = $status;
+            $certificate->stato = StatoEnum::from($status);
             $certificate->dt_scadenza = $expiration;
 
             $certificate->idcert = $serial_number;

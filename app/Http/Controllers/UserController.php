@@ -63,7 +63,6 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param User $user
      * @return Application|Factory|\Illuminate\Foundation\Application|View
      */
     public function edit(User $user)
@@ -74,8 +73,6 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param User $user
      * @return RedirectResponse
      */
     public function update(Request $request, User $user)

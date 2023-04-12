@@ -54,7 +54,6 @@ class UserControllerTest extends TestCase
 
         $response = $this->actingAs($user)->get('admin/showallusers');
 
-
         $response->assertViewIs('admin.showallusers');
         $response->assertViewHas('users');
         $users = $response->viewData('users');

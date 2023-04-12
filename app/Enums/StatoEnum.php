@@ -8,7 +8,8 @@ enum StatoEnum: string
      case R = 'revoked';
      case E = 'expired';
 
-     public static function to($string) {
+     public static function to($string)
+     {
          if (StatoEnum::V->name == $string) {
              return StatoEnum::V;
          } elseif (StatoEnum::R->name == $string) {

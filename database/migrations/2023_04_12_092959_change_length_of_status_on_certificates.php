@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('certificates', function (Blueprint $table) {
-            $table->enum('stato', ['V', 'R'])->change();;
+            $table->enum('stato', ['V', 'R'])->change();
         });
     }
 };

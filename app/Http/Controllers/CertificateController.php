@@ -70,8 +70,6 @@ class CertificateController extends Controller
             //$file_name = $lineItems[4];
             $distinguished_name = Str::remove(PHP_EOL, $lineItems[5]);
 
-
-
             $date = Carbon::createFromFormat('ymdHisZ', $expiration);
             $expiration = $date->format('Y-m-d H:i:s');
             if ($revocation != '') {
@@ -89,7 +87,7 @@ class CertificateController extends Controller
             $certificate->idcert = $serial_number;
             $certificate->cert = $distinguished_name;
             $user = User::where('user_name', '=', $distinguished_name)->firstOrNew();
-            if (!$user->exists) {
+            if (! $user->exists) {
                 $user->user_name = $distinguished_name;
                 $user->email = '';
                 $user->password = '';

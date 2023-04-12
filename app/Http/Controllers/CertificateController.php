@@ -28,7 +28,7 @@ class CertificateController extends Controller
         $files = Storage::disk('ca')->files();
 
         foreach ($files as $file) {
-            $array_contents = file($file, FILE_SKIP_EMPTY_LINES);
+            $array_contents = file(config('filesystems.key_folder') . $file, FILE_SKIP_EMPTY_LINES);
             foreach ($array_contents as $line) {
                 $lineItems = explode("\t", $line);
 

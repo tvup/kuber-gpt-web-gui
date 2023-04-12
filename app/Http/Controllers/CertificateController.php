@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use InvalidArgumentException;
 
 class CertificateController extends Controller
 {
@@ -32,7 +33,12 @@ class CertificateController extends Controller
             foreach ($array_contents as $line) {
                 $lineItems = explode("\t", $line);
 
-                $date = Carbon::createFromFormat('ymdHisZ', array_key_exists(1, $lineItems) ? $lineItems[1] : Carbon::now('Europe/Copenhagen')->format('ymdHisZ'));
+                try {
+                    $date = Carbon::createFromFormat('ymdHisZ', array_key_exists(1, $lineItems) ? $lineItems[1] : Carbon::now('Europe/Copenhagen')->format('ymdHisZ'));
+                } catch (InvalidArgumentException $e) {
+                    $date = Carbon::now('Europe/Copenhagen')->format('ymdHisZ');
+                }
+
                 $lineItems[1] = $date->format('d/m/Y H:i:s');
                 if (array_key_exists(2, $lineItems) && $lineItems[2] != '') {
                     $date = Carbon::createFromFormat('ymdHisZ', $lineItems[2]);

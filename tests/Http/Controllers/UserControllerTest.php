@@ -7,19 +7,20 @@ use App\Enums\VPNTypeEnum;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\Request;
 use Tests\TestCase;
 
 class UserControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    /**
+     * @throws \ReflectionException
+     */
     public function testValidator()
     {
         $userController = new UserController();
         $reflection = new \ReflectionClass($userController);
         $method = $reflection->getMethod('validator');
-        $method->setAccessible(true);
 
         // Test with valid data
         $validData = [
@@ -108,8 +109,6 @@ class UserControllerTest extends TestCase
             'vpn_type' => fake()->randomElement([VPNTypeEnum::FULL->value, VPNTypeEnum::TS->value]),
         ];
 
-        $request = new Request($updatedData);
-
         $response = $this->actingAs($user)->post('admin/updateuser/'.$user->id, $updatedData);
 
         $response->assertSessionHas('msg-success', 'Profile updated!');
@@ -125,10 +124,11 @@ class UserControllerTest extends TestCase
     public function testDel()
     {
         // Seed the database with a test user
+        /** @var User $user */
         $user = User::factory()->create();
 
         $userController = new UserController();
-        $response = $userController->del($user->id);
+        $userController->del($user->id);
 
         $deletedUser = User::find($user->id);
         $this->assertNull($deletedUser);

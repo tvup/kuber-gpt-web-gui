@@ -33,7 +33,7 @@
                             @endif
 
                                 <!--  <td> {{$cert->id}} </td> -->
-                                <td> {{ Str::title($cert->stato) }} </td>
+                                <td> {{ Str::title($cert->stato->value) }} </td>
                                 <td>{{ (new \Carbon\Carbon($cert->dt_scadenza))->format('d/m/Y') }}</td>
                                 <td> {{--$cert->dt_revoca--}}
                                     @if ($cert->dt_revoca != "")

@@ -9,7 +9,7 @@ return [
     'users' => 'Users',
     'name' => 'Name',
     'surname' => 'Surname',
-    'CF' => 'CF',
+    'vat_number' => 'VAT number',
     'company' => 'Company',
     'e_mail' => 'E-Mail',
     'vpn_type' => 'VPN Type',

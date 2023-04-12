@@ -10,7 +10,7 @@ return [
     'users' => 'Utenti',
     'name' => 'Nom',
     'surname' => 'Cognome',
-    'CF' => 'CF',
+    'vat_number' => 'Codice fiscale',
     'company' => 'Società',
     'e_mail' => 'E-Mail',
     'vpn_type' => 'Tipo VPN',

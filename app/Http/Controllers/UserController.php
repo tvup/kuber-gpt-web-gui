@@ -19,7 +19,7 @@ class UserController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'cf' => 'required|string|max:255',
+            'vat_number' => 'required|string|max:255',
             'password' => 'required|string|min:8|confirmed',
         ]);
     }
@@ -50,7 +50,6 @@ class UserController extends Controller
 
     public function show_from_name($name)
     {
-        /** @var User $user */
         $user = User::where('user_name', Str::remove(PHP_EOL, $name))->first();
         if (null === $user) {
             return view('auth.register', ['user' => $name]);
@@ -94,7 +93,7 @@ class UserController extends Controller
         $data = $request->all();
         $user->name = $data['name'];
         $user->surname = $data['surname'];
-        $user->cf = $data['cf'];
+        $user->vat_number = $data['vat_number'];
         $user->company = $data['company'];
         $user->vpn_type = $data['vpn_type'];
 

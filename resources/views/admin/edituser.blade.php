@@ -61,14 +61,14 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="cf" class="col-md-4 col-form-label text-md-right">{{ __('CF') }}</label>
+                            <label for="vat_number" class="col-md-4 col-form-label text-md-right">{{ __('edituser.vat_number') }}</label>
 
                             <div class="col-md-6">
-                                <input id="cf" type="text" class="form-control{{ $errors->has('cf') ? ' is-invalid' : '' }}" name="cf" value="{{ $user->cf }}" required autofocus>
+                                <input id="vat_number" type="text" class="form-control{{ $errors->has('vat_number') ? ' is-invalid' : '' }}" name="vat_number" value="{{ $user->vat_number }}" required autofocus>
 
-                                @if ($errors->has('cf'))
+                                @if ($errors->has('vat_number'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('cf') }}</strong>
+                                        <strong>{{ $errors->first('vat_number') }}</strong>
                                     </span>
                                 @endif
                             </div>

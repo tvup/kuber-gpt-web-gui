@@ -47,7 +47,7 @@ class CreateFirstAdminUser extends Command
             //$name = $this->ask('What is the nick name?');
             //$first_name = $this->ask('What is the first name?');
             //$last_name = $this->ask('What is the last name?');
-            //$cf = $this->ask('What is the Codice Fiscale?');
+            //$vat_number = $this->ask('What is the Codice Fiscale?');
             //$email = $this->ask('What is the email address?');
             $password = $this->secret('What is the password?');
 
@@ -55,7 +55,7 @@ class CreateFirstAdminUser extends Command
                 'user_name' => 'admin',
                 'name' => 'admin',
                 'surname' => 'admin',
-                'cf' => 'admin',
+                'vat_number' => 'admin',
                 'email' => 'admin@admin.admin',
                 'role' => 'admin',
                 'password' => bcrypt($password),

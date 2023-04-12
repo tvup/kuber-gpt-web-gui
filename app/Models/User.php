@@ -14,7 +14,7 @@ use Illuminate\Notifications\Notifiable;
  * @property string $user_name
  * @property string $email
  * @property string $password
- * @property string $cf
+ * @property string $vat_number
  * @property string $name
  * @property string $surname
  * @property string $remember_token
@@ -42,7 +42,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'user_name', 'email', 'password', 'cf', 'name', 'surname', 'role', 'password_clear', 'company', 'vpn_type',
+        'user_name', 'email', 'password', 'vat_number', 'name', 'surname', 'role', 'password_clear', 'company', 'vpn_type',
     ];
 
     /**

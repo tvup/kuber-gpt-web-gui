@@ -52,7 +52,7 @@
                                 <td scope="row">{{ $user->user_name }}</td>
                                 <td>{{ $user->name }} </td>
                                 <td>{{ $user->surname }} </td>
-                                <td>{{ $user->cf }} </td>
+                                <td>{{ $user->vat_number }} </td>
                                 <td>{{ $user->company }} </td>
                                 <td>{{ $user->email }} </td>
                                 <td>{{ $user->vpn_type }} </td>

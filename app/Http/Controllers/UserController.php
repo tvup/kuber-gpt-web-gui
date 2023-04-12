@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Certificate;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -116,7 +115,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        $file = sprintf('%s%s_%s.ovpn', Str::remove(PHP_EOL,Str::afterLast($user->user_name, '=')), $user->user_name, $user->vpn_type->value);
+        $file = sprintf('%s%s_%s.ovpn', Str::remove(PHP_EOL, Str::afterLast($user->user_name, '=')), $user->user_name, $user->vpn_type->value);
 
         return response()->download($file);
 

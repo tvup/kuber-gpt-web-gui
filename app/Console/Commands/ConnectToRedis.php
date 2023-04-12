@@ -3,9 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Redis;
-use Predis\Client;
 
 class ConnectToRedis extends Command
 {
@@ -30,5 +28,4 @@ class ConnectToRedis extends Command
     {
         Redis::publish('my-channel', 'jytte tvupper+2@gmail.com');
     }
-
 }

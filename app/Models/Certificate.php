@@ -21,7 +21,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Certificate extends Model
 {
-
     protected $casts = [
         'stato' => StatoEnum::class,
     ];

@@ -141,8 +141,8 @@ return [
             'password' => env('REDIS_PASSWORD', null),
             'port' => env('REDIS_PORT', '6379'),
             'database' => '0',
-            #since config/session.php does not have an app level prefix we can change
-            #this prefx to `myapp:s:` if we share redis server between apps
+            //since config/session.php does not have an app level prefix we can change
+            //this prefx to `myapp:s:` if we share redis server between apps
         ],
     ],
 

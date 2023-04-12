@@ -57,25 +57,23 @@ return [
             'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
         ],
 
-
-
-//        'redis' => [
-//            'driver' => 'redis',
-//            'connection' => 'default',
-//            'queue' => 'default',
-//            'retry_after' => 90,
-//            'block_for' => null,
-//        ],
-//        'redis' => [
-//            'host' => env('REDIS_HOST'),
-//            'port' => env('REDIS_PORT'),
-//            'driver' => 'redis',
-//            'connection' => 'default',
-//            'queue' => env('REDIS_QUEUE', 'default'),
-//            'retry_after' => 90,
-//            'block_for' => null,
-//            'after_commit' => false,
-//        ],
+        //        'redis' => [
+        //            'driver' => 'redis',
+        //            'connection' => 'default',
+        //            'queue' => 'default',
+        //            'retry_after' => 90,
+        //            'block_for' => null,
+        //        ],
+        //        'redis' => [
+        //            'host' => env('REDIS_HOST'),
+        //            'port' => env('REDIS_PORT'),
+        //            'driver' => 'redis',
+        //            'connection' => 'default',
+        //            'queue' => env('REDIS_QUEUE', 'default'),
+        //            'retry_after' => 90,
+        //            'block_for' => null,
+        //            'after_commit' => false,
+        //        ],
     ],
 
     /*

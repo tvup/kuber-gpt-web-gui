@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\UserRoleEnum;
 use App\Enums\VPNTypeEnum;
 use App\Models\Certificate;
 use App\Models\User;
@@ -96,7 +95,7 @@ class CertificateController extends Controller
             //$certificato->cert = $array_temp[5];
             $user_name = Str::remove(PHP_EOL, $array_temp[5]);
             $user = \App\Models\User::where('user_name', '=', $user_name)->firstOrNew();
-            if(!$user->exists) {
+            if (! $user->exists) {
                 $user->user_name = $user_name;
                 $user->email = '';
                 $user->password = '';
@@ -146,7 +145,7 @@ class CertificateController extends Controller
         $certificate = Certificate::find($cert);
         $name = $certificate->user->user_name;
 
-        $file = sprintf('%s%s_%s.ovpn', config('filesystems.certificate_folder'), Str::remove(PHP_EOL,Str::afterLast($name, '=')), $certificate->user->vpn_type->value);
+        $file = sprintf('%s%s_%s.ovpn', config('filesystems.certificate_folder'), Str::remove(PHP_EOL, Str::afterLast($name, '=')), $certificate->user->vpn_type->value);
 
         return response()->download($file);
 
@@ -176,7 +175,6 @@ class CertificateController extends Controller
 
         $this->auto_popolate_db();
 
-
         return redirect()->route('admin.admin_showuserfromname', ['name' => $certificato->user->user_name])->with('msg-success', 'Profile updated!');
 
     }
@@ -196,13 +194,13 @@ class CertificateController extends Controller
             return redirect()->back()->with('msg-danger', 'Errore: Esitono già certificati validi');
         }
 
-        $strippedUserName = Str::remove(PHP_EOL,Str::afterLast($user->user_name, '='));
+        $strippedUserName = Str::remove(PHP_EOL, Str::afterLast($user->user_name, '='));
 
         //procedo se non ha certificati validi attivi
         if ($user->vpn_type == VPNTypeEnum::FULL) {
-            Redis::publish('my-channel', $strippedUserName . ' ' . $user->email);
+            Redis::publish('my-channel', $strippedUserName.' '.$user->email);
         } else {
-            Redis::publish('my-channel', $strippedUserName . ' ' . $user->email);
+            Redis::publish('my-channel', $strippedUserName.' '.$user->email);
         }
 
         return redirect()->back()->with('msg-success', 'Profile updated!');

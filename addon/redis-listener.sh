@@ -64,6 +64,8 @@ function on_message_received() {
   elif [  "${channel}" = "${REDIS_REVOKE_CHANNEL}" ]; then
       cd /etc/openvpn/easy-rsa || exit
       EASYRSA_BATCH=1 /opt/EasyRSA-3.1.2/easyrsa revoke "${text}"
+      sudo setfacl -m u:forge:rwx /etc/openvpn/easy-rsa/pki
+      sudo setfacl -m u:forge:rw /etc/openvpn/easy-rsa/pki/index.txt
   fi
 }
 

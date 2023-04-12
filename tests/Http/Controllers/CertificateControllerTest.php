@@ -27,14 +27,6 @@ class CertificateControllerTest extends TestCase
         $this->actingAs($user);
     }
 
-    public function testReadIndex()
-    {
-        Storage::fake('ca')->put(config('filesystems.key_folder').'hest', 'ged');
-        $response = $this->get('/admin/read_index');
-        $response->assertStatus(200);
-        $response->assertViewIs('admin.readindex');
-    }
-
     public function testPopolateDb()
     {
         Storage::fake()->put(config('filesystems.key_file'), 'V	250714011809Z		98CE8C26EA5C8578C39536810591B1ED	unknown	/CN=openvpn'.PHP_EOL.

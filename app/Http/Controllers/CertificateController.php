@@ -6,14 +6,11 @@ use App\Enums\StatusEnum;
 use App\Models\Certificate;
 use App\Models\User;
 use Carbon\Carbon;
-use ErrorException;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
-use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class CertificateController extends Controller
@@ -22,53 +19,6 @@ class CertificateController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-    }
-
-    public function read_index(): View
-    {
-        //Array for return
-        $array_index = [];
-
-        $i = 0;
-        $files = Storage::disk('pki')->files();
-
-        foreach ($files as $file) {
-            try {
-                $array_contents = File::get(config('filesystems.key_folder').$file);
-            } catch (ErrorException $e) {
-                continue;
-            }
-            foreach (explode(PHP_EOL, $array_contents) as $line) {
-                $lineItems = explode("\t", $line);
-
-                try {
-                    $date = Carbon::createFromFormat('ymdHisZ', array_key_exists(1, $lineItems) ? $lineItems[1] : Carbon::now('Europe/Copenhagen')->format('ymdHisZ'));
-                } catch (InvalidArgumentException $e) {
-                    $date = Carbon::now('Europe/Copenhagen');
-                }
-
-                $lineItems[1] = $date->format('d/m/Y H:i:s');
-                if (array_key_exists(2, $lineItems) && $lineItems[2] != '') {
-                    try {
-                        $date = Carbon::createFromFormat('ymdHisZ', $lineItems[2]);
-                    } catch (InvalidArgumentException $e) { /** @phpstan-ignore-line */
-                        $date = Carbon::now('Europe/Copenhagen');
-                    }
-                    $lineItems[2] = $date->format('d/m/Y H:i:s');
-                }
-
-                //I read the cert (I'm only interested in the "username")
-                $array_cert = explode('/', array_key_exists(5, $lineItems) ? $lineItems[5] : '');
-                $lineItems[5] = array_key_exists(6, $array_cert) ? $array_cert[6] : '    ';
-                $lineItems[5] = substr($lineItems[5], 3);
-
-                $array_index[$i] = $lineItems;
-                $i++;
-
-            }
-        }
-
-        return view('admin.readindex', ['array_index' => $array_index]);
     }
 
     public function auto_popolate_db(): void
@@ -93,14 +43,14 @@ class CertificateController extends Controller
                 $distinguished_name = Str::remove(PHP_EOL, $lineItems[5]);
 
                 if ($revocation != '') {
-                    $certificate->revoked_at = Carbon::createFromFormat('ymdHisZ', $revocation);
+                    $certificate->revoked_at = Carbon::createFromFormat('ymdHisZ', $revocation) ?: null;
                 }
 
                 $array_index[$i] = $lineItems;
                 $i++;
 
                 $certificate->status = StatusEnum::to($status);
-                $certificate->expires_at = Carbon::createFromFormat('ymdHisZ', $expiration);
+                $certificate->expires_at = Carbon::createFromFormat('ymdHisZ', $expiration) ?: null;
 
                 $certificate->idcert = $serial_number;
                 $certificate->cert = $distinguished_name;

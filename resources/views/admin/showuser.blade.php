@@ -40,7 +40,7 @@
                                 <th>{{__('showallusers.user')}}</th>
                                 <th>{{__('showallusers.name')}}</th>
                                 <th>{{__('showallusers.surname')}}</th>
-                                <th>{{__('showallusers.CF')}}</th>
+                                <th>{{__('showallusers.vat_number')}}</th>
                                 <th>{{__('showallusers.company')}}</th>
                                 <th>{{__('showallusers.e_mail')}}</th>
                                 <th>{{__('showallusers.vpn_type')}}</th>

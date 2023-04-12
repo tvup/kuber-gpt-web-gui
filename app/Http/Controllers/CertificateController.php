@@ -143,9 +143,8 @@ class CertificateController extends Controller
     {
         /** @var Certificate $certificate */
         $certificate = Certificate::find($cert);
-        $name = $certificate->user->user_name;
 
-        $file = sprintf('%s%s_%s.ovpn', config('filesystems.certificate_folder'), Str::remove(PHP_EOL, Str::afterLast($name, '=')), $certificate->user->vpn_type->value);
+        $file = sprintf('%s%s_%s.ovpn', config('filesystems.certificate_folder'), $certificate->user->strippedUserName, $certificate->user->vpn_type->value);
 
         return response()->download($file);
 
@@ -194,13 +193,11 @@ class CertificateController extends Controller
             return redirect()->back()->with('msg-danger', 'Errore: Esitono già certificati validi');
         }
 
-        $strippedUserName = Str::remove(PHP_EOL, Str::afterLast($user->user_name, '='));
-
         //procedo se non ha certificati validi attivi
         if ($user->vpn_type == VPNTypeEnum::FULL) {
-            Redis::publish('my-channel', $strippedUserName.' '.$user->email);
+            Redis::publish('my-channel', $user->strippedUserName.' '.$user->email);
         } else {
-            Redis::publish('my-channel', $strippedUserName.' '.$user->email);
+            Redis::publish('my-channel', $user->strippedUserName.' '.$user->email);
         }
 
         return redirect()->back()->with('msg-success', 'Profile updated!');

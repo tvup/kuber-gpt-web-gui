@@ -115,7 +115,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        $file = sprintf('%s%s_%s.ovpn', config('filesystems.certificate_folder'), Str::remove(PHP_EOL, Str::afterLast($user->user_name, '=')), $user->vpn_type->value);
+        $file = sprintf('%s%s_%s.ovpn', config('filesystems.certificate_folder'), $user->strippedUserName, $user->vpn_type->value);
 
         return response()->download($file);
 

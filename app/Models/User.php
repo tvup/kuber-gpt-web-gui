@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 /**
  * @property int $id
@@ -23,6 +24,7 @@ use Illuminate\Notifications\Notifiable;
  * @property string $company
  * @property VPNTypeEnum $vpn_type
  * @property string $locale
+ * @property string $strippedUserName
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Certificate[] $certificates
@@ -79,5 +81,10 @@ class User extends Authenticatable
 
         return false;
 
+    }
+
+    public function getStrippedUserNameAttribute(): string
+    {
+        return Str::remove(PHP_EOL, Str::afterLast($this->user_name, '='));
     }
 }

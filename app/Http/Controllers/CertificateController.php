@@ -7,11 +7,14 @@ use App\Models\Certificate;
 use App\Models\User;
 use Carbon\Carbon;
 use ErrorException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 use InvalidArgumentException;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class CertificateController extends Controller
 {
@@ -21,7 +24,7 @@ class CertificateController extends Controller
         $this->middleware('auth');
     }
 
-    public function read_index()
+    public function read_index(): View
     {
         //Array for return
         $array_index = [];
@@ -33,9 +36,9 @@ class CertificateController extends Controller
             try {
                 $array_contents = File::get(config('filesystems.key_folder').$file);
             } catch (ErrorException $e) {
-                $array_contents = [];
+                continue;
             }
-            foreach ($array_contents as $line) {
+            foreach (explode(PHP_EOL, $array_contents) as $line) {
                 $lineItems = explode("\t", $line);
 
                 try {
@@ -48,7 +51,7 @@ class CertificateController extends Controller
                 if (array_key_exists(2, $lineItems) && $lineItems[2] != '') {
                     try {
                         $date = Carbon::createFromFormat('ymdHisZ', $lineItems[2]);
-                    } catch (InvalidArgumentException $e) {
+                    } catch (InvalidArgumentException $e) { /** @phpstan-ignore-line */
                         $date = Carbon::now('Europe/Copenhagen');
                     }
                     $lineItems[2] = $date->format('d/m/Y H:i:s');
@@ -68,7 +71,7 @@ class CertificateController extends Controller
         return view('admin.readindex', ['array_index' => $array_index]);
     }
 
-    public function auto_popolate_db()
+    public function auto_popolate_db(): void
     {
 
         Certificate::truncate();
@@ -89,19 +92,15 @@ class CertificateController extends Controller
                 //$file_name = $lineItems[4];
                 $distinguished_name = Str::remove(PHP_EOL, $lineItems[5]);
 
-                $date = Carbon::createFromFormat('ymdHisZ', $expiration);
-                $expiration = $date->format('Y-m-d H:i:s');
                 if ($revocation != '') {
-                    $date = Carbon::createFromFormat('ymdHisZ', $revocation);
-                    $revocation = $date->format('Y-m-d H:i:s');
-                    $certificate->revoked_at = $revocation;
+                    $certificate->revoked_at = Carbon::createFromFormat('ymdHisZ', $revocation);
                 }
 
                 $array_index[$i] = $lineItems;
                 $i++;
 
                 $certificate->status = StatusEnum::to($status);
-                $certificate->expires_at = $expiration;
+                $certificate->expires_at = Carbon::createFromFormat('ymdHisZ', $expiration);
 
                 $certificate->idcert = $serial_number;
                 $certificate->cert = $distinguished_name;
@@ -119,7 +118,7 @@ class CertificateController extends Controller
 
     }
 
-    public function popolate_db()
+    public function popolate_db(): View
     {
 
         $this->auto_popolate_db();
@@ -128,18 +127,15 @@ class CertificateController extends Controller
         return view('admin.readdb', ['certificates' => $certificates]);
     }
 
-    public function download($cert)
+    public function download(Certificate $certificate): BinaryFileResponse
     {
-        /** @var Certificate $certificate */
-        $certificate = Certificate::find($cert);
-
         $file = sprintf('%s%s.ovpn', config('filesystems.certificate_folder'), $certificate->user->strippedUserName);
 
         return response()->download($file);
 
     }
 
-    public function revoke(Certificate $certificate)
+    public function revoke(Certificate $certificate): RedirectResponse
     {
         Redis::publish(config('database.redis.default.revoke_channel'), $certificate->user->strippedUserName);
 
@@ -152,7 +148,7 @@ class CertificateController extends Controller
 
     }
 
-    public function release(User $user)
+    public function release(User $user): RedirectResponse
     {
         //check that the user does not have valid active certificates
         foreach ($user->certificates as $cert) {

@@ -17,7 +17,7 @@ use Illuminate\Support\Str;
  * @property string $idcert
  * @property string $cert
  * @property User $user
- * @property string $link_conf
+ * @property array<int, string> $link_conf
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
@@ -30,9 +30,12 @@ class Certificate extends Model
         'link_conf' => 'array',
     ];
 
+    /**
+     * @return BelongsTo<User, Certificate>
+     */
     public function user(): BelongsTo
     {
-        return $this->belongsTo('\App\Models\User');
+        return $this->belongsTo(User::class);
     }
 
     public function getStrippedUserNameAttribute(): string

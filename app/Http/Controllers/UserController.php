@@ -3,17 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class UserController extends Controller
 {
-    protected function validator(array $data)
+    /**
+     * @param  array<string, string>  $data
+     */
+    protected function validator(array $data): \Illuminate\Validation\Validator
     {
         return Validator::make($data, [
             'user_name' => 'sometimes|string|max:255',
@@ -25,10 +26,8 @@ class UserController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return Application|Factory|View|\Illuminate\Foundation\Application
      */
-    public function index()
+    public function index(): \Illuminate\View\View
     {
         $users = User::all();
 
@@ -39,15 +38,12 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user): Application|Factory|View|\Illuminate\Foundation\Application
+    public function show(User $user): \Illuminate\View\View
     {
         return view('admin.showuser', ['user' => $user]);
     }
 
-    /**
-     * @return Application|Factory|View|\Illuminate\Foundation\Application
-     */
-    public function show_from_name(string $name)
+    public function show_from_name(string $name): \Illuminate\View\View
     {
         $user = User::where('user_name', $name)->first();
         if (null === $user) {
@@ -58,10 +54,7 @@ class UserController extends Controller
 
     }
 
-    /**
-     * @return Application|Factory|View|\Illuminate\Foundation\Application
-     */
-    public function new(string $user_name = null)
+    public function new(string $user_name = null): \Illuminate\View\View
     {
         if ($user_name) {
             return view('auth.register')->with('user_name', $user_name);
@@ -72,22 +65,18 @@ class UserController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @return Application|Factory|\Illuminate\Foundation\Application|View
      */
-    public function edit(User $user)
+    public function edit(User $user): \Illuminate\View\View
     {
         return view('admin.edituser', ['user' => $user]);
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @return RedirectResponse
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $user): RedirectResponse
     {
-        $this->validator($request->except('email'))->validate();
+        $this->validator($request->except('email'))->validated();
         $data = $request->all();
         $user->name = $data['name'];
         $user->surname = $data['surname'];
@@ -100,7 +89,7 @@ class UserController extends Controller
 
     }
 
-    public function del($id)
+    public function del(int $id): RedirectResponse
     {
         /** @var User $user */
         $user = User::find($id);
@@ -110,7 +99,7 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-    public function downloadmycert()
+    public function downloadmycert(): BinaryFileResponse
     {
         $user = Auth::user();
 

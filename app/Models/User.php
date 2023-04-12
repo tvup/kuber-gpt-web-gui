@@ -40,7 +40,7 @@ class User extends Authenticatable
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var array<string>
      */
     protected $fillable = [
         'user_name', 'email', 'password', 'vat_number', 'name', 'surname', 'role', 'password_clear', 'company',
@@ -49,15 +49,18 @@ class User extends Authenticatable
     /**
      * The attributes that should be hidden for arrays.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $hidden = [
         'password', 'remember_token',
     ];
 
+    /**
+     * @return HasMany<Certificate>
+     */
     public function certificates(): HasMany
     {
-        return $this->hasMany('\App\Models\Certificate');
+        return $this->hasMany(Certificate::class);
     }
 
     public function isAdmin(): bool

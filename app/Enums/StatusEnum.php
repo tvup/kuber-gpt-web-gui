@@ -8,7 +8,7 @@ enum StatusEnum: string
      case R = 'revoked';
      case E = 'expired';
 
-     public static function to($string)
+     public static function to(string $string): StatusEnum|null
      {
          if (StatusEnum::V->name == $string) {
              return StatusEnum::V;
@@ -17,5 +17,7 @@ enum StatusEnum: string
          } elseif (StatusEnum::E->name == $string) {
              return StatusEnum::E;
          }
+
+         return null;
      }
 }

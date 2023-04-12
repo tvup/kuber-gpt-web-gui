@@ -50,7 +50,7 @@ class UserController extends Controller
     {
         $user = User::where('user_name', $name)->first();
         if (null === $user) {
-            return view('auth.register', ['user' => $name]);
+            return view('auth.register')->with('user_name', $name);
         }
 
         return view('admin.showuser', ['user' => $user, 'certs' => $user->certificates]);

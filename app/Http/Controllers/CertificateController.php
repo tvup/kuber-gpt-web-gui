@@ -8,6 +8,7 @@ use App\Models\Certificate;
 use App\Models\User;
 use Carbon\Carbon;
 use ErrorException;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -31,7 +32,7 @@ class CertificateController extends Controller
 
         foreach ($files as $file) {
             try {
-                $array_contents = file(config('filesystems.key_folder').$file, FILE_SKIP_EMPTY_LINES);
+                $array_contents = File::get(config('filesystems.key_folder').$file);
             } catch (ErrorException $e) {
                 $array_contents = [];
             }
@@ -74,46 +75,47 @@ class CertificateController extends Controller
         Certificate::truncate();
 
         $i = 0;
-        $array_contents = file(config('filesystems.key_file'), FILE_SKIP_EMPTY_LINES);
-        foreach ($array_contents as $line) {
-
+        foreach (explode(PHP_EOL, Storage::get(config('filesystems.key_file'))) as $line) {
             $certificate = app(Certificate::class);
 
             //A1status/A13expiration/A13revocationA4reason/A32serial_number/A16file_name/A20distinguished_name
             $lineItems = explode("\t", $line);
-            $status = $lineItems[0];
-            $expiration = $lineItems[1];
-            $revocationAndReason = $lineItems[2];
-            $revocation = Str::substr($revocationAndReason, 0, 13);
-            //$reason = Str::substr($revocationAndReason, 13);
-            $serial_number = $lineItems[3];
-            //$file_name = $lineItems[4];
-            $distinguished_name = Str::remove(PHP_EOL, $lineItems[5]);
+            if(count($lineItems)>=6) {
+                $status = $lineItems[0];
+                $expiration = $lineItems[1];
+                $revocationAndReason = $lineItems[2];
+                $revocation = Str::substr($revocationAndReason, 0, 13);
+                //$reason = Str::substr($revocationAndReason, 13);
+                $serial_number = $lineItems[3];
+                //$file_name = $lineItems[4];
+                $distinguished_name = Str::remove(PHP_EOL, $lineItems[5]);
 
-            $date = Carbon::createFromFormat('ymdHisZ', $expiration);
-            $expiration = $date->format('Y-m-d H:i:s');
-            if ($revocation != '') {
-                $date = Carbon::createFromFormat('ymdHisZ', $revocation);
-                $revocation = $date->format('Y-m-d H:i:s');
-                $certificate->revoked_at = $revocation;
+                $date = Carbon::createFromFormat('ymdHisZ', $expiration);
+                $expiration = $date->format('Y-m-d H:i:s');
+                if ($revocation != '') {
+                    $date = Carbon::createFromFormat('ymdHisZ', $revocation);
+                    $revocation = $date->format('Y-m-d H:i:s');
+                    $certificate->revoked_at = $revocation;
+                }
+
+                $array_index[$i] = $lineItems;
+                $i++;
+
+                $certificate->status = StatusEnum::to($status);
+                $certificate->expires_at = $expiration;
+
+                $certificate->idcert = $serial_number;
+                $certificate->cert = $distinguished_name;
+                $user = User::where('user_name', '=', $distinguished_name)->first();
+
+                if ($user) {
+                    $certificate->user()->associate($user);
+                }
+                $certificate->link_conf = $lineItems;
+
+                $certificate->save();
             }
 
-            $array_index[$i] = $lineItems;
-            $i++;
-
-            $certificate->status = StatusEnum::to($status);
-            $certificate->expires_at = $expiration;
-
-            $certificate->idcert = $serial_number;
-            $certificate->cert = $distinguished_name;
-            $user = User::where('user_name', '=', $distinguished_name)->first();
-
-            if ($user) {
-                $certificate->user()->associate($user);
-            }
-            $certificate->link_conf = $lineItems;
-
-            $certificate->save();
 
         }
 

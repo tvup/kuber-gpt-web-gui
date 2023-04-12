@@ -132,7 +132,7 @@ class CertificateController extends Controller
         $name = $certificate->user;
         /** @var User $user */
         $user = User::where('user_name', Str::remove(PHP_EOL, $name))->first();
-        $vpn_type = $user->vpn_type;
+        $vpn_type = $user->vpn_type->value;
 
         $file = sprintf('%s%s_%s.ovpn', config('filesystems.certificate_folder'), Str::afterLast($name, '='), $vpn_type);
 

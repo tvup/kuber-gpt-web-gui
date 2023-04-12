@@ -83,8 +83,8 @@
                             </thead>
                             <tbody>
                             @foreach($certificates as $certificate)
-                                @if (($certificate->status == 'V') && ( ((new \Carbon\Carbon($certificate->expires_at))->isPast()) || (((new \Carbon\Carbon($certificate->expires_at))->isFuture()) && ((new \Carbon\Carbon($certificate->expires_at))->isCurrentMonth()) && ((new \Carbon\Carbon($certificate->expires_at))->isCurrentYear()) ) ))
-                                    @if ((new \Carbon\Carbon($certificate->dt_scadenza))->isPast())
+                                @if (($certificate->status == \App\Enums\StatusEnum::V) && ( ((new \Carbon\Carbon($certificate->expires_at))->isPast()) || (((new \Carbon\Carbon($certificate->expires_at))->isFuture()) && ((new \Carbon\Carbon($certificate->expires_at))->isCurrentMonth()) && ((new \Carbon\Carbon($certificate->expires_at))->isCurrentYear()) ) ))
+                                    @if ((new \Carbon\Carbon($certificate->expires_at))->isPast())
                                         <tr class="table-danger">
                                     @elseif (((new \Carbon\Carbon($certificate->expires_at))->isFuture()) && ((new \Carbon\Carbon($certificate->expires_at))->isCurrentMonth()))
                                         <tr class="table-warning">

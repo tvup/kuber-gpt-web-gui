@@ -170,7 +170,7 @@ class CertificateController extends Controller
 
         $certs = Certificate::where('user', $name)->get();
 
-        return redirect()->route('admin.admin_showuserfromname', ['name' => $user->name])->with('msg-success', 'Profile updated!');
+        return redirect()->route('admin.admin_showuserfromname', ['name' => $user->user_name])->with('msg-success', 'Profile updated!');
 
     }
 

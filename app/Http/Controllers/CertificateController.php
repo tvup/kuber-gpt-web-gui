@@ -93,7 +93,7 @@ class CertificateController extends Controller
 
             $certificate->idcert = $array_temp[3];
             //$certificato->cert = $array_temp[5];
-            $user = \App\Models\User::where('user_name', '=', $array_temp[5])->first();
+            $user = \App\Models\User::where('user_name', '=', Str::remove(PHP_EOL,$array_temp[5]))->first();
             $certificate->user()->associate($user);
             //$certificato->link_conf = $array_temp[];
 

@@ -43,6 +43,7 @@ class UserControllerTest extends TestCase
 
     public function testIndex()
     {
+        User::truncate();
         // Seed the database with some test users
         $users = User::factory()->count(3)->make();
 

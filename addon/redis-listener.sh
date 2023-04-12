@@ -40,25 +40,25 @@ function on_message_received() {
       EASYRSA_BATCH=1 /opt/EasyRSA-3.1.2/easyrsa sign-req client "${message}"
 
       cd /etc/openvpn/easy-rsa/pki || exit
-      cat /home/forge/secure.torbenit.dk/addon/vpn_FULL_TCP_conf.ovpn > ./"${message}"_FULL.ovpn
+      cat /home/forge/secure.torbenit.dk/addon/vpn_TCP_conf.ovpn > ./"${message}".ovpn
 
-      echo "<ca>" >> ./"${message}"_FULL.ovpn
-      cat ca.crt  >> ./"${message}"_FULL.ovpn
-      echo "</ca>" >> ./"${message}"_FULL.ovpn
+      echo "<ca>" >> ./"${message}".ovpn
+      cat ca.crt  >> ./"${message}".ovpn
+      echo "</ca>" >> ./"${message}".ovpn
 
-      echo "<cert>" >> ./"${message}"_FULL.ovpn
-      cat issued/"${message}".crt  >> .//"${message}"_FULL.ovpn
-      echo "</cert>" >> ./"${message}"_FULL.ovpn
+      echo "<cert>" >> ./"${message}".ovpn
+      cat issued/"${message}".crt  >> .//"${message}".ovpn
+      echo "</cert>" >> ./"${message}".ovpn
 
-      echo "<key>" >> ./"${message}"_FULL.ovpn
-      cat private/"${message}".key  >> ./"${message}"_FULL.ovpn
-      echo "</key>" >> ./"${message}"_FULL.ovpn
+      echo "<key>" >> ./"${message}".ovpn
+      cat private/"${message}".key  >> ./"${message}".ovpn
+      echo "</key>" >> ./"${message}".ovpn
 
-      echo "<tls-auth>" >> ./"${message}"_FULL.ovpn
-      cat ../ta.key  >> ./"${message}"_FULL.ovpn
-      echo "</tls-auth>" >> ./"${message}"_FULL.ovpn
+      echo "<tls-auth>" >> ./"${message}".ovpn
+      cat ../ta.key  >> ./"${message}".ovpn
+      echo "</tls-auth>" >> ./"${message}".ovpn
 
-      /usr/bin/mailx "${email}" -s "VPN per "${message}" con password" -a From:admin@torbenit.dk -A "${message}"_FULL.ovpn < /etc/openvpn/easy-rsa/pki/private/"${message}".password.txt
+      /usr/bin/mailx "${email}" -s "VPN per "${message}" con password" -a From:admin@torbenit.dk -A "${message}".ovpn < /etc/openvpn/easy-rsa/pki/private/"${message}".password.txt
       sudo setfacl -m u:forge:rwx /etc/openvpn/easy-rsa/pki
       sudo setfacl -m u:forge:rw /etc/openvpn/easy-rsa/pki/index.txt
   elif [  "${channel}" = "${REDIS_REVOKE_CHANNEL}" ]; then

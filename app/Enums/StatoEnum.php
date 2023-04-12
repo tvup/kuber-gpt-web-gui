@@ -4,7 +4,7 @@ namespace App\Enums;
 
 enum StatoEnum: string
 {
-     case V = 'V';
-     case R = 'R';
-     case E = 'E';
+     case V = 'valid';
+     case R = 'revoked';
+     case E = 'expired';
 }

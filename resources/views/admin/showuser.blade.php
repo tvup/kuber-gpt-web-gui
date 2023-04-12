@@ -87,7 +87,7 @@
                         <tbody>
                             @foreach ($user->certificates as $cert)
                             <tr>
-                                <td scope="row"> {{ $cert->stato }} </td>
+                                <td scope="row"> {{ Str::title($cert->stato->value) }} </td>
                                 <td>{{ (new \Carbon\Carbon($cert->dt_scadenza))->format('d/m/Y H:i') }}</td>
                                 <td>
                                     @if ($cert->dt_revoca != "")

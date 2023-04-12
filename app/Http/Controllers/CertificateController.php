@@ -31,7 +31,7 @@ class CertificateController extends Controller
 
         foreach ($files as $file) {
             try {
-                $array_contents = file(config('filesystems.key_folder') . $file, FILE_SKIP_EMPTY_LINES);
+                $array_contents = file(config('filesystems.key_folder').$file, FILE_SKIP_EMPTY_LINES);
             } catch (ErrorException $e) {
                 $array_contents = [];
             }

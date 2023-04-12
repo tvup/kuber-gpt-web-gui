@@ -97,8 +97,6 @@ class UserController extends Controller
 
         $user->save();
 
-        //return redirect()->route('admin.admin_showallusers')->with('status', 'Profile updated!');
-        //return redirect()->route('admin.admin_showallusers')->with('msg-success', 'Profile updated!');
         return redirect()->back()->with('msg-success', 'Profile updated!');
 
     }

@@ -27,7 +27,7 @@
 </head>
 <body>
 
-<!-- Definisco il menu a discesa per pc e mobile -->
+<!-- I define the dropdown menu for pc and mobile -->
 <!-- Dropdown Structure -->
 <ul id="dropdown1" class="dropdown-content">
     @guest
@@ -90,7 +90,7 @@
         </li>
     @endguest
 </ul>
-<!-- FINE - Definisco il menu a discesa -->
+<!-- END - I define the drop down menu -->
 
 <nav class="light-blue lighten-1" role="navigation">
     <div class="nav-wrapper container">

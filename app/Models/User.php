@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Enums\UserRoleEnum;
-use App\Enums\VPNTypeEnum;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -23,7 +22,6 @@ use Illuminate\Support\Str;
  * @property UserRoleEnum $role
  * @property string $password_clear
  * @property string $company
- * @property VPNTypeEnum $vpn_type
  * @property string $locale
  * @property string $strippedUserName
  * @property Carbon $created_at
@@ -37,7 +35,6 @@ class User extends Authenticatable
 
     protected $casts = [
         'role' => UserRoleEnum::class,
-        'vpn_type' => VPNTypeEnum::class,
     ];
 
     /**
@@ -46,7 +43,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'user_name', 'email', 'password', 'vat_number', 'name', 'surname', 'role', 'password_clear', 'company', 'vpn_type',
+        'user_name', 'email', 'password', 'vat_number', 'name', 'surname', 'role', 'password_clear', 'company',
     ];
 
     /**

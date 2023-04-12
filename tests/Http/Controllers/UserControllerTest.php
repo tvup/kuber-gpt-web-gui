@@ -3,7 +3,6 @@
 namespace Tests\Http\Controllers;
 
 use App\Enums\UserRoleEnum;
-use App\Enums\VPNTypeEnum;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -109,7 +108,6 @@ class UserControllerTest extends TestCase
             'surname' => fake()->lastName,
             'vat_number' => fake()->bothify('??#####'),
             'company' => fake()->company,
-            'vpn_type' => fake()->randomElement([VPNTypeEnum::FULL->value, VPNTypeEnum::TS->value]),
         ];
 
         $response = $this->actingAs($user)->post('admin/updateuser/'.$user->id, $updatedData);
@@ -121,7 +119,6 @@ class UserControllerTest extends TestCase
         $this->assertEquals($updatedData['surname'], $updatedUser->surname);
         $this->assertEquals($updatedData['vat_number'], $updatedUser->vat_number);
         $this->assertEquals($updatedData['company'], $updatedUser->company);
-        $this->assertEquals($updatedData['vpn_type'], $updatedUser->vpn_type->value);
     }
 
     public function testDel()

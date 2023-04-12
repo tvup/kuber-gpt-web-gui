@@ -3,7 +3,6 @@
 namespace Tests\Http\Controllers\Auth;
 
 use App\Enums\UserRoleEnum;
-use App\Enums\VPNTypeEnum;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -60,7 +59,6 @@ class RegisterControllerTest extends TestCase
             'vat_number' => '123456789',
             'role' => UserRoleEnum::User->value,
             'company' => 'Example Corp.',
-            'vpn_type' => VPNTypeEnum::FULL->value,
         ];
 
         $this->actingAs($user)->post('/register', $userData);
@@ -76,7 +74,6 @@ class RegisterControllerTest extends TestCase
         $this->assertEquals($userData['role'], $user->role->value);
         $this->assertEquals($userData['company'], $user->company);
         $this->assertEquals($userData['password'], $user->password_clear);
-        $this->assertEquals($userData['vpn_type'], $user->vpn_type->value);
     }
 
     public function testRegisterSuccess()
@@ -91,7 +88,6 @@ class RegisterControllerTest extends TestCase
             'vat_number' => fake()->randomNumber(9),
             'role' => fake()->randomElement([UserRoleEnum::Admin->value, UserRoleEnum::Manager->value, UserRoleEnum::User->value]),
             'company' => fake()->company,
-            'vpn_type' => fake()->randomElement([VPNTypeEnum::FULL->value, VPNTypeEnum::TS->value]),
         ];
         $response = $this->post('/register', $userData);
 
@@ -114,7 +110,6 @@ class RegisterControllerTest extends TestCase
             'vat_number' => '',
             'role' => '',
             'company' => '',
-            'vpn_type' => '',
         ];
 
         $response = $this->post('/register', $userData);

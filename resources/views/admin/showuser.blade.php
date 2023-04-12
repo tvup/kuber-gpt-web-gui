@@ -44,7 +44,6 @@
                                 <th>{{__('showallusers.vat_number')}}</th>
                                 <th>{{__('showallusers.company')}}</th>
                                 <th>{{__('showallusers.e_mail')}}</th>
-                                <th>{{__('showallusers.vpn_type')}}</th>
                                 <th>{{__('showallusers.action')}}</th>
                             </tr>
                             </thead>
@@ -56,7 +55,6 @@
                                 <td>{{ $user->vat_number }} </td>
                                 <td>{{ $user->company }} </td>
                                 <td>{{ $user->email }} </td>
-                                <td>{{ $user->vpn_type }} </td>
                                 <td>
                                     <button type="button" class="btn btn-primary" data-toggle="modal"
                                             data-target="#pwdModal">

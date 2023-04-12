@@ -61,7 +61,7 @@ class CertificateControllerTest extends TestCase
                 $stream = new StreamedResponse();
 
             $mock->shouldReceive('download')
-                ->with(sprintf('%s%s_%s.ovpn', config('filesystems.certificate_folder'), $certificate->user->strippedUserName, $certificate->user->vpn_type->value))
+                ->with(sprintf('%s%s.ovpn', config('filesystems.certificate_folder'), $certificate->user->strippedUserName))
                 ->andReturn(['header' => 'data']);
         }));
 

@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Enums\UserRoleEnum;
-use App\Enums\VPNTypeEnum;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
@@ -26,7 +25,6 @@ class UserFactory extends Factory
             'role' => UserRoleEnum::User,
             'password_clear' => bcrypt($this->faker->password()),
             'company' => $this->faker->company(),
-            'vpn_type' => VPNTypeEnum::FULL,
             'locale' => 'da_dk',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

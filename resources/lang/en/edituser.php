@@ -12,7 +12,6 @@ return [
     'vat_number' => 'VAT number',
     'company' => 'Company',
     'e_mail' => 'E-Mail',
-    'vpn_type' => 'VPN Type',
     'email_address_unique' => 'E-Mail Address - Unique per login',
 
 ];

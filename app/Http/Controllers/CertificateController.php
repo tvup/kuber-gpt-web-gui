@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Enums\StatusEnum;
-use App\Enums\VPNTypeEnum;
 use App\Models\Certificate;
 use App\Models\User;
 use Carbon\Carbon;
@@ -134,7 +133,7 @@ class CertificateController extends Controller
         /** @var Certificate $certificate */
         $certificate = Certificate::find($cert);
 
-        $file = sprintf('%s%s_%s.ovpn', config('filesystems.certificate_folder'), $certificate->user->strippedUserName, $certificate->user->vpn_type->value);
+        $file = sprintf('%s%s.ovpn', config('filesystems.certificate_folder'), $certificate->user->strippedUserName);
 
         return response()->download($file);
 
@@ -163,11 +162,7 @@ class CertificateController extends Controller
         }
 
         //I proceed if it has no active valid certificates
-        if ($user->vpn_type == VPNTypeEnum::FULL) {
-            Redis::publish(config('database.redis.default.create_channel'), $user->strippedUserName.' '.$user->email);
-        } else {
-            Redis::publish(config('database.redis.default.create_channel'), $user->strippedUserName.' '.$user->email);
-        }
+        Redis::publish(config('database.redis.default.create_channel'), $user->strippedUserName.' '.$user->email);
 
         return redirect()->back()->with('msg-success', 'Profile updated!');
     }

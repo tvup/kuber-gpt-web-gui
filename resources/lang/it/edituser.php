@@ -12,7 +12,6 @@ return [
     'vat_number' => 'Codice fiscale',
     'company' => 'Società',
     'e_mail' => 'E-Mail',
-    'vpn_type' => 'Tipo VPN',
     'email_address_unique' => 'Indirizzo e-mail - Univoco per login',
 
 ];

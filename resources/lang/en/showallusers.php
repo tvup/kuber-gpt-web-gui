@@ -13,7 +13,6 @@ return [
     'vat_number' => 'VAT number',
     'company' => 'Company',
     'e_mail' => 'E-Mail',
-    'vpn_type' => 'VPN Type',
     'action' => 'Action',
     'delete' => 'Delete',
     'edit_user' => 'Edit user',

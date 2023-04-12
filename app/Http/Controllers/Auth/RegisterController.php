@@ -80,7 +80,6 @@ class RegisterController extends Controller
             'role' => $data['role'],
             'company' => $data['company'],
             'password_clear' => $password_clear,
-            'vpn_type' => $data['vpn_type'],
         ]);
     }
 

@@ -13,7 +13,6 @@ return [
     'vat_number' => 'Codice fiscale',
     'company' => 'Società',
     'e_mail' => 'E-Mail',
-    'vpn_type' => 'Tipo VPN',
     'action' => 'Azione',
     'delete' => 'Eliminare',
     'edit_user' => 'Modifica utente',

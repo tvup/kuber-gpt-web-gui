@@ -28,7 +28,6 @@
                                 <th>{{__('showallusers.vat_number')}}</th>
                                 <th>{{__('showallusers.company')}}</th>
                                 <th>{{__('showallusers.e_mail')}}</th>
-                                <th>{{__('showallusers.vpn_type')}}</th>
                                 <th>{{__('showallusers.action')}}</th>
                                 <th>{{__('showallusers.delete')}}</th>
                             </tr>
@@ -44,7 +43,6 @@
                                     <td>{{$user->vat_number}}</td>
                                     <td>{{$user->company}}</td>
                                     <td>{{$user->email}}</td>
-                                    <td>{{$user->vpn_type}}</td>
                                     <td>
                                         @if(Auth::user()->isAdmin())
                                             <a href="{{ action('UserController@edit', ['user' => $user]) }}"

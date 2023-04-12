@@ -88,27 +88,6 @@
                                 </div>
                             </div>
 
-                        <div class="form-group row">
-                            <label for="vpn_type" class="col-md-4 col-form-label text-md-right">{{ __('edituser.vpn_type') }}</label>
-
-                            <div class="col-md-6">
-
-                                <select id="vpn_type" class="form-control{{ $errors->has('vpn_type') ? ' is-invalid' : '' }}" name="vpn_type"  autofocus>
-                                    <option value="TS" {{ ($user->vpn_type == \App\Enums\VPNTypeEnum::TS ? "selected" : "") }} >
-                                        {{\App\Enums\VPNTypeEnum::TS->value}}</option>
-                                    <option value="FULL" {{ ($user->vpn_type == \App\Enums\VPNTypeEnum::FULL ? "selected" : "") }} >
-                                        {{\App\Enums\VPNTypeEnum::FULL->value}}</option>
-                                </select>
-
-
-                                @if ($errors->has('vpn_type'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('vpn_type') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('edituser.email_address_unique') }}</label>

@@ -93,7 +93,6 @@ class UserController extends Controller
         $user->surname = $data['surname'];
         $user->vat_number = $data['vat_number'];
         $user->company = $data['company'];
-        $user->vpn_type = $data['vpn_type'];
 
         $user->save();
 
@@ -115,7 +114,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        $file = sprintf('%s%s_%s.ovpn', config('filesystems.certificate_folder'), $user->strippedUserName, $user->vpn_type->value);
+        $file = sprintf('%s%s.ovpn', config('filesystems.certificate_folder'), $user->strippedUserName);
 
         return response()->download($file);
 

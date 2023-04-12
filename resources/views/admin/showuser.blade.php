@@ -97,7 +97,7 @@
                                 </td>
                                 <td>
                                     @if(Auth::user()->isAdmin())
-                                        @if ($cert->stato == "V")
+                                        @if ($cert->stato == \App\Enums\StatoEnum::V)
                                             <a href="{{ action('CertificateController@revoke', ['cert' => $cert]) }}" class="btn btn-danger">
                                             <i class="fas fa-trash-alt"></i></a>
                                             <a href="{{ action('CertificateController@download', ['cert' => $cert]) }}" class="btn btn-success">

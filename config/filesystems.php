@@ -4,7 +4,7 @@ return [
 
     'key_file' => env('INDEX_FULL_PATH', '/etc/openvpn/easy-rsa/pki/index.txt'),
     'key_folder' => env('INDEX_PATH', '/etc/openvpn/easy-rsa/pki/'),
-    'certificate_folder' => env('CERTIFICATE_FOLDER', '/etc/openvpn/easy-rsa/pki/issued/'),
+    'certificate_folder' => env('CERTIFICATE_FOLDER', '/etc/openvpn/easy-rsa/pki/'),
     'script_folder' => env('SCRIPT_FOLDER', '/etc/openvpn/easy-rsa/pki/'),
 
     /*

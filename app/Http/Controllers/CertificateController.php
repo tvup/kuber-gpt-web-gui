@@ -51,7 +51,7 @@ class CertificateController extends Controller
 
                 //I read the cert (I'm only interested in the "username")
                 $array_cert = explode('/', array_key_exists(5, $lineItems) ? $lineItems[5] : '');
-                $lineItems[5] = $array_cert[6];
+                $lineItems[5] = array_key_exists(6, $array_cert) ? $array_cert[6] : '    ';
                 $lineItems[5] = substr($lineItems[5], 3);
 
                 $array_index[$i] = $lineItems;

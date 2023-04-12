@@ -118,17 +118,15 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $my_user_id = Auth::id();
-        /** @var Certificate $certificate */
         $certificate = Certificate::where('user_id', $my_user_id)
             ->where('stato', 'V')
             ->firstOrFail();
         $name = $certificate->user;
-        //$user = User::where('name', $name)->get()->first();
-        $vpn_type = $user->vpn_type;
+        $vpn_type = $user->vpn_type->value;
 
-        $file = sprintf('%s%s_%s.ovpn', config('filesystems.certificate_folder'), $name, $vpn_type);
+        $file = sprintf('%s%s_%s.ovpn', Str::remove(PHP_EOL,Str::afterLast($name, '=')), $name, $vpn_type);
 
-        return \Response::download($file);
+        return response()->download($file);
 
     }
 }

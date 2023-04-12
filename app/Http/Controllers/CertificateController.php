@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\StatoEnum;
 use App\Enums\VPNTypeEnum;
 use App\Models\Certificate;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Str;
-use Symfony\Component\Process\Process;
 
 class CertificateController extends Controller
 {
@@ -16,11 +16,6 @@ class CertificateController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-    }
-
-    public function delete_all()
-    {
-        $user = Auth::user();
     }
 
     public function read_index()
@@ -31,36 +26,31 @@ class CertificateController extends Controller
         $i = 0;
         $array_contents = file(config('filesystems.key_folder'), FILE_SKIP_EMPTY_LINES);
         foreach ($array_contents as $line) {
-            $array_temp = explode("\t", $line);
+            $lineItems = explode("\t", $line);
 
-            $date = \DateTime::createFromFormat('ymdHisZ', $array_temp[1]);
-            $array_temp[1] = $date->format('d/m/Y H:i:s');
-            if ($array_temp[2] != '') {
-                $date = \DateTime::createFromFormat('ymdHisZ', $array_temp[2]);
-                $array_temp[2] = $date->format('d/m/Y H:i:s');
+            $date = Carbon::createFromFormat('ymdHisZ', $lineItems[1]);
+            $lineItems[1] = $date->format('d/m/Y H:i:s');
+            if ($lineItems[2] != '') {
+                $date = Carbon::createFromFormat('ymdHisZ', $lineItems[2]);
+                $lineItems[2] = $date->format('d/m/Y H:i:s');
             }
 
-            //leggo il cert (mi interessa solo il nome "utente")
-            $array_cert = explode('/', $array_temp[5]);
-            //print_r($array_cert);
-            $array_temp[5] = $array_cert[6];
-            $array_temp[5] = substr($array_temp[5], 3);
+            //I read the cert (I'm only interested in the "username")
+            $array_cert = explode('/', $lineItems[5]);
+            $lineItems[5] = $array_cert[6];
+            $lineItems[5] = substr($lineItems[5], 3);
 
-            $array_index[$i] = $array_temp;
+            $array_index[$i] = $lineItems;
             $i++;
 
         }
 
-        //return view('home')->with('rule', $rule);
-        //return view('home', ['rule' => $rule, 'array_index' => $array_index]);
         return view('admin.readindex', ['array_index' => $array_index]);
     }
 
     public function auto_popolate_db()
     {
 
-        //DB::table('certificati')->delete();
-        //cancello
         Certificate::truncate();
 
         $i = 0;
@@ -69,34 +59,38 @@ class CertificateController extends Controller
 
             $certificate = app(Certificate::class);
 
-            $array_temp = explode("\t", $line);
+            //A1status/A13expiration/A13revocationA4reason/A32serial_number/A16file_name/A20distinguished_name
+            $lineItems = explode("\t", $line);
+            $status = $lineItems[0];
+            $expiration = $lineItems[1];
+            $revocationAndReason = $lineItems[2];
+            $revocation = Str::substr($revocationAndReason, 0, 13);
+            //$reason = Str::substr($revocationAndReason, 13);
+            $serial_number = $lineItems[3];
+            //$file_name = $lineItems[4];
+            $distinguished_name = Str::remove(PHP_EOL, $lineItems[5]);
 
-            $date = \DateTime::createFromFormat('ymdHisZ', $array_temp[1]);
-            $array_temp[1] = $date->format('Y-m-d H:i:s');
-            if ($array_temp[2] != '') {
-                $date = \DateTime::createFromFormat('ymdHisZ', $array_temp[2]);
-                $array_temp[2] = $date->format('Y-m-d H:i:s');
-                $certificate->dt_revoca = $array_temp[2];
+
+
+            $date = Carbon::createFromFormat('ymdHisZ', $expiration);
+            $expiration = $date->format('Y-m-d H:i:s');
+            if ($revocation != '') {
+                $date = Carbon::createFromFormat('ymdHisZ', $revocation);
+                $revocation = $date->format('Y-m-d H:i:s');
+                $certificate->dt_revoca = $revocation;
             }
 
-            //leggo il cert (mi interessa solo il nome "utente")
-            $array_cert = explode('/', $array_temp[5]);
-            //print_r($array_cert);
-            //$array_temp[5] = $array_cert[6];
-            //$array_temp[5] = substr($array_temp[5], 3);
-
-            $array_index[$i] = $array_temp;
+            $array_index[$i] = $lineItems;
             $i++;
 
-            $certificate->stato = $array_temp[0];
-            $certificate->dt_scadenza = $array_temp[1];
+            $certificate->stato = $status;
+            $certificate->dt_scadenza = $expiration;
 
-            $certificate->idcert = $array_temp[3];
-            //$certificato->cert = $array_temp[5];
-            $user_name = Str::remove(PHP_EOL, $array_temp[5]);
-            $user = \App\Models\User::where('user_name', '=', $user_name)->firstOrNew();
-            if (! $user->exists) {
-                $user->user_name = $user_name;
+            $certificate->idcert = $serial_number;
+            $certificate->cert = $distinguished_name;
+            $user = User::where('user_name', '=', $distinguished_name)->firstOrNew();
+            if (!$user->exists) {
+                $user->user_name = $distinguished_name;
                 $user->email = '';
                 $user->password = '';
                 $user->vat_number = '';
@@ -109,25 +103,12 @@ class CertificateController extends Controller
             }
 
             $certificate->user()->associate($user);
-            //$certificato->link_conf = $array_temp[];
-
-            //$user = \App\User::where('name','=',$certificato->user)->get();
-           // dd($user->id);
-            if (isset($user->id)) {
-                //dd($user);
-                $certificate->user_id = $user->id;
-            }
+            $certificate->link_conf = $lineItems;
 
             $certificate->save();
 
         }
 
-        $certs = Certificate::orderBy('id', 'desc')->get();
-
-        //return view('home')->with('rule', $rule);
-        //return view('home', ['rule' => $rule, 'array_index' => $array_index]);
-        //return view('admin.readindex', ['array_index' => $array_index]);
-        //return view('admin.readdb', ['certs' => $certs]);
     }
 
     public function popolate_db()
@@ -150,54 +131,33 @@ class CertificateController extends Controller
 
     }
 
-    public function revoke($cert)
+    public function revoke(Certificate $certificate)
     {
-        //
-        // the array can contain any number of arguments and options
-        ///etc/openvpn/easy-rsa/pki/script-revoke-web.sh
-        //echo $cert;
-        $certificato = Certificate::find($cert);
+        Redis::publish(config('database.redis.default.create_channel'), $certificate->user->strippedUserName);
 
-        $process = new Process(['/usr/bin/sudo', config('filesystems.script_folder').'script-revoke-web.sh', $certificato->user->user_name]);
-        $process->start();
-
-        foreach ($process as $type => $data) {
-            if ($process::OUT === $type) {
-                echo "\nRead from stdout: ".$data;
-            } else { // $process::ERR === $type
-                echo "\nRead from stderr: ".$data;
-            }
-        }
-
-        $certificato->stato = 'R';
-        $certificato->save();
+        $certificate->stato = StatoEnum::R;
+        $certificate->save();
 
         $this->auto_popolate_db();
 
-        return redirect()->route('admin.admin_showuserfromname', ['name' => $certificato->user->user_name])->with('msg-success', 'Profile updated!');
+        return redirect()->route('admin.admin_showuserfromname', ['name' => $certificate->user->user_name])->with('msg-success', 'Profile updated!');
 
     }
 
-    public function release($user)
+    public function release(User $user)
     {
-        $user = \App\Models\User::find($user);
-        //controllo che l'utente non abbia certificati attivi validi
-        $certificati_utente = $user->certificates;
-        $certificati_attivi = false;
-        foreach ($certificati_utente as $cert) {
-            if ($cert->stato == 'V') {
-                $certificati_attivi = true;
+        //check that the user does not have valid active certificates
+        foreach ($user->certificates as $cert) {
+            if ($cert->stato == StatoEnum::V) {
+                return redirect()->back()->with('msg-danger', 'Error: Valid certificate(s) already exist');
             }
         }
-        if ($certificati_attivi == true) {
-            return redirect()->back()->with('msg-danger', 'Errore: Esitono già certificati validi');
-        }
 
-        //procedo se non ha certificati validi attivi
+        //I proceed if it has no active valid certificates
         if ($user->vpn_type == VPNTypeEnum::FULL) {
-            Redis::publish('my-channel', $user->strippedUserName.' '.$user->email);
+            Redis::publish(config('database.redis.default.create_channel'), $user->strippedUserName.' '.$user->email);
         } else {
-            Redis::publish('my-channel', $user->strippedUserName.' '.$user->email);
+            Redis::publish(config('database.redis.default.create_channel'), $user->strippedUserName.' '.$user->email);
         }
 
         return redirect()->back()->with('msg-success', 'Profile updated!');

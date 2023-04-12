@@ -23,6 +23,7 @@ class Certificate extends Model
 {
     protected $casts = [
         'stato' => StatoEnum::class,
+        'link_conf' => 'array',
     ];
 
     public function user(): BelongsTo

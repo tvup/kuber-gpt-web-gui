@@ -6,4 +6,5 @@ enum StatoEnum: string
 {
      case V = 'V';
      case R = 'R';
+     case E = 'E';
 }

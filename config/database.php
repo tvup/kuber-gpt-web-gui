@@ -120,6 +120,8 @@ return [
             'password' => env('REDIS_PASSWORD', null),
             'port' => env('REDIS_PORT', '6379'),
             'database' => '0',
+            'create_channel' => env('REDIS_CREATE_CHANNEL', 'create_channel'),
+            'revoke_channel' => env('REDIS_REVOKE_CHANNEL', 'revoke_channel'),
         ],
         //the `cache` connection of the redis driver
         'cache' => [

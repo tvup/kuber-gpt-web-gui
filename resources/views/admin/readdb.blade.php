@@ -46,7 +46,7 @@
                                             </td>
                                         @else
                                             <td>
-                                                <a href="{{ action('UserController@new', ['name' => rawurlencode($certificate->cert)]) }}">{{$certificate->cert}} </a>
+                                                <a href="{{ action('UserController@new', ['user_name' => rawurlencode($certificate->cert)]) }}">{{$certificate->cert}} </a>
                                             </td>
                                         @endif
                                     </tr>

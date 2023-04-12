@@ -75,7 +75,7 @@ class CertificateController extends Controller
         Certificate::truncate();
 
         $i = 0;
-        foreach (explode(PHP_EOL, Storage::get(config('filesystems.key_file'))) as $line) {
+        foreach (explode(PHP_EOL, Storage::disk('ca')->get(config('filesystems.key_file'))) as $line) {
             $certificate = app(Certificate::class);
 
             //A1status/A13expiration/A13revocationA4reason/A32serial_number/A16file_name/A20distinguished_name

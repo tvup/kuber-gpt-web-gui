@@ -36,12 +36,16 @@ class CertificateController extends Controller
                 try {
                     $date = Carbon::createFromFormat('ymdHisZ', array_key_exists(1, $lineItems) ? $lineItems[1] : Carbon::now('Europe/Copenhagen')->format('ymdHisZ'));
                 } catch (InvalidArgumentException $e) {
-                    $date = Carbon::now('Europe/Copenhagen')->format('ymdHisZ');
+                    $date = Carbon::now('Europe/Copenhagen');
                 }
 
                 $lineItems[1] = $date->format('d/m/Y H:i:s');
                 if (array_key_exists(2, $lineItems) && $lineItems[2] != '') {
-                    $date = Carbon::createFromFormat('ymdHisZ', $lineItems[2]);
+                    try {
+                        $date = Carbon::createFromFormat('ymdHisZ', $lineItems[2]);
+                    } catch (InvalidArgumentException $e) {
+                        $date = Carbon::now('Europe/Copenhagen');
+                    }
                     $lineItems[2] = $date->format('d/m/Y H:i:s');
                 }
 

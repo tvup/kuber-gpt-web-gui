@@ -33,10 +33,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin', '
     Route::get('read_index', 'CertificateController@read_index')->name('admin_readindex');
     Route::get('popolate_db', 'CertificateController@popolate_db')->name('admin_popolatedb');
 
-    //Route::get('revokecert/{cert}/{user}', 'CertificateController@revoke')->name('admin_revokecert');
-    Route::get('download/{cert}', 'CertificateController@download')->name('admin_downloadcert');
-    Route::get('revokecert/{cert}', 'CertificateController@revoke')->name('admin_revokecert');
-    Route::get('releasecert/{user}', 'CertificateController@release')->name('admin_releasecert');
+    //Route::get('revokecert/{certificate}/{user}', 'CertificateController@revoke')->name('admin_revokecert');
+    Route::get('download/{certificate}', 'CertificateController@download')->name('admin_downloadcert');
+    Route::get('revokecert/{certificate}', 'CertificateController@revoke')->name('admin_revokecert');
+    Route::get('releasecert/{certificate}', 'CertificateController@release')->name('admin_releasecert');
 
     Route::get('showallusers', 'UserController@index')->name('admin_showallusers');
     Route::get('edituser/{user}', 'UserController@edit')->name('admin_edituser');

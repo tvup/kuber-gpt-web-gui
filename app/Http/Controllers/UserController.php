@@ -18,7 +18,7 @@ class UserController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'sometimes|string|email|max:255|unique:users',
             'vat_number' => 'required|string|max:255',
             'password' => 'required|string|min:8|confirmed',
         ]);
@@ -87,9 +87,11 @@ class UserController extends Controller
      */
     public function update(Request $request, int $id)
     {
+        $request->remove('password');
+
         /** @var User $user */
         $user = User::find($id);
-        $this->validator($request->except('email'))->validate();
+        $this->validator($request->all())->validate();
         $data = $request->all();
         $user->name = $data['name'];
         $user->surname = $data['surname'];

@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -38,12 +39,9 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(int $id): Application|Factory|View|\Illuminate\Foundation\Application
+    public function show(User $user): Application|Factory|View|\Illuminate\Foundation\Application
     {
-        $user = User::find($id)->get();
-
-        return view('admin.user', ['user' => $user]);
-
+        return view('admin.showuser', ['user' => $user]);
     }
 
     public function show_from_name($name)
@@ -65,26 +63,23 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param User $user
      * @return Application|Factory|\Illuminate\Foundation\Application|View
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::find($id);
-
         return view('admin.edituser', ['user' => $user]);
-
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @param User $user
+     * @return RedirectResponse
      */
-    public function update(Request $request, int $id)
+    public function update(Request $request, User $user)
     {
-        /** @var User $user */
-        $user = User::find($id);
         $this->validator($request->except('email'))->validate();
         $data = $request->all();
         $user->name = $data['name'];

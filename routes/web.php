@@ -40,6 +40,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin', '
 
     Route::get('showallusers', 'UserController@index')->name('admin_showallusers');
     Route::get('edituser/{user}', 'UserController@edit')->name('admin_edituser');
+    Route::get('show/{user}', 'UserController@show')->name('admin_showuser');
     Route::post('updateuser/{user}', 'UserController@update')->name('admin_updateuser');
     Route::get('del/{user}', 'UserController@del')->name('admin_deluser');
 

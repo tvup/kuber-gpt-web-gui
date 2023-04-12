@@ -16,7 +16,7 @@ Goal: create quick and easy to use solution to manage users and certificate and 
 * Fresh install of OpenVPN
 * Web server (NGinx, Apache...)
 * MySQL
-* PHP >= 7.1
+* PHP >= 8.2
 * Laravel
 
 ### CentOS 7
@@ -28,11 +28,11 @@ Goal: create quick and easy to use solution to manage users and certificate and 
 # yum remove php-common-5.4.16-45.el7.x86_64
 #  yum remove php*
 # yum remove php
-# yum install mod_php71w php71w-opcache
+# yum install mod_php82w php82w-opcache
 # yum install yum-plugin-replace
-# yum replace php-common --replace-with=php71w-common
-# yum install php71w-gdphp71w-ldap  php71w-mbstring php71w-mcrypt php71w-pear php71w-pecl-imagickphp71w-pecl-memcachedphp71w-pecl-mongodbphp71w-pecl-redis php71w-soapphp71w-tidyphp71w-xml php71w-xmlrpc
-# yum install yum install php71w-mysqlnd.x86_64 php71w-pdo.x86_64 php71w-pecl-imagick.x86_64 php71w-pecl-redis.x86_64 php71w-soap.x86_64 php71w-ldap.x86_64
+# yum replace php-common --replace-with=php82w-common
+# yum install php82w-gdphp82w-ldap  php82w-mbstring php82w-mcrypt php82w-pear php82w-pecl-imagickphp82w-pecl-memcachedphp82w-pecl-mongodbphp82w-pecl-redis php82w-soapphp82w-tidyphp82w-xml php82w-xmlrpc
+# yum install yum install php82w-mysqlnd.x86_64 php82w-pdo.x86_64 php82w-pecl-imagick.x86_64 php82w-pecl-redis.x86_64 php82w-soap.x86_64 php82w-ldap.x86_64
 
 # yum remove mariadb-5.5.60-1.el7_5.x86_64 mariadb-libs-5.5.60-1.el7_5.x86_64 mariadb-server-5.5.60-1.el7_5.x86_64
   
@@ -62,8 +62,8 @@ gpgcheck=1
 ## Installation
 
 * Setup openvpn server with your parameter and preferences or use your already working openvpn server
-* go to /etc/openvpn/ca: cd /etc/openvpn/ca
-* git clone https://github.com/MaoX17/openvpn-web-gui.git
+* go to /etc/openvpn/easy-rsa/pki: cd /etc/openvpn/easy-rsa/pki
+* git clone https://github.com/tvup/openvpn-web-gui.git
 * cd openvpn-web-gui
 * chmod ugo+x addon/*
 * cp addon/* ../
@@ -101,4 +101,4 @@ gpgcheck=1
 
 This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-<p><a href="https://www.buymeacoffee.com/MaoX17"> <img align="left" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" alt="MaoX17" /></a></p><br><br>
+<p><a href="https://www.buymeacoffee.com/tvup"> <img align="left" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" alt="MaoX17" /></a></p><br><br>

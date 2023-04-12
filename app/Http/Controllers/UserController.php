@@ -62,12 +62,16 @@ class UserController extends Controller
     }
 
     /**
-     * @param string $user_name
+     * @param string|null $user_name
      * @return Application|Factory|View|\Illuminate\Foundation\Application
      */
-    public function new(string $user_name)
+    public function new(?string $user_name)
     {
-        return view('auth.register')->with('user_name', $user_name);
+        if($user_name) {
+            return view('auth.register')->with('user_name', $user_name);
+        } else {
+            return view('auth.register');
+        }
     }
 
     /**

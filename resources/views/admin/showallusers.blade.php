@@ -57,7 +57,7 @@
                                 </td>
                                 <td>
                                     @if(Auth::user()->isAdmin())
-                                    <a href="{{ action('UserController@del', ['id' => $user->id]) }}" class="btn btn-danger" title="Elimina Utente">
+                                    <a href="{{ action('UserController@del', ['user' => $user]) }}" class="btn btn-danger" title="Elimina Utente">
                                         <i class="fas fa-user-times"></i>
                                     </a>
 

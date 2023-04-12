@@ -15,7 +15,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.admin_updateuser',['id' => $user->id]) }}" aria-label="{{ __('Salva') }}">
+                    <form method="POST" action="{{ route('admin.admin_updateuser',['user' => $user]) }}" aria-label="{{ __('Salva') }}">
                         @csrf
 
                         <div class="form-group row">

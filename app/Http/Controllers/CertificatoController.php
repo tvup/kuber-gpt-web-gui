@@ -89,8 +89,8 @@ class CertificatoController extends Controller
             //leggo il cert (mi interessa solo il nome "utente")
             $array_cert = explode("/", $array_temp[5]);
             //print_r($array_cert);
-            $array_temp[5] = $array_cert[6];
-            $array_temp[5] = substr($array_temp[5], 3);
+            //$array_temp[5] = $array_cert[6];
+            //$array_temp[5] = substr($array_temp[5], 3);
 
             $array_index[$i] = $array_temp;
             $i++;

@@ -59,7 +59,7 @@
                             <div class="border">
                                 <h4>Applications</h4>
                                 @php($countOfApplications=0)
-                                @for ($i = 0; $i < count($serverAsset->applications ? : 0); $i++)
+                                @for ($i = 0; $i < count($serverAsset->applications ? : []); $i++)
                                     @php($countOfApplications++)
                                     <div class="form-group row input-fields">
                                         <label for="applications"

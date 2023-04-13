@@ -25,13 +25,13 @@
                     </div>
                 </div>
                 <div class="card shadow-lg">
-                    <div class="card-header bg-primary text-white">{{ __('register.register') }}</div>
+                    <div class="card-header bg-primary text-white">{{ __('users/create.register') }}</div>
                     <div class="card-body">
-                        <form method="POST" action="{{ action('UserController@store') }}" aria-label="{{ __('register.register') }}">
+                        <form method="POST" action="{{ action('UserController@store') }}" aria-label="{{ __('users/create.register') }}">
                             @csrf
                             <div class="form-group row">
                                 <label for="user_name"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('register.user_matches_the_certificate') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('users/create.user_matches_the_certificate') }}</label>
                                 <div class="col-md-6">
                                     <input id="user_name" type="text"
                                            class="form-control{{ $errors->has('user_name') ? ' is-invalid' : '' }}"
@@ -46,7 +46,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="name"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('register.name') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('users/create.name') }}</label>
                                 <div class="col-md-6">
                                     <input id="name" type="text"
                                            class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
@@ -60,7 +60,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="surname"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('register.surname') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('users/create.surname') }}</label>
                                 <div class="col-md-6">
                                     <input id="surname" type="text"
                                            class="form-control{{ $errors->has('surname') ? ' is-invalid' : '' }}"
@@ -88,7 +88,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="company"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('register.company') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('users/create.company') }}</label>
                                 <div class="col-md-6">
                                     <input id="company" type="text"
                                            class="form-control{{ $errors->has('company') ? ' is-invalid' : '' }}"
@@ -102,7 +102,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="email"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('register.e_mail_address_unique') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('users/create.email_address_unique') }}</label>
                                 <div class="col-md-6">
                                     <input id="email" type="email"
                                            class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
@@ -116,17 +116,17 @@
                             </div>
                             <div class="form-group row">
                                 <label for="role"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('register.privileges') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('users/create.privileges') }}</label>
                                 <div class="col-md-6">
                                     <select id="role"
                                             class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}"
                                             name="role" required autofocus>
                                         <option
-                                            value="{{ \App\Enums\UserRoleEnum::User->value }}">{{ __('register.'.\App\Enums\UserRoleEnum::User->value) }}</option>
+                                            value="{{ \App\Enums\UserRoleEnum::User->value }}">{{ __('users/create.'.\App\Enums\UserRoleEnum::User->value) }}</option>
                                         <option
-                                            value="{{ \App\Enums\UserRoleEnum::Admin->value }}">{{ __('register.'.\App\Enums\UserRoleEnum::Admin->value) }}</option>
+                                            value="{{ \App\Enums\UserRoleEnum::Admin->value }}">{{ __('users/create.'.\App\Enums\UserRoleEnum::Admin->value) }}</option>
                                         <option
-                                            value="{{ \App\Enums\UserRoleEnum::Manager->value }}">{{ __('register.'.\App\Enums\UserRoleEnum::Manager->value) }}</option>
+                                            value="{{ \App\Enums\UserRoleEnum::Manager->value }}">{{ __('users/create.'.\App\Enums\UserRoleEnum::Manager->value) }}</option>
                                         <select>
                                             @if ($errors->has('role'))
                                                 <span class="invalid-feedback" role="alert">
@@ -137,7 +137,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="password"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('register.password') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('users/create.password') }}</label>
                                 <div class="col-md-6">
                                     <input id="password" type="password"
                                            class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} password"
@@ -151,7 +151,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="password-confirm"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('register.confirm_password') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('users/create.confirm_password') }}</label>
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control password"
                                            name="password_confirmation" required>
@@ -159,7 +159,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="show-password"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('register.show_password') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('users/create.show_password') }}</label>
                                 <div class="col-md-1">
                                     <input id="show-password" type="checkbox" class="form-control"
                                            name="show-password"
@@ -181,14 +181,14 @@
 
 
 
-                                        {{__('register.suggest_password')}}
+                                        {{__('users/create.suggest_password')}}
                                     </button>
                                 </div>
                             </div>
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('register.register') }}
+                                        {{ __('users/create.register') }}
                                     </button>
                                 </div>
                             </div>

@@ -42,9 +42,9 @@ class UserController extends Controller
     public function create(string $user_name = null): View
     {
         if ($user_name) {
-            return view('auth.register')->with('user_name', $user_name);
+            return view('admin.users.create')->with('user_name', $user_name);
         } else {
-            return view('auth.register');
+            return view('admin.users.create');
         }
     }
 
@@ -97,7 +97,7 @@ class UserController extends Controller
             'password_clear' => $password_clear,
         ]);
 
-        return redirect()->back()->with('msg-success', 'Profile updated!');
+        return redirect()->route('admin.users.index')->with('msg-success', 'User created!');
     }
 
     /**
@@ -122,7 +122,7 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return redirect()->back();
+        return redirect()->route('admin.users.index')->with('msg-danger', 'User deleted!');
     }
 
     /** User functions **/

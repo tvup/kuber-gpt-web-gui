@@ -15,7 +15,7 @@ return [
     'email_address_unique' => 'E-Mail Address - Unique per login',
     'privileges' => 'Privileges',
     'admin' => 'Admin',
-    'manager' => 'Manager - read only',
+    'manager_ro' => 'Manager - read only',
     'user' => 'User',
     'password' => 'Password',
     'confirm_password' => 'Confirm Password',

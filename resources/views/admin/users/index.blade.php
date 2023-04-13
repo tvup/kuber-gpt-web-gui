@@ -53,10 +53,10 @@
                                     </td>
                                     <td>
                                         @if(Auth::user()->isAdmin())
-                                            <form action="{{ action('UserController@destroy', ['user' => $user]) }}">
+                                            <form action="{{ action('UserController@destroy', ['user' => $user]) }}" method="POST">
                                                 @method('DELETE')
                                                 @csrf
-                                                <button class="btn btn-danger" title="{{__('delete_user')}}">
+                                                <button type="submit" class="btn btn-danger">
                                                     <i class="fas fa-user-times"></i>
                                                 </button>
                                             </form>

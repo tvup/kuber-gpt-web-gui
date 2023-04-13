@@ -27,6 +27,18 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @php
+                                $collection = collect([
+                                    'badge-primary',
+                                    'badge-secondary',
+                                    'badge-success',
+                                    'badge-danger',
+                                    'badge-warning',
+                                    'badge-info',
+                                    'badge-light',
+                                    'badge-dark',
+                                ]);
+                            @endphp
                             @foreach($serverAssets as $serverAsset)
                                 <tr>
                                     <td>
@@ -35,8 +47,16 @@
                                     </td>
                                     <td>{{$serverAsset->local_ip}}</td>
                                     <td>{{$serverAsset->public_ip}}</td>
-                                    <td>{{$serverAsset->applications}}</td>
-                                    <td>{{$serverAsset->tags}}</td>
+                                    <td>
+                                        @foreach(is_array($serverAsset->applications) ? $serverAsset->applications : [$serverAsset->applications] as $application)
+                                            <a href="{{$application['url']}}" class="badge badge-secondary">{{$application['url']}}</a>
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        @foreach(is_array($serverAsset->tags) ? $serverAsset->tags : [$serverAsset->tags] as $tag)
+                                            <span class="badge badge-pill {{$collection->random()}}">{{$tag}}</span>
+                                        @endforeach
+                                    </td>
                                     <td>
                                         @if(Auth::user()->isAdmin())
                                             <a href="{{ action('ServerAssetController@edit', ['server_asset' => $serverAsset]) }}"

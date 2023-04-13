@@ -11,9 +11,9 @@ use Illuminate\Support\Str;
 
 /**
  * @property int $id
- * @property StatusEnum $status
- * @property Carbon $expires_at
- * @property Carbon $revoked_at
+ * @property StatusEnum|null $status
+ * @property Carbon|null $expires_at
+ * @property Carbon|null $revoked_at
  * @property string $idcert
  * @property string $cert
  * @property User $user

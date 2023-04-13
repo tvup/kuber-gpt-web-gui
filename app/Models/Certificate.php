@@ -22,7 +22,7 @@ use Illuminate\Support\Str;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-class Certificate extends Model
+class Certificate extends BaseModel
 {
     use HasFactory;
 

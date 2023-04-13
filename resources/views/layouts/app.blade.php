@@ -52,6 +52,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.admin_showallusers') }}">User list</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.server-asset.index') }}">Server assets</a>
+                    </li>
                     @endguest
                 </ul>
 

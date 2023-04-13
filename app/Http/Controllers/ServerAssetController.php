@@ -41,7 +41,7 @@ class ServerAssetController extends Controller
                 'tags' => Arr::get($validated, 'tags'),
             ]);
 
-        return redirect('/users')->with(['msg-success' => 'Server asset stored', 'status' => 'Server asset stored']);
+        return redirect('/admin/server-asset')->with(['msg-success' => 'Server asset stored', 'status' => 'Server asset stored']);
 
     }
 

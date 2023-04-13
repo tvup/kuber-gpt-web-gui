@@ -38,11 +38,11 @@
                                         </td>
                                         @if($certificate->user)
                                             <td>
-                                                <a href="{{ action('UserController@show_from_name', ['name' => rawurlencode($certificate->user->user_name)]) }}">{{$certificate->user->user_name}} </a>
+                                                <a href="{{ route('user.show-by-user-name', ['user_name' => rawurlencode($certificate->user->user_name)]) }}">{{$certificate->user->user_name}} </a>
                                             </td>
                                         @else
                                             <td>
-                                                <a href="{{ action('UserController@new', ['user_name' => rawurlencode($certificate->cert)]) }}">{{$certificate->cert}} </a>
+                                                <a href="{{ route('admin.users.create', ['user_name' => rawurlencode($certificate->cert)]) }}">{{$certificate->cert}} </a>
                                             </td>
                                         @endif
                                     </tr>
@@ -82,7 +82,7 @@
                                             <td>{{ (new \Carbon\Carbon($certificate->expires_at))->format('d/m/Y') }}</td>
 
                                             <td>
-                                                <a href="{{ action('UserController@show_from_name', ['name' => $certificate->user]) }}">{{$certificate->user}} </a>
+                                                <a href="{{ route('admin.user.show-by-user-name', ['user_name' => $certificate->user]) }}">{{$certificate->user}} </a>
                                             </td>
 
                                         </tr>

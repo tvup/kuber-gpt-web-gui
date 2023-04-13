@@ -17,7 +17,8 @@
                     <div class="card-header card-header-custom">{{ __('edituser.register') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('admin.admin_updateuser',['user' => $user]) }}" aria-label="{{ __('edituser.save') }}">
+                        <form method="POST" action="{{ action('UserController@update',['user' => $user]) }}" aria-label="{{ __('edituser.save') }}">
+                            @method('PUT')
                             @csrf
 
                             <div class="form-group row">

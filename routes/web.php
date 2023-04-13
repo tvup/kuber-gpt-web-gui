@@ -12,6 +12,7 @@
 */
 
 use App\Http\Controllers\ServerAssetController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,7 +25,7 @@ Route::middleware('locale')->group(function () {
 
     Route::get('/read_index', 'CertificateController@read_index')->name('readindex');
 
-    Route::get('/downloadmycert', 'UserController@downloadmycert')->name('user_downloadmycert');
+    Route::get('/download_user_cert', 'UserController@downloadUserCert')->name('user.download-user-cert');
 
 });
 
@@ -38,14 +39,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin', '
     Route::get('revokecert/{certificate}', 'CertificateController@revoke')->name('admin_revokecert');
     Route::get('releasecert/{user}', 'CertificateController@release')->name('admin_releasecert');
 
-    Route::get('showallusers', 'UserController@index')->name('admin_showallusers');
-    Route::get('edituser/{user}', 'UserController@edit')->name('admin_edituser');
-    Route::get('show/{user}', 'UserController@show')->name('admin_showuser');
-    Route::post('updateuser/{user}', 'UserController@update')->name('admin_updateuser');
-    Route::get('del/{user}', 'UserController@del')->name('admin_deluser');
 
-    Route::get('showuserfromname/{name}', 'UserController@show_from_name')->name('admin_showuserfromname')->where('name', '.*');
-    Route::get('new/{user_name?}', 'UserController@new')->name('admin_newuser')->where('user_name', '.*');
+    Route::get('show_by_user_name/{user_name}', 'UserController@showByUserName')->name('user.show-by-user-name')->where('user_name', '.*');
+    Route::resource('users', UserController::class)->except([]);
 
     Route::resource('server_assets', ServerAssetController::class);
 

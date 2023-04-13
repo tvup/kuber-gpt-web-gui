@@ -18,7 +18,7 @@
                             <ul class="list-group list-group-flush">
 
                                 <li class="list-group-item"><a href={{route('admin.admin_popolatedb')}}> {{ __('home.open_certificate_dashboard') }}</a></li>
-                                <li class="list-group-item"><a href={{route('admin.admin_showallusers')}}> {{ __('home.show_all_registered_users') }}</a></li>
+                                <li class="list-group-item"><a href={{route('admin.users.index')}}> {{ __('home.show_all_registered_users') }}</a></li>
 
                             </ul>
 
@@ -26,7 +26,7 @@
 
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
-                                    <a href="{{ route('user_downloadmycert') }}" class="btn btn-success">
+                                    <a href="{{ route('user.download-user-cert') }}" class="btn btn-success">
                                         {{ __('home.download_vpn_access') }}
                                         <i class="fas fa-download"></i>
                                     </a>

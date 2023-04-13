@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class UserController extends Controller
@@ -28,34 +29,15 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): \Illuminate\View\View
+    public function index(): View
     {
         $users = User::all();
 
-        return view('admin.showallusers', ['users' => $users]);
+        return view('admin.users.index', ['users' => $users]);
 
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(User $user): \Illuminate\View\View
-    {
-        return view('admin.showuser', ['user' => $user]);
-    }
-
-    public function show_from_name(string $name): \Illuminate\View\View
-    {
-        $user = User::where('user_name', $name)->first();
-        if (null === $user) {
-            return view('auth.register')->with('user_name', $name);
-        }
-
-        return view('admin.showuser', ['user' => $user, 'certs' => $user->certificates]);
-
-    }
-
-    public function new(string $user_name = null): \Illuminate\View\View
+    public function create(string $user_name = null): View
     {
         if ($user_name) {
             return view('auth.register')->with('user_name', $user_name);
@@ -65,11 +47,46 @@ class UserController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function show(User $user): View
+    {
+        return view('admin.users.show', ['user' => $user]);
+    }
+
+    public function showByUserName(string $user_name): View
+    {
+        $user = User::where('user_name', $user_name)->first();
+        if (null === $user) {
+            return view('admin.users.create')->with('user_name', $user_name);
+        }
+
+        return view('admin.users.show', ['user' => $user]);
+
+    }
+
+
+    /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user): \Illuminate\View\View
+    public function edit(User $user): View
     {
-        return view('admin.edituser', ['user' => $user]);
+        return view('admin.users.edit', ['user' => $user]);
+    }
+
+    public function store(Request $request)
+    {
+        $this->validator($request->except('email'))->validated();
+        $data = $request->all();
+        $user = app(User::class);
+        $user->name = $data['name'];
+        $user->surname = $data['surname'];
+        $user->vat_number = $data['vat_number'];
+        $user->company = $data['company'];
+
+        $user->save();
+
+        return redirect()->back()->with('msg-success', 'Profile updated!');
     }
 
     /**
@@ -90,17 +107,16 @@ class UserController extends Controller
 
     }
 
-    public function del(int $id): RedirectResponse
+    public function destroy(User $user): RedirectResponse
     {
-        /** @var User $user */
-        $user = User::find($id);
-
         $user->delete();
 
         return redirect()->back();
     }
 
-    public function downloadmycert(): StreamedResponse
+
+    /** User functions **/
+    public function downloadUserCert(): StreamedResponse
     {
         /** @var User $user */
         $user = Auth::user();

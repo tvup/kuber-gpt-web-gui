@@ -8,7 +8,7 @@
                 <div class="card shadow">
                     <div class="card-header bg-primary text-white d-flex align-items-center justify-content-between">
                         <h4>{{__('showallusers.all_registered_users')}}</h4>
-                        <a href="{{ action('UserController@new') }}" class="btn btn-success">
+                        <a href="{{ action('UserController@create') }}" class="btn btn-success">
                             {{__('showallusers.new_user')}}
                             <i class="fa fa-plus-square" aria-hidden="true"></i>
                         </a>
@@ -31,7 +31,7 @@
                             @foreach($users as $user)
                                 <tr>
                                     <td>
-                                        <a href="{{ action('UserController@show_from_name', ['name' => $user->user_name]) }}"
+                                        <a href="{{ route('admin.user.show-by-user-name', ['user_name' => $user->user_name]) }}"
                                            class="text-primary font-weight-bold">{{$user->user_name}} </a>
                                     </td>
                                     <td>{{$user->name}}</td>
@@ -45,7 +45,7 @@
                                                class="btn btn-warning" title="{{__('showallusers.edit_user')}}">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <a href="{{ action('UserController@show_from_name', ['name' => $user->user_name]) }}"
+                                            <a href="{{ route('admin.user.show-by-user-name', ['user_name' => $user->user_name]) }}"
                                                class="btn btn-info" title="{{__('showallusers.show_user')}}">
                                                 <i class="fas fa-user"></i>
                                             </a>
@@ -53,10 +53,13 @@
                                     </td>
                                     <td>
                                         @if(Auth::user()->isAdmin())
-                                            <a href="{{ action('UserController@del', ['user' => $user]) }}"
-                                               class="btn btn-danger" title="{{__('delete_user')}}">
-                                                <i class="fas fa-user-times"></i>
-                                            </a>
+                                            <form action="{{ action('UserController@destroy', ['user' => $user]) }}">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button class="btn btn-danger" title="{{__('delete_user')}}">
+                                                    <i class="fas fa-user-times"></i>
+                                                </button>
+                                            </form>
                                         @endif
                                     </td>
                                 </tr>

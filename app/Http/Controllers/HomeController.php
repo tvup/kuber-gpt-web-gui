@@ -28,10 +28,14 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        if ($user->role == UserRoleEnum::Admin) {
-            $role = UserRoleEnum::Admin;
-        } elseif ($user->role == UserRoleEnum::Manager) {
-            $role = UserRoleEnum::Manager;
+        if($user) {
+            if ($user->role == UserRoleEnum::Admin) {
+                $role = UserRoleEnum::Admin;
+            } elseif ($user->role == UserRoleEnum::Manager) {
+                $role = UserRoleEnum::Manager;
+            } else {
+                $role = UserRoleEnum::User;
+            }
         } else {
             $role = UserRoleEnum::User;
         }

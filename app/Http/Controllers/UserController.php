@@ -102,6 +102,7 @@ class UserController extends Controller
 
     public function downloadmycert(): StreamedResponse
     {
+        /** @var User $user */
         $user = Auth::user();
 
         $fileName = sprintf('%s.ovpn', $user->strippedUserName);

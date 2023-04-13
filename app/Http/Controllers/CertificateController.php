@@ -27,43 +27,46 @@ class CertificateController extends Controller
         Certificate::truncate();
 
         $i = 0;
-        foreach (explode(PHP_EOL, Storage::disk('pki')->get(config('filesystems.key_file'))) as $line) {
-            $certificate = app(Certificate::class);
+        $fileContent = Storage::disk('pki')->get(config('filesystems.key_file'));
+        if ($fileContent) {
+            foreach (explode(PHP_EOL, $fileContent) as $line) {
+                $certificate = app(Certificate::class);
 
-            //A1status/A13expiration/A13revocationA4reason/A32serial_number/A16file_name/A20distinguished_name
-            $lineItems = explode("\t", $line);
-            if (count($lineItems) >= 6) {
-                $status = $lineItems[0];
-                $expiration = $lineItems[1];
-                $revocationAndReason = $lineItems[2];
-                $revocation = Str::substr($revocationAndReason, 0, 13);
-                //$reason = Str::substr($revocationAndReason, 13);
-                $serial_number = $lineItems[3];
-                //$file_name = $lineItems[4];
-                $distinguished_name = Str::remove(PHP_EOL, $lineItems[5]);
+                //A1status/A13expiration/A13revocationA4reason/A32serial_number/A16file_name/A20distinguished_name
+                $lineItems = explode("\t", $line);
+                if (count($lineItems) >= 6) {
+                    $status = $lineItems[0];
+                    $expiration = $lineItems[1];
+                    $revocationAndReason = $lineItems[2];
+                    $revocation = Str::substr($revocationAndReason, 0, 13);
+                    //$reason = Str::substr($revocationAndReason, 13);
+                    $serial_number = $lineItems[3];
+                    //$file_name = $lineItems[4];
+                    $distinguished_name = Str::remove(PHP_EOL, $lineItems[5]);
 
-                if ($revocation != '') {
-                    $certificate->revoked_at = Carbon::createFromFormat('ymdHisZ', $revocation) ?: null;
+                    if ($revocation != '') {
+                        $certificate->revoked_at = Carbon::createFromFormat('ymdHisZ', $revocation) ?: null;
+                    }
+
+                    $array_index[$i] = $lineItems;
+                    $i++;
+
+                    $certificate->status = StatusEnum::to($status);
+                    $certificate->expires_at = Carbon::createFromFormat('ymdHisZ', $expiration) ?: null;
+
+                    $certificate->idcert = $serial_number;
+                    $certificate->cert = $distinguished_name;
+                    $user = User::where('user_name', '=', $distinguished_name)->first();
+
+                    if ($user) {
+                        $certificate->user()->associate($user);
+                    }
+                    $certificate->link_conf = $lineItems;
+
+                    $certificate->save();
                 }
 
-                $array_index[$i] = $lineItems;
-                $i++;
-
-                $certificate->status = StatusEnum::to($status);
-                $certificate->expires_at = Carbon::createFromFormat('ymdHisZ', $expiration) ?: null;
-
-                $certificate->idcert = $serial_number;
-                $certificate->cert = $distinguished_name;
-                $user = User::where('user_name', '=', $distinguished_name)->first();
-
-                if ($user) {
-                    $certificate->user()->associate($user);
-                }
-                $certificate->link_conf = $lineItems;
-
-                $certificate->save();
             }
-
         }
 
     }

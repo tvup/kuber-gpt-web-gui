@@ -29,8 +29,26 @@
 <div class="wrapper">
     <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
+            <a class="navbar-brand" href="{{ url('/') }}" style="display: flex; align-items: center;">
+                @switch(config('app.env'))
+                    @case('local')
+                        <span class="badge badge-danger">LOCAL</span>
+                        @break
+                    @case('testing')
+                        <span class="badge badge-warning">TESTING</span>
+                        @break
+                    @case('staging')
+                        <span class="badge badge-primary">STAGING</span>
+                        @break
+                    @case('demo')
+                        <span class="badge badge-info">DEMO</span>
+                        @break
+                    @case('production')
+                        @break
+                    @default
+                        <span class="badge badge-dark">UNKNOWN ENV</span>
+                @endswitch
+                <span class="app-name" style="margin-left: 5px;">{{ config('app.name', 'Laravel') }}</span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false"

@@ -5,7 +5,6 @@ namespace Tests\Http\Controllers;
 use App\Enums\UserRoleEnum;
 use App\Models\ServerAsset;
 use App\Models\User;
-use DB;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
@@ -46,12 +45,11 @@ class ServerAssetControllerTest extends TestCase
     {
         ServerAsset::truncate();
 
-
         $nick_name = $this->faker->word;
         $ipv4 = $this->faker->ipv4;
         $ipv41 = $this->faker->ipv4;
-        $applications = [['name' => 'app1', 'url' => 'http://www.test1.dk'], ['name' => 'app2', 'url' => 'http://www.test2.dk'], ['name' => 'app4', 'url' => 'http://www.test3.dk'],];
-        $applications2 = [['url' => 'http://www.test1.dk', 'name' => 'app1'], ['url' => 'http://www.test2.dk', 'name' => 'app2'], ['url' => 'http://www.test3.dk', 'name' => 'app4'],];
+        $applications = [['name' => 'app1', 'url' => 'http://www.test1.dk'], ['name' => 'app2', 'url' => 'http://www.test2.dk'], ['name' => 'app4', 'url' => 'http://www.test3.dk']];
+        $applications2 = [['url' => 'http://www.test1.dk', 'name' => 'app1'], ['url' => 'http://www.test2.dk', 'name' => 'app2'], ['url' => 'http://www.test3.dk', 'name' => 'app4']];
         $tags = [$this->faker->word, $this->faker->word, $this->faker->word];
 
         $data = [
@@ -70,15 +68,14 @@ class ServerAssetControllerTest extends TestCase
             'tags' => $this->transMoGrif(json_encode($tags)),
         ];
 
-
-
         $response = $this->post('/admin/server_assets', $data);
         $response->assertStatus(302);
         $response->assertRedirect('/admin/server_assets');
         //$this->assertDatabaseHas('server_assets', $data2);
     }
 
-    private function transMoGrif($input) {
+    private function transMoGrif($input)
+    {
         return Str::replace(',', ', ', Str::replace('":', '": ', $input));
     }
 
@@ -108,9 +105,8 @@ class ServerAssetControllerTest extends TestCase
     {
         $server_asset = ServerAsset::factory()->create();
 
-        $applications = [['name' => 'app1', 'url' => 'http://www.test1.dk'], ['name' => 'app2', 'url' => 'http://www.test2.dk'], ['name' => 'app4', 'url' => 'http://www.test3.dk'],];
+        $applications = [['name' => 'app1', 'url' => 'http://www.test1.dk'], ['name' => 'app2', 'url' => 'http://www.test2.dk'], ['name' => 'app4', 'url' => 'http://www.test3.dk']];
         $tags = [$this->faker->word, $this->faker->word, $this->faker->word];
-
 
         $data = [
             'nick_name' => $this->faker->word,

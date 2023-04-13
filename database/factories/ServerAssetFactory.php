@@ -16,8 +16,8 @@ class ServerAssetFactory extends Factory
             'nick_name' => $this->faker->name(),
             'local_ip' => $this->faker->ipv4(),
             'public_ip' => $this->faker->ipv4(),
-            'applications' => [['name'=> $this->faker->word(), 'url' => $this->faker->url()]],
-            'tags' => [$this->faker->word(),$this->faker->word(),$this->faker->word()],
+            'applications' => [['name' => $this->faker->word(), 'url' => $this->faker->url()]],
+            'tags' => [$this->faker->word(), $this->faker->word(), $this->faker->word()],
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];

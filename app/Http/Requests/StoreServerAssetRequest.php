@@ -25,8 +25,10 @@ class StoreServerAssetRequest extends FormRequest
             'nick_name' => ['nullable', 'string', 'max:255'],
             'local_ip' => ['nullable', 'ipv4'],
             'public_ip' => ['nullable', 'ipv4'],
-            'applications' => ['nullable', 'string', 'max:4000'],
-            'tags' => ['nullable', 'string', 'max:4000'],
+            'applications' => ['nullable', 'array'],
+            'applications.*.name' => ['required', 'string', 'max:250'],
+            'applications.*.url' => ['required', 'url', 'max:250'],
+            'tags' => ['nullable', 'array'],
         ];
     }
 }

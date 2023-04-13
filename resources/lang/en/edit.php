@@ -9,4 +9,7 @@ return [
     'tags' => 'Tags',
     'register' => 'Edit',
     'reset' => 'Return to list',
+    'name' => 'Name',
+    'url' => 'URL',
+    'tag' => 'Tag',
 ];

@@ -48,13 +48,13 @@
                                     <td>{{$serverAsset->local_ip}}</td>
                                     <td>{{$serverAsset->public_ip}}</td>
                                     <td>
-                                        @foreach(is_array($serverAsset->applications) ? $serverAsset->applications : [$serverAsset->applications] as $application)
-                                            <a href="{{$application['url']}}" class="badge badge-secondary">{{$application['url']}}</a>
+                                        @foreach(is_array($serverAsset->applications) ? $serverAsset->applications : array_filter([$serverAsset->applications]) as $application)
+                                            <h5><a href="{{$application['url']}}" class="badge badge-secondary">{{$application['name']}}</a></h5>
                                         @endforeach
                                     </td>
                                     <td>
                                         @foreach(is_array($serverAsset->tags) ? $serverAsset->tags : [$serverAsset->tags] as $tag)
-                                            <span class="badge badge-pill {{$collection->random()}}">{{$tag}}</span>
+                                            <h5><span class="badge badge-pill {{$collection->random()}}">{{$tag}}</span></h5>
                                         @endforeach
                                     </td>
                                     <td>

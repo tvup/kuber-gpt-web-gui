@@ -96,19 +96,19 @@
         <div class="container text-center">
             <div class="row">
                 <div class="col-md-4">
-                    <h4>Kontakt os</h4>
+                    <h4>Contact</h4>
                     <ul class="list-unstyled">
-                        <li>Adresse: 1234 Vejle</li>
-                        <li>Telefon: 12 34 56 78</li>
-                        <li>Email: info@eksempel.dk</li>
+                        <li>Dybendal Alle 12, Taastrup</li>
+                        <li>Phone: 77 77 46 63</li>
+                        <li>E-mail: contact@torbenit.dk</li>
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    <h4>Om os</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <h4>About the project</h4>
+                    <p>With great thanks forked from <a href="https://github.com/MaoX17">MaoX17</a>.<br/> The graphics are by ChatGPT4 who has helped and been the driving force behind it.</p>
                 </div>
                 <div class="col-md-4">
-                    <h4>Følg os</h4>
+                    <h4>Follow</h4>
                     <ul class="list-unstyled social-icons">
                         <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                         <li><a href="#"><i class="fab fa-twitter"></i></a></li>
@@ -121,7 +121,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <p>&copy; 2023 Eksempel. Alle rettigheder forbeholdes.</p>
+                        <p>2023 Torben IT ApS</p>
                     </div>
                 </div>
             </div>

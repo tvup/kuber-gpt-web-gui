@@ -7,7 +7,7 @@
                 <div class="card border-0 shadow-lg">
                     <div class="card-body text-center">
                         <h1 class="display-4 mb-4 text-primary">{{ __('welcome.vpn_manager') }}</h1>
-                        <p class="lead">{{ __('welcome.prato_commune') }}</p>
+                        <p class="lead">So we get to decide the number of clients ourselves :)</p>
                         <p>{{ __('welcome.certificate_manager_and_related_users') }}</p>
                     </div>
 
@@ -30,7 +30,7 @@
                         </div>
                     @endguest
                     <div class="card-footer bg-transparent">
-                        <p class="text-muted">&copy; {{ date('Y') }} {{ __('welcome.prato_commune') }}</p>
+                        <p class="text-muted"> Torben IT ApS </p>
                     </div>
                 </div>
             </div>

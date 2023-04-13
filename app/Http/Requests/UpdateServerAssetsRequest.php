@@ -26,8 +26,8 @@ class UpdateServerAssetsRequest extends FormRequest
             'local_ip' => ['nullable', 'ipv4'],
             'public_ip' => ['nullable', 'ipv4'],
             'applications' => ['nullable', 'array'],
-//            'applications.*.name' => ['required', 'string', 'max:250'],
-//            'applications.*.url' => ['required', 'url', 'max:250'],
+            //            'applications.*.name' => ['required', 'string', 'max:250'],
+            //            'applications.*.url' => ['required', 'url', 'max:250'],
             'tags' => ['nullable', 'array'],
         ];
     }

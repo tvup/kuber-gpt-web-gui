@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserRoleEnum;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
@@ -65,7 +67,6 @@ class UserController extends Controller
 
     }
 
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -74,17 +75,27 @@ class UserController extends Controller
         return view('admin.users.edit', ['user' => $user]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $this->validator($request->except('email'))->validated();
         $data = $request->all();
-        $user = app(User::class);
-        $user->name = $data['name'];
-        $user->surname = $data['surname'];
-        $user->vat_number = $data['vat_number'];
-        $user->company = $data['company'];
 
-        $user->save();
+        $password_clear = '';
+        if ($data['role'] == UserRoleEnum::User->value) {
+            $password_clear = $data['password'];
+        }
+
+        User::create([
+            'user_name' => $data['user_name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'name' => $data['name'],
+            'surname' => $data['surname'],
+            'vat_number' => $data['vat_number'],
+            'role' => $data['role'],
+            'company' => $data['company'],
+            'password_clear' => $password_clear,
+        ]);
 
         return redirect()->back()->with('msg-success', 'Profile updated!');
     }
@@ -113,7 +124,6 @@ class UserController extends Controller
 
         return redirect()->back();
     }
-
 
     /** User functions **/
     public function downloadUserCert(): StreamedResponse

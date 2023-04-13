@@ -21,6 +21,7 @@ class StoreServerAssetRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
             'nick_name' => ['nullable', 'string', 'max:255'],
             'local_ip' => ['nullable', 'ipv4'],

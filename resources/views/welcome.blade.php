@@ -17,7 +17,7 @@
                         </div>
                     @else
                         <div class="d-flex justify-content-center mb-3">
-                            <a class="btn btn-success mr-2" href="{{ route('home') }}"> Dashboard </a>
+                            <a class="btn btn-success mr-2" href="{{ route('home') }}"> {{__('welcome.main_menu')}} </a>
                             <a class="btn btn-primary" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">

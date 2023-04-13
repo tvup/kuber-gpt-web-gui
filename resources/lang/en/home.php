@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+    'main_menu' => 'Main menu',
     'open_certificate_dashboard' => 'Open the certificate dashboard',
     'show_all_registered_users' => 'Show all registered users',
     'download_vpn_access' => 'Download your VPN access',

@@ -118,3 +118,16 @@ footer {
 body {
     padding-bottom: 180px;
 }
+
+
+.navbar-nav li {
+    margin: 0 10px;
+}
+
+.navbar-nav li:first-child {
+    margin-left: 0;
+}
+
+.navbar-nav li:last-child {
+    margin-right: 0;
+}

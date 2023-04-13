@@ -41,7 +41,15 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('home') }}">Main menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.admin_popolatedb') }}">Certificate dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.admin_showallusers') }}">User list</a>
+                    </li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

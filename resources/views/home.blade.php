@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card shadow-lg">
-                    <div class="card-header bg-primary text-white">{{__('home.dashboard')}} - {{ $role }}</div>
+                    <div class="card-header bg-primary text-white">{{__('home.main_menu')}} - {{ $role }}</div>
 
                     <div class="card-body">
                         @if (session('status'))

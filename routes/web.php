@@ -47,7 +47,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin', '
 
     Route::get('server_asset/create', 'ServerAssetController@create')->name('server-asset.create');
     Route::get('server_asset/', 'ServerAssetController@index')->name('server-asset.index');
+    Route::post('server_asset', 'ServerAssetController@store')->name('server-asset.store');
     Route::get('server_asset/{server_asset}', 'ServerAssetController@show')->name('server-asset.show');
 
-    Route::post('server_asset/', 'ServerAssetController@store')->name('server-asset.store');
 });

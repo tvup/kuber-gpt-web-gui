@@ -32,14 +32,17 @@ class ServerAssetController extends Controller
     {
         $validated = $request->validated();
 
-        return ServerAsset::create(
+        ServerAsset::create(
             [
-                'nice_name' => Arr::get($validated, 'nice_name'),
+                'nick_name' => Arr::get($validated, 'nick_name'),
                 'local_ip' => Arr::get($validated, 'local_ip'),
                 'public_ip' => Arr::get($validated, 'public_ip'),
                 'applications' => Arr::get($validated, 'applications'),
                 'tags' => Arr::get($validated, 'tags'),
             ]);
+
+        return redirect('/users')->with(['msg-success' => 'Server asset stored', 'status' => 'Server asset stored']);
+
     }
 
     /**

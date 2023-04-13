@@ -97,7 +97,7 @@ class CertificateController extends Controller
 
         $this->auto_popolate_db();
 
-        return redirect()->route('admin.admin_showuserfromname', ['name' => $certificate->user->user_name])->with('msg-success', 'Profile updated!');
+        return redirect()->route('admin.user.show-by-user-name', ['user_name' => $certificate->user->user_name])->with('msg-success', 'Profile updated!');
 
     }
 

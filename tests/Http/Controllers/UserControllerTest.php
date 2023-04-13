@@ -54,9 +54,9 @@ class UserControllerTest extends TestCase
             $user->save();
         }
 
-        $response = $this->actingAs($user)->get('admin/showallusers');
+        $response = $this->actingAs($user)->get('admin/users');
 
-        $response->assertViewIs('admin.showallusers');
+        $response->assertViewIs('admin.users.index');
         $response->assertViewHas('users');
         $users = $response->viewData('users');
         $this->assertCount(4, $users);
@@ -70,9 +70,9 @@ class UserControllerTest extends TestCase
         $user->role = UserRoleEnum::Admin;
         $user->save();
 
-        $response = $this->actingAs($user)->get('admin/show/'.$user->id);
+        $response = $this->actingAs($user)->get('admin/users/'.$user->id);
 
-        $response->assertViewIs('admin.showuser');
+        $response->assertViewIs('admin.users.show');
         $response->assertViewHas('user');
         $viewUser = $response->viewData('user');
         $this->assertEquals($user->id, $viewUser->id);
@@ -86,9 +86,9 @@ class UserControllerTest extends TestCase
         $user->role = UserRoleEnum::Admin;
         $user->save();
 
-        $response = $this->actingAs($user)->get('/admin/edituser/'.$user->id);
+        $response = $this->actingAs($user)->get('/admin/users/'.$user->id.'/edit');
 
-        $response->assertViewIs('admin.edituser');
+        $response->assertViewIs('admin.users.edit');
         $response->assertViewHas('user');
         $viewUser = $response->viewData('user');
         $this->assertEquals($user->id, $viewUser->id);
@@ -108,8 +108,10 @@ class UserControllerTest extends TestCase
             'vat_number' => fake()->bothify('??#####'),
             'company' => fake()->company,
         ];
+        //Pro forma
+        $this->actingAs($user)->get('admin/users/'.$user->id);
 
-        $response = $this->actingAs($user)->post('admin/updateuser/'.$user->id, $updatedData);
+        $response = $this->actingAs($user)->put('admin/users/'.$user->id, $updatedData);
 
         $response->assertSessionHas('msg-success', 'Profile updated!');
 
@@ -120,14 +122,14 @@ class UserControllerTest extends TestCase
         $this->assertEquals($updatedData['company'], $updatedUser->company);
     }
 
-    public function testDel()
+    public function testDestroy()
     {
         // Seed the database with a test user
         /** @var User $user */
         $user = User::factory()->create();
 
         $userController = new UserController();
-        $userController->del($user->id);
+        $userController->destroy($user);
 
         $deletedUser = User::find($user->id);
         $this->assertNull($deletedUser);

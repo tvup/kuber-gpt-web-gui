@@ -74,7 +74,7 @@ class CertificateControllerTest extends TestCase
 
         $response = $this->get('/admin/revokecert/'.$certificate->id);
 
-        $response->assertRedirect(route('admin.admin_showuserfromname', ['name' => $certificate->user->user_name]));
+        $response->assertRedirect(route('admin.user.show-by-user-name', ['user_name' => $certificate->user->user_name]));
         $response->assertSessionHas('msg-success', 'Profile updated!');
     }
 
@@ -87,10 +87,10 @@ class CertificateControllerTest extends TestCase
 
         Redis::shouldReceive('publish')->once();
 
-        $this->get('/admin/showuserfromname/'.$user->user_name);
+        $this->get('/admin/users/show_by_user_name/'.$user->user_name);
         $response = $this->get('/admin/releasecert/'.$user->id);
 
-        $response->assertRedirect(route('admin.admin_showuserfromname', ['name' => $user->user_name]));
+        $response->assertRedirect(route('admin.user.show-by-user-name', ['user_name' => $user->user_name]));
         $response->assertSessionHas('msg-success', 'Profile updated!');
     }
 }

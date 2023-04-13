@@ -12,12 +12,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <!--
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    -->
-
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -32,7 +26,7 @@
 
 </head>
 <body>
-<div id="app">
+<div class="wrapper">
     <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
@@ -98,6 +92,43 @@
 
         @yield('content')
     </main>
+    <footer class="bg-dark text-white py-3 position-fixed bottom-0 w-100">
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>Kontakt os</h4>
+                    <ul class="list-unstyled">
+                        <li>Adresse: 1234 Vejle</li>
+                        <li>Telefon: 12 34 56 78</li>
+                        <li>Email: info@eksempel.dk</li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h4>Om os</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </div>
+                <div class="col-md-4">
+                    <h4>Følg os</h4>
+                    <ul class="list-unstyled social-icons">
+                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>&copy; 2023 Eksempel. Alle rettigheder forbeholdes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
 </div>
 
 @yield('scripts');

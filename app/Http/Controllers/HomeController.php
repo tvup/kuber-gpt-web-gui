@@ -28,7 +28,7 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        if($user) {
+        if ($user) {
             if ($user->role == UserRoleEnum::Admin) {
                 $role = UserRoleEnum::Admin;
             } elseif ($user->role == UserRoleEnum::Manager) {

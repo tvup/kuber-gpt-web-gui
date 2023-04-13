@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\ServerAssetController;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -45,9 +47,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin', '
     Route::get('showuserfromname/{name}', 'UserController@show_from_name')->name('admin_showuserfromname')->where('name', '.*');
     Route::get('new/{user_name?}', 'UserController@new')->name('admin_newuser')->where('user_name', '.*');
 
-    Route::get('server_asset/create', 'ServerAssetController@create')->name('server-asset.create');
-    Route::get('server_asset/', 'ServerAssetController@index')->name('server-asset.index');
-    Route::post('server_asset', 'ServerAssetController@store')->name('server-asset.store');
-    Route::get('server_asset/{server_asset}', 'ServerAssetController@show')->name('server-asset.show');
+    Route::resource('server_assets', ServerAssetController::class);
 
 });

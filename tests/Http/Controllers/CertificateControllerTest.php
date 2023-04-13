@@ -30,7 +30,7 @@ class CertificateControllerTest extends TestCase
 
     public function testPopolateDb()
     {
-        Storage::fake()->put(config('filesystems.key_file'), 'V	250714011809Z		98CE8C26EA5C8578C39536810591B1ED	unknown	/CN=openvpn'.PHP_EOL.
+        Storage::fake('pki')->put(config('filesystems.key_file'), 'V	250714011809Z		98CE8C26EA5C8578C39536810591B1ED	unknown	/CN=openvpn'.PHP_EOL.
             'V	250715013823Z		51A14DD8E7C57B0928A099EEC32C1266	unknown	/CN=Lars'.PHP_EOL.
             'R	250715033213Z	230412075224Z	D295A7253593A2220C3AB8552786402D	unknown	/CN=Torben'.PHP_EOL.
             'R	250715075445Z	230412094038Z	4C084FB6F49FDBC5BCE26FF26AC23529	unknown	/CN=Torben'.PHP_EOL.
@@ -44,7 +44,7 @@ class CertificateControllerTest extends TestCase
 
     public function testDownload()
     {
-        Storage::fake('ca');
+        Storage::fake('pki');
         // Create a Certificate for the test
         /** @var Certificate $certificate */
         $certificate = Certificate::factory()->create();
@@ -80,6 +80,7 @@ class CertificateControllerTest extends TestCase
 
     public function testRelease()
     {
+        Storage::fake('pki');
         // Create a User for the test
         /** @var User $user */
         $user = User::factory()->create();

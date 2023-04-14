@@ -5,6 +5,7 @@ namespace Tests\Http\Controllers;
 use App\Enums\UserRoleEnum;
 use App\Http\Controllers\UserController;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -47,6 +48,7 @@ class UserControllerTest extends TestCase
 
         $user = User::factory()->make();
         $user->role = UserRoleEnum::Admin;
+        $user->approved_at = Carbon::now('Europe/Copenhagen');
 
         $users->add($user);
 
@@ -68,6 +70,7 @@ class UserControllerTest extends TestCase
         /** @var User $user */
         $user = User::factory()->make();
         $user->role = UserRoleEnum::Admin;
+        $user->approved_at = Carbon::now('Europe/Copenhagen');
         $user->save();
 
         $response = $this->actingAs($user)->get('admin/users/'.$user->id);
@@ -84,6 +87,7 @@ class UserControllerTest extends TestCase
         /** @var User $user */
         $user = User::factory()->make();
         $user->role = UserRoleEnum::Admin;
+        $user->approved_at = Carbon::now('Europe/Copenhagen');
         $user->save();
 
         $response = $this->actingAs($user)->get('/admin/users/'.$user->id.'/edit');
@@ -100,6 +104,7 @@ class UserControllerTest extends TestCase
         /** @var User $user */
         $user = User::factory()->make();
         $user->role = UserRoleEnum::Admin;
+        $user->approved_at = Carbon::now('Europe/Copenhagen');
         $user->save();
 
         $updatedData = [

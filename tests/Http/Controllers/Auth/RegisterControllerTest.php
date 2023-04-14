@@ -5,6 +5,7 @@ namespace Tests\Http\Controllers\Auth;
 use App\Enums\UserRoleEnum;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
@@ -45,7 +46,8 @@ class RegisterControllerTest extends TestCase
     {
         /** @var User $user */
         $user = User::factory()->make();
-        $user->role = UserRoleEnum::User;
+        $user->role = UserRoleEnum::Admin;
+        $user->approved_at = Carbon::now('Europe/Copenhagen');
         $user->save();
 
         $userData = [
@@ -60,7 +62,8 @@ class RegisterControllerTest extends TestCase
             'company' => 'Example Corp.',
         ];
 
-        $this->actingAs($user)->post('/register', $userData);
+        $response = $this->actingAs($user)->post('/admin/users', $userData);
+
         $user = User::whereUserName('johndoe')->firstOrFail();
 
         $this->assertInstanceOf(User::class, $user);
@@ -90,7 +93,7 @@ class RegisterControllerTest extends TestCase
         ];
         $response = $this->post('/register', $userData);
 
-        $response->assertRedirect('/admin/popolate_db');
+        $response->assertRedirect('/home');
         $this->assertDatabaseHas('users', [
             'email' => $userData['email'],
             'user_name' => $userData['user_name'],
@@ -117,7 +120,6 @@ class RegisterControllerTest extends TestCase
             'email',
             'password',
             'user_name',
-            'role',
         ]);
     }
 }

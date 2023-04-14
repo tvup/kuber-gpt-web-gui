@@ -3,20 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserRoleEnum;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class HomeController extends Controller
 {
-
     /**
      * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|Factory|View|Application
      */
-    public function index()
+    public function index(): View
     {
         $user = Auth::user();
         if ($user) {
@@ -34,7 +29,7 @@ class HomeController extends Controller
         return view('home')->with('role', $role);
     }
 
-    public function approval()
+    public function approval(): View
     {
         return view('auth.approval');
     }

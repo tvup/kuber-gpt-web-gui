@@ -5,6 +5,7 @@ namespace Tests\Http\Controllers;
 use App\Enums\UserRoleEnum;
 use App\Models\Certificate;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -25,6 +26,7 @@ class CertificateControllerTest extends TestCase
         /** @var User $user */
         $user = User::factory()->create();
         $user->role = UserRoleEnum::Admin;
+        $user->approved_at = Carbon::now('Europe/Copenhagen');
         $this->actingAs($user);
     }
 

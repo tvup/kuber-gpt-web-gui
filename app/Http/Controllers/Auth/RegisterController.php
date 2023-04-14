@@ -5,9 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Enums\UserRoleEnum;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -29,7 +28,7 @@ class RegisterController extends Controller
     /**
      * Where to redirect users after registration.
      */
-    protected string $redirectTo = '/admin/popolate_db';
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -38,7 +37,6 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        //otherwise it doesn't execute if you are authenticated
         //$this->middleware('guest');
     }
 
@@ -54,81 +52,23 @@ class RegisterController extends Controller
             'user_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|in:admin,user,manager_ro',
         ]);
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array<string, string>  $data
-     * @return User
+     * @param  array  $data
+     * @return \App\Models\User
      */
     protected function create(array $data)
     {
-
-        $password_clear = '';
-        if ($data['role'] == UserRoleEnum::User->value) {
-            $password_clear = $data['password'];
-        }
-
         return User::create([
-            'user_name' => $data['user_name'],
+            'user_name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'name' => $data['name'],
-            'surname' => $data['surname'],
-            'vat_number' => $data['vat_number'],
-            'role' => $data['role'],
-            'company' => $data['company'],
-            'password_clear' => $password_clear,
+            'role' => UserRoleEnum::User,
         ]);
     }
-
-    /**
-     * I add this method - mao
-     * Override default register method from RegistersUsers trait
-     *
-     * @return Redirector|mixed to $redirectTo
-     */
-    public function register(Request $request)
-    {
-
-        $this->validator($request->all())->validate();
-        $user = $this->create($request->all());
-
-        return $this->registered($request, $user) ?: redirect($this->redirectPath());
-    }
-
-    /**
-     * Generate a unique token
-     *
-     * @return unique token
-     */
-    /*
-    public function getToken() {
-        return hash_hmac('sha256', str_random(40), config('app.key'));
-    }
-*/
-    /**
-     * Activate the user account
-     *
-     * @param  string  $key
-     * @return redirect to login page
-     */
-    /*
-    public function activation($key)
-    {
-        $auth_user = User::where('activation_key', $key)->first();
-
-        if($auth_user) {
-            $auth_user->status = 'active';
-            $auth_user->save();
-            return redirect('login')->with('success', 'Your account is activated. You can login now.');
-        } else {
-            return redirect('login')->with('error', 'Invalid activation key.');
-        }
-    }
-    */
 
 }

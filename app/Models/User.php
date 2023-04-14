@@ -26,6 +26,7 @@ use Illuminate\Support\Str;
  * @property string $strippedUserName
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @property Carbon $approved_at
  * @property Certificate[] $certificates
  */
 class User extends Authenticatable
@@ -43,7 +44,7 @@ class User extends Authenticatable
      * @var array<string>
      */
     protected $fillable = [
-        'user_name', 'email', 'password', 'vat_number', 'name', 'surname', 'role', 'password_clear', 'company',
+        'user_name', 'email', 'password', 'vat_number', 'name', 'surname', 'role', 'password_clear', 'company', 'approved_at',
     ];
 
     /**

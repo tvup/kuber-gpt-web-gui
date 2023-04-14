@@ -20,8 +20,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::middleware('locale')->group(function () {
-    Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware(['locale','approved'])->group(function () {
+
 
     Route::get('/read_index', 'CertificateController@read_index')->name('readindex');
 
@@ -29,7 +29,12 @@ Route::middleware('locale')->group(function () {
 
 });
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin', 'locale']], function () {
+Route::middleware(['auth', 'locale'])->group(function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/approval', 'HomeController@approval')->name('approval');
+});
+
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin', 'locale', 'approved']], function () {
 
     Route::get('/', 'CertificateController@popolate_db')->name('admin_popolatedb');
     Route::get('read_index', 'CertificateController@read_index')->name('admin_readindex');

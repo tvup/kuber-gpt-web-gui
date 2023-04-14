@@ -38,7 +38,7 @@
                                         </td>
                                         @if($certificate->user)
                                             <td>
-                                                <a href="{{ route('user.show-by-user-name', ['user_name' => rawurlencode($certificate->user->user_name)]) }}">{{$certificate->user->user_name}} </a>
+                                                <a href="{{ route('admin.user.show-by-user-name', ['user_name' => rawurlencode($certificate->user->user_name)]) }}">{{$certificate->user->user_name}} </a>
                                             </td>
                                         @else
                                             <td>

@@ -1,118 +1,58 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        
-        <title>{{ config('app.name', 'Laravel') }}</title>
+@extends('layouts.app')
 
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
+@section('content')
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card border-0 shadow-lg">
+                    <div class="card-body text-center">
+                        <h1 class="display-4 mb-4 text-primary">{{ __('welcome.vpn_manager') }}</h1>
+                        <p class="lead">So we get to decide the number of clients ourselves :)</p>
+                        <p>{{ __('welcome.certificate_manager_and_related_users') }}</p>
+                    </div>
 
-        <!-- Fonts -->
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                    @guest
+                        <div class="d-flex justify-content-center mb-3">
+                            <a class="btn btn-primary mr-2" href="{{ route('login') }}">Login</a>
+                        </div>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <!-- <a href="{{ route('register') }}">Register</a> -->
-                    @endauth
-                </div>
-            @endif
+                        <div class="d-flex justify-content-center mb-3">
+                            <a class="btn btn-success mr-2" href="{{ route('home') }}"> {{__('welcome.main_menu')}} </a>
+                            <a class="btn btn-primary" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Vpn Manager
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                    @endguest
+                    <div class="card-footer bg-transparent">
+                        <p class="text-muted"> Torben IT ApS </p>
+                    </div>
                 </div>
-                <div>
-                    Comune di Prato
-                </div>
-                <div class="m-b-md">
-                    Gestore dei certificati e relative utenze
-                </div>
-                                
-                @guest
-                    <a class="btn btn-primary" href="{{ route('login') }}">Login</a>
-                @else
-                    <a class="btn btn-success" href="{{ route('home') }}"> Dashboard </a>
-                    <a class="btn btn-primary" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
-                    </a>
-
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                @endguest
             </div>
         </div>
-    </body>
-</html>
+    </div>
+    <style>
+        body {
+            background: linear-gradient(135deg, #7f7fd5, #86a8e7, #91eae4);
+            background-size: 600% 600%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+@endsection

@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class AddFields2ToUsersTable extends Migration
 {
@@ -15,7 +15,7 @@ class AddFields2ToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->enum('tipo_vpn', ['TS', 'FULL'])->default("TS");
+            $table->enum('tipo_vpn', ['TS', 'FULL'])->default('TS');
 
         });
     }

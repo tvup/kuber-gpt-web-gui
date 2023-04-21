@@ -11,16 +11,15 @@ class IsAdmin
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user() && (Auth::user()->isAdmin() ||Auth::user()->isManagerRO() )) {
+        if (Auth::user() && (Auth::user()->isAdmin() || Auth::user()->isManager())) {
             return $next($request);
         }
-        
+
         return redirect('/login');
-        
+
     }
 }

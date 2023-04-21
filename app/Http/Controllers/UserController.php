@@ -2,190 +2,138 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserRoleEnum;
+use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Certificato;
-use App\User;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class UserController extends Controller
 {
-
-
-    protected function validator(array $data)
+    /**
+     * @param  array<string, string>  $data
+     */
+    protected function validator(array $data): \Illuminate\Validation\Validator
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            //'email' => 'required|string|email|max:255|unique:users',
-            'cf' => 'required|string|max:255',
-//            'password' => 'required|string|min:6|confirmed',
+            'user_name' => 'sometimes|string|max:255',
+            'email' => 'sometimes|string|email|max:255|unique:users',
+            'password' => 'sometimes|string|min:8|confirmed',
+            'role' => 'sometimes|in:admin,user,manager_ro',
         ]);
     }
 
-
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
-        //
-        //$user = User::where('name', $name)->get()->first();
         $users = User::all();
-        //echo($user);
-        return view('admin.showallusers', ['users' => $users]);
 
-
+        return view('admin.users.index', ['users' => $users]);
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(string $user_name = null): View
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        if ($user_name) {
+            return view('admin.users.create')->with('user_name', $user_name);
+        } else {
+            return view('admin.users.create');
+        }
     }
 
     /**
      * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user): View
     {
-        //
-        $user = User::find($id)->get();
-        return view('admin.user', ['user' => $user]);
-
+        return view('admin.users.show', ['user' => $user]);
     }
 
-    public function show_from_name($name)
+    public function showByUserName(string $user_name): View
     {
-        //
-        //dd($name);
-        $user = User::where('name', $name)->get()->first();
-        //echo($user);
-        if ( is_null($user) ){
-            //dd('ok');
-            return view('auth.register', ['user' => $name]);
+        $user = User::where('user_name', $user_name)->first();
+        if (null === $user) {
+            return view('admin.users.create')->with('user_name', $user_name);
         }
 
-        $certs = Certificato::where('user',$name)->get();
-        return view('admin.showuser', ['user' => $user, 'certs' => $certs]);
+        return view('admin.users.show', ['user' => $user]);
 
-
-    }
-
-    public function new($name)
-    {
-        return view('auth.register', ['user' => $name]);
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user): View
     {
-        //
-        $user = User::find($id);
-        return view('admin.edituser', ['user' => $user]);
+        return view('admin.users.edit', ['user' => $user]);
+    }
 
+    public function store(Request $request): RedirectResponse
+    {
+        $this->validator($request->except('email'))->validated();
+        $data = $request->all();
+
+        $password_clear = '';
+        if ($data['role'] == UserRoleEnum::User->value) {
+            $password_clear = $data['password'];
+        }
+
+        User::create([
+            'user_name' => $data['user_name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'name' => $data['name'],
+            'surname' => $data['surname'],
+            'vat_number' => $data['vat_number'],
+            'role' => $data['role'],
+            'company' => $data['company'],
+            'password_clear' => $password_clear,
+        ]);
+
+        return redirect()->route('admin.users.index')->with('msg-success', 'User created!');
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user): RedirectResponse
     {
-        //
-        //dd($request);
-        //dd($id);
-        $user = User::find($id);
-        $this->validator($request->all())->validate();
+        $this->validator($request->except('email'))->validated();
         $data = $request->all();
-        $user->nome = $data['nome'];
-        $user->cognome = $data['cognome'];
-        $user->cf = $data['cf'];
-        $user->societa = $data['societa'];
-        $user->tipo_vpn = $data['tipo_vpn'];
+        $user->name = $data['name'];
+        $user->surname = $data['surname'];
+        $user->vat_number = $data['vat_number'];
+        $user->company = $data['company'];
 
-        //dd($user);
         $user->save();
 
-        //return redirect()->route('admin.admin_showallusers')->with('status', 'Profile updated!');
-        //return redirect()->route('admin.admin_showallusers')->with('msg-success', 'Profile updated!');
         return redirect()->back()->with('msg-success', 'Profile updated!');
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(User $user): RedirectResponse
     {
-        //
+        $user->delete();
+
+        return redirect()->route('admin.users.index')->with('msg-danger', 'User deleted!');
     }
 
-
-
-
-    public function del($id)
+    /** User functions **/
+    public function downloadUserCert(): StreamedResponse
     {
-        //
-        $user = User::find($id);
-        //dd($user);
-
-        $user->delete($user->id);
-
-        return redirect()->back();
-    }
-
-
-    public function downloadmycert()
-    {
+        /** @var User $user */
         $user = Auth::user();
-        $my_user_id = Auth::id();
-        $certificato = \App\Certificato::where('user_id', $my_user_id)
-            ->where('stato', 'V')
-            ->firstOrFail();
-        $name = $certificato->user;
-        //$user = User::where('name', $name)->get()->first();
-        $tipo_vpn = $user->tipo_vpn;
-        //dd($user);
 
+        $fileName = sprintf('%s.ovpn', $user->strippedUserName);
 
-        $file="/etc/openvpn/ca/keys/conf/".$name."_".$tipo_vpn.".ovpn";
-        return \Response::download($file);
+        return Storage::disk('pki')->download($fileName);
 
     }
-
-
-
-
 }

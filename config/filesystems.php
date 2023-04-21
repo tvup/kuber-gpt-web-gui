@@ -2,6 +2,9 @@
 
 return [
 
+    'key_file' => env('INDEX_FILE', 'index.txt'),
+    'key_folder' => env('PKI_PATH', '/etc/openvpn/easy-rsa/pki/'),
+
     /*
     |--------------------------------------------------------------------------
     | Default Filesystem Disk
@@ -48,9 +51,9 @@ return [
             'root' => storage_path('app'),
         ],
 
-        'ca' => [
+        'pki' => [
             'driver' => 'local',
-            'root' => env('INDEX_PATH'),
+            'root' => env('PKI_PATH'),
         ],
 
         'public' => [

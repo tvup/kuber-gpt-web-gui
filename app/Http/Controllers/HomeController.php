@@ -2,39 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Enums\UserRoleEnum;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
      * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
         $user = Auth::user();
-        //dd($user);
-        if ($user->rule == "admin")
-            $rule = "ADMIN";
-        elseif ($user->rule == "manager_ro") {
-            $rule = "MANAGER_RO";
+        if ($user) {
+            if ($user->role == UserRoleEnum::Admin) {
+                $role = UserRoleEnum::Admin;
+            } elseif ($user->role == UserRoleEnum::Manager) {
+                $role = UserRoleEnum::Manager;
+            } else {
+                $role = UserRoleEnum::User;
+            }
+        } else {
+            $role = UserRoleEnum::User;
         }
-        else {
-            $rule ="USER";
-        }
-            
-        return view('home')->with('rule', $rule);
+
+        return view('home')->with('role', $role);
+    }
+
+    public function approval(): View
+    {
+        return view('auth.approval');
     }
 }

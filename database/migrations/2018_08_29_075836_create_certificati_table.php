@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateCertificatiTable extends Migration
 {
@@ -25,7 +25,6 @@ class CreateCertificatiTable extends Migration
             $table->string('link_conf')->nullable();
 
             $table->integer('user_id')->nullable();
-
 
             $table->timestamps();
         });

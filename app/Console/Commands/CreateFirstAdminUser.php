@@ -76,6 +76,6 @@ class CreateFirstAdminUser extends Command
             $this->info("User admin: admin@admin.admin exist. Exit.");
         }
 
-
+    return 0;
     }
 }

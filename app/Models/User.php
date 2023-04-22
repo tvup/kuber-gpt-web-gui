@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
+use Laravel\Cashier\Billable;
 
 /**
  * @property int $id
@@ -26,13 +27,14 @@ use Illuminate\Support\Str;
  * @property string $strippedUserName
  * @property Carbon $created_at
  * @property Carbon $updated_at
- * @property Carbon $approved_at
+ * @property Carbon|null $approved_at
  * @property Certificate[] $certificates
  */
 class User extends Authenticatable
 {
     use Notifiable;
     use HasFactory;
+    use Billable;
 
     protected $casts = [
         'role' => UserRoleEnum::class,

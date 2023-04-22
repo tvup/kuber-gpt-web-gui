@@ -8,6 +8,7 @@
         "php": "^8.2",
         "ext-intl": "*",
         "ext-mbstring": "*",
+        "laravel/cashier": "^14.12",
         "laravel/framework": "^10.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^4.2",
@@ -16,6 +17,7 @@
     "require-dev": {
         "brianium/paratest": "^7.1",
         "fakerphp/faker": "^1.21",
+        "friendsofphp/php-cs-fixer": "^3.16",
         "laravel/pint": "^1.8",
         "laravel/sail": "^1.21",
         "mockery/mockery": "^1.0",

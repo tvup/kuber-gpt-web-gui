@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\UserRoleEnum;
 use App\Models\User;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -141,10 +142,10 @@ class UserController extends Controller
     public function toggleAccess(string $id): View
     {
         $user = User::find($id);
-        if(!$user) {
-            throw new Exception('User not found with id: '. $id);
+        if (! $user) {
+            throw new Exception('User not found with id: '.$id);
         }
-        if($user->approved_at) {
+        if ($user->approved_at) {
             $user->approved_at = null;
             $text = 'User deactivated!';
         } else {

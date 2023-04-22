@@ -8,5 +8,5 @@ return [
     'do_it_your_self' => 'Do it yourself - variable price',
     'bronze' => 'Bronze GPT',
     'silver' => 'Silver GPT',
-    'gold'=> 'Gold GPT'
+    'gold' => 'Gold GPT',
 ];

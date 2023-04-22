@@ -14,16 +14,23 @@
 use App\Http\Controllers\ServerAssetController;
 use App\Http\Controllers\UserController;
 
+//"Outside" - beyond authentication
 Route::get('/', function () {
     return view('welcome');
 });
+Route::middleware(['locale'])->group(function () {
+    Route::get('/subscription-checkout', 'CashierController@checkoutSubscription')->name('cashier.checkout-subscription');
+    Route::get('/sales', 'ProductDisplayController@choose')->name('sales.choose');
+    Route::get('/products', 'ProductDisplayController@index')->name('products.index');
+});
+
+
+
 
 Auth::routes();
 
 Route::middleware(['locale', 'approved', 'auth'])->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/products', 'ProductDisplayController@index')->name('product-display');
-    Route::get('/product-details', 'ProductDisplayController@choose')->name('product-display.choosey');
     Route::get('/read_index', 'CertificateController@read_index')->name('readindex');
     Route::get('/download_user_cert', 'UserController@downloadUserCert')->name('user.download-user-cert');
 });

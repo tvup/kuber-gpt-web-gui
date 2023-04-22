@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'kuber-gpt-ai-hassle-free' => 'kuber-GPT - AI hassle free',
     'choose_wisely' => 'You must choose...',
     'with_care' => '..with great care',
     'bring_you_own_keys' => 'Bring your own keys',

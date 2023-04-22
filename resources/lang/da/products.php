@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'kuber-gpt-ai-hassle-free' => 'kuber-GPT - AI uden besvær',
     'choose_wisely' => 'Du skal vælge...',
     'with_care' => '..forsigtigt',
     'bring_you_own_keys' => 'Medbring selv nøgler',

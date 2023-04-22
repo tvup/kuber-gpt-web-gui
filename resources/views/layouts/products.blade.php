@@ -15,10 +15,12 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="">
     <meta property="og:image" content="">
-    <link rel="shortcut icon" href="assets/media/favicons/favicon.png">
+    <link rel="shortcut icon" href="media/favicons/favicon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="assets/media/favicons/favicon-192x192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/media/favicons/apple-touch-icon-180x180.png">
     <link rel="stylesheet" id="css-main" href="css/oneui.min-5.6.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 </head>
 <body>
 <div id="page-container"
@@ -127,7 +129,7 @@
                                         <a class="d-flex py-2" href="javascript:void(0)">
                                             <div class="me-3 ms-2 overlay-container overlay-bottom">
                                                 <img class="img-avatar img-avatar48"
-                                                     src="assets/media/avatars/avatar4.jpg" alt="">
+                                                     src="media/avatars/avatar4.jpg" alt="">
                                                 <span
                                                     class="overlay-item item item-tiny item-circle border border-2 border-white bg-success"></span>
                                             </div>
@@ -141,7 +143,7 @@
                                         <a class="d-flex py-2" href="javascript:void(0)">
                                             <div class="me-3 ms-2 overlay-container overlay-bottom">
                                                 <img class="img-avatar img-avatar48"
-                                                     src="assets/media/avatars/avatar16.jpg" alt="">
+                                                     src="media/avatars/avatar16.jpg" alt="">
                                                 <span
                                                     class="overlay-item item item-tiny item-circle border border-2 border-white bg-success"></span>
                                             </div>
@@ -155,7 +157,7 @@
                                         <a class="d-flex py-2" href="javascript:void(0)">
                                             <div class="me-3 ms-2 overlay-container overlay-bottom">
                                                 <img class="img-avatar img-avatar48"
-                                                     src="assets/media/avatars/avatar1.jpg" alt="">
+                                                     src="media/avatars/avatar1.jpg" alt="">
                                                 <span
                                                     class="overlay-item item item-tiny item-circle border border-2 border-white bg-success"></span>
                                             </div>
@@ -169,7 +171,7 @@
                                         <a class="d-flex py-2" href="javascript:void(0)">
                                             <div class="me-3 ms-2 overlay-container overlay-bottom">
                                                 <img class="img-avatar img-avatar48"
-                                                     src="assets/media/avatars/avatar4.jpg" alt="">
+                                                     src="media/avatars/avatar4.jpg" alt="">
                                                 <span
                                                     class="overlay-item item item-tiny item-circle border border-2 border-white bg-warning"></span>
                                             </div>
@@ -183,7 +185,7 @@
                                         <a class="d-flex py-2" href="javascript:void(0)">
                                             <div class="me-3 ms-2 overlay-container overlay-bottom">
                                                 <img class="img-avatar img-avatar48"
-                                                     src="assets/media/avatars/avatar9.jpg" alt="">
+                                                     src="media/avatars/avatar9.jpg" alt="">
                                                 <span
                                                     class="overlay-item item item-tiny item-circle border border-2 border-white bg-warning"></span>
                                             </div>
@@ -210,194 +212,40 @@
             </div>
         </div>
     </aside>
-    <header id="page-header">
-        <div class="content-header">
-            <div class="d-flex align-items-center">
-                <button type="button" class="btn btn-sm btn-alt-secondary me-2 d-lg-none" data-toggle="layout"
-                        data-action="sidebar_toggle">
-                    <i class="fa fa-fw fa-bars"></i>
+    <header class="w-full text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800">
+        <div x-data="{ open: false }" class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
+            <div class="p-4 flex flex-row items-center justify-between">
+                <a href="#" class="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">{{__('products.kuber-gpt-ai-hassle-free')}}</a>
+                <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
+                    <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+                        <path x-show="!open" fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                        <path x-show="open" fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
                 </button>
-                <button type="button" class="btn btn-sm btn-alt-secondary me-2 d-none d-lg-inline-block"
-                        data-toggle="layout" data-action="sidebar_mini_toggle">
-                    <i class="fa fa-fw fa-ellipsis-v"></i>
-                </button>
-                <button type="button" class="btn btn-sm btn-alt-secondary d-md-none" data-toggle="layout"
-                        data-action="header_search_on">
-                    <i class="fa fa-fw fa-search"></i>
-                </button>
-                <form class="d-none d-md-inline-block" action="be_pages_generic_search.html" method="POST">
-                    <div class="input-group input-group-sm">
-                        <input type="text" class="form-control form-control-alt" placeholder="Search.."
-                               id="page-header-search-input2" name="page-header-search-input2">
-                        <span class="input-group-text border-0">
-            <i class="fa fa-fw fa-search"></i>
-          </span>
-                    </div>
-                </form>
             </div>
-            <div class="d-flex align-items-center">
-                <div class="dropdown d-inline-block ms-2">
-                    <button type="button" class="btn btn-sm btn-alt-secondary d-flex align-items-center"
-                            id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-                        <img class="rounded-circle" src="media/avatars/avatar10.jpg" alt="Header Avatar"
-                             style="width: 21px;">
-                        <span class="d-none d-sm-inline-block ms-2">John</span>
-                        <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block opacity-50 ms-1 mt-1"></i>
+            <nav :class="{'flex': open, 'hidden': !open}" class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
+                <a class="px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">Blog</a>
+                <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">Portfolio</a>
+                <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">About</a>
+                <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">Contact</a>
+                <div @click.away="open = false" class="relative" x-data="{ open: false }">
+                    <button @click="open = !open" class="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+                        <span>Dropdown</span>
+                        <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                     </button>
-                    <div class="dropdown-menu dropdown-menu-md dropdown-menu-end p-0 border-0"
-                         aria-labelledby="page-header-user-dropdown">
-                        <div class="p-3 text-center bg-body-light border-bottom rounded-top">
-                            <img class="img-avatar img-avatar48 img-avatar-thumb"
-                                 src="media/avatars/avatar10.jpg" alt="">
-                            <p class="mt-2 mb-0 fw-medium">John Smith</p>
-                            <p class="mb-0 text-muted fs-sm fw-medium">Web Developer</p>
-                        </div>
-                        <div class="p-2">
-                            <a class="dropdown-item d-flex align-items-center justify-content-between"
-                               href="be_pages_generic_inbox.html">
-                                <span class="fs-sm fw-medium">Inbox</span>
-                                <span class="badge rounded-pill bg-primary ms-2">3</span>
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center justify-content-between"
-                               href="be_pages_generic_profile.html">
-                                <span class="fs-sm fw-medium">Profile</span>
-                                <span class="badge rounded-pill bg-primary ms-2">1</span>
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center justify-content-between"
-                               href="javascript:void(0)">
-                                <span class="fs-sm fw-medium">Settings</span>
-                            </a>
-                        </div>
-                        <div role="separator" class="dropdown-divider m-0"></div>
-                        <div class="p-2">
-                            <a class="dropdown-item d-flex align-items-center justify-content-between"
-                               href="op_auth_lock.html">
-                                <span class="fs-sm fw-medium">Lock Account</span>
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center justify-content-between"
-                               href="op_auth_signin.html">
-                                <span class="fs-sm fw-medium">Log Out</span>
-                            </a>
+                    <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
+                        <div class="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
+                            <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">Link #1</a>
+                            <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">Link #2</a>
+                            <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">Link #3</a>
                         </div>
                     </div>
                 </div>
-                <div class="dropdown d-inline-block ms-2">
-                    <button type="button" class="btn btn-sm btn-alt-secondary" id="page-header-notifications-dropdown"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-fw fa-bell"></i>
-                        <span class="text-primary">•</span>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0 border-0 fs-sm"
-                         aria-labelledby="page-header-notifications-dropdown">
-                        <div class="p-2 bg-body-light border-bottom text-center rounded-top">
-                            <h5 class="dropdown-header text-uppercase">Notifications</h5>
-                        </div>
-                        <ul class="nav-items mb-0">
-                            <li>
-                                <a class="text-dark d-flex py-2" href="javascript:void(0)">
-                                    <div class="flex-shrink-0 me-2 ms-3">
-                                        <i class="fa fa-fw fa-check-circle text-success"></i>
-                                    </div>
-                                    <div class="flex-grow-1 pe-2">
-                                        <div class="fw-semibold">You have a new follower</div>
-                                        <span class="fw-medium text-muted">15 min ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="text-dark d-flex py-2" href="javascript:void(0)">
-                                    <div class="flex-shrink-0 me-2 ms-3">
-                                        <i class="fa fa-fw fa-plus-circle text-primary"></i>
-                                    </div>
-                                    <div class="flex-grow-1 pe-2">
-                                        <div class="fw-semibold">1 new sale, keep it up</div>
-                                        <span class="fw-medium text-muted">22 min ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="text-dark d-flex py-2" href="javascript:void(0)">
-                                    <div class="flex-shrink-0 me-2 ms-3">
-                                        <i class="fa fa-fw fa-times-circle text-danger"></i>
-                                    </div>
-                                    <div class="flex-grow-1 pe-2">
-                                        <div class="fw-semibold">Update failed, restart server</div>
-                                        <span class="fw-medium text-muted">26 min ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="text-dark d-flex py-2" href="javascript:void(0)">
-                                    <div class="flex-shrink-0 me-2 ms-3">
-                                        <i class="fa fa-fw fa-plus-circle text-primary"></i>
-                                    </div>
-                                    <div class="flex-grow-1 pe-2">
-                                        <div class="fw-semibold">2 new sales, keep it up</div>
-                                        <span class="fw-medium text-muted">33 min ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="text-dark d-flex py-2" href="javascript:void(0)">
-                                    <div class="flex-shrink-0 me-2 ms-3">
-                                        <i class="fa fa-fw fa-user-plus text-success"></i>
-                                    </div>
-                                    <div class="flex-grow-1 pe-2">
-                                        <div class="fw-semibold">You have a new subscriber</div>
-                                        <span class="fw-medium text-muted">41 min ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="text-dark d-flex py-2" href="javascript:void(0)">
-                                    <div class="flex-shrink-0 me-2 ms-3">
-                                        <i class="fa fa-fw fa-check-circle text-success"></i>
-                                    </div>
-                                    <div class="flex-grow-1 pe-2">
-                                        <div class="fw-semibold">You have a new follower</div>
-                                        <span class="fw-medium text-muted">42 min ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="p-2 border-top text-center">
-                            <a class="d-inline-block fw-medium" href="javascript:void(0)">
-                                <i class="fa fa-fw fa-arrow-down me-1 opacity-50"></i> Load More..
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <button type="button" class="btn btn-sm btn-alt-secondary ms-2" data-toggle="layout"
-                        data-action="side_overlay_toggle">
-                    <i class="fa fa-fw fa-list-ul fa-flip-horizontal"></i>
-                </button>
-            </div>
-        </div>
-        <div id="page-header-search" class="overlay-header bg-body-extra-light">
-            <div class="content-header">
-                <form class="w-100" action="be_pages_generic_search.html" method="POST">
-                    <div class="input-group">
-                        <button type="button" class="btn btn-alt-danger" data-toggle="layout"
-                                data-action="header_search_off">
-                            <i class="fa fa-fw fa-times-circle"></i>
-                        </button>
-                        <input type="text" class="form-control" placeholder="Search or hit ESC.."
-                               id="page-header-search-input" name="page-header-search-input">
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div id="page-header-loader" class="overlay-header bg-body-extra-light">
-            <div class="content-header">
-                <div class="w-100 text-center">
-                    <i class="fa fa-fw fa-circle-notch fa-spin"></i>
-                </div>
-            </div>
+            </nav>
         </div>
     </header>
     <main id="main-container">
-        <div class="bg-image" style="background-image: url('assets/media/photos/photo3@2x.jpg');">
+        <div class="bg-image" style="background-image: url('media/photos/photo3@2x.jpg');">
             <div class="bg-primary-dark-op">
                 <div class="content content-full text-center py-6">
                     <h1 class="h2 text-white mb-2">{{__('products.weve_put_it_all_together_for_you')}}</h1>
@@ -419,7 +267,7 @@
                                         <a class="btn btn-sm btn-alt-secondary" href="be_pages_ecom_store_product.html">
                                             View
                                         </a>
-                                        <a class="btn btn-sm btn-alt-secondary" href="javascript:void(0)">
+                                        <a class="btn btn-sm btn-alt-secondary" href="{{ route('cashier.checkout-subscription') }}">
                                             <i class="fa fa-plus text-success me-1"></i> Add to cart
                                         </a>
                                         <div class="text-warning mt-3">
@@ -481,7 +329,7 @@
                     <div class="block block-rounded h-100 mb-0">
                         <div class="block-content p-1">
                             <div class="options-container">
-                                <img class="img-fluid options-item" src="assets/media/various/ecom_product3.png" alt="">
+                                <img class="img-fluid options-item" src="media/various/ecom_product3.png" alt="">
                                 <div class="options-overlay bg-black-75">
                                     <div class="options-overlay-content">
                                         <a class="btn btn-sm btn-alt-secondary" href="be_pages_ecom_store_product.html">
@@ -529,17 +377,94 @@
             </div>
         </div>
     </main>
-    <footer id="page-footer" class="bg-body-light">
-        <div class="content py-3">
-            <div class="row fs-sm">
-                <div class="col-sm-6 order-sm-2 py-1 text-center text-sm-end">
-
+    <footer>
+        <div class="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+                <div>
+                    <a href="#" class="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">{{ __('sales.kuber-gpt-ai-hassle-free') }}</a>
+                    <p class="max-w-xs mt-4 text-sm text-gray-600">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, accusantium.
+                    </p>
+                    <div class="flex mt-8 space-x-6 text-gray-600">
+                        <a class="hover:opacity-75" href target="_blank" rel="noreferrer">
+                            <span class="sr-only"> Facebook </span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" />
+                            </svg>
+                        </a>
+                        <a class="hover:opacity-75" href target="_blank" rel="noreferrer">
+                            <span class="sr-only"> Instagram </span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clipRule="evenodd" />
+                            </svg>
+                        </a>
+                        <a class="hover:opacity-75" href target="_blank" rel="noreferrer">
+                            <span class="sr-only"> Twitter </span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                            </svg>
+                        </a>
+                        <a class="hover:opacity-75" href target="_blank" rel="noreferrer">
+                            <span class="sr-only"> GitHub </span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+                            </svg>
+                        </a>
+                        <a class="hover:opacity-75" href target="_blank" rel="noreferrer">
+                            <span class="sr-only"> Dribbble </span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z" clipRule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
                 </div>
-                <div class="col-sm-6 order-sm-1 py-1 text-center text-sm-start">
-
-                    <span data-toggle="year-copy"></span>
+                <div class="grid grid-cols-1 gap-8 lg:col-span-2 sm:grid-cols-2 lg:grid-cols-4">
+                    <div>
+                        <p class="font-medium">
+                            Company
+                        </p>
+                        <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
+                            <a class="hover:opacity-75" href> About </a>
+                            <a class="hover:opacity-75" href> Meet the Team </a>
+                            <a class="hover:opacity-75" href> History </a>
+                            <a class="hover:opacity-75" href> Careers </a>
+                        </nav>
+                    </div>
+                    <div>
+                        <p class="font-medium">
+                            Services
+                        </p>
+                        <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
+                            <a class="hover:opacity-75" href> Company Review </a>
+                            <a class="hover:opacity-75" href> Accounts Review </a>
+                            <a class="hover:opacity-75" href> HR Consulting </a>
+                        </nav>
+                    </div>
+                    <div>
+                        <p class="font-medium">
+                            Helpful Links
+                        </p>
+                        <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
+                            <a class="hover:opacity-75" href> Contact </a>
+                            <a class="hover:opacity-75" href> FAQs </a>
+                            <a class="hover:opacity-75" href> Live Chat </a>
+                        </nav>
+                    </div>
+                    <div>
+                        <p class="font-medium">
+                            Legal
+                        </p>
+                        <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
+                            <a class="hover:opacity-75" href> Privacy Policy </a>
+                            <a class="hover:opacity-75" href> Terms &amp; Conditions </a>
+                            <a class="hover:opacity-75" href> Returns Policy </a>
+                            <a class="hover:opacity-75" href> Accessibility </a>
+                        </nav>
+                    </div>
                 </div>
             </div>
+            <p class="mt-8 text-xs text-gray-800">
+            </p>
         </div>
     </footer>
 </div>

@@ -2,11 +2,11 @@
 
 return [
     'main_menu' => 'Hovedmenu',
+    'choose_product' => 'Vælg produkt',
     'open_certificate_dashboard' => 'Open the certificate dashboard',
     'show_all_registered_users' => 'Show all registered users',
-    'download_vpn_access' => 'Download your VPN access',
-    'download_openvpn_client' => 'Download the openVPN client',
-    'guide_in_progress' => 'Guide - In progress',
-    'dashboard' => 'Dashboard',
-
+    'do_it_your_self' => 'Gør det selv - variabel pris',
+    'bronze' => 'Bronze GPT',
+    'silver' => 'Silver GPT',
+    'gold'=> 'Gold GPT'
 ];

@@ -26,7 +26,7 @@ class HomeController extends Controller
             $role = UserRoleEnum::User;
         }
 
-        return view('home')->with('role', $role);
+        return view('home')->with(['user' => $user, 'role' => $role]);
     }
 
     public function approval(): View

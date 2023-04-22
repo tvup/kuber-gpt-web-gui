@@ -5,7 +5,11 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card shadow-lg">
-                    <div class="card-header bg-primary text-white">{{__('home.main_menu')}} - {{ $role }}</div>
+                    @if(($role == \App\Enums\UserRoleEnum::Admin) || ($role == \App\Enums\UserRoleEnum::Manager))
+                        <div class="card-header bg-primary text-white">{{__('home.main_menu')}} - {{ $role }}</div>
+                    @else
+                        <div class="card-header bg-primary text-white">{{__('home.choose_product')}} - {{ $user->name }}</div>
+                    @endif
 
                     <div class="card-body">
                         @if (session('status'))
@@ -27,14 +31,14 @@
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
                                     <a href="{{ route('user.download-user-cert') }}" class="btn btn-success">
-                                        {{ __('home.download_vpn_access') }}
+                                        {{ __('home.do_it_your_self') }}
                                         <i class="fas fa-download"></i>
                                     </a>
                                 </li>
                                 <hr>
                                 <li class="list-group-item">
                                     <a href="https://swupdate.openvpn.org/community/releases/openvpn-install-2.4.6-I602.exe" class="btn btn-info">
-                                        {{ __('home.download_openvpn_client') }}
+                                        {{ __('home.bronze') }}
                                         <i class="fas fa-download"></i>
                                     </a>
                                 </li>

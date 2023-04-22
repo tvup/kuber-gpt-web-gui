@@ -2,11 +2,11 @@
 
 return [
     'main_menu' => 'Menu principale',
-    'open_certificate_dashboard' => 'Apri la dashboard del certificato',
-    'show_all_registered_users' => 'Mostra tutti gli utenti registrati',
-    'download_vpn_access' => 'Scarica il tuo accesso VPN',
-    'download_openvpn_client' => 'Scarica il client openVPN',
-    'guide_in_progress' => 'Guida - In corso',
-    'dashboard' => 'Pannello di controllo',
-
+    'choose_product' => 'Scegli il prodotto',
+    'open_certificate_dashboard' => 'Open the certificate dashboard',
+    'show_all_registered_users' => 'Show all registered users',
+    'do_it_your_self' => 'Fai da te - prezzo variabile',
+    'bronze' => 'Bronze GPT',
+    'silver' => 'Silver GPT',
+    'gold'=> 'Gold GPT'
 ];

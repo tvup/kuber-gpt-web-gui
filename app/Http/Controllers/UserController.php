@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\UserRoleEnum;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -134,6 +135,21 @@ class UserController extends Controller
         $fileName = sprintf('%s.ovpn', $user->strippedUserName);
 
         return Storage::disk('pki')->download($fileName);
+
+    }
+
+    public function toggleAccess($request, User $user): View
+    {
+        if($user->approved_at) {
+            $user->approved_at = null;
+            $text = 'User deactivated!';
+        } else {
+            $user->approved_at = Carbon::now('Europe/Copenhagen');
+            $text = 'User activated!';
+        }
+        $user->save();
+
+        return view('admin.users.edit', ['user' => $user])->with('msg-success', $text);
 
     }
 }

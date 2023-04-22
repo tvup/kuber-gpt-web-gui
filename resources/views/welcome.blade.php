@@ -6,9 +6,9 @@
             <div class="col-md-8">
                 <div class="card border-0 shadow-lg">
                     <div class="card-body text-center">
-                        <h1 class="display-4 mb-4 text-primary">{{ __('welcome.vpn_manager') }}</h1>
-                        <p class="lead">So we get to decide the number of clients ourselves :)</p>
-                        <p>{{ __('welcome.certificate_manager_and_related_users') }}</p>
+                        <h1 class="display-4 mb-4 text-primary">{{ __('welcome.kuber_gpt') }}</h1>
+                        <p class="lead">{{ __('welcome.the_world_is_my_playground') }}</p>
+                        <p>{{ __('welcome.gpt_manager') }}</p>
                     </div>
 
                     @guest

@@ -2,8 +2,8 @@
 
 return [
     'main_menu' => 'Menu principale',
-    'prato_commune' => 'Comune di Prato.',
-    'certificate_manager_and_related_users' => 'Gestore dei certificati e relative utenze.',
-    'vpn_manager' => 'Gestore VPN',
+    'the_world_is_my_playground' => 'Il mondo è il mio parco giochi.',
+    'gpt_manager' => 'GPT-manager',
+    'kuber_gpt' => 'kuber-GPT',
 
 ];

@@ -13,5 +13,6 @@ return [
     'company' => 'Società',
     'e_mail' => 'E-Mail',
     'email_address_unique' => 'Indirizzo e-mail - Univoco per login',
+    'toggle_user_access' => 'Attiva/disattiva l\'accesso utente',
 
 ];

@@ -2,8 +2,8 @@
 
 return [
     'main_menu' => 'Main menu',
-    'prato_commune' => 'Municipality of Prato.',
-    'certificate_manager_and_related_users' => 'Certificate manager and related users.',
-    'vpn_manager' => 'VPN Manager',
+    'the_world_is_my_playground' => 'The world is my playground.',
+    'gpt_manager' => 'GPT-manager',
+    'kuber_gpt' => 'kuber-GPT',
 
 ];

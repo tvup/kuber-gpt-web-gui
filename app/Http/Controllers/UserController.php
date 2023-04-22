@@ -138,8 +138,12 @@ class UserController extends Controller
 
     }
 
-    public function toggleAccess($request, User $user): View
+    public function toggleAccess(string $id): View
     {
+        $user = User::find($id);
+        if(!$user) {
+            throw new Exception('User not found with id: '. $id);
+        }
         if($user->approved_at) {
             $user->approved_at = null;
             $text = 'User deactivated!';

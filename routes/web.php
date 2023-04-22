@@ -17,11 +17,11 @@ use App\Http\Controllers\UserController;
 
 //"Outside" - beyond authentication
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/sales');
 });
 Route::middleware(['locale'])->group(function () {
-    Route::get('/subscription-checkout', 'CashierController@checkoutSubscription')->name('cashier.checkout-subscription');
     Route::get('/sales', 'ProductDisplayController@choose')->name('sales.choose');
+    Route::get('/subscription-checkout', 'CashierController@checkoutSubscription')->name('cashier.checkout-subscription');
     Route::get('/products', 'ProductDisplayController@index')->name('products.index');
 });
 

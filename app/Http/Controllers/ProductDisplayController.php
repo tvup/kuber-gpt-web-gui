@@ -8,7 +8,9 @@ class ProductDisplayController extends Controller
 {
     public function index(): View
     {
-        return view('layouts.products');
+        return view('products.appetizer', [
+            'title' => 'Template Inheritance',
+        ]);
     }
 
     public function choose(): View

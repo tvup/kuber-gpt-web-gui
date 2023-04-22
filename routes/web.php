@@ -31,8 +31,11 @@ Auth::routes();
 
 Route::middleware(['locale', 'approved', 'auth'])->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/read_index', 'CertificateController@read_index')->name('readindex');
+    Route::get('/read_index', 'CredentialsController@read_index')->name('readindex');
     Route::get('/download_user_cert', 'UserController@downloadUserCert')->name('user.download-user-cert');
+    Route::get('credentials', 'CredentialsController@index')->name('credentials.index');
+    Route::post('credentials', 'CredentialsController@index')->name('credentials.edit');
+    Route::put('credentials', 'CredentialsController@index')->name('credentials.delete');
 });
 
 Route::middleware(['auth', 'locale'])->group(function () {
@@ -41,13 +44,13 @@ Route::middleware(['auth', 'locale'])->group(function () {
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin', 'locale', 'approved']], function () {
 
-    Route::get('/', 'CertificateController@popolate_db')->name('admin_popolatedb');
-    Route::get('read_index', 'CertificateController@read_index')->name('admin_readindex');
-    Route::get('popolate_db', 'CertificateController@popolate_db')->name('admin_popolatedb');
+    Route::get('/', 'CredentialsController@index')->name('admin_popolatedb');
+    Route::get('read_index', 'CredentialsController@read_index')->name('admin_readindex');
 
-    Route::get('download/{certificate}', 'CertificateController@download')->name('admin_downloadcert');
-    Route::get('revokecert/{certificate}', 'CertificateController@revoke')->name('admin_revokecert');
-    Route::get('releasecert/{user}', 'CertificateController@release')->name('admin_releasecert');
+
+    Route::get('download/{certificate}', 'CredentialsController@download')->name('admin_downloadcert');
+    Route::get('revokecert/{certificate}', 'CredentialsController@revoke')->name('admin_revokecert');
+    Route::get('releasecert/{user}', 'CredentialsController@release')->name('admin_releasecert');
 
     Route::get('users/show_by_user_name/{user_name}', 'UserController@showByUserName')->name('user.show-by-user-name')->where('user_name', '.*');
     Route::get('users/{id}/toggle-access', 'UserController@toggleAccess')->name('user.toggle-access');

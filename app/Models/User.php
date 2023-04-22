@@ -28,7 +28,7 @@ use Laravel\Cashier\Billable;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon|null $approved_at
- * @property Certificate[] $certificates
+ * @property CredentialsSet[] $credentialsSet
  */
 class User extends Authenticatable
 {
@@ -59,11 +59,11 @@ class User extends Authenticatable
     ];
 
     /**
-     * @return HasMany<Certificate>
+     * @return HasMany<CredentialsSet>
      */
-    public function certificates(): HasMany
+    public function credentialsSet(): HasMany
     {
-        return $this->hasMany(Certificate::class);
+        return $this->hasMany(CredentialsSet::class);
     }
 
     public function isAdmin(): bool
@@ -88,8 +88,4 @@ class User extends Authenticatable
 
     }
 
-    public function getStrippedUserNameAttribute(): string
-    {
-        return Str::afterLast($this->user_name, '=');
-    }
 }

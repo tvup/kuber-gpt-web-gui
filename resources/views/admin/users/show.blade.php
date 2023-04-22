@@ -82,7 +82,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($user->certificates as $certificate)
+                            @foreach ($user->credentialsSets as $certificate)
                                 <tr>
                                     <td scope="row"> {{ Str::title($certificate->status->value) }}
                                     </td>
@@ -94,7 +94,7 @@
                                     </td>
                                     <td>
                                         @if(Auth::user()->isAdmin())
-                                            @if ($certificate->status == \App\Enums\StatusEnum::V)
+                                            @if ($certificate->status == \App\Enums\CredentialTypeEnum::V)
                                                 <a href="{{ action('CertificateController@revoke', ['certificate' => $certificate]) }}"
                                                    class="btn btn-danger">
                                                     <i class="fas fa-trash-alt"></i></a>

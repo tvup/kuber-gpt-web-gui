@@ -3,7 +3,7 @@
 namespace Tests\Http\Controllers;
 
 use App\Enums\UserRoleEnum;
-use App\Models\Certificate;
+use App\Models\Credential;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -48,8 +48,8 @@ class CertificateControllerTest extends TestCase
     {
         Storage::fake('pki');
         // Create a Certificate for the test
-        /** @var Certificate $certificate */
-        $certificate = Certificate::factory()->create();
+        /** @var Credential $certificate */
+        $certificate = Credential::factory()->create();
 
         $fileName = sprintf('%s.ovpn', $certificate->strippedUserName);
         Storage::disk('pki')->put($fileName, 'content');
@@ -69,8 +69,8 @@ class CertificateControllerTest extends TestCase
     public function testRevoke()
     {
         // Create a Certificate for the test
-        /** @var Certificate $certificate */
-        $certificate = Certificate::factory()->create();
+        /** @var Credential $certificate */
+        $certificate = Credential::factory()->create();
 
         Redis::shouldReceive('publish')->once();
 

@@ -2,20 +2,20 @@
 
 namespace Database\Factories;
 
-use App\Enums\StatusEnum;
-use App\Models\Certificate;
+use App\Enums\CredentialTypeEnum;
+use App\Models\Credential;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
 class CertificateFactory extends Factory
 {
-    protected $model = Certificate::class;
+    protected $model = Credential::class;
 
     public function definition(): array
     {
         return [
-            'status' => fake()->randomElement([StatusEnum::V, StatusEnum::E, StatusEnum::R]),
+            'status' => fake()->randomElement([CredentialTypeEnum::V, CredentialTypeEnum::E, CredentialTypeEnum::R]),
             'expires_at' => Carbon::today()->subDays(rand(0, 179))->addSeconds(rand(0, 86400)),
             'revoked_at' => fake()->randomElement([Carbon::today()->subDays(rand(0, 179))->addSeconds(rand(0, 86400)), null]),
             'idcert' => $this->faker->md5,

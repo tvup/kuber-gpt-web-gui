@@ -11,6 +11,7 @@ class RearrangeUserTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->renameColumn('rule', 'role');
+            $table->string('nome')->nullable()->change();
             $table->renameColumn('name', 'user_name');
             $table->renameColumn('nome', 'name');
             $table->renameColumn('cognome', 'surname');
@@ -29,7 +30,12 @@ class RearrangeUserTable extends Migration
             $table->renameColumn('vpn_type', 'tipo_vpn');
             $table->renameColumn('company', 'societa');
             $table->renameColumn('surname', 'cognome');
+        });
+        Schema::table('users', function (Blueprint $table) {
             $table->renameColumn('name', 'nome');
+        });
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('nome')->nullable(false)->change();
             $table->renameColumn('user_name', 'name');
             $table->renameColumn('role', 'rule');
         });

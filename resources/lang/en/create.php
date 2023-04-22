@@ -3,12 +3,13 @@
 return [
 
     'close' => 'Close',
-    'register' => 'Register',
+    'create' => 'Create',
     'nick_name' => 'Nick name',
-    'local_ip' => 'Local IP',
-    'public_ip' => 'Public IP',
-    'applications' => 'Applications',
-    'tags' => 'Tags',
+    'public_ip' => 'IP pubblico',
+    'add_one_more_tag' => 'Add one more tag',
+    'register' => 'Register',
     'reset' => 'Return to list of servers',
+    'tag' => 'Tag',
+    'remove_this_field' => 'Remove this field'
 
 ];

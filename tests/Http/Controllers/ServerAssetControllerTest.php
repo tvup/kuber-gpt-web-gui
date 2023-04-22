@@ -3,7 +3,7 @@
 namespace Tests\Http\Controllers;
 
 use App\Enums\UserRoleEnum;
-use App\Models\ServerAsset;
+use App\Models\RunSet;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -45,7 +45,7 @@ class ServerAssetControllerTest extends TestCase
 
     public function testStore()
     {
-        ServerAsset::truncate();
+        RunSet::truncate();
 
         $nick_name = $this->faker->word;
         $ipv4 = $this->faker->ipv4;
@@ -83,7 +83,7 @@ class ServerAssetControllerTest extends TestCase
 
     public function testShow()
     {
-        $server_asset = ServerAsset::factory()->create();
+        $server_asset = RunSet::factory()->create();
 
         $response = $this->get("/admin/server_assets/{$server_asset->id}");
 
@@ -94,7 +94,7 @@ class ServerAssetControllerTest extends TestCase
 
     public function testEdit()
     {
-        $server_asset = ServerAsset::factory()->create();
+        $server_asset = RunSet::factory()->create();
 
         $response = $this->get("/admin/server_assets/{$server_asset->id}/edit");
 
@@ -105,7 +105,7 @@ class ServerAssetControllerTest extends TestCase
 
     public function testUpdate()
     {
-        $server_asset = ServerAsset::factory()->create();
+        $server_asset = RunSet::factory()->create();
 
         $applications = [['name' => 'app1', 'url' => 'http://www.test1.dk'], ['name' => 'app2', 'url' => 'http://www.test2.dk'], ['name' => 'app4', 'url' => 'http://www.test3.dk']];
         $tags = [$this->faker->word, $this->faker->word, $this->faker->word];
@@ -126,7 +126,7 @@ class ServerAssetControllerTest extends TestCase
 
     public function testDestroy()
     {
-        $server_asset = ServerAsset::factory()->create();
+        $server_asset = RunSet::factory()->create();
 
         $response = $this->delete("/admin/server_assets/{$server_asset->id}");
 

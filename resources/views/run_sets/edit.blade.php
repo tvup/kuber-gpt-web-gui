@@ -8,7 +8,7 @@
                     <div class="card-header bg-primary text-white">{{ __('edit.register') }}</div>
                     <div class="card-body">
                         <form id="sa-form" method="POST"
-                              action="{{ action([App\Http\Controllers\ServerAssetController::class, 'update'], ['server_asset' => $serverAsset]) }}"
+                              action="{{ action([App\Http\Controllers\RunSetController::class, 'update'], ['server_asset' => $serverAsset]) }}"
                               aria-label="{{ __('edit.save') }}">
                             <input type="hidden" name="_method" value="PUT">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -99,8 +99,8 @@
                                 <div class="form-group row mb-0 m-3">
                                     <div class="col-md-6 offset-md-4">
                                         <button type="button" class="add-fields btn btn-dark">
-                                        Add one more application
-                                    </button>
+                                            Add one more application
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -139,7 +139,7 @@
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('edit.save') }}
                                     </button>
-                                    <a href="{{ action([\App\Http\Controllers\ServerAssetController::class, 'index']) }}"
+                                    <a href="{{ action([\App\Http\Controllers\RunSetController::class, 'index']) }}"
                                        class="btn btn-primary">
                                         {{ __('edit.reset') }}
                                     </a>

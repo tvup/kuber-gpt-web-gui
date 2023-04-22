@@ -8,6 +8,7 @@
         "php": "^8.2",
         "ext-intl": "*",
         "ext-mbstring": "*",
+        "ext-redis": "*",
         "laravel/cashier": "^14.12",
         "laravel/framework": "^10.0",
         "laravel/tinker": "^2.0",

@@ -11,7 +11,8 @@
 |
 */
 
-use App\Http\Controllers\ServerAssetController;
+use App\Http\Controllers\ConductorController;
+use App\Http\Controllers\RunSetController;
 use App\Http\Controllers\UserController;
 
 //"Outside" - beyond authentication
@@ -36,6 +37,8 @@ Route::middleware(['locale', 'approved', 'auth'])->group(function () {
     Route::get('credentials', 'CredentialsController@index')->name('credentials.index');
     Route::post('credentials', 'CredentialsController@index')->name('credentials.edit');
     Route::put('credentials', 'CredentialsController@index')->name('credentials.delete');
+    Route::resource('run_sets', RunSetController::class);
+    Route::post('/launch', 'ConductorController@launch')->name('conductor.launch');
 });
 
 Route::middleware(['auth', 'locale'])->group(function () {
@@ -56,6 +59,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin', '
     Route::get('users/{id}/toggle-access', 'UserController@toggleAccess')->name('user.toggle-access');
     Route::resource('users', UserController::class)->except([]);
 
-    Route::resource('server_assets', ServerAssetController::class);
+
 
 });

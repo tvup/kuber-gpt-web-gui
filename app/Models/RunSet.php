@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-class ServerAsset extends BaseModel
+class RunSet extends BaseModel
 {
     use HasFactory;
 

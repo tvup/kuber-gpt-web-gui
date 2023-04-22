@@ -64,13 +64,13 @@
                         <a class="nav-link" href="{{ route('home') }}">Main menu</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.admin_popolatedb') }}">Certificate dashboard</a>
+                        <a class="nav-link" href="{{ route('credentials.index') }}">Certificate dashboard</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.users.index') }}">User list</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.server_assets.index') }}">Server assets</a>
+                        <a class="nav-link" href="{{ route('run_sets.index') }}">Server assets</a>
                     </li>
                     @endguest
                 </ul>

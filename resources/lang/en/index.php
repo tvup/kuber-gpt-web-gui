@@ -2,19 +2,18 @@
 
 return [
 
-    'all_server_assets' => 'All server assets',
-    'new_server_asset' => 'New server asset',
-    'id' => 'Id',
+    'all_run_sets' => 'All run sets',
+    'new_run_set' => 'New run set',
     'nick_name' => 'Nick name',
-    'local_ip' => 'Local IP',
+    'created_at' => 'Created at',
     'public_ip' => 'Public IP',
-    'applications' => 'Applications',
+    'status' => 'Status',
     'tags' => 'Tags',
     'action' => 'Action',
-    'delete' => 'Delete',
-    'edit_server_asset' => 'Edit server asset',
-    'show_server_asset' => 'Show server asset',
-    'delete_server_asset' => 'Delete server asset',
+    'edit_delete' => 'Edit/Delete',
+    'edit_run_set' => 'Edit server asset',
+    'show_run_set' => 'Show server asset',
+    'delete_run_set' => 'Delete server asset',
 
     'edit_user' => 'Edit user',
     'show_user' => 'Show user',

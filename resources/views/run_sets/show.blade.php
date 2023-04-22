@@ -31,11 +31,12 @@
                                 <td>@json($serverAsset->tags) </td>
                                 <td class="d-flex">
                                     @if(Auth::user()->isAdmin())
-                                        <a href="{{ action('ServerAssetController@edit', ['server_asset' => $serverAsset]) }}" class="btn btn-warning mr-2  ">
+                                        <a href="{{ action('RunSetController@edit', ['server_asset' => $serverAsset]) }}"
+                                           class="btn btn-warning mr-2  ">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <form action="{{action([App\Http\Controllers\ServerAssetController::class, 'destroy'],['server_asset' => $serverAsset])}}"
-                                            method="POST">
+                                        <form action="{{action([App\Http\Controllers\RunSetController::class, 'destroy'],['server_asset' => $serverAsset])}}"
+                                              method="POST">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                                             <button class="btn btn-danger">
@@ -50,7 +51,7 @@
                         <div class="form-row text-center">
                             <div class="col-12">
                                 <a class="btn btn-primary justify-content-center"
-                                   href=" {{ action([App\Http\Controllers\ServerAssetController::class, 'index']) }} "> {{__('show.server_assets')}}</a>
+                                   href=" {{ action([App\Http\Controllers\RunSetController::class, 'index']) }} "> {{__('show.server_assets')}}</a>
                             </div>
                         </div>
 

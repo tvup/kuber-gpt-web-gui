@@ -5,9 +5,10 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card shadow-lg">
-                    <div class="card-header bg-primary text-white">{{ __('create.register') }}</div>
+                    <div class="card-header bg-primary text-white">{{ __('create.create') }}</div>
                     <div class="card-body">
-                        <form method="POST" id="sa-form" action="{{ action('ServerAssetController@store') }}" aria-label="{{ __('create.register') }}">
+                        <form method="POST" id="sa-form" action="{{ action('RunSetController@store') }}"
+                              aria-label="{{ __('create.register') }}">
                             @csrf
                             <div class="form-group row">
                                 <label for="nick_name"
@@ -25,20 +26,8 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="local_ip" class="col-md-4 col-form-label text-md-right">{{ __('create.local_ip') }}</label>
-                                <div class="col-md-6">
-                                    <input id="local_ip" type="text"
-                                           class="form-control{{ $errors->has('local_ip') ? ' is-invalid' : '' }}"
-                                           name="local_ip" value="{{ old('local_ip') }}" autofocus>
-                                    @if ($errors->has('local_ip'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('local_ip') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="public_ip" class="col-md-4 col-form-label text-md-right">{{ __('create.public_ip') }}</label>
+                                <label for="public_ip"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('create.public_ip') }}</label>
                                 <div class="col-md-6">
                                     <input id="public_ip" type="text"
                                            class="form-control{{ $errors->has('public_ip') ? ' is-invalid' : '' }}"
@@ -52,18 +41,11 @@
                             </div>
 
                             <div class="fields"></div>
-                            <div class="form-group row mb-0 m-3">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="button" class="add-fields btn btn-dark">
-                                        Add one more application
-                                    </button>
-                                </div>
-                            </div>
                             <div class="tag-fields mt-4"></div>
                             <div class="form-group row m-3">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="button" class="add-tag-fields btn btn-dark">
-                                        Add one more tag
+                                        {{ __('create.add_one_more_tag') }}
                                     </button>
                                 </div>
                             </div>
@@ -72,7 +54,7 @@
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('create.register') }}
                                     </button>
-                                    <a href="{{ action([\App\Http\Controllers\ServerAssetController::class, 'index']) }}"
+                                    <a href="{{ action([\App\Http\Controllers\RunSetController::class, 'index']) }}"
                                        class="btn btn-primary">
                                         {{ __('create.reset') }}
                                     </a>
@@ -86,33 +68,16 @@
     </div>
 @endsection
 @section('scripts')
-    <script type="text/x-templates" id="fields-templates">
-        <div class="form-group row input-fields">
-            <label for="applications" class="col-md-4 col-form-label text-md-right">{{ __('edit.name') }}</label>
-            <div class="col-md-6">
-                <input name="applications[REPLACE_ME][name]" placeholder="name" class="form-control">
-            </div>
-            <label for="applications" class="col-md-4 col-form-label text-md-right">{{ __('edit.url') }}</label>
-            <div class="col-md-6">
-                <input name="applications[REPLACE_ME][url]" placeholder="url" class="form-control">
-            </div>
-            <div class="col-md-6 offset-md-4">
-                <button type="button" class="remove-fields">
-                    Remove these fields
-                </button>
-            </div>
-        </div>
-    </script>
 
     <script type="text/x-templates" id="tag-fields-templates">
         <div class="form-group row input-tag-fields">
-            <label for="tags" class="col-md-4 col-form-label text-md-right">{{ __('edit.tag') }}</label>
+            <label for="tags" class="col-md-4 col-form-label text-md-right">{{ __('create.tag') }}</label>
             <div class="col-md-6">
                 <input name="tags[]" placeholder="tag" class="form-control">
             </div>
             <div class="col-md-6 offset-md-4">
                 <button type="button" class="remove-tag-fields">
-                    Remove this field
+                    {{__('create.remove_this_field')}}
                 </button>
             </div>
         </div>

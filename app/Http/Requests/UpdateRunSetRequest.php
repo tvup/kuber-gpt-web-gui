@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreServerAssetRequest extends FormRequest
+class UpdateRunSetRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,14 +21,13 @@ class StoreServerAssetRequest extends FormRequest
      */
     public function rules(): array
     {
-
         return [
             'nick_name' => ['nullable', 'string', 'max:255'],
             'local_ip' => ['nullable', 'ipv4'],
             'public_ip' => ['nullable', 'ipv4'],
             'applications' => ['nullable', 'array'],
-            'applications.*.name' => ['required', 'string', 'max:250'],
-            'applications.*.url' => ['required', 'url', 'max:250'],
+            //            'applications.*.name' => ['required', 'string', 'max:250'],
+            //            'applications.*.url' => ['required', 'url', 'max:250'],
             'tags' => ['nullable', 'array'],
         ];
     }

@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\ServerAsset;
+use App\Models\RunSet;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
 class ServerAssetFactory extends Factory
 {
-    protected $model = ServerAsset::class;
+    protected $model = RunSet::class;
 
     public function definition(): array
     {

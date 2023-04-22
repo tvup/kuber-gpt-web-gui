@@ -45,7 +45,7 @@
                                 <hr>
                                 <li class="list-group-item">
                                     <a href="#" class="btn btn-primary">
-                                        {{__('home.guide_in_progress')}}
+                                        {{__('home.silver')}}
                                         <i class="fas fa-spinner"></i>
                                     </a>
                                 </li>
@@ -55,7 +55,7 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                         @csrf
                                         <button type="submit" class="btn btn-danger">
-                                            {{ __('auth.logout') }}
+                                            {{ __('home.gold') }}
                                             <i class="fas fa-sign-out-alt"></i>
                                         </button>
                                     </form>

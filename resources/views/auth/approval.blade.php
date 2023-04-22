@@ -5,12 +5,12 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Waiting for Approval</div>
+                    <div class="card-header">{{ __('waiting_for_approval') }}</div>
 
                     <div class="card-body">
-                        Your account is waiting for our administrator approval.
+                        {{ __('account_review') }}
                         <br />
-                        Please check back later.
+                        {{ __('check_back_later') }}
                     </div>
                 </div>
             </div>

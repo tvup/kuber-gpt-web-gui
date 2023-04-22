@@ -115,9 +115,9 @@
                                         {{ __('edituser.save') }}
                                     </button>
                                     @if(!$user->approved_at)
-                                        <a class="btn btn-primary justify-content-center" href=" {{ action('UserController@toggleAccess', $user->id) }} " > {{__('edituser.toggle_user_access')}}</a>
+                                        <a class="btn btn-primary justify-content-center" href=" {{ route('user.toggle-access', $user->id) }} " > {{__('edituser.toggle_user_access')}}</a>
                                     @else
-                                        <a class="btn btn-danger justify-content-center" href=" {{ action('UserController@toggleAccess', $user->id) }} " > {{__('edituser.toggle_user_access')}}</a>
+                                        <a class="btn btn-danger justify-content-center" href=" {{ route('user.toggle-access', $user->id) }} " > {{__('edituser.toggle_user_access')}}</a>
                                     @endif
                                     <a class="btn btn-primary justify-content-center" href=" {{ action('UserController@index') }} "> {{__('edituser.go_back_to_users')}}</a>
                                 </div>

@@ -41,6 +41,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin', '
     Route::get('releasecert/{user}', 'CertificateController@release')->name('admin_releasecert');
 
     Route::get('users/show_by_user_name/{user_name}', 'UserController@showByUserName')->name('user.show-by-user-name')->where('user_name', '.*');
+    Route::get('users/{id}/toggle-access', 'UserController@toggleAccess')->name('user.toggle-access');
     Route::resource('users', UserController::class)->except([]);
 
     Route::resource('server_assets', ServerAssetController::class);

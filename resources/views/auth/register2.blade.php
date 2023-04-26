@@ -38,7 +38,7 @@
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
         <h1 class="text-primary text-center">
-          <strong>Laravel 8 Stripe Subscription Example - CodeSolutionStuff</strong>
+          <strong>Laravel 8 Stripe Subscription</strong>
         </h1>
     </div>
 </div>
@@ -47,7 +47,7 @@
     <div class="panel panel-default credit-card-box">
         <div class="panel-heading display-table" >
             <div class="row display-tr" >
-                <strong>Laravel 8 Stripe Subscription Example - CodeSolutionStuff</strong>
+                <strong>Laravel Stripe Subscription</strong>
             </div>
         </div>
         <div class="panel-body">

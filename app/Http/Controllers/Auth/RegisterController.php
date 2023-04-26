@@ -59,7 +59,7 @@ class RegisterController extends Controller
         //$this->validator(request()->all())->validate();
 
         return Checkout::guest()
-            ->create('starter', [
+            ->create('price_1Mzq2QJsg0XlNoyeqmfLqInO', [
                 'success_url' => route('home'),
                 'cancel_url' => route('home'),
             ]);

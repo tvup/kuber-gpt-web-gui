@@ -95,6 +95,7 @@
         if (error) {
             alert('Something went wrong: ' + error);
         } else {
+            window.location.replace("https://kuber-gpt.com/subscribe/" + {{ $user_id }}+ "/" + setupIntent.payment_method);
             alert('Everrything is good');
         }
     });

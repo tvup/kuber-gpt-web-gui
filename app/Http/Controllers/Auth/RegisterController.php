@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Validator;
 use Laravel\Cashier\Cashier;
 use Laravel\Cashier\Checkout;
 use Laravel\Cashier\Exceptions\IncompletePayment;
+use Laravel\Cashier\Subscription;
 use Stripe\SetupIntent;
 
 class RegisterController extends Controller
@@ -54,20 +55,23 @@ class RegisterController extends Controller
 //        );
         $user = User::find(2);
         $intent = $user->createSetupIntent();
-        return view('auth.register2', ['intent' => $intent]);
+        return view('auth.register2', ['intent' => $intent, 'user_id' => $user->id]);
     }
 
-    public function subscribe()
+    public function subscribe($user_id, $pmi)
     {
-//        $intent = SetupIntent::create(
-//                [], Cashier::stripeOptions()
-//        );
-        $user = User::find(2);
-        $user->newSubscription(
-            'default', 'price_1Mzq2QJsg0XlNoyeqmfLqInO'
-        )->create('pm_1N1GBbJsg0XlNoyeOScKwb13');
+        $user = User::find($user_id);
 
-        return view('home');
+        if(!$user) {
+            abort(404, 'User not found');
+        }
+
+        /** @var Subscription $subscription */
+        $subscription = $user->newSubscription(
+            'default', 'price_1Mzq2QJsg0XlNoyeqmfLqInO'
+        )->create($pmi);
+
+        return view('welcome', ['status' => $subscription->toJson()]);
     }
 
     public function receiveSubscriptionIntent() {

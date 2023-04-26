@@ -54,12 +54,13 @@
             <div class="col-md-12">
                 <form method="post" action="{{route('subscribe')}}" id="reg-form">
                     @csrf
-                <input name="user_name" type="text">
-                <input name="email" type="text">
-                <input name="password" type="text">
+                <label for="email">Email</label><input name="email" type="text">
+                <label for="email">password</label><input name="password" type="text">
                 <input type="hidden" id="pmi" name="pmi" value="">
                 <input type="hidden" name="role" value="user">
-                <input id="card-holder-name" type="text">
+                <input type="hidden" name="allowed_a_is" value="1">
+                <input type="hidden" name="a_is_running" value="0">
+                <label for="email">Full name</label><input id="card-holder-name" type="text">
 
                 <!-- Stripe Elements Placeholder -->
                 <div id="card-element"></div>

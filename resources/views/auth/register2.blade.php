@@ -70,7 +70,7 @@
 <script src="https://js.stripe.com/v3/"></script>
 
 <script>
-    const stripe = Stripe({{ config('cashier.key') }});
+    const stripe = Stripe('{{ config('cashier.key') }}');
 
     const elements = stripe.elements();
     const cardElement = elements.create('card');

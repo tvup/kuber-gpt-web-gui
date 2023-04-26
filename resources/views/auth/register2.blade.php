@@ -53,6 +53,7 @@
         <div class="panel-body">
             <div class="col-md-12">
                 <form method="post" action="{{route('subscribe')}}" id="reg-form">
+                    {{ csrf_token() }}
                 <input name="user_name" type="text">
                 <input name="email" type="text">
                 <input name="password" type="text">

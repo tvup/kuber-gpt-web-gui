@@ -105,6 +105,8 @@
             alert('Something went wrong: ' + error);
         } else {
             document.getElementById('pmi').value = setupIntent.payment_method;
+            console.log('From response: ' + setupIntent.payment_method);
+            console.log('From element: ' + document.getElementById('pmi').value);
             document.getElementById("reg-form").submit();
 
             //window.location.replace("https://kuber-gpt.com/subscribe/" + {{ $user_id }}+ "/" + setupIntent.payment_method);

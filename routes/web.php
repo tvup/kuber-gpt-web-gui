@@ -24,7 +24,7 @@ Route::middleware(['locale'])->group(function () {
     Route::get('/subscription-checkout', 'CashierController@checkoutSubscription')->name('cashier.checkout-subscription');
     Route::get('/products', 'ProductDisplayController@index')->name('products.index');
     Route::post('/dosubsribe', 'Auth\RegisterController@receiveSubscriptionIntent')->name('do.subsribe');
-    Route::get('/subscribe/{user_id}/{pmi}', 'Auth\RegisterController@subscribe')->name('subscribe');
+    Route::post('/subscribe', 'Auth\RegisterController@subscribe')->name('subscribe');
 });
 
 

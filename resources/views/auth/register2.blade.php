@@ -52,6 +52,12 @@
         </div>
         <div class="panel-body">
             <div class="col-md-12">
+                <form method="post" action="{{route('subscribe')}}" id="reg-form">
+                <input name="user_name" type="text">
+                <input name="email" type="text">
+                <input name="password" type="text">
+                <input type="hidden" id="pmi" name="pmi" value="">
+                <input type="hidden" name="role" value="user">
                 <input id="card-holder-name" type="text">
 
                 <!-- Stripe Elements Placeholder -->
@@ -60,6 +66,7 @@
                 <button id="card-button" data-secret="{{ $intent->client_secret }}">
                     Update Payment Method
                 </button>
+                </form>
             </div>
         </div>
     </div>
@@ -95,7 +102,10 @@
         if (error) {
             alert('Something went wrong: ' + error);
         } else {
-            window.location.replace("https://kuber-gpt.com/subscribe/" + {{ $user_id }}+ "/" + setupIntent.payment_method);
+            document.getElementById('pmi').value = setupIntent.payment_method;
+            document.getElementById("reg-form").submit();
+
+            //window.location.replace("https://kuber-gpt.com/subscribe/" + {{ $user_id }}+ "/" + setupIntent.payment_method);
         }
     });
 </script>

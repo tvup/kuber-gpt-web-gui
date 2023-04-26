@@ -58,45 +58,36 @@ class RegisterController extends Controller
         return view('auth.register2', ['intent' => $intent, 'user_id' => $user->id]);
     }
 
-    public function subscribe($user_id, $pmi)
-    {
-        $user = User::find($user_id);
-
-        if(!$user) {
-            abort(404, 'User not found');
-        }
-
-        /** @var Subscription $subscription */
-        $subscription = $user->newSubscription(
-            'default', 'price_1Mzq2QJsg0XlNoyeqmfLqInO'
-        )->create($pmi);
-
-        return view('welcome')->with('status');
-    }
-
-    public function receiveSubscriptionIntent() {
-        //$this->validator(request()->all())->validate();
-
-        return Checkout::guest()
-            ->create('price_1Mzt1XJsg0XlNoyewlROsGpW', [
-                'success_url' => route('home'),
-                'cancel_url' => route('home'),
-            ]);
-
-
-//        DB::beginTransaction();
+//    public function subscribe(Request $request)
+//    {
+//        $user = User::find($user_id);
 //
-//        event(new Registered($user = $this->create(request()->all())));
-//
-//        try {
-//
-//            $newSubscription = $user->newSubscription('main', 'price_1Mzq5TJsg0XlNoyeKhsP3Jqn')->create(request()->payment_method, ['line1' => 'Jernbane Alle 37', 'city' => 'Taastrup', 'postal_code'=>'2630', 'county'=>'DK','email' => $user->email]);
-//        } catch ( IncompletePayment $exception ){
-//            DB::rollback();
-//            return redirect()->back()->with(['error_message' => $exception->getMessage()]);
+//        if(!$user) {
+//            abort(404, 'User not found');
 //        }
 //
-//        DB::commit();
+//        /** @var Subscription $subscription */
+//        $subscription = $user->newSubscription(
+//            'default', 'price_1Mzq2QJsg0XlNoyeqmfLqInO'
+//        )->create($pmi);
+//
+//        return view('welcome')->with('status');
+//    }
+
+    public function subscribe() {
+        DB::beginTransaction();
+
+        event(new Registered($user = $this->create(request()->all())));
+
+        try {
+            $newSubscription = $user->newSubscription('default', 'price_1Mzq2QJsg0XlNoyeqmfLqInO')->create(request()->payment_method, request()->pmi);
+            logger()->info($newSubscription->toJson());
+        } catch ( IncompletePayment $exception ){
+            DB::rollback();
+            return redirect()->back()->with(['error_message' => $exception->getMessage()]);
+        }
+
+        DB::commit();
 
         $this->guard()->login($user);
 

@@ -52,7 +52,9 @@ class RegisterController extends Controller
 //        $intent = SetupIntent::create(
 //                [], Cashier::stripeOptions()
 //        );
-        return view('auth.register2');
+        $user = User::find(2);
+        $intent = $user->createSetupIntent();
+        return view('auth.register2', ['intent' => $intent]);
     }
 
     public function receiveSubscriptionIntent() {

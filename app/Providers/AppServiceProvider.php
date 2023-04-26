@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //Stripe::setApiKey(config('cashier.key'));
+        Stripe::setApiKey(config('cashier.key'));
         Cashier::calculateTaxes();
     }
 

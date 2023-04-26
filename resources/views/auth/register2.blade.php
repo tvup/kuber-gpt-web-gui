@@ -52,68 +52,14 @@
         </div>
         <div class="panel-body">
             <div class="col-md-12">
-              {!! Form::open(['url' => route('do.subsribe'), 'data-parsley-validate', 'id' => 'payment-form']) !!}
-                @if ($message = Session::get('success'))
-                    <div class="alert alert-success alert-block">
-                        <button type="button" class="close" data-dismiss="alert">?</button>
-                        <strong>{{ $message }}</strong>
-                    </div>
-                @endif
+                <input id="card-holder-name" type="text">
 
-                @if ($error_message = Session::get('error'))
-                    <div class="alert alert-success alert-block">
-                        <button type="button" class="close" data-dismiss="alert">?</button>
-                        <strong>{{ $error_message }}</strong>
-                    </div>
-                @endif
-                <div class="form-group" id="product-group">
-                    {!! Form::label('plane', 'Select Plan:') !!}
-                    {!! Form::select('plane', ['laravel' => 'Laravel ($10)', 'vue' => 'Vue ($20)', 'react' => 'React ($15)'], 'Book', [
-                        'class'                       => 'form-control',
-                        'required'                    => 'required',
-                        'data-parsley-class-handler'  => '#product-group'
-                    ]) !!}
-                </div>
+                <!-- Stripe Elements Placeholder -->
+                <div id="card-element"></div>
 
-                <div class="form-group" id="user-group">
-                    {!! Form::label(null, 'Email:') !!}
-                    {!! Form::text('email', null, [
-                        'class'                         => 'form-control',
-                        'required'                      => 'required',
-                        'data-parsley-type'             => 'string',
-                        'maxlength'                     => '150',
-                        'data-parsley-trigger'          => 'change focusout',
-                    ]) !!}
-                </div>
-                <div class="form-group" id="user-group">
-                    {!! Form::label(null, 'User name:') !!}
-                    {!! Form::text('user_name', null, [
-                        'class'                         => 'form-control',
-                        'required'                      => 'required',
-                        'data-parsley-type'             => 'string',
-                        'maxlength'                     => '150',
-                        'data-parsley-trigger'          => 'change focusout',
-                    ]) !!}
-                </div>
-                <div class="form-group" id="user-group">
-                    {!! Form::label(null, 'Password:') !!}
-                    {!! Form::text('password', null, [
-                        'class'                         => 'form-control',
-                        'required'                      => 'required',
-                        'data-parsley-type'             => 'string',
-                        'maxlength'                     => '150',
-                        'data-parsley-trigger'          => 'change focusout',
-                    ]) !!}
-                </div>
-                  <div class="form-group">
-                      {!! Form::submit('Place order!', ['class' => 'btn btn-lg btn-block btn-primary btn-order', 'id' => 'submitBtn', 'style' => 'margin-bottom: 10px;']) !!}
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12">
-                        <span class="payment-errors" style="color: red;margin-top:10px;"></span>
-                    </div>
-                  </div>
-              {!! Form::close() !!}
+                <button id="card-button" data-secret="{{ $intent->client_secret }}">
+                    Update Payment Method
+                </button>
             </div>
         </div>
     </div>
@@ -121,45 +67,37 @@
   </div>
 </div>
 
-    <script>
-window.ParsleyConfig = {
-    errorsWrapper: '<div></div>',
-            errorTemplate: '<div class="alert alert-danger parsley" role="alert"></div>',
-            errorClass: 'has-error',
-            successClass: 'has-success'
-        };
-    </script>
+<script src="https://js.stripe.com/v3/"></script>
 
-    <script src="http://parsleyjs.org/dist/parsley.js"></script>
-    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-    <script>
-Stripe.setPublishableKey("<?php echo env('STRIPE_PUBLISHABLE_SECRET') ?>");
-        jQuery(function($) {
-            $('#payment-form').submit(function(event) {
-                var $form = $(this);
-                $form.parsley().subscribe('parsley:form:validate', function(formInstance) {
-                    formInstance.submitEvent.preventDefault();
-                    alert();
-                    return false;
-                });
-                $form.find('#submitBtn').prop('disabled', true);
-                Stripe.card.createToken($form, stripeResponseHandler);
-                return false;
-            });
-        });
-        function stripeResponseHandler(status, response) {
-            var $form = $('#payment-form');
-            if (response.error) {
-                $form.find('.payment-errors').text(response.error.message);
-                $form.find('.payment-errors').addClass('alert alert-danger');
-                $form.find('#submitBtn').prop('disabled', false);
-                $('#submitBtn').button('reset');
-            } else {
-                var token = response.id;
-                $form.append($('<input type="hidden" name="stripeToken" />').val(token));
-                $form.get(0).submit();
+<script>
+    const stripe = Stripe('stripe-public-key');
+
+    const elements = stripe.elements();
+    const cardElement = elements.create('card');
+
+    cardElement.mount('#card-element');
+
+
+    const cardHolderName = document.getElementById('card-holder-name');
+    const cardButton = document.getElementById('card-button');
+    const clientSecret = cardButton.dataset.secret;
+
+    cardButton.addEventListener('click', async (e) => {
+        const { setupIntent, error } = await stripe.confirmCardSetup(
+            clientSecret, {
+                payment_method: {
+                    card: cardElement,
+                    billing_details: { name: cardHolderName.value }
+                }
             }
-        };
-    </script>
+        );
+
+        if (error) {
+            alert('Something went wrong: ' + error);
+        } else {
+            alert('Everrything is good');
+        }
+    });
+</script>
 </body>
 </html>

@@ -80,7 +80,7 @@ class RegisterController extends Controller
         event(new Registered($user = $this->create(request()->all())));
 
         try {
-            $newSubscription = $user->newSubscription('default', 'price_1Mzq2QJsg0XlNoyeqmfLqInO')->create(request()->payment_method, request()->pmi);
+            $newSubscription = $user->newSubscription('default', 'price_1Mzq2QJsg0XlNoyeqmfLqInO')->create(request()->pmi);
             logger()->info($newSubscription->toJson());
         } catch ( IncompletePayment $exception ){
             DB::rollback();

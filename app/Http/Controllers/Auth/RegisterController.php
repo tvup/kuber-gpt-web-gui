@@ -74,15 +74,30 @@ class RegisterController extends Controller
 //        return view('welcome')->with('status');
 //    }
 
-    public function subscribe() {
+    public function subscribe()
+    {
         DB::beginTransaction();
 
         event(new Registered($user = $this->create(request()->all())));
 
         try {
-            $newSubscription = $user->newSubscription('default', 'price_1Mzq2QJsg0XlNoyeqmfLqInO')->create(request()->pmi);
+            $user_details = [
+                'email' => $user->email,
+                'shipping' => [
+                    'address' => [
+                        'line1' => 'Jernbane Alle 1',
+                        'city' => 'Taastrup',
+                        'country' => 'Denmark',
+                        'postal_code' => '2630',
+                    ],
+                    'name' => request()->full_name,
+                    'phone' => '42455663',
+                ]
+            ];
+
+            $newSubscription = $user->newSubscription('default', 'price_1Mzq2QJsg0XlNoyeqmfLqInO')->create(request()->pmi, $user_details);
             logger()->info($newSubscription->toJson());
-        } catch ( IncompletePayment $exception ){
+        } catch (IncompletePayment $exception) {
             DB::rollback();
             return redirect()->back()->with(['error_message' => $exception->getMessage()]);
         }
@@ -96,11 +111,10 @@ class RegisterController extends Controller
     }
 
 
-
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array<string, string>  $data
+     * @param array<string, string> $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -115,7 +129,7 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array<string, string>  $data
+     * @param array<string, string> $data
      */
     protected function create(array $data): User
     {
@@ -123,8 +137,8 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'role' => UserRoleEnum::User,
-            'allowed_a_is' => (int) $data['allowed_a_is'],
-            'a_is_running' => (int) $data['a_is_running'],
+            'allowed_a_is' => (int)$data['allowed_a_is'],
+            'a_is_running' => (int)$data['a_is_running'],
         ]);
     }
 }

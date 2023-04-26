@@ -123,6 +123,8 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'role' => UserRoleEnum::User,
+            'allowed_a_is' => (int) $data['allowed_a_is'],
+            'a_is_running' => (int) $data['a_is_running'],
         ]);
     }
 }

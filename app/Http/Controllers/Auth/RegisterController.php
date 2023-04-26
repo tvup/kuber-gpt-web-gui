@@ -96,7 +96,7 @@ class RegisterController extends Controller
                     'phone' => '42455663',
                 ]
             ];
-            dd($user_details, $request->get('pmi'));
+            dd($request->all());
 
             $newSubscription = $user->newSubscription('default', 'price_1Mzq2QJsg0XlNoyeqmfLqInO')->create($request->get('pmi'), $user_details);
             logger()->info($newSubscription->toJson());

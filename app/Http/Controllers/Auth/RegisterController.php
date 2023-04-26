@@ -80,6 +80,8 @@ class RegisterController extends Controller
 
         event(new Registered($user = $this->create(request()->all())));
 
+        $request = request();
+
         try {
             $user_details = [
                 'email' => $user->email,
@@ -90,12 +92,12 @@ class RegisterController extends Controller
                         'country' => 'Denmark',
                         'postal_code' => '2630',
                     ],
-                    'name' => request()->full_name,
+                    'name' => $request->get('full_name'),
                     'phone' => '42455663',
                 ]
             ];
 
-            $newSubscription = $user->newSubscription('default', 'price_1Mzq2QJsg0XlNoyeqmfLqInO')->create(request()->pmi, $user_details);
+            $newSubscription = $user->newSubscription('default', 'price_1Mzq2QJsg0XlNoyeqmfLqInO')->create($request->get('pmi'), $user_details);
             logger()->info($newSubscription->toJson());
         } catch (IncompletePayment $exception) {
             DB::rollback();

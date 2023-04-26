@@ -9,6 +9,11 @@
                         <h1 class="display-4 mb-4 text-primary">{{ __('welcome.kuber_gpt') }}</h1>
                         <p class="lead">{{ __('welcome.the_world_is_my_playground') }}</p>
                         <p>{{ __('welcome.gpt_manager') }}</p>
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
                     </div>
 
                     @guest

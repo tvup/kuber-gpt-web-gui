@@ -64,7 +64,7 @@ class RegisterController extends Controller
 //        );
         $user = User::find(2);
         $user->newSubscription(
-            'default', 'starter'
+            'default', 'price_1Mzq2QJsg0XlNoyeqmfLqInO'
         )->create('pm_1N1GBbJsg0XlNoyeOScKwb13');
 
         return view('home');

@@ -57,6 +57,19 @@ class RegisterController extends Controller
         return view('auth.register2', ['intent' => $intent]);
     }
 
+    public function subscribe()
+    {
+//        $intent = SetupIntent::create(
+//                [], Cashier::stripeOptions()
+//        );
+        $user = User::find(2);
+        $user->newSubscription(
+            'default', 'starter'
+        )->create('pm_1N1GBbJsg0XlNoyeOScKwb13');
+
+        return view('home');
+    }
+
     public function receiveSubscriptionIntent() {
         //$this->validator(request()->all())->validate();
 

@@ -71,7 +71,7 @@ class RegisterController extends Controller
             'default', 'price_1Mzq2QJsg0XlNoyeqmfLqInO'
         )->create($pmi);
 
-        return view('welcome')->with('status', $subscription->toJson());
+        return view('welcome')->with('status');
     }
 
     public function receiveSubscriptionIntent() {

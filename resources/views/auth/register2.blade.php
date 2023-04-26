@@ -92,6 +92,7 @@
     const clientSecret = cardButton.dataset.secret;
 
     cardButton.addEventListener('click', async (e) => {
+        e.preventDefault();
         const { setupIntent, error } = await stripe.confirmCardSetup(
             clientSecret, {
                 payment_method: {

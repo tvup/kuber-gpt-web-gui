@@ -23,6 +23,7 @@ Route::middleware(['locale'])->group(function () {
     Route::get('/sales', 'ProductDisplayController@choose')->name('sales.choose');
     Route::get('/subscription-checkout', 'CashierController@checkoutSubscription')->name('cashier.checkout-subscription');
     Route::get('/products', 'ProductDisplayController@index')->name('products.index');
+    Route::post('/dosubsribe', 'Auth\RegisterController@receiveSubscriptionIntent')->name('do.subsribe');
 });
 
 

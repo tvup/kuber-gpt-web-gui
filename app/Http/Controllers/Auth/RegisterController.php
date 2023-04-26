@@ -6,9 +6,16 @@ use App\Enums\UserRoleEnum;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use DB;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Laravel\Cashier\Cashier;
+use Laravel\Cashier\Checkout;
+use Laravel\Cashier\Exceptions\IncompletePayment;
+use Stripe\SetupIntent;
 
 class RegisterController extends Controller
 {
@@ -39,6 +46,46 @@ class RegisterController extends Controller
     {
         //$this->middleware('guest');
     }
+
+    public function showRegistrationForm()
+    {
+//        $intent = SetupIntent::create(
+//                [], Cashier::stripeOptions()
+//        );
+        return view('auth.register2');
+    }
+
+    public function receiveSubscriptionIntent() {
+        //$this->validator(request()->all())->validate();
+
+        return Checkout::guest()
+            ->create('price_tshirt', [
+                'success_url' => route('your-success-route'),
+                'cancel_url' => route('your-cancel-route'),
+            ]);
+
+
+//        DB::beginTransaction();
+//
+//        event(new Registered($user = $this->create(request()->all())));
+//
+//        try {
+//
+//            $newSubscription = $user->newSubscription('main', 'price_1Mzq5TJsg0XlNoyeKhsP3Jqn')->create(request()->payment_method, ['line1' => 'Jernbane Alle 37', 'city' => 'Taastrup', 'postal_code'=>'2630', 'county'=>'DK','email' => $user->email]);
+//        } catch ( IncompletePayment $exception ){
+//            DB::rollback();
+//            return redirect()->back()->with(['error_message' => $exception->getMessage()]);
+//        }
+//
+//        DB::commit();
+
+        $this->guard()->login($user);
+
+        return $this->registered(request(), $user)
+            ?: redirect($this->redirectPath());
+    }
+
+
 
     /**
      * Get a validator for an incoming registration request.

@@ -59,9 +59,9 @@ class RegisterController extends Controller
         //$this->validator(request()->all())->validate();
 
         return Checkout::guest()
-            ->create('price_tshirt', [
-                'success_url' => route('your-success-route'),
-                'cancel_url' => route('your-cancel-route'),
+            ->create('starter', [
+                'success_url' => route('home'),
+                'cancel_url' => route('home'),
             ]);
 
 

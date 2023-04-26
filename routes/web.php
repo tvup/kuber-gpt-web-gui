@@ -18,7 +18,7 @@ use App\Http\Controllers\UserController;
 //"Outside" - beyond authentication
 Route::get('/', function () {
     return redirect('/sales');
-});
+})->name('home');
 Route::middleware(['locale'])->group(function () {
     Route::get('/sales', 'ProductDisplayController@choose')->name('sales.choose');
     Route::get('/subscription-checkout', 'CashierController@checkoutSubscription')->name('cashier.checkout-subscription');

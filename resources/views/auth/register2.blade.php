@@ -93,7 +93,6 @@
         const elements = stripe.elements();
 
         var style = {
-            hidePostalCode: true,
             base: {
                 lineHeight: '1.35',
                 fontSize: "16px",
@@ -111,7 +110,7 @@
             },
 
         };
-        var cardElement = elements.create("card", { style: style });
+        var cardElement = elements.create("card", { style: style, hidePostalCode: true, });
 
         cardElement.mount('#card-element');
 

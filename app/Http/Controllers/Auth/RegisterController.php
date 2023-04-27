@@ -85,9 +85,9 @@ class RegisterController extends Controller
         try {
             $user_details = [
                 'email' => $user->email,
-                'shipping' => [
+                'billing_details' => [
                     'address' => [
-                        'line1' => 'Jernbane Alle 1',
+                        'line1' => 'Jernbane Alle 2',
                         'city' => 'Taastrup',
                         'country' => 'Denmark',
                         'postal_code' => '2630',
@@ -96,7 +96,7 @@ class RegisterController extends Controller
                     'phone' => '42455663',
                 ]
             ];
-            $newSubscription = $user->newSubscription('default', 'price_1Mzq2QJsg0XlNoyeqmfLqInO')->create($request->get('pmi'), $user_details);
+            $newSubscription = $user->newSubscription('default', 'price_1Mzq2QJsg0XlNoyeqmfLqInO')->create($request->get('pmi'));
             logger()->info($newSubscription->toJson());
         } catch (IncompletePayment $exception) {
             DB::rollback();

@@ -4,7 +4,7 @@
 
 @section('content')
     <main id="main-container">
-        <div class="bg-image" style="background-image: url('media/photos/photo3@2x.jpg');">
+        <div class="bg-image" style="background-image: url('/media/photos/photo3@2x.jpg');">
             <div class="bg-primary-dark-op">
                 <div class="content content-full text-center py-6">
                     <h1 class="h2 text-white mb-2">{{__('products.weve_put_it_all_together_for_you')}}</h1>
@@ -58,21 +58,11 @@
                     </div>
                 </div>
                 @endforeach
+            </div>
             <div class="text-end">
                 <a class="fs-sm fw-semibold link-fx" href="be_pages_ecom_store_products.html">{{__('products.with_care')}}</a>
             </div>
         </div>
-        <div class="bg-body-dark">
-            <div class="content content-full">
-                <div class="my-5 text-center">
-                    <h3 class="h4 mb-4">
-                        Over <strong>50.000</strong> digital products!
-                    </h3>
-                    <a class="btn btn-primary px-4 py-2" href="be_pages_ecom_store_products.html">
-                        Explore Store <i class="fa fa-arrow-right ms-1"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
+
     </main>
 @endsection

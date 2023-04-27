@@ -15,7 +15,7 @@ class ConductorController extends Controller
     public function launch(RunSet $run_set) {
         //check that the user does not have valid active certificates
         $user = auth()->user();
-        if($user->allowed_a_is >= $user->a_is_running) {
+        if($user->allowed_a_is <= $user->a_is_running) {
             return redirect()->back()->with('msg-danger', 'Error: Valid certificate(s) already exist');
         }
 

@@ -40,7 +40,7 @@ Route::middleware(['locale', 'auth'])->group(function () {
     Route::post('credentials', 'CredentialsController@index')->name('credentials.edit');
     Route::put('credentials', 'CredentialsController@index')->name('credentials.delete');
     Route::resource('run_sets', RunSetController::class);
-    Route::post('/launch', 'ConductorController@launch')->name('conductor.launch');
+    Route::post('/launch/{$run_set}', 'ConductorController@launch')->name('conductor.launch');
 });
 
 Route::middleware(['auth', 'locale'])->group(function () {

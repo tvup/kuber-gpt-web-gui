@@ -119,20 +119,13 @@
         addressElement.mount("#address-element");
 
 
-        // const cardElement = elements.create('card', {
-        //
-        // });
-
-
-
-
-        const cardHolderName = document.getElementById('Field-nameInput');
-        const cardCity = document.getElementById('Field-localityInput');
-        const cardCountry = document.getElementById('Field-countryInput');
-        const cardLine1 = document.getElementById('Field-addressLine1Input');
-        const cardPostalCode = document.getElementById('Field-addressLine1Input');
-        const cardButton = document.getElementById('card-button');
-        const clientSecret = cardButton.dataset.secret;
+        let cardHolderName = document.getElementById('Field-nameInput');
+        let cardCity = document.getElementById('Field-localityInput');
+        let cardCountry = document.getElementById('Field-countryInput');
+        let cardLine1 = document.getElementById('Field-addressLine1Input');
+        let cardPostalCode = document.getElementById('Field-addressLine1Input');
+        let cardButton = document.getElementById('card-button');
+        let clientSecret = cardButton.dataset.secret;
 
         cardButton.addEventListener('click', async (e) => {
             e.preventDefault();

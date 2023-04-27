@@ -52,9 +52,7 @@ class CreateFirstAdminUser extends Command
             $password = $this->secret('What is the password?');
 
             User::create([
-                'user_name' => 'admin',
                 'name' => 'admin',
-                'surname' => 'admin',
                 'vat_number' => 'admin',
                 'email' => 'admin@admin.admin',
                 'role' => 'admin',

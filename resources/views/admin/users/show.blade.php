@@ -35,9 +35,7 @@
                         <table class="table table-responsive-md table-striped">
                             <thead>
                             <tr>
-                                <th>{{__('showallusers.user')}}</th>
                                 <th>{{__('showallusers.name')}}</th>
-                                <th>{{__('showallusers.surname')}}</th>
                                 <th>{{__('showallusers.vat_number')}}</th>
                                 <th>{{__('showallusers.company')}}</th>
                                 <th>{{__('showallusers.e_mail')}}</th>
@@ -46,9 +44,7 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td scope="row">{{ $user->user_name }}</td>
                                 <td>{{ $user->name }} </td>
-                                <td>{{ $user->surname }} </td>
                                 <td>{{ $user->vat_number }} </td>
                                 <td>{{ $user->company }} </td>
                                 <td>{{ $user->email }} </td>

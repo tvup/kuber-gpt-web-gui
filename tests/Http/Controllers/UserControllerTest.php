@@ -24,7 +24,7 @@ class UserControllerTest extends TestCase
 
         // Test with valid data
         $validData = [
-            'user_name' => fake()->firstName,
+            'name' => fake()->name,
             'email' => fake()->email,
             'role' => fake()->randomElement([UserRoleEnum::User->value, UserRoleEnum::Manager->value, UserRoleEnum::Admin->value]),
         ];
@@ -33,7 +33,7 @@ class UserControllerTest extends TestCase
 
         // Test with invalid data
         $invalidData = [
-            'user_name' => '',
+            'name' => '',
             'email' => 'aa',
             'role' => '',
         ];

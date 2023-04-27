@@ -24,7 +24,7 @@ class UserController extends Controller
     protected function validator(array $data): \Illuminate\Validation\Validator
     {
         return Validator::make($data, [
-            'user_name' => 'sometimes|string|max:255',
+            'name' => 'sometimes|string|max:255',
             'email' => 'sometimes|string|email|max:255|unique:users',
             'password' => 'sometimes|string|min:8|confirmed',
             'role' => 'sometimes|in:admin,user,manager_ro',
@@ -42,10 +42,10 @@ class UserController extends Controller
 
     }
 
-    public function create(string $user_name = null): View
+    public function create(string $name = null): View
     {
-        if ($user_name) {
-            return view('admin.users.create')->with('user_name', $user_name);
+        if ($name) {
+            return view('admin.users.create')->with('name', $name);
         } else {
             return view('admin.users.create');
         }
@@ -59,11 +59,11 @@ class UserController extends Controller
         return view('admin.users.show', ['user' => $user]);
     }
 
-    public function showByUserName(string $user_name): View
+    public function showByUserName(string $name): View
     {
-        $user = User::where('user_name', $user_name)->first();
+        $user = User::where('name', $name)->first();
         if (null === $user) {
-            return view('admin.users.create')->with('user_name', $user_name);
+            return view('admin.users.create')->with('name', $name);
         }
 
         return view('admin.users.show', ['user' => $user]);
@@ -89,10 +89,9 @@ class UserController extends Controller
         }
 
         User::create([
-            'user_name' => $data['user_name'],
+            'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'name' => $data['name'],
             'surname' => $data['surname'],
             'vat_number' => $data['vat_number'],
             'role' => $data['role'],

@@ -31,11 +31,10 @@
                             @foreach($users as $user)
                                 <tr>
                                     <td>
-                                        <a href="{{ route('admin.user.show-by-user-name', ['user_name' => $user->user_name]) }}"
-                                           class="text-primary font-weight-bold">{{$user->user_name}} </a>
+                                        <a href="{{ route('admin.user.show-by-user-name', ['name' => $user->name]) }}"
+                                           class="text-primary font-weight-bold">{{$user->name}} </a>
                                     </td>
                                     <td>{{$user->name}}</td>
-                                    <td>{{$user->surname}}</td>
                                     <td>{{$user->vat_number}}</td>
                                     <td>{{$user->company}}</td>
                                     <td>{{$user->email}}</td>
@@ -45,7 +44,7 @@
                                                class="btn btn-warning" title="{{__('showallusers.edit_user')}}">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <a href="{{ route('admin.user.show-by-user-name', ['user_name' => $user->user_name]) }}"
+                                            <a href="{{ route('admin.user.show-by-user-name', ['name' => $user->name]) }}"
                                                class="btn btn-info" title="{{__('showallusers.show_user')}}">
                                                 <i class="fas fa-user"></i>
                                             </a>

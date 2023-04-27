@@ -15,12 +15,10 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_name' => $this->faker->userName(),
             'email' => $this->faker->unique()->safeEmail(),
             'password' => bcrypt($this->faker->password()),
             'vat_number' => $this->faker->word(),
             'name' => $this->faker->name(),
-            'surname' => $this->faker->word(),
             'remember_token' => Str::random(10),
             'role' => UserRoleEnum::User,
             'password_clear' => bcrypt($this->faker->password()),

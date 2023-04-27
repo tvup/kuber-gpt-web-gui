@@ -59,7 +59,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin', '
     Route::get('revokecert/{certificate}', 'CredentialsController@revoke')->name('admin_revokecert');
     Route::get('releasecert/{user}', 'CredentialsController@release')->name('admin_releasecert');
 
-    Route::get('users/show_by_user_name/{user_name}', 'UserController@showByUserName')->name('user.show-by-user-name')->where('user_name', '.*');
+    Route::get('users/show_by_user_name/{name}', 'UserController@showByUserName')->name('user.show-by-user-name')->where('name', '.*');
     Route::get('users/{id}/toggle-access', 'UserController@toggleAccess')->name('user.toggle-access');
     Route::resource('users', UserController::class)->except([]);
 

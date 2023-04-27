@@ -13,12 +13,10 @@ use Laravel\Cashier\Billable;
 
 /**
  * @property int $id
- * @property string $user_name
  * @property string $email
  * @property string $password
  * @property string $vat_number
  * @property string $name
- * @property string $surname
  * @property string $remember_token
  * @property UserRoleEnum $role
  * @property string $password_clear
@@ -47,7 +45,7 @@ class User extends Authenticatable
      * @var array<string>
      */
     protected $fillable = [
-        'user_name', 'email', 'password', 'vat_number', 'name', 'surname', 'role', 'password_clear', 'company', 'approved_at', 'allowed_a_is', 'a_is_running',
+        'name', 'email', 'password', 'vat_number', 'role', 'password_clear', 'company', 'approved_at', 'allowed_a_is', 'a_is_running',
     ];
 
     /**

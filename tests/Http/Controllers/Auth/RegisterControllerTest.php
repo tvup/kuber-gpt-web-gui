@@ -22,7 +22,7 @@ class RegisterControllerTest extends TestCase
 
         // Test with valid data
         $validData = [
-            'user_name' => 'John Doe',
+            'name' => 'John Doe',
             'email' => 'john@example.com',
             'role' => UserRoleEnum::User->value,
             'password' => 'password123',
@@ -51,7 +51,6 @@ class RegisterControllerTest extends TestCase
         $user->save();
 
         $userData = [
-            'user_name' => 'johndoe',
             'email' => 'john@example.com',
             'password' => 'password123',
             'password_confirmation' => 'password123',
@@ -67,11 +66,9 @@ class RegisterControllerTest extends TestCase
         $user = User::whereUserName('johndoe')->firstOrFail();
 
         $this->assertInstanceOf(User::class, $user);
-        $this->assertEquals($userData['user_name'], $user->user_name);
+        $this->assertEquals($userData['name'], $user->name);
         $this->assertEquals($userData['email'], $user->email);
         $this->assertTrue(Hash::check($userData['password'], $user->password));
-        $this->assertEquals($userData['name'], $user->name);
-        $this->assertEquals($userData['surname'], $user->surname);
         $this->assertEquals($userData['vat_number'], $user->vat_number);
         $this->assertEquals($userData['role'], $user->role->value);
         $this->assertEquals($userData['company'], $user->company);
@@ -81,12 +78,10 @@ class RegisterControllerTest extends TestCase
     public function testRegisterSuccess()
     {
         $userData = [
-            'user_name' => fake()->userName,
             'email' => fake()->unique()->safeEmail,
             'password' => 'password123',
             'password_confirmation' => 'password123',
-            'name' => fake()->firstName,
-            'surname' => fake()->lastName,
+            'name' => fake()->name,
             'vat_number' => fake()->randomNumber(9),
             'role' => fake()->randomElement([UserRoleEnum::Admin->value, UserRoleEnum::Manager->value, UserRoleEnum::User->value]),
             'company' => fake()->company,
@@ -96,19 +91,17 @@ class RegisterControllerTest extends TestCase
         $response->assertRedirect('/home');
         $this->assertDatabaseHas('users', [
             'email' => $userData['email'],
-            'user_name' => $userData['user_name'],
+            'name' => $userData['name'],
         ]);
     }
 
     public function testRegisterValidationError()
     {
         $userData = [
-            'user_name' => '',
             'email' => 'invalid-email',
             'password' => 'short',
             'password_confirmation' => 'mismatch',
             'name' => '',
-            'surname' => '',
             'vat_number' => '',
             'role' => '',
             'company' => '',
@@ -119,7 +112,7 @@ class RegisterControllerTest extends TestCase
         $response->assertSessionHasErrors([
             'email',
             'password',
-            'user_name',
+            'name',
         ]);
     }
 }

@@ -128,16 +128,15 @@
         //     }
         // })
 
-
+        let address = {};
         const myPromise = addressElement.on('change', (event) => {
             if (event.complete){
                 // Extract potentially complete address
-                const address = event.value.address;
-                console.log(event.value.name);
-                console.log(event.value.address.city);
-                console.log(event.value.address.country);
-                console.log(event.value.address.line1);
-                console.log(event.value.address.postal_code);
+                address.name = event.value.name;
+                address.city = event.value.address.city;
+                address.country = event.value.address.country;
+                address.line1 = event.value.address.line1;
+                address.postal_code = event.value.address.postal_code;
             }
         })
 
@@ -161,7 +160,13 @@
                 clientSecret, {
                     payment_method: {
                         card: cardElement,
-                        billing_details: {name: address.name
+                            billing_details: { name: address.name, address: {
+                                    city: address.city,
+                                    country: address.country,
+                                    line1: address.line1,
+                                    postal_code: address.postal_code
+
+                                },
                         }
                     }
                 }

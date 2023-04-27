@@ -52,7 +52,6 @@ class RegisterController extends Controller
     public function showRegistrationForm($stripe_price_id)
     {
         $user = app(User::class);
-        $user->name = 'Jens Jensen';
         $intent = $user->createSetupIntent();
         $price = Price::wherePriceId($stripe_price_id)->first();
         return view('auth.register2', ['intent' => $intent, 'stripe_price_id' => $stripe_price_id, 'price' => $price]);
@@ -85,6 +84,7 @@ class RegisterController extends Controller
         DB::commit();
 
         $this->guard()->login($user);
+        $user->updateStripeCustomer(['name'=>$request->get('name'), 'email' => $request->get('email'), 'address'=>['city'=>$request->get('city'),'line1'=>$request->get('line1'), 'country'=>$request->get('country'),'postal_code'=>$request->get('postal_code')]]);
 
         $returnValue = $this->registered(request(), $user) ;
         if ($returnValue) {

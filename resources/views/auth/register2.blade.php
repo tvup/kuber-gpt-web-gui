@@ -34,6 +34,11 @@
                     <input type="hidden" name="role" value="user">
                     <input type="hidden" name="allowed_a_is" value="1">
                     <input type="hidden" name="a_is_running" value="0">
+                    <input type="hidden" id="name" name="name" value="">
+                    <input type="hidden" id="line1" name="line1" value="">
+                    <input type="hidden" id="city" name="city" value="">
+                    <input type="hidden" id="postal_code" name="postal_code" value="">
+                    <input type="hidden" id="country" name="country" value="">
                     <label for="card-element">Credit or debit card:</label><br>
                     <div id="card-element" class="form-control" style='height: 2.4em; padding-top: .7em;'></div>
                     <!-- We'll put the error messages in this element -->
@@ -179,6 +184,11 @@
                 alert('Something went wrong: ' + error);
             } else {
                 document.getElementById('payment_method').value = setupIntent.payment_method;
+                document.getElementById('name').value = address.name;
+                document.getElementById('line1').value = address.line1;
+                document.getElementById('city').value = address.city;
+                document.getElementById('postal_code').value = address.postal_code;
+                document.getElementById('country').value = address.country;
                 document.getElementById("reg-form").submit();
             }
         });

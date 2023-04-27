@@ -115,10 +115,7 @@
         cardElement.mount('#card-element');
 
         const addressElement = elements.create("address", {
-            mode: "billing",
-            fields: {
-                city: 'always',
-            },
+            mode: "billing"
         });
         addressElement.mount("#address-element");
 

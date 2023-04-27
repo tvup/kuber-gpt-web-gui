@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Enums\UserRoleEnum;
 use App\Http\Controllers\Controller;
+use App\Models\Price;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use DB;
@@ -52,7 +53,8 @@ class RegisterController extends Controller
     {
         $user = app(User::class);
         $intent = $user->createSetupIntent();
-        return view('auth.register2', ['intent' => $intent, 'product_id' => $product_id]);
+        $price = Price::wherePriceId($product_id)->first();
+        return view('auth.register2', ['intent' => $intent, 'product_id' => $product_id, 'price' => $price]);
     }
 
 

@@ -84,7 +84,23 @@
         console.log(stripe);
 
         const elements = stripe.elements();
-        const cardElement = elements.create('card');
+        var style = {
+            base: {
+                color: "#32325d",
+                fontFamily: 'Arial, sans-serif',
+                fontSmoothing: "antialiased",
+                fontSize: "16px",
+                "::placeholder": {
+                    color: "#32325d"
+                }
+            },
+            invalid: {
+                fontFamily: 'Arial, sans-serif',
+                color: "#fa755a",
+                iconColor: "#fa755a"
+            }
+        };
+        var cardElement = elements.create("card", { style: style });
 
         cardElement.mount('#card-element');
 

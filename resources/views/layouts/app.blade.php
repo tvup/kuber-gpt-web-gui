@@ -23,6 +23,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="icon" href="{{ asset('icon-32x32.png') }}"  />
+
 </head>
 <body>
 <div class="wrapper">

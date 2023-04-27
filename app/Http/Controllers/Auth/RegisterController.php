@@ -85,7 +85,7 @@ class RegisterController extends Controller
         try {
             $user_details = [
                 'email' => $user->email,
-                'billing_details' => [
+                'billing' => [
                     'address' => [
                         'line1' => 'Jernbane Alle 2',
                         'city' => 'Taastrup',

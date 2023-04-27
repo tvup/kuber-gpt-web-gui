@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreRunSetRequest;
 use App\Http\Requests\UpdateRunSetRequest;
 use App\Models\RunSet;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
 use Illuminate\View\View;
@@ -16,7 +17,10 @@ class RunSetController extends Controller
      */
     public function index(): View
     {
-        return view('run_sets.index', ['run_sets' => RunSet::all()]);
+        /** @var User $user */
+        $user = auth()->user();
+        $runSets = $user->runSets;
+        return view('run_sets.index', ['run_sets' => $runSets]);
     }
 
     /**

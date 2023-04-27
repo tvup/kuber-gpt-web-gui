@@ -157,4 +157,15 @@ class UserController extends Controller
         return view('admin.users.edit', ['user' => $user])->with('msg-success', $text);
 
     }
+
+    public function running_id($user_id, $running_port) {
+
+        $user = User::find($user_id);
+        if(!$user) {
+            abort(404, 'user not found');
+        }
+
+        $user->running_port = $running_port;
+        $user->save();
+    }
 }

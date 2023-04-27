@@ -127,16 +127,7 @@
         //         address = event.value.address;
         //     }
         // })
-        const myPromise = addressElement.getValue()
-            .then(function(result) {
-                if (result.complete) {
-                    // Allow user to proceed to the next step
-                    // Optionally, use value to store the address details
-                }
-            })
 
-        console.log('Log this one');
-        console.log(myPromise.value);
 
         const handleNextStep = async () => {
             const addressElement = elements.getElement('address');
@@ -151,6 +142,10 @@
             return address;
         };
         let address = handleNextStep();
+
+        address.then(function(result) {
+           console.log(result);
+        });
 
 
 

@@ -48,11 +48,11 @@ class RegisterController extends Controller
         //$this->middleware('guest');
     }
 
-    public function showRegistrationForm()
+    public function showRegistrationForm($product_id)
     {
-        $user = User::find(2);
+        $user = app(User::class);
         $intent = $user->createSetupIntent();
-        return view('auth.register2', ['intent' => $intent, 'user_id' => $user->id]);
+        return view('auth.register2', ['intent' => $intent, 'product_id' => $product_id]);
     }
 
 
@@ -65,7 +65,7 @@ class RegisterController extends Controller
         $request = request();
 
         try {
-            $newSubscription = $user->newSubscription('default', config('app.default_product_price_id'))->create($request->get('pmi'));
+            $newSubscription = $user->newSubscription('default', $request->get('product_id'))->create($request->get('pmi'));
         } catch (IncompletePayment $exception) {
             DB::rollback();
             return redirect()->back()->with(['error_message' => $exception->getMessage()]);

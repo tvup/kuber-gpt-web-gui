@@ -24,7 +24,7 @@
                                 <img class="img-fluid options-item" src="media/various/ecom_product3.png" alt="">
                                 <div class="options-overlay bg-black-75">
                                     <div class="options-overlay-content">
-                                        <a class="btn btn-sm btn-alt-secondary" href="{{route('users.create', ['product_id' => 'price_1Mzq2QJsg0XlNoyeqmfLqInO'])}}">
+                                        <a class="btn btn-sm btn-alt-secondary" href="">
                                             View
                                         </a>
                                         <a class="btn btn-sm btn-alt-secondary" href="javascript:void(0)">
@@ -94,10 +94,10 @@
                                 <img class="img-fluid options-item" src="media/various/ecom_product1.png" alt="">
                                 <div class="options-overlay bg-black-75">
                                     <div class="options-overlay-content">
-                                        <a class="btn btn-sm btn-alt-secondary" href="{{route('users.create', ['product_id' => 'price_1Mzq2QJsg0XlNoyeqmfLqInO'])}}">
+                                        <a class="btn btn-sm btn-alt-secondary" href="{{route('users.create', ['product_id' => 'price_1N1OgmJsg0XlNoyeN2AeLqFr'])}}">
                                             View
                                         </a>
-                                        <a class="btn btn-sm btn-alt-secondary" href="{{route('users.create', ['product_id' => 'price_1Mzq2QJsg0XlNoyeqmfLqInO'])}}">
+                                        <a class="btn btn-sm btn-alt-secondary" href="{{route('users.create', ['product_id' => 'price_1N1OgmJsg0XlNoyeN2AeLqFr'])}}">
                                             <i class="fa fa-plus text-success me-1"></i> Add to cart
                                         </a>
                                         <div class="text-warning mt-3">
@@ -114,7 +114,7 @@
                         <div class="block-content">
                             <div class="mb-1">
                                 <div class="fw-semibold float-end ms-1">€ 12 / hour</div>
-                                <a class="h6" href="be_pages_ecom_store_product.html">Rent for 24 hours - pay ultimo month</a>
+                                <a class="h6" href="{{route('users.create', ['product_id' => 'price_1N1OgmJsg0XlNoyeN2AeLqFr'])}}">Rent for 24 hours - pay ultimo month</a>
                             </div>
                             <p class="fs-sm text-muted">"Meter billing"</p>
                             <p class="fs-sm text-muted">Billed as you use - after first hour which will be billed for 1 hour no matter what, but afterwards, you can turn on/off as you wish</p>
@@ -131,10 +131,10 @@
                                 <img class="img-fluid options-item" src="media/various/ecom_product2.png" alt="">
                                 <div class="options-overlay bg-black-75">
                                     <div class="options-overlay-content">
-                                        <a class="btn btn-sm btn-alt-secondary" href="be_pages_ecom_store_product.html">
+                                        <a class="btn btn-sm btn-alt-secondary" href="{{route('users.create', ['product_id' => 'price_1N1OhZJsg0XlNoyeHp4NvlIH'])}}">
                                             View
                                         </a>
-                                        <a class="btn btn-sm btn-alt-secondary" href="javascript:void(0)">
+                                        <a class="btn btn-sm btn-alt-secondary" href="{{route('users.create', ['product_id' => 'price_1N1OhZJsg0XlNoyeHp4NvlIH'])}}">
                                             <i class="fa fa-plus text-success me-1"></i> Add to cart
                                         </a>
                                         <div class="text-warning mt-3">
@@ -152,7 +152,7 @@
                         <div class="block-content">
                             <div class="mb-1">
                                 <div class="fw-semibold float-end ms-1">€ 135 / month</div>
-                                <a class="h6" href="be_pages_ecom_store_product.html">{{__('products.we_have_it_all_for_you')}}</a>
+                                <a class="h6" href="{{route('users.create', ['product_id' => 'price_1N1OhZJsg0XlNoyeHp4NvlIH'])}}"></a>
                             </div>
                             <p class="fs-sm text-muted">Pay in advance</p>
                             <p class="fs-sm text-muted">Runs for a month</p>
@@ -166,10 +166,10 @@
                                 <img class="img-fluid options-item" src="media/various/ecom_product3.png" alt="">
                                 <div class="options-overlay bg-black-75">
                                     <div class="options-overlay-content">
-                                        <a class="btn btn-sm btn-alt-secondary" href="be_pages_ecom_store_product.html">
+                                        <a class="btn btn-sm btn-alt-secondary" href="{{route('users.create', ['product_id' => 'price_1N1OiiJsg0XlNoye9zvZx2js'])}}">
                                             View
                                         </a>
-                                        <a class="btn btn-sm btn-alt-secondary" href="javascript:void(0)">
+                                        <a class="btn btn-sm btn-alt-secondary" href="{{route('users.create', ['product_id' => 'price_1N1OiiJsg0XlNoye9zvZx2js'])}}">
                                             <i class="fa fa-plus text-success me-1"></i> Add to cart
                                         </a>
                                         <div class="text-warning mt-3">
@@ -187,7 +187,7 @@
                         <div class="block-content">
                             <div class="mb-1">
                                 <div class="fw-semibold float-end ms-1">€ 500 / month</div>
-                                <a class="h6" href="be_pages_ecom_store_product.html">This is our premium product</a>
+                                <a class="h6" href="{{route('users.create', ['product_id' => 'price_1N1OiiJsg0XlNoye9zvZx2js'])}}">This is our premium product</a>
                             </div>
                             <p class="fs-sm text-muted">{{__('products.you_can_have_it_all')}}</p>
                             <p class="fs-sm text-muted">Bring nothing - just start the window and you're on</p>

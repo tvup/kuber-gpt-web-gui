@@ -54,12 +54,12 @@
             <div class="col-md-12">
                 <form method="post" action="{{route('subscribe')}}" id="reg-form">
                     @csrf
-                <label for="email">Email</label><input name="email" type="text">
-                <label for="password">password</label><input name="password" type="text">
-                <label for="city">city</label><input id="city" type="text">
-                <label for="country">country</label><input id="country" type="text">
-                <label for="line1">line1</label><input id="line1" type="text">
-                <label for="postal_code">postal_code</label><input id="postal_code" type="text">
+                <label for="email">Email</label><input name="email" type="text"><br><br>
+                <label for="password">password</label><input name="password" type="text"><br>
+                <label for="city">city</label><input id="city" type="text"><br>
+                <label for="country">country</label><input id="country" type="text"><br>
+                <label for="line1">line1</label><input id="line1" type="text"><br>
+                <label for="postal_code">postal_code</label><input id="postal_code" type="text"><br>
                 <input type="hidden" id="pmi" name="pmi" value="">
                 <input type="hidden" name="role" value="user">
                 <input type="hidden" name="allowed_a_is" value="1">
@@ -86,7 +86,8 @@
     const stripe = Stripe('{{ config('cashier.key') }}');
 
     const elements = stripe.elements();
-    const cardElement = elements.create('card');
+    const cardElement = elements.create('card', {
+        hidePostalCode: true});
 
     cardElement.mount('#card-element');
 

@@ -50,29 +50,11 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-//        $intent = SetupIntent::create(
-//                [], Cashier::stripeOptions()
-//        );
         $user = User::find(2);
         $intent = $user->createSetupIntent();
         return view('auth.register2', ['intent' => $intent, 'user_id' => $user->id]);
     }
 
-//    public function subscribe(Request $request)
-//    {
-//        $user = User::find($user_id);
-//
-//        if(!$user) {
-//            abort(404, 'User not found');
-//        }
-//
-//        /** @var Subscription $subscription */
-//        $subscription = $user->newSubscription(
-//            'default', 'price_1Mzq2QJsg0XlNoyeqmfLqInO'
-//        )->create($pmi);
-//
-//        return view('welcome')->with('status');
-//    }
 
     public function subscribe()
     {
@@ -83,8 +65,7 @@ class RegisterController extends Controller
         $request = request();
 
         try {
-            $newSubscription = $user->newSubscription('default', 'price_1Mzq2QJsg0XlNoyeqmfLqInO')->create($request->get('pmi'));
-            logger()->info($newSubscription->toJson());
+            $newSubscription = $user->newSubscription('default', config('app.default_product_price_id'))->create($request->get('pmi'));
         } catch (IncompletePayment $exception) {
             DB::rollback();
             return redirect()->back()->with(['error_message' => $exception->getMessage()]);
@@ -95,7 +76,7 @@ class RegisterController extends Controller
         $this->guard()->login($user);
 
         return $this->registered(request(), $user)
-            ?: redirect($this->redirectPath());
+            ?: redirect($this->redirectPath()->with('status','Registered!'));
     }
 
 

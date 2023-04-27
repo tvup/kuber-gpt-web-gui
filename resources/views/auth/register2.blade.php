@@ -138,10 +138,7 @@
 
             return address;
         };
-        const fetchThing = () => handleNextStep();
-        const result = fetchThing();
-        const {address} = result ? JSON.parse(result) : {}
-        console.log(address);
+        console.log(handleNextStep());
 
 
 

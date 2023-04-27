@@ -52,6 +52,7 @@ class RegisterController extends Controller
     public function showRegistrationForm($stripe_price_id)
     {
         $user = app(User::class);
+        $user->name = 'Jens Jensen';
         $intent = $user->createSetupIntent();
         $price = Price::wherePriceId($stripe_price_id)->first();
         return view('auth.register2', ['intent' => $intent, 'stripe_price_id' => $stripe_price_id, 'price' => $price]);

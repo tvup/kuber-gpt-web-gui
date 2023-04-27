@@ -126,11 +126,11 @@
 
 
 
-        const cardHolderName = document.getElementById('card-holder-name');
-        const cardCity = document.getElementById('city');
-        const cardCountry = document.getElementById('country');
-        const cardLine1 = document.getElementById('line1');
-        const cardPostalCode = document.getElementById('postal_code');
+        const cardHolderName = document.getElementById('Field-nameInput');
+        const cardCity = document.getElementById('Field-localityInput');
+        const cardCountry = document.getElementById('Field-countryInput');
+        const cardLine1 = document.getElementById('Field-addressLine1Input');
+        const cardPostalCode = document.getElementById('Field-addressLine1Input');
         const cardButton = document.getElementById('card-button');
         const clientSecret = cardButton.dataset.secret;
 

@@ -71,7 +71,7 @@
 
                                     <h3 class="lead light-text">{{ $price->name }}</h3>
                                     <p class="light-text">{{ $price->descr }}</p>
-                                    <h3 class="light-text lead text-small">{{ $price->amount }}</h3>
+                                    <h3 class="light-text lead text-small">€ {{ $price->amount }}</h3>
 
                             </td>
                             <td>
@@ -86,7 +86,7 @@
                         <span>Total</span>
                     </div>
                     <div class="col-md-4 offset-md-4">
-                        <span class="text-right" style="display: inline-block">$100</span>
+                        <span class="text-right" style="display: inline-block">€ {{ $price->amount }}</span>
                     </div>
                 </div>
                 <hr>

@@ -138,6 +138,7 @@
 
             return address;
         };
+        address = handleNextStep();
         console.log(handleNextStep());
 
 
@@ -154,17 +155,16 @@
 
         cardButton.addEventListener('click', async (e) => {
             e.preventDefault();
-            await handleNextStep();
             const {setupIntent, error} = await stripe.confirmCardSetup(
                 clientSecret, {
                     payment_method: {
                         card: cardElement,
-                        billing_details: {name: address.Field-nameInput.value,
+                        billing_details: {name: address.name,
                             address: {
-                                city: address.Field-localityInput.value,
-                                country: address.Field-countryInput.value,
-                                line1: address.Field-addressLine1Input.value,
-                                postal_code: address.Field-postalCodeInput.value
+                                city: address.locality,
+                                country: address.country,
+                                line1: address.line1,
+                                postal_code: address.postal_code
                             }
                         }
                     }

@@ -70,7 +70,7 @@
                             <td>
 
                                     <h3 class="lead light-text">{{ $price->name }}</h3>
-                                    <p class="light-text">{{ $price->name }}</p>
+                                    <p class="light-text">{{ $price->descr }}</p>
                                     <h3 class="light-text lead text-small">{{ $price->amount }}</h3>
 
                             </td>

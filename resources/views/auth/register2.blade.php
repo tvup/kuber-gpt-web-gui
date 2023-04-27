@@ -144,7 +144,6 @@
             return address;
         };
         let address = handleNextStep();
-        console.log(handleNextStep());
 
 
 

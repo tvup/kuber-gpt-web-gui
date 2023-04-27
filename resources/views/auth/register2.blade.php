@@ -134,7 +134,7 @@
         // let cardCountry = document.getElementById('Field-countryInput');
         // let cardLine1 = document.getElementById('Field-addressLine1Input');
         // let cardPostalCode = document.getElementById('Field-addressLine1Input');
-        // let cardButton = document.getElementById('card-button');
+        let cardButton = document.getElementById('card-button');
         let clientSecret = cardButton.dataset.secret;
 
         cardButton.addEventListener('click', async (e) => {
@@ -145,8 +145,8 @@
                         card: cardElement,
                         billing_details: {name: address.Field-nameInput.value,
                             address: {
-                                city: caddress.Field-localityInput.value,
-                                country: caddress.Field-countryInput.value,
+                                city: address.Field-localityInput.value,
+                                country: address.Field-countryInput.value,
                                 line1: address.Field-addressLine1Input.value,
                                 postal_code: address.Field-postalCodeInput.value
                             }

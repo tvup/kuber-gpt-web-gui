@@ -35,50 +35,75 @@
 
 </head>
 <body id="app-layout">
-<div class="row">
-    <div class="col-md-8 col-md-offset-2">
-        <h1 class="text-primary text-center">
-          <strong>Laravel 8 Stripe Subscription</strong>
-        </h1>
-    </div>
-</div>
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <div class="panel panel-default credit-card-box">
-        <div class="panel-heading display-table" >
-            <div class="row display-tr" >
-                <strong>Laravel Stripe Subscription</strong>
-            </div>
-        </div>
-        <div class="panel-body">
-            <div class="col-md-12">
-                <form method="post" action="{{route('subscribe')}}" id="reg-form">
-                    @csrf
-                <label for="email">Email</label><input name="email" type="text"><br><br>
-                <label for="password">password</label><input name="password" type="text"><br>
-                <label for="city">city</label><input id="city" type="text"><br>
-                <label for="country">country</label><input id="country" type="text"><br>
-                <label for="line1">line1</label><input id="line1" type="text"><br>
-                <label for="postal_code">postal_code</label><input id="postal_code" type="text"><br>
-                <input type="hidden" id="pmi" name="pmi" value="">
-                <input type="hidden" id="pmi" name="product_id" value="{{$product_id}}">
-                <input type="hidden" name="role" value="user">
-                <input type="hidden" name="allowed_a_is" value="1">
-                <input type="hidden" name="a_is_running" value="0">
-                <label for="email">Full name</label><input name="full_name" id="card-holder-name" type="text">
-
-                <!-- Stripe Elements Placeholder -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 offset-md-1">
+            <hr>
+            <h1 class="lead" style="font-size: 1.5em">Checkout</h1>
+            <hr>
+            <h3 class="lead" style="font-size: 1.2em; margin-bottom: 1.6em;">Billing details</h3>
+            <form method="POST" action="{{route('subscribe')}}" id="reg-form">
+                @csrf()
+                <div class="form-group">
+                    <label for="email" class="light-text">Email Address</label>
+                    @guest
+                        <input type="text" name="email" class="form-control my-input" required>
+                    @else
+                        <input type="text" name="email" class="form-control my-input" value="{{ auth()->user()->email }}" readonly required>
+                    @endguest
+                </div>
+                <div class="form-group">
+                    <label for="password" class="light-text">password</label>
+                    <input type="password" name="password" class="form-control my-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="light-text">password</label>
+                    <input type="password" name="password" class="form-control my-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="name" class="light-text">Name</label>
+                    <input type="text" name="full_name" id="card-holder-name" class="form-control my-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="line1" class="light-text">Address</label>
+                    <input type="text" name="line1" id="line1" class="form-control my-input" required>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="city" class="light-text">City</label>
+                            <input type="text" name="city" class="form-control my-input" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="province" class="light-text">Province</label>
+                        <input type="text" name="province" class="form-control my-input" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="country" class="light-text">Country</label>
+                    <input type="text" name="country" class="form-control my-input" required>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="postal_code" class="light-text">Postal Code</label>
+                            <input type="text" name="postal_code"  id="postal_code" class="form-control my-input" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="phone" class="light-text">Phone</label>
+                        <input type="text" name="phone" class="form-control my-input" required>
+                    </div>
+                </div>
                 <div id="card-element"></div>
-
-                <button id="card-button" data-secret="{{ $intent->client_secret }}">
+                <button id="card-button">
                     Update Payment Method
                 </button>
-                </form>
-            </div>
+            </form>
         </div>
     </div>
 
-  </div>
 </div>
 
 <script src="https://js.stripe.com/v3/"></script>

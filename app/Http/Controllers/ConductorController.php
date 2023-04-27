@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\RunSet;
 use Illuminate\Http\Request;
-use Redis;
+use Illuminate\Support\Facades\Redis;
 use RedisException;
 
 class ConductorController extends Controller

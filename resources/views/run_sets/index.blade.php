@@ -6,10 +6,14 @@
             <div class="col-md-14">
                 @include('partials.msg')
                 <div>
-                    <p>Add a run set to prepare the AI</p>
-                    <p>Then click launch</p>
-                    <p>Hit that F5 - we haven't made the page active yet - you'll be looking for an IP-address to access your ai</p>
-                    <p>Happy ai'ing</p>
+                    <ul>
+                        <li>Add a run set to prepare the AI</li>
+                        <li>Then click launch</li>
+                        <li>Hit that F5 - we haven't made the page active yet - you'll be looking for an IP-address to
+                            access your ai
+                        </li>
+                        <li>Happy ai'ing</li>
+                    </ul>
                 </div>
                 <div class="card shadow">
                     <div class="card-header bg-primary text-white d-flex align-items-center justify-content-between">
@@ -52,7 +56,9 @@
                                            class="text-primary font-weight-bold">{{$runSet->nick_name}} </a>
                                     </td>
                                     <td>{{$runSet->created_at}}</td>
-                                    <td><a href="http://{{auth()->user()->running_port . ':50001'}}">{{auth()->user()->running_port . ':50001'}}</a></td>
+                                    <td>
+                                        <a href="http://{{auth()->user()->running_port . ':50001'}}">{{auth()->user()->running_port . ':50001'}}</a>
+                                    </td>
                                     <td>{{$runSet->status}}</td>
                                     <td>
                                         @foreach(is_array($runSet->tags) ? $runSet->tags : [$runSet->tags] as $tag)
@@ -62,7 +68,7 @@
                                     </td>
                                     <td>
                                         <form action="{{route('conductor.launch',['run_set' => $runSet])}}"
-                                            method="POST">
+                                              method="POST">
                                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                                             <button class="btn btn-danger">
                                                 <i class="fas fa-user-times">LAUNCH</i>

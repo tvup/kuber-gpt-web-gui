@@ -29,6 +29,10 @@
                         <label for="password" class="light-text">Confirm password</label>
                         <input type="password" name="password" class="form-control my-input" required>
                     </div>
+                    <input type="hidden" id="pmi" name="product_id" value="{{$product_id}}">
+                    <input type="hidden" name="role" value="user">
+                    <input type="hidden" name="allowed_a_is" value="1">
+                    <input type="hidden" name="a_is_running" value="0">
                     <label for="card-element">Credit or debit card:</label><br>
                     <div id="card-element" class="form-control" style='height: 2.4em; padding-top: .7em;'></div>
                     <!-- We'll put the error messages in this element -->

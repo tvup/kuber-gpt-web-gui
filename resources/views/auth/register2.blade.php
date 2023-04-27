@@ -12,22 +12,6 @@
                     @csrf()
                     <div id="address-element"></div>
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="postal_code" class="light-text">Postal Code</label>
-                                <input type="text" name="postal_code" id="postal_code" class="form-control my-input"
-                                       required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="city" class="light-text">City</label>
-                                <input type="text" name="city" class="form-control my-input" required>
-                            </div>
-                        </div>
-
-                    </div>
                     <div class="form-group">
                         <label for="email" class="light-text">Email Address</label>
                         @guest

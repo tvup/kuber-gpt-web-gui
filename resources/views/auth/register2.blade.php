@@ -119,13 +119,27 @@
         addressElement.mount("#address-element");
 
 
-        let address = '';
-        addressElement.on('change', (event) => {
-            if (event.complete){
-                // Extract potentially complete address
-                address = event.value.address;
+        // let address = '';
+        // addressElement.on('change', (event) => {
+        //     if (event.complete){
+        //         // Extract potentially complete address
+        //         address = event.value.address;
+        //     }
+        // })
+
+        const handleNextStep = async () => {
+            const addressElement = elements.getElement('address');
+
+            const {complete, value} = await addressElement.getValue();
+
+            if (complete) {
+                // Allow user to proceed to the next step
+                // Optionally, use value to store the address details
             }
-        })
+            console.log(value);
+        };
+
+
 
 
 

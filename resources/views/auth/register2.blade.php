@@ -140,6 +140,7 @@
             return address;
         };
         let address = handleNextStep();
+        console.log(address);
 
 
 

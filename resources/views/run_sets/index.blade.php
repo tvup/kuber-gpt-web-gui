@@ -46,7 +46,7 @@
                                            class="text-primary font-weight-bold">{{$runSet->nick_name}} </a>
                                     </td>
                                     <td>{{$runSet->created_at}}</td>
-                                    <td>{{$runSet->public_ip .':' . $user->running_port}}</td>
+                                    <td>{{$runSet->public_ip .':' . auth()->user()->running_port}}</td>
                                     <td>{{$runSet->status}}</td>
                                     <td>
                                         @foreach(is_array($runSet->tags) ? $runSet->tags : [$runSet->tags] as $tag)

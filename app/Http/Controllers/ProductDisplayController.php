@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Price;
 use Illuminate\View\View;
 
 class ProductDisplayController extends Controller
@@ -10,6 +11,7 @@ class ProductDisplayController extends Controller
     {
         return view('products.appetizer', [
             'title' => 'Template Inheritance',
+            'products' => Price::whereEnvironment(config('app.simulate'))->get()
         ]);
     }
 

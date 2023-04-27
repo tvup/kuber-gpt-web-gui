@@ -67,7 +67,13 @@ class RegisterController extends Controller
         $request = request();
 
         try {
-            $newSubscription = $user->newSubscription('default', $request->get('stripe_price_id'))->create($request->get('payment_method'));
+            $type = Price::wherePriceId($request->get('stripe_price_id'))->first()->type;
+            if($type == 'subscription') {
+                $newSubscription = $user->newSubscription('default', $request->get('stripe_price_id'))->create($request->get('payment_method'));
+            } else if ($type == 'metered') {
+                $newSubscription = $user->newSubscription('default')->meteredPrice($request->get('stripe_price_id'))->create($request->get('payment_method'));
+            }
+
         } catch (IncompletePayment $exception) {
             DB::rollback();
             return redirect()->back()->with(['error_message' => $exception->getMessage()]);

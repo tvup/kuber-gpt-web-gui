@@ -149,6 +149,7 @@ return [
     */
 
     'default_product_price_id' => env('DEFAULT_PRODCUT_PRICE_ID'),
+    'simulate' => env('SIMULATE'),
 
     'providers' => [
 

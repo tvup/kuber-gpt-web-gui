@@ -9,9 +9,10 @@
                 <div class="content content-full text-center py-6">
                     <h1 class="h2 text-white mb-2">{{__('products.weve_put_it_all_together_for_you')}}</h1>
                     <h2 class="h4 fw-normal text-white-75 mb-0">{{__('products.and_weve_really_enjoyed_it_in_the_long_long_time_its_taken')}}</h2>
-                    <h3>{{__('products.psst_if_you_are_the_type_who_can_also_spend_day_in_and_day_out_then_maybe_you_should_just_put_the_payment_card_away_and_click_here')}}</h3>
                 </div>
+                <h3 class="text-black-75 text-right"><a href="{{ route('its-free') }}">{{__('products.psst_if_you_are_the_type_who_can_also_spend_day_in_and_day_out_then_maybe_you_should_just_put_the_payment_card_away_and_click_here')}}</a></h3>
             </div>
+
         </div>
 
         <div class="content content-full content-boxed">

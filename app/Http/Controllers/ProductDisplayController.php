@@ -17,7 +17,7 @@ class ProductDisplayController extends Controller
 
     public function choose(): View
     {
-        return view('sales.appetizer', [
+        return view('landing-pages.appetizer', [
             'title' => 'Template Inheritance',
         ]);
     }

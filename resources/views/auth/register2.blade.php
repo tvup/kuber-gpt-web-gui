@@ -138,7 +138,7 @@
 
             return address;
         };
-        address = handleNextStep();
+        let address = handleNextStep();
         console.log(handleNextStep());
 
 

@@ -75,8 +75,14 @@ class RegisterController extends Controller
 
         $this->guard()->login($user);
 
-        return $this->registered(request(), $user)->with('status','Registered!')
-            ?: redirect($this->redirectPath())->with('status','Registered!');
+        $retrun = $this->registered(request(), $user) ;
+        if ($retrun) {
+            session(['status' => 'Registered']);
+            return $retrun;
+        } else {
+            return redirect($this->redirectPath());
+        }
+
     }
 
 

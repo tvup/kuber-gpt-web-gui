@@ -20,7 +20,7 @@ Route::get('/', function () {
     return redirect('/sales');
 })->name('home');
 Route::middleware(['locale'])->group(function () {
-    Route::get('/users/create/{product_id}', 'UserController@showRegistrationForm')->name('users.create');
+    Route::get('/users/create/{product_id}', 'Auth\RegisterController@showRegistrationForm')->name('users.create');
     Route::get('/users/{user_id}/running_port/{running_port}', 'UserController@running_id')->name('sales.choose');
     Route::get('/sales', 'ProductDisplayController@choose')->name('sales.choose');
     Route::get('/subscription-checkout', 'CashierController@checkoutSubscription')->name('cashier.checkout-subscription');

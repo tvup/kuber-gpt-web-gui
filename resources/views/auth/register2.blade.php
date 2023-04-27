@@ -15,9 +15,9 @@
                     <div class="form-group">
                         <label for="email" class="light-text">Email Address</label>
                         @guest
-                            <input type="text" name="email" class="form-control my-input" required>
+                            <input type="text" name="email" class="form-control my-input" id="email" required>
                         @else
-                            <input type="text" name="email" class="form-control my-input"
+                            <input type="text" name="email" class="form-control my-input" id="email"
                                    value="{{ auth()->user()->email }}" readonly required>
                         @endguest
                     </div>
@@ -150,7 +150,7 @@
         // let cardCity = document.getElementById('Field-localityInput');
         // let cardCountry = document.getElementById('Field-countryInput');
         // let cardLine1 = document.getElementById('Field-addressLine1Input');
-        // let cardPostalCode = document.getElementById('Field-addressLine1Input');
+        const emailField = document.getElementById('email');
         let cardButton = document.getElementById('card-button');
         let clientSecret = cardButton.dataset.secret;
 
@@ -163,6 +163,7 @@
                         card: cardElement,
                             billing_details: {
                                 name: address.name,
+                                email: emailField.value,
                                 address: {
                                     line1: address.line1,
                                     city: address.city,

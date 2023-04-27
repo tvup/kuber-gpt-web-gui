@@ -144,7 +144,9 @@
         let address = handleNextStep();
 
         address.then(function(result) {
-           console.log(result);
+            if (result.complete) {
+                console.log(result);
+            }
         });
 
 

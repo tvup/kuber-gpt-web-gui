@@ -124,15 +124,6 @@
         });
         addressElement.mount("#address-element");
 
-
-        // let address = '';
-        // addressElement.on('change', (event) => {
-        //     if (event.complete){
-        //         // Extract potentially complete address
-        //         address = event.value.address;
-        //     }
-        // })
-
         let address = {};
         const myPromise = addressElement.on('change', (event) => {
             if (event.complete){
@@ -144,24 +135,12 @@
                 address.postal_code = event.value.address.postal_code;
             }
         })
-
-
-
-
-
-
-
-        // let cardHolderName = document.getElementById('Field-nameInput');
-        // let cardCity = document.getElementById('Field-localityInput');
-        // let cardCountry = document.getElementById('Field-countryInput');
-        // let cardLine1 = document.getElementById('Field-addressLine1Input');
         const emailField = document.getElementById('email');
         let cardButton = document.getElementById('card-button');
         let clientSecret = cardButton.dataset.secret;
 
         cardButton.addEventListener('click', async (e) => {
             e.preventDefault();
-            console.log(address);
             const {setupIntent, error} = await stripe.confirmCardSetup(
                 clientSecret, {
                     payment_method: {

@@ -29,7 +29,8 @@
                         <label for="password" class="light-text">Confirm password</label>
                         <input type="password" name="password" class="form-control my-input" required>
                     </div>
-                    <input type="hidden" id="pmi" name="product_id" value="{{$product_id}}">
+                    <input type="hidden" id="pmi" name="stripe_price_id" value="{{$stripe_price_id}}">
+                    <input type="hidden" id="payment_method" name="payment_method" value="">
                     <input type="hidden" name="role" value="user">
                     <input type="hidden" name="allowed_a_is" value="1">
                     <input type="hidden" name="a_is_running" value="0">
@@ -172,7 +173,7 @@
             if (error) {
                 alert('Something went wrong: ' + error);
             } else {
-                document.getElementById('pmi').value = setupIntent.payment_method;
+                document.getElementById('payment_method').value = setupIntent.payment_method;
                 document.getElementById("reg-form").submit();
             }
         });

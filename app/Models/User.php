@@ -90,7 +90,7 @@ class User extends Authenticatable
     }
 
     public function runSets() {
-        $this->hasMany(RunSet::class);
+        return $this->hasMany(RunSet::class);
     }
 
 }

@@ -59,7 +59,6 @@ class RegisterController extends Controller
         $user = app(User::class);
         $intent = $user->createSetupIntent();
         $price = Price::wherePriceId($stripe_price_id)->first();
-        $faker = Factory::create();
         if(in_array($price->type, ['tokenized', 'limited-time'])) {
             $user->email = '';
             $user->password = '';

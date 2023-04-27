@@ -55,7 +55,11 @@
                 <form method="post" action="{{route('subscribe')}}" id="reg-form">
                     @csrf
                 <label for="email">Email</label><input name="email" type="text">
-                <label for="email">password</label><input name="password" type="text">
+                <label for="password">password</label><input name="password" type="text">
+                <label for="city">city</label><input id="city" type="text">
+                <label for="country">country</label><input id="country" type="text">
+                <label for="line1">line1</label><input id="line1" type="text">
+                <label for="postal_code">postal_code</label><input id="postal_code" type="text">
                 <input type="hidden" id="pmi" name="pmi" value="">
                 <input type="hidden" name="role" value="user">
                 <input type="hidden" name="allowed_a_is" value="1">
@@ -88,6 +92,10 @@
 
 
     const cardHolderName = document.getElementById('card-holder-name');
+    const cardCity = document.getElementById('city');
+    const cardCountry = document.getElementById('country');
+    const cardLine1 = document.getElementById('line1');
+    const cardPostalCode = document.getElementById('postal_code');
     const cardButton = document.getElementById('card-button');
     const clientSecret = cardButton.dataset.secret;
 
@@ -97,7 +105,7 @@
             clientSecret, {
                 payment_method: {
                     card: cardElement,
-                    billing_details: { name: cardHolderName.value }
+                    billing_details: { name: cardHolderName.value,  address: {city: cardCity.value, country: cardCountry.value, line1: cardLine1.value, postal_code: cardPostalCode.value}}
                 }
             }
         );

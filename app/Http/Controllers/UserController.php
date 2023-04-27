@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -165,7 +166,7 @@ class UserController extends Controller
             abort(404, 'user not found');
         }
 
-        $user->running_port = $running_port;
+        $user->running_port = Str::replace('"', '', $running_port);
         $user->save();
     }
 }

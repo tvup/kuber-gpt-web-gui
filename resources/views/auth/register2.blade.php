@@ -136,7 +136,7 @@
             })
 
         console.log('Log this one');
-        console.log(myPromise.value.address);
+        console.log(myPromise.value);
 
         const handleNextStep = async () => {
             const addressElement = elements.getElement('address');

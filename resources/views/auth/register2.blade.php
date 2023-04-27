@@ -161,12 +161,13 @@
                 clientSecret, {
                     payment_method: {
                         card: cardElement,
-                            billing_details: { name: address.name, address: {
-                                    city: address.city,
-                                    country: address.country,
+                            billing_details: {
+                                name: address.name,
+                                address: {
                                     line1: address.line1,
-                                    postal_code: address.postal_code
-
+                                    city: address.city,
+                                    postal_code: address.postal_code,
+                                    country: address.country
                                 },
                         }
                     }

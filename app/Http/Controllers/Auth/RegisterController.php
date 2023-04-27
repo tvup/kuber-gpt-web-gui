@@ -96,7 +96,7 @@ class RegisterController extends Controller
                     'phone' => '42455663',
                 ]
             ];
-            $newSubscription = $user->newSubscription('default', 'price_1Mzq2QJsg0XlNoyeqmfLqInO')->create($request->get('pmi'));
+            $newSubscription = $user->newSubscription('default', 'price_1Mzq2QJsg0XlNoyeqmfLqInO')->create($request->get('pmi'), $user_details);
             logger()->info($newSubscription->toJson());
         } catch (IncompletePayment $exception) {
             DB::rollback();

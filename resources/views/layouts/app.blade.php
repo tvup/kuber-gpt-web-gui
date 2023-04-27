@@ -62,18 +62,19 @@
                     @guest
                     @else
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">Main menu</a>
+                        <a class="nav-link" href="{{ route('home') }}">{{__('app.main_menu')}}</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('credentials.index') }}">{{__('app.key_store')}}</a>
                     </li>
                     @if(auth()->user()->role == \App\Enums\UserRoleEnum::Admin)
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('credentials.index') }}">Certificate dashboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.users.index') }}">User list</a>
+                            <a class="nav-link" href="{{ route('admin.users.index') }}">{{__('app.user_list')}}</a>
                         </li>
                     @endif
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('run_sets.index') }}">AI- and run sets</a>
+                        <a class="nav-link" href="{{ route('run_sets.index') }}">{{__('app.ai_and_run_sets')}}</a>
                     </li>
                     @endguest
                 </ul>
@@ -83,10 +84,10 @@
                     <!-- Authentication Links -->
                     @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('app.login') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('app.register') }}</a>
                         </li>
                     @else
                         <li class="nav-item dropdown">
@@ -128,7 +129,7 @@
         <div class="container text-center">
             <div class="row">
                 <div class="col-md-4">
-                    <h4>Contact</h4>
+                    <h4>{{__('app.contact') }}</h4>
                     <ul class="list-unstyled">
                         <li>Dybendal Alle 12, Taastrup</li>
                         <li>Phone: 77 77 46 63</li>
@@ -136,11 +137,11 @@
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    <h4>About the project</h4>
+                    <h4>{{__('app.about_the_project')}}</h4>
                     <p>With great thanks forked from <a href="https://github.com/MaoX17">MaoX17</a>.<br/> The graphics are by ChatGPT4 who has helped and been the driving force behind it.</p>
                 </div>
                 <div class="col-md-4">
-                    <h4>Follow</h4>
+                    <h4>{{__('app.follow')}}</h4>
                     <ul class="list-unstyled social-icons">
                         <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                         <li><a href="#"><i class="fab fa-twitter"></i></a></li>

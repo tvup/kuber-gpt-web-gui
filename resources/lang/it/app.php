@@ -2,14 +2,14 @@
 
 return [
 
-    'main_menu' => 'Main menu',
+    'main_menu' => 'Menu principale',
     'key_store' => 'Key store',
-    'user_list' => 'User list',
-    'ai_and_run_sets' => 'AI- and run sets',
+    'user_list' => 'Negozio di chiavi',
+    'ai_and_run_sets' => 'AI- e serie di corse',
     'login' => 'Login',
-    'register' => 'Register',
-    'contact' => 'Contact',
-    'about_the_project' => 'About the project',
-    'follow' => 'Follow',
+    'register' => 'Registrati',
+    'contact' => 'Contatto',
+    'about_the_project' => 'Informazioni sul progetto',
+    'follow' => 'Seguire',
 
 ];

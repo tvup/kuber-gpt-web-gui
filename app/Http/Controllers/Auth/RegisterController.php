@@ -8,16 +8,21 @@ use App\Models\Price;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use DB;
+use Faker\Factory;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Laravel\Cashier\Cashier;
 use Laravel\Cashier\Checkout;
 use Laravel\Cashier\Exceptions\IncompletePayment;
 use Laravel\Cashier\Subscription;
+use Stripe\Checkout\Session;
 use Stripe\SetupIntent;
+use Stripe\Stripe;
+use Stripe\StripeClient;
 
 class RegisterController extends Controller
 {
@@ -49,11 +54,23 @@ class RegisterController extends Controller
         //$this->middleware('guest');
     }
 
-    public function showRegistrationForm($stripe_price_id)
+    public function showRegistrationForm(Request $request, $stripe_price_id)
     {
         $user = app(User::class);
         $intent = $user->createSetupIntent();
         $price = Price::wherePriceId($stripe_price_id)->first();
+        $faker = Factory::create();
+        if(in_array($price->type, ['tokenized', 'limited-time'])) {
+            $user->email = '';
+            $user->password = '';
+            $user->role = UserRoleEnum::User;
+            $user->allowed_a_is = 1;
+            $user->a_is_running = 0;
+            return $user->checkout($stripe_price_id, [
+                'success_url' => route('subscribe-get').'?session_id={CHECKOUT_SESSION_ID}',
+                'cancel_url' => route('subscribe-get'),
+            ]);
+        }
         return view('auth.register', ['intent' => $intent, 'stripe_price_id' => $stripe_price_id, 'price' => $price]);
     }
 
@@ -89,6 +106,30 @@ class RegisterController extends Controller
 
         $this->guard()->login($user);
         $user->updateStripeCustomer(['name'=>$request->get('name'), 'email' => $request->get('email'), 'address'=>['city'=>$request->get('city'),'line1'=>$request->get('line1'), 'country'=>$request->get('country'),'postal_code'=>$request->get('postal_code')]]);
+
+        $returnValue = $this->registered(request(), $user) ;
+        if ($returnValue) {
+            session(['status' => 'Registered']);
+            return $returnValue;
+        } else {
+            return redirect($this->redirectPath());
+        }
+
+    }
+
+
+    public function subscribeGet(Request $request)
+    {
+        /** @var Session $checkoutSession */
+        $checkoutSession = Cashier::stripe()->checkout->sessions->retrieve($request->get('session_id'));
+        /** @var User $user */
+        $user = User::whereStripeId($checkoutSession->customer)->firstOrFail();
+        $user->email = $checkoutSession->customer_details->email;
+        $user->name = $checkoutSession->customer_details->name;
+        $user->save();
+
+
+        $this->guard()->login($user);
 
         $returnValue = $this->registered(request(), $user) ;
         if ($returnValue) {

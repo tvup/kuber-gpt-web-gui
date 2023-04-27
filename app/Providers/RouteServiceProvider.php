@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/run_setsP';
+    public const HOME = '/run_sets';
 
     /**
      * This namespace is applied to your controller routes.

@@ -10,7 +10,7 @@ class ProductDisplayController extends Controller
     public function index(): View
     {
         return view('products.appetizer', [
-            'title' => 'Template Inheritance',
+            'title' => config('app.name', 'Laravel'),
             'products' => Price::whereEnvironment(config('app.simulate'))->get()
         ]);
     }
@@ -18,7 +18,7 @@ class ProductDisplayController extends Controller
     public function choose(): View
     {
         return view('landing-pages.appetizer', [
-            'title' => 'Template Inheritance',
+            'title' => config('app.name', 'Laravel'),
         ]);
     }
 }

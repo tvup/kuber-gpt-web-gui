@@ -2,94 +2,108 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('register.register') }}</div>
+        <div class="row">
+            <div class="col-md-5 offset-md-1">
+                <hr>
+                <h1 class="lead" style="font-size: 1.5em">Checkout</h1>
+                <hr>
+                <h3 class="lead" style="font-size: 1.2em; margin-bottom: 1.6em;">Billing details</h3>
+                <form method="POST" action="{{route('subscribe')}}" id="reg-form">
+                    @csrf()
+                    <div id="address-element"></div>
 
-                    <div class="card-body">
-                        <form method="POST" action="{{ route('register') }}">
-                            @csrf
+                    <div class="form-group">
+                        <label for="email" class="light-text">Email Address</label>
+                        @guest
+                            <input type="text" name="email" class="form-control my-input" id="email" required>
+                        @else
+                            <input type="text" name="email" class="form-control my-input" id="email"
+                                   value="{{ auth()->user()->email }}" readonly required>
+                        @endguest
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="light-text">Password</label>
+                        <input type="password" name="password" class="form-control my-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="light-text">Confirm password</label>
+                        <input type="password" name="password" class="form-control my-input" required>
+                    </div>
+                    <input type="hidden" id="pmi" name="stripe_price_id" value="{{$stripe_price_id}}">
+                    <input type="hidden" id="payment_method" name="payment_method" value="">
+                    <input type="hidden" name="role" value="user">
+                    <input type="hidden" name="allowed_a_is" value="1">
+                    <input type="hidden" name="a_is_running" value="0">
+                    <input type="hidden" id="name" name="name" value="">
+                    <input type="hidden" id="line1" name="line1" value="">
+                    <input type="hidden" id="city" name="city" value="">
+                    <input type="hidden" id="postal_code" name="postal_code" value="">
+                    <input type="hidden" id="country" name="country" value="">
+                    <label for="card-element">Credit or debit card:</label><br>
+                    <div id="card-element" class="form-control" style='height: 2.4em; padding-top: .7em;'></div>
+                    <!-- We'll put the error messages in this element -->
+                    <div id="card-errors" role="alert"></div>
 
-                           <div class="row mb-3">
-                                <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('register.name') }}</label>
+                    <br>
+                        <button id="card-button" class="btn btn-lg btn-primary btn-block" data-secret="{{ $intent->client_secret }}">Complete order</button>
 
-                                <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                </form>
+            </div>
+            <div class="col-md-5 offset-md-1">
+                <hr>
+                <h3>Your Order</h3>
+                <hr>
+                <table class="table table-borderless table-responsive">
+                    <tbody>
+                        <tr>
+                            <td>
 
-                                    @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
+                                    <img src="/{{$price->img}}" height="100px" width="100px"></td>
 
-                            <div class="row mb-3">
-                                <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('register.email_address') }}</label>
+                            <td>
+                            <td>
 
-                                <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                    <h3 class="lead light-text">{{ $price->name }}</h3>
+                                    <p class="light-text">{{ $price->descr }}</p>
+                                    <h3 class="light-text lead text-small">€ {{ $price->amount }}</h3>
 
-                                    @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('register.password') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                    @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('register.confirm_password') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                                </div>
-                            </div>
-
-                            <div class="row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('register.register') }}
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                            </td>
+                            <td>
+                                <!-- <span class="quantity-square">1</span> -->
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr>
+                <div class="row">
+                    <div class="col-md-4">
+                        <span>Total</span>
+                    </div>
+                    <div class="col-md-4 offset-md-4">
+                        <span class="text-right" style="display: inline-block">€ {{ $price->amount }}</span>
                     </div>
                 </div>
+                <hr>
             </div>
         </div>
+
     </div>
 @endsection
 
-@section('javascript')
+@section('scripts')
     <script src="https://js.stripe.com/v3/"></script>
-
-    <script>
-        const stripe = Stripe('{{ env("STRIPE_KEY") }}');
-        console.log(stripe);
+    <script type="module">
+        const stripe = Stripe('{{ config('cashier.key') }}');
 
         const elements = stripe.elements();
+
         var style = {
             base: {
-                color: "#32325d",
-                fontFamily: 'Arial, sans-serif',
-                fontSmoothing: "antialiased",
+                lineHeight: '1.35',
                 fontSize: "16px",
+                color: '#495057',
+                fontFamily: 'apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif',
+                fontSmoothing: "antialiased",
                 "::placeholder": {
                     color: "#32325d"
                 }
@@ -98,58 +112,64 @@
                 fontFamily: 'Arial, sans-serif',
                 color: "#fa755a",
                 iconColor: "#fa755a"
-            }
+            },
+
         };
-        var cardElement = elements.create("card", { style: style });
+        var cardElement = elements.create("card", { style: style, hidePostalCode: true, });
 
         cardElement.mount('#card-element');
 
-        const cardHolderName = document.getElementById('name');
-        const cardButton = document.getElementById('card-button');
-        const clientSecret = cardButton.dataset.secret;
-        let validCard = false;
-        const cardError = document.getElementById('card-errors');
-
-        cardElement.addEventListener('change', function(event) {
-
-            if (event.error) {
-                validCard = false;
-                cardError.textContent = event.error.message;
-            } else {
-                validCard = true;
-                cardError.textContent = '';
-            }
+        const addressElement = elements.create("address", {
+            mode: "billing"
         });
+        addressElement.mount("#address-element");
 
-        var form = document.getElementById('signup-form');
+        let address = {};
+        const myPromise = addressElement.on('change', (event) => {
+            if (event.complete){
+                // Extract potentially complete address
+                address.name = event.value.name;
+                address.city = event.value.address.city;
+                address.country = event.value.address.country;
+                address.line1 = event.value.address.line1;
+                address.postal_code = event.value.address.postal_code;
+            }
+        })
+        const emailField = document.getElementById('email');
+        let cardButton = document.getElementById('card-button');
+        let clientSecret = cardButton.dataset.secret;
 
-        form.addEventListener('submit', async (e) => {
+        cardButton.addEventListener('click', async (e) => {
             e.preventDefault();
-
-            const { setupIntent, error } = await stripe.handleCardSetup(
-                clientSecret, cardElement, {
-                    payment_method_data: {
-                        billing_details: { name: cardHolderName.value }
+            const {setupIntent, error} = await stripe.confirmCardSetup(
+                clientSecret, {
+                    payment_method: {
+                        card: cardElement,
+                            billing_details: {
+                                name: address.name,
+                                email: emailField.value,
+                                address: {
+                                    line1: address.line1,
+                                    city: address.city,
+                                    postal_code: address.postal_code,
+                                    country: address.country
+                                },
+                        }
                     }
                 }
             );
 
             if (error) {
-                // Display "error.message" to the user...
-                console.log(error);
+                alert('Something went wrong: ' + error);
             } else {
-                console.log(setupIntent);
-                // The card has been verified successfully...
-                var hiddenInput = document.createElement('input');
-                hiddenInput.setAttribute('type', 'hidden');
-                hiddenInput.setAttribute('name', 'payment_method');
-                hiddenInput.setAttribute('value', setupIntent.payment_method);
-                form.appendChild(hiddenInput);
-                // Submit the form
-                form.submit();
+                document.getElementById('payment_method').value = setupIntent.payment_method;
+                document.getElementById('name').value = address.name;
+                document.getElementById('line1').value = address.line1;
+                document.getElementById('city').value = address.city;
+                document.getElementById('postal_code').value = address.postal_code;
+                document.getElementById('country').value = address.country;
+                document.getElementById("reg-form").submit();
             }
-
         });
-
     </script>
 @endsection

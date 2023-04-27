@@ -54,7 +54,7 @@ class RegisterController extends Controller
         $user = app(User::class);
         $intent = $user->createSetupIntent();
         $price = Price::wherePriceId($stripe_price_id)->first();
-        return view('auth.register2', ['intent' => $intent, 'stripe_price_id' => $stripe_price_id, 'price' => $price]);
+        return view('auth.register', ['intent' => $intent, 'stripe_price_id' => $stripe_price_id, 'price' => $price]);
     }
 
 
@@ -74,6 +74,10 @@ class RegisterController extends Controller
             } else if ($type == 'metered') {
                 logger()->info('is metered ' . $request->get('stripe_price_id') . ' payment method: '.$request->get('payment_method'));
                 $newSubscription = $user->newSubscription('default')->meteredPrice($request->get('stripe_price_id'))->create($request->get('payment_method'));
+            } else if ($type == 'tokenized') {
+
+            } else if ($type == 'limited-time') {
+
             }
 
         } catch (IncompletePayment $exception) {

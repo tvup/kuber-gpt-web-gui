@@ -133,10 +133,13 @@
             if (event.complete){
                 // Extract potentially complete address
                 const address = event.value.address;
-                console.log(address);
+                console.log(event.value.name);
+                console.log(event.value.address.city);
+                console.log(event.value.address.country);
+                console.log(event.value.address.line1);
+                console.log(event.value.address.postal_code);
             }
         })
-
 
 
 

@@ -57,7 +57,12 @@ class RunSetController extends Controller
         $runSet->created_at = Arr::get($validated, 'created_at');
         $runSet->public_ip = Arr::get($validated, 'public_ip');
         $runSet->tags = Arr::get($validated, 'tags');
+        /** @var User $user */
+        $user = auth()->user();
+        $runSet->user()->associate($user);
         $runSet->save();
+
+
 
         return redirect('/run_sets')->with(['msg-success' => 'Run set stored']);
 

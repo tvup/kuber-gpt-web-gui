@@ -1,40 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel</title>
+@extends('layouts.app')
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-     <style>
-        .alert.parsley {
-    margin-top: 5px;
-            margin-bottom: 0px;
-            padding: 10px 15px 10px 15px;
-        }
-        .check .alert {
-    margin-top: 20px;
-        }
-        .credit-card-box .panel-title {
-    display: inline;
-    font-weight: bold;
-        }
-        .credit-card-box .display-td {
-    display: table-cell;
-    vertical-align: middle;
-            width: 100%;
-        }
-        .credit-card-box .display-tr {
-    display: table-row;
-}
-    </style>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-</head>
-<body id="app-layout">
+@section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-5 offset-md-1">
@@ -105,7 +71,8 @@
     </div>
 
 </div>
-
+@endsection
+@section('javascript')
 <script src="https://js.stripe.com/v3/"></script>
 
 <script>
@@ -144,6 +111,4 @@
             document.getElementById("reg-form").submit();
         }
     });
-</script>
-</body>
-</html>
+@endsection

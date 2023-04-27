@@ -63,7 +63,7 @@
                     </div>
                 </div>
                 <div id="card-element"></div>
-                <button id="card-button">
+                <button id="card-button" data-secret="{{ $intent->client_secret }}">
                     Update Payment Method
                 </button>
             </form>

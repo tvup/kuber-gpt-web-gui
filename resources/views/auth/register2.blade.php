@@ -126,18 +126,22 @@
         //         address = event.value.address;
         //     }
         // })
-
         const handleNextStep = async () => {
             const addressElement = elements.getElement('address');
 
-            const {complete, value} = await addressElement.getValue();
+            const {complete, address} = await addressElement.getValue();
 
             if (complete) {
                 // Allow user to proceed to the next step
                 // Optionally, use value to store the address details
             }
-            console.log(value);
+
+            return address;
         };
+        const fetchThing = () => handleNextStep();
+        const result = fetchThing();
+        const {address} = result ? JSON.parse(result) : {}
+        console.log(address);
 
 
 

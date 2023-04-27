@@ -29,6 +29,7 @@ use Laravel\Cashier\Billable;
  * @property Carbon $updated_at
  * @property Carbon|null $approved_at
  * @property CredentialsSet[] $credentialsSet
+ * @property RunSet[] $runSets
  */
 class User extends Authenticatable
 {
@@ -86,6 +87,10 @@ class User extends Authenticatable
 
         return false;
 
+    }
+
+    public function runSets() {
+        $this->hasMany(RunSet::class);
     }
 
 }

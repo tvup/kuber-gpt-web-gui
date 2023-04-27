@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property array $tags
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @property User $user
  */
 class RunSet extends BaseModel
 {
@@ -23,4 +24,8 @@ class RunSet extends BaseModel
         'applications' => 'array',
         'tags' => 'array',
     ];
+
+    public function user() {
+        $this->belongsTo(User::class);
+    }
 }

@@ -17,9 +17,7 @@ class RunSetController extends Controller
      */
     public function index(): View
     {
-        /** @var User $user */
-        $user = auth()->user();
-        $runSets = $user->runSets;
+        $runSets = auth()->user()->runSets;
         return view('run_sets.index', ['run_sets' => $runSets]);
     }
 

@@ -24,7 +24,7 @@
                                 <img class="img-fluid options-item" src="media/various/ecom_product3.png" alt="">
                                 <div class="options-overlay bg-black-75">
                                     <div class="options-overlay-content">
-                                        <a class="btn btn-sm btn-alt-secondary" href="{{route('users.create', ['product_id' => 'price_1Mzq2QJsg0XlNoyeqmfLqInO')}}.html">
+                                        <a class="btn btn-sm btn-alt-secondary" href="{{route('users.create', ['product_id' => 'price_1Mzq2QJsg0XlNoyeqmfLqInO'])}}">
                                             View
                                         </a>
                                         <a class="btn btn-sm btn-alt-secondary" href="javascript:void(0)">

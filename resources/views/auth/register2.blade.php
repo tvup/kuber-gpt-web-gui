@@ -64,7 +64,7 @@
                         <tr>
                             <td>
 
-                                    <img src="" height="100px" width="100px"></td>
+                                    <img src="{{$price->img}}" height="100px" width="100px"></td>
 
                             <td>
                             <td>

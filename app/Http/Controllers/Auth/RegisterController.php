@@ -69,8 +69,10 @@ class RegisterController extends Controller
         try {
             $type = Price::wherePriceId($request->get('stripe_price_id'))->whereEnvironment(config('app.simulate'))->first()->type;
             if($type == 'subscription') {
+                logger()->info('is subscription ' . $request->get('stripe_price_id'));
                 $newSubscription = $user->newSubscription('default', $request->get('stripe_price_id'))->create($request->get('payment_method'));
             } else if ($type == 'metered') {
+                logger()->info('is metered ' . $request->get('stripe_price_id'));
                 $newSubscription = $user->newSubscription('default')->meteredPrice($request->get('stripe_price_id'))->create($request->get('payment_method'));
             }
 

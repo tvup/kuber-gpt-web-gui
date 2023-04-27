@@ -21,8 +21,11 @@ class ConductorController extends Controller
             return redirect()->back()->with('msg-danger', 'Error: Valid certificate(s) already exist');
         }
 
+        $array = $run_set->toArray();
+        $array['user_id'] = auth()->user()->id;
+
         //I proceed if it has no active valid certificates
-        Redis::publish(config('database.redis.default.create_channel'), $run_set);
+        Redis::publish(config('database.redis.default.create_channel'), json_encode($array));
 
         return redirect()->back()->with('msg-success', 'AI created!');
     }

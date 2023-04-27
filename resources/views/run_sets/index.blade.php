@@ -5,6 +5,12 @@
         <div class="row justify-content-center">
             <div class="col-md-14">
                 @include('partials.msg')
+                <div>
+                    <p>Add a run set to prepare the AI</p>
+                    <p>Then click launch</p>
+                    <p>Hit that F5 - we haven't made the page active yet - you'll be looking for an IP-address to access your ai</p>
+                    <p>Happy ai'ing</p>
+                </div>
                 <div class="card shadow">
                     <div class="card-header bg-primary text-white d-flex align-items-center justify-content-between">
                         <h4>{{__('index.all_run_sets')}}</h4>

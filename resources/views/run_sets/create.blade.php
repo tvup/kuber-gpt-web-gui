@@ -25,20 +25,6 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="public_ip"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('create.public_ip') }}</label>
-                                <div class="col-md-6">
-                                    <input id="public_ip" type="text"
-                                           class="form-control{{ $errors->has('public_ip') ? ' is-invalid' : '' }}"
-                                           name="public_ip" value="{{ old('public_ip') }}" autofocus>
-                                    @if ($errors->has('public_ip'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('public_ip') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
 
                             <div class="fields"></div>
                             <div class="tag-fields mt-4"></div>

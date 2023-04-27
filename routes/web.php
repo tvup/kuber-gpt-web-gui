@@ -32,7 +32,7 @@ Route::middleware(['locale'])->group(function () {
 
 Auth::routes();
 
-Route::middleware(['locale', 'approved', 'auth'])->group(function () {
+Route::middleware(['locale', 'auth'])->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/read_index', 'CredentialsController@read_index')->name('readindex');
     Route::get('/download_user_cert', 'UserController@downloadUserCert')->name('user.download-user-cert');

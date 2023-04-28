@@ -6,7 +6,7 @@
 
     <div class="flex bg-white" style="height:600px;">
         <div class="content-top"  style="position:absolute;
- top:144px;
+ top:134px;
  right:-62px;
  left:205px;
  color:rgb(0, 0, 0);
@@ -16,10 +16,10 @@
  height:88px !important;
  background-position-y:0%;
  overflow:visible;
- min-height:120px;"><p>DISCLAIMER - This software is to be considered beta!<br/>A lot of these technologies are baby-new and will not work flawlessly or smoothly</p></div>
+ min-height:135px;"><p>DISCLAIMER - This software is to be considered beta!<br/>A lot of these technologies are baby-new and will not work flawlessly or smoothly nor is site or software in a stable release yet.</p></div>
         <div class="flex items-center text-center lg:text-left px-8 md:px-12 lg:w-1/2">
             <div>
-                <h2 class="text-3xl font-semibold text-gray-800 md:text-4xl">AutoGPT <span class="text-indigo-600">get ready!</span>
+                <h2 class="mt-20 text-3xl font-semibold text-gray-800 md:text-4xl">AutoGPT <span class="text-indigo-600">get ready!</span><br/> Your hosted, interactive, and self-reflective AI.
                 </h2>
                 <p class="mt-2 text-sm text-gray-500 md:text-base">{{__('appetizer.its-happening-right-now-its-a-hype-and-now-if-you-want-to-to-cut-the-corners-a-see-it-for-your-self-youre-invited')}}</p>
                 <div class="flex justify-center lg:justify-start mt-6">

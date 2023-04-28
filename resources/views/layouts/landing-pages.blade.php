@@ -43,7 +43,7 @@
             <div>
                 <a href="#" class="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">{{ __('landing-pages.kuber-gpt-ai-hassle-free') }}</a>
                 <p class="max-w-xs mt-4 text-sm text-gray-600">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, accusantium.
+                    Hosted, interactive, selv-reflective AutoGPT in your browser. An intelligent terminal just for you.
                 </p>
                 <div class="flex mt-8 space-x-6 text-gray-600">
                     <a class="hover:opacity-75" href target="_blank" rel="noreferrer">

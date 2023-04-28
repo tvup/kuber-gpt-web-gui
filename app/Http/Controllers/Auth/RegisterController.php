@@ -14,15 +14,13 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 use Laravel\Cashier\Cashier;
 use Laravel\Cashier\Checkout;
 use Laravel\Cashier\Exceptions\IncompletePayment;
-use Laravel\Cashier\Subscription;
+use Stripe\Charge;
 use Stripe\Checkout\Session;
 use Stripe\SetupIntent;
 use Stripe\Stripe;
-use Stripe\StripeClient;
 
 class RegisterController extends Controller
 {
@@ -60,15 +58,21 @@ class RegisterController extends Controller
         $intent = $user->createSetupIntent();
         $price = Price::wherePriceId($stripe_price_id)->first();
         if(in_array($price->type, ['tokenized', 'limited-time'])) {
-            $user->email = '';
-            $user->password = '';
-            $user->role = UserRoleEnum::User;
-            $user->allowed_a_is = 1;
-            $user->a_is_running = 0;
-            return $user->checkout($stripe_price_id, [
+            Stripe::setApiKey(config('cashier.secret'));
+
+            // Opret en checkout session for gæsten
+            $checkout_session = Session::create([
+                'payment_method_types' => ['card'],
+                'line_items' => [[
+                    'price' => $stripe_price_id,
+                    'quantity' => 1,
+                ]],
+                'mode' => 'payment',
                 'success_url' => route('subscribe-get').'?session_id={CHECKOUT_SESSION_ID}',
                 'cancel_url' => route('subscribe-get'),
             ]);
+
+            return view('chredir')->with('checkout_session',$checkout_session);
         }
         return view('auth.register', ['intent' => $intent, 'stripe_price_id' => $stripe_price_id, 'price' => $price]);
     }

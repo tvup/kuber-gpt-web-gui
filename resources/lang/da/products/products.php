@@ -22,6 +22,7 @@ return [
     'gpt_4' => 'GPT-4 !',
     'our_premium' => 'Det bedste, vi har',
     'just_per_hour' => 'Alm. timeafregning',
+    'fixed_price' => 'Fast pris',
     'everything_from_our_premium_product' => 'Alt fra vores premium produkt',
 
 ];

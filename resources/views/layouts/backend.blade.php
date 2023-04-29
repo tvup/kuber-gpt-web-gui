@@ -118,6 +118,12 @@
             </div>
         @endif
 
+        @if (session('error_message'))
+            <div class="alert alert-danger" role="alert">
+                {{ session('error_message') }}
+            </div>
+        @endif
+
         @yield('content')
     </main>
     <footer class="bg-dark text-white py-3 position-fixed bottom-0 w-100">

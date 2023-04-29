@@ -22,6 +22,7 @@ return [
     'gpt_4' => 'GPT-4 !',
     'our_premium' => 'Our premium',
     'just_per_hour' => 'Just per hour',
+    'fixed_price' => 'Fixed price',
     'everything_from_our_premium_product' => 'Everything from our premium product',
 
 ];

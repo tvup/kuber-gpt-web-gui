@@ -18,7 +18,9 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Cashier\Cashier;
 use Laravel\Cashier\Exceptions\IncompletePayment;
+use Laravel\Cashier\Payment;
 use Stripe\Checkout\Session;
+use Stripe\PaymentIntent as StripePaymentIntent;
 use Stripe\Stripe;
 
 class RegisterController extends Controller
@@ -56,7 +58,7 @@ class RegisterController extends Controller
         $user = app(User::class);
         $intent = $user->createSetupIntent();
         $price = Price::wherePriceId($stripe_price_id)->first();
-        if(in_array($price->type, ['tokenized', 'limited-time'])) {
+        if(in_array($price->type, ['tokenized', 'limited-time', 'subscription'])) {
             Stripe::setApiKey(config('cashier.secret'));
 
             // Opret en checkout session for gæsten
@@ -66,7 +68,7 @@ class RegisterController extends Controller
                     'price' => $stripe_price_id,
                     'quantity' => 1,
                 ]],
-                'mode' => 'payment',
+                'mode' => $price->type == 'subscription' ? 'subscription' : 'payment',
                 'success_url' => route('subscribe-get').'?session_id={CHECKOUT_SESSION_ID}',
                 'cancel_url' => route('subscribe-get'),
             ]);
@@ -90,16 +92,12 @@ class RegisterController extends Controller
 
         try {
             $type = Price::wherePriceId($request->get('stripe_price_id'))->whereEnvironment(config('app.simulate'))->first()->type;
-            if($type == 'subscription') {
-                logger()->info('is subscription ' . $request->get('stripe_price_id') . ' payment method: '.$request->get('payment_method'));
-                $newSubscription = $user->newSubscription('default', $request->get('stripe_price_id'))->create($request->get('payment_method'));
-            } else if ($type == 'metered') {
+            if ($type == 'metered') {
                 logger()->info('is metered ' . $request->get('stripe_price_id') . ' payment method: '.$request->get('payment_method'));
                 $newSubscription = $user->newSubscription('default')->meteredPrice($request->get('stripe_price_id'))->create($request->get('payment_method'));
-            } else if ($type == 'tokenized') {
-
-            } else if ($type == 'limited-time') {
-
+            } else  {
+                logger()->warning('Unexpected type of product was received: ' . $type);
+                throw new IncompletePayment(new Payment(new StripePaymentIntent()));
             }
 
         } catch (IncompletePayment $exception) {
@@ -131,16 +129,18 @@ class RegisterController extends Controller
 
     public function subscribeGet(Request $request)
     {
-        dump($request->get('session_id'));
         /** @var Session $checkoutSession */
         $checkoutSession = Cashier::stripe()->checkout->sessions->retrieve($request->get('session_id'));
-        dump($checkoutSession);
         /** @var User $user */
         $user = User::whereStripeId($checkoutSession->customer)->first();
         if(!$user) {
             $user = app(User::class);
         }
         $user->email = $checkoutSession->customer_details->email;
+        $user->name = $checkoutSession->customer_details->name;
+        if($checkoutSession->customer) {
+            $user->stripe_id = $checkoutSession->customer;
+        }
         $user->name = $checkoutSession->customer_details->name;
         $faker = Factory::create();
         $password = $faker->password(8);
@@ -166,7 +166,7 @@ class RegisterController extends Controller
         $returnValue = $this->registered(request(), $user) ;
         if ($returnValue) {
             session(['status' => 'Registered']);
-            return $returnValue;
+            return redirect(RouteServiceProvider::HOME)->with('status', 'Profile created');
         } else {
             return redirect($this->redirectPath());
         }

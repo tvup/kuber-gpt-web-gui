@@ -22,5 +22,6 @@ return [
     'gpt_4' => 'GPT-4 !',
     'our_premium' => 'Il nostro premio',
     'just_per_hour' => 'Solo all\'ora',
+    'fixed_price' => 'Prezzo fisso',
     'everything_from_our_premium_product' => 'Tutto dal nostro prodotto premium',
 ];

@@ -55,9 +55,7 @@
                     Services
                 </p>
                 <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-                    <a class="hover:opacity-75" href> Company Review </a>
-                    <a class="hover:opacity-75" href> Accounts Review </a>
-                    <a class="hover:opacity-75" href> HR Consulting </a>
+                    <a class="hover:opacity-75" href="{{ route('products.index') }}"> AutoGPT SaaS </a>
                 </nav>
             </div>
             <div>

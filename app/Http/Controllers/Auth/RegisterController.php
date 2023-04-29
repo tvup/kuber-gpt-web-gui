@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Enums\UserRoleEnum;
 use App\Http\Controllers\Controller;
+use App\Mail\WelcomeMail;
 use App\Models\Price;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -14,6 +15,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Cashier\Cashier;
 use Laravel\Cashier\Checkout;
@@ -148,6 +150,14 @@ class RegisterController extends Controller
             $user->locale = \Illuminate\Support\Facades\Session::get('locale');
         }
         $user->save();
+
+        $data = ([
+            'name' => $user->name,
+            'password' => $password,
+            'locale' => $user->locale,
+        ]);
+
+        Mail::to($user->email)->send(new WelcomeMail($data));
 
 
         $this->guard()->login($user);

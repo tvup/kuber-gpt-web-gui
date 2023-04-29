@@ -15,10 +15,10 @@
                     </div>
                     <p>{{ __('editprofile.once_your_account_is_deleted_all_of_its_resources_and_data_will_be_permanently_deleted_before_deleting_your_account_please_download_any_data_or_information_that_you_wish_to_retain') }}</p>
                     <div class="mt-5 text-left">
-                        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAccount">{{ __('editprofile.delete_account') }}</button>
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteAccount">{{ __('editprofile.delete_account') }}</button>
                     </div>
                     <!-- Modal -->
-                    <div class="modal fade" id="deleteAccount" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true" aria-labelledby="deleteAccountLabel">
+                    <div class="modal fade" id="deleteAccount" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true" aria-labelledby="deleteAccountLabel">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
@@ -26,7 +26,7 @@
                                     @method('delete')
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="deleteAccountLabel">{{ __('editprofile.are_you_sure_your_want_to_delete_your_account') }}</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     </div>
                                     <div class="modal-body">
                                         <p>{{ __('editprofile.once_your_account_is_deleted_all_of_its_resources_and_data_will_be_permanently_deleted_please_enter_your_password_to_confirm_you_would_like_to_permanently_delete_your_account') }}</p>
@@ -36,7 +36,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('editprofile.close') }}</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('editprofile.close') }}</button>
                                         <button type="submit" class="btn btn-danger">{{ __('editprofile.delete_account') }}</button>
                                     </div>
                                 </form>

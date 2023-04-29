@@ -14,26 +14,26 @@
 use App\Http\Controllers\ConductorController;
 use App\Http\Controllers\RunSetController;
 use App\Http\Controllers\UserController;
-
 //"Outside" - beyond authentication
-Route::get('/landing-pages', function () {
-    return redirect('/');
-});
-
-Route::get('/home', function () {
-    return redirect('/');
-})->name('home');
-
-Route::get('/', function () {
-    return view('/landing-pages/appetizer')->with('title',  config('app.name', 'Laravel'));
-})->name('welcome');
-
-Route::get('/news', function () { return view('/landing-pages/news')->with('title',  config('app.name', 'Laravel') );})->name('news');
-Route::get('/its-free', function () { return view('/landing-pages/its-free')->with('title',  config('app.name', 'Laravel') );})->name('its-free');
-Route::get('/about', function () { return view('/landing-pages/about')->with('title',  config('app.name', 'Laravel') );})->name('about');
-Route::get('/contact', function () { return view('/landing-pages/contact')->with('title',  config('app.name', 'Laravel') );})->name('contact');
-
 Route::middleware(['locale'])->group(function () {
+    Route::get('/landing-pages', function () {
+        return redirect('/');
+    });
+
+    Route::get('/home', function () {
+        return redirect('/');
+    })->name('home');
+
+    Route::get('/', function () {
+        return view('/landing-pages/appetizer')->with('title',  config('app.name', 'Laravel'));
+    })->name('welcome');
+
+    Route::get('/news', function () { return view('/landing-pages/news')->with('title',  config('app.name', 'Laravel') );})->name('news');
+    Route::get('/its-free', function () { return view('/landing-pages/its-free')->with('title',  config('app.name', 'Laravel') );})->name('its-free');
+    Route::get('/about', function () { return view('/landing-pages/about')->with('title',  config('app.name', 'Laravel') );})->name('about');
+    Route::get('/contact', function () { return view('/landing-pages/contact')->with('title',  config('app.name', 'Laravel') );})->name('contact');
+
+
     Route::get('/users/create/{product_id}', 'Auth\RegisterController@showRegistrationForm')->name('users.create');
     Route::get('/users/{user_id}/running_port/{running_port}', 'UserController@running_id')->name('landing-pages.choose');
     Route::get('/landing-pages', 'ProductDisplayController@choose')->name('landing-pages.choose');

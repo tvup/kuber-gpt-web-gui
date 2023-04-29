@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'introduction-offer-2-days-for-only' => 'INTRODUKTIONSTILBUD - 2 DAGE FOR KUN',
+    'introduction_offer_2_days_for_only' => 'INTRODUKTIONSTILBUD - 2 DAGE FOR KUN',
     'limited_admission' => 'Begrænset optag',
     'you_can_renew_for_as_long_as_the_offer_is_active' => 'Du kan forny, så længe tilbuddet er aktivt.',
     'rent_per_hour_pay_in_advance' => 'Leje pr. time - betales forud',
@@ -17,7 +17,11 @@ return [
     'pay_in_advance' => 'Betal forud',
     'runs_for_a_month' => 'Kører i en måned',
     'gold' => 'Guld',
-    'then_you_just_get_the_whole_chew_bang' => 'Så får du da bare hele baduljen',
+    'then_you_just_get_the_whole_chew_bang' => 'Så får du da også bare det hele',
     'bring_nothing_just_start_the_window_and_youre_on' => 'Medbring ingenting - bare start vinduet, og du er i gang',
     'gpt_4' => 'GPT-4 !',
+    'our_premium' => 'Det bedste, vi har',
+    'just_per_hour' => 'Alm. timeafregning',
+    'everything_from_our_premium_product' => 'Alt fra vores premium produkt',
+
 ];

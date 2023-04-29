@@ -41,10 +41,10 @@
                             <div class="mb-1">
                                 <div class="fw-semibold float-end ms-1">€ {{$product->amount}}</div>
 
-                                <a class="h6" href="{{route('users.create', ['product_id' => $product->price_id])}}">{{ $product->name }}</a>
+                                <a class="h6" href="{{route('users.create', ['product_id' => $product->price_id])}}">{{ __('products/products.'.$product->name) }}</a>
                             </div>
                             @forelse($product->tag_lines as $line)
-                                <p class="fs-sm text-muted">{{$line}}</p>
+                                <p class="fs-sm text-muted">{{__('products/products.'.$line)}}</p>
                             @empty
                             @endforelse
                         </div>

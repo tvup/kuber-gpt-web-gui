@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'introduction-offer-2-days-for-only' => 'INTRODUCTION OFFER - 2 DAYS FOR ONLY',
+    'introduction_offer_2_days_for_only' => 'INTRODUCTION OFFER - 2 DAYS FOR ONLY',
     'limited_admission' => 'Limited admission',
     'you_can_renew_for_as_long_as_the_offer_is_active' => 'You can renew for as long as the offer is active.',
     'rent_per_hour_pay_in_advance' => 'Rent per hour - pay in advance',
@@ -20,4 +20,8 @@ return [
     'then_you_just_get_the_whole_chew_bang' => 'Then you just get the whole chew-bang',
     'bring_nothing_just_start_the_window_and_youre_on' => 'Bring nothing - just start the window and you\'re on',
     'gpt_4' => 'GPT-4 !',
+    'our_premium' => 'Our premium',
+    'just_per_hour' => 'Just per hour',
+    'everything_from_our_premium_product' => 'Everything from our premium product',
+
 ];

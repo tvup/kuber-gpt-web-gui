@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'introduction-offer-2-days-for-only' => 'OFFERTA DI PRESENTAZIONE - 2 GIORNI A SOLI',
+    'introduction_offer_2_days_for_only' => 'OFFERTA DI PRESENTAZIONE - 2 GIORNI A SOLI',
     'limited_admission' => 'Ingresso limitato',
     'you_can_renew_for_as_long_as_the_offer_is_active' => 'Puoi rinnovare finché l\'offerta è attiva.',
     'rent_per_hour_pay_in_advance' => 'Affitto all\'ora - pagamento anticipato',
@@ -20,4 +20,7 @@ return [
     'then_you_just_get_the_whole_chew_bang' => 'Quindi ottieni solo l\'intero masticare',
     'bring_nothing_just_start_the_window_and_youre_on' => 'Non portare niente: basta aprire la finestra e il gioco è fatto',
     'gpt_4' => 'GPT-4 !',
+    'our_premium' => 'Il nostro premio',
+    'just_per_hour' => 'Solo all\'ora',
+    'everything_from_our_premium_product' => 'Tutto dal nostro prodotto premium',
 ];

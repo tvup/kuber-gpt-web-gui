@@ -16,7 +16,7 @@
 
         <div class="flex items-center text-center lg:text-left px-8 md:px-12 lg:w-1/2">
             <div>
-                <h2 class="mt-20 text-3xl font-semibold text-gray-800 md:text-4xl">AutoGPT <span class="text-indigo-600">get ready!</span><br/> Your hosted, interactive, and self-reflective AI.
+                <h2 class="mt-36 text-3xl font-semibold text-gray-800 md:text-4xl">AutoGPT <span class="text-indigo-600">get ready!</span><br/> Your hosted, interactive, and self-reflective AI.
                 </h2>
                 <p class="mt-2 text-sm text-gray-500 md:text-base">{{__('appetizer.its-happening-right-now-its-a-hype-and-now-if-you-want-to-to-cut-the-corners-a-see-it-for-your-self-youre-invited')}}</p>
                 <div class="flex justify-center lg:justify-start mt-6">
@@ -29,7 +29,7 @@
         </div>
         <div class="hidden lg:block lg:w-1/2" style="clip-path:polygon(10% 0, 100% 0%, 100% 100%, 0 100%)">
             <video autoplay="" muted="" loop="true" class="h-full object-cover">
-                <source src="{{ asset('media/videos/demo.webm') }}#t=26,86" type="video/mp4">
+                <source src="{{ asset('media/videos/demo.webm') }}#t=26,86" type="video/webm">
                 <div class="h-full bg-black opacity-25 -z-10"></div>
             </video>
         </div>

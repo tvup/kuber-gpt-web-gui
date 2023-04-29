@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ __('landing-pages.meta-description') }}">
 
+
+
+
     <title>@yield('title')</title>
 
     <link rel="shortcut icon" href="{{ asset('media/favicons/favicon.png') }}">

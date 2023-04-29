@@ -14,18 +14,8 @@
     <link rel="icon" sizes="192x192" type="image/png" href="{{ asset('media/favicons/favicon-192x192.png') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('media/favicons/apple-touch-icon-180x180.png') }}">
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-    <!-- font awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
-          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
-    <!-- Styles -->
-    <link rel="icon" href="{{ asset('icon-32x32.png') }}"  />
-
-    @vite(['resources/sass/backend.scss', 'resources/js/app.js'])
-
+    @vite(['resources/js/app.js'])
+    @yield('css')
 </head>
 <body>
 <div class="wrapper">
@@ -143,10 +133,10 @@
                 <div class="col-md-4">
                     <h4>{{__('app.follow')}}</h4>
                     <ul class="list-unstyled social-icons">
-                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                        <li><a href="https://github.com/tvup/kuber-gpt-web-gui"><i class="fab fa-github"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                        <li><a href="https://github.com/tvup/kuber-gpt-web-gui"><i class="fa-brands fa-github"></i></a></li>
                     </ul>
                 </div>
             </div>

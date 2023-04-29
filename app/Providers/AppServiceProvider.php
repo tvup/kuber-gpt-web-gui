@@ -18,6 +18,10 @@ class AppServiceProvider extends ServiceProvider
             $view->with('available_locales', config('app.available_locales'));
         });
 
+        view()->composer('*', function ($view) {
+            $view->with('title', config('app.name', 'Laravel'));
+        });
+
         Stripe::setApiKey(config('cashier.key'));
         Cashier::calculateTaxes();
     }

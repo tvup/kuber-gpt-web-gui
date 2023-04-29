@@ -8,6 +8,16 @@
 // Bootstrap
 @import 'bootstrap';
 
+$fa-font-path           : "../fonts/fontawesome";
+
+// Core third party components
+@import 'vendor/fontawesome/fontawesome';
+@import 'vendor/fontawesome/regular';
+@import 'vendor/fontawesome/solid';
+@import 'vendor/fontawesome/brands';
+
+
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);

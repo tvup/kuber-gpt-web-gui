@@ -46,12 +46,12 @@
     "src": "resources/sass/app.scss"
   },
   "resources/sass/landing.scss": {
-    "file": "assets/landing-ba10be3a.css",
+    "file": "assets/landing-de2eb447.css",
     "isEntry": true,
     "src": "resources/sass/landing.scss"
   },
   "resources/sass/main.scss": {
-    "file": "assets/main-ca96e18e.css",
+    "file": "assets/main-3de69d91.css",
     "isEntry": true,
     "src": "resources/sass/main.scss"
   }

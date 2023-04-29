@@ -2,7 +2,7 @@
 
 return [
     'news' => 'Notizia',
-    'free-zone' => 'Entra nella zona franca',
+    'free-zone' => 'Zona franca',
     'about' => 'Di',
     'contact' => 'Contatto',
     'try_it_now' => 'Provalo ora!',

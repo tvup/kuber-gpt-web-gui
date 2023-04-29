@@ -5,18 +5,15 @@
 @section('content')
 
     <div class="flex bg-white" style="height:600px;">
-        <div class="content-top"  style="position:absolute;
- top:134px;
- right:-62px;
- left:205px;
- color:rgb(0, 0, 0);
- font-size:23px;
- background-color:#f6f655;
- width:586px;
- height:88px !important;
- background-position-y:0%;
- overflow:visible;
- min-height:135px;"><p>{!! __('appetizer.disclaimer')!!}</p></div>
+        <div class="disclaimer-container">
+            <div class="content-top disclaimer-box">
+
+            <p>
+                    {!! __('appetizer.disclaimer')!!}
+                </p>
+            </div>
+        </div>
+
         <div class="flex items-center text-center lg:text-left px-8 md:px-12 lg:w-1/2">
             <div>
                 <h2 class="mt-20 text-3xl font-semibold text-gray-800 md:text-4xl">AutoGPT <span class="text-indigo-600">get ready!</span><br/> Your hosted, interactive, and self-reflective AI.

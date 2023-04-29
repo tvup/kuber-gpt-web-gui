@@ -4,4 +4,30 @@
 
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
+.disclaimer-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-top: -6rem;
+}
 
+.disclaimer-box {
+    color: rgb(0, 0, 0);
+    font-size: 23px;
+    background-color: #f6f655;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 5px;
+}
+
+@media (min-width: 1024px) {
+    .disclaimer-box {
+        position: absolute;
+        top: 134px;
+        right: -62px;
+        left: 205px;
+        width: 586px;
+        height: auto;
+        min-height: 135px;
+    }
+}

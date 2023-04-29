@@ -1,5 +1,11 @@
 @extends('layouts.backend')
 
+@section('title', $title)
+
+@section('css')
+    @vite(['resources/sass/backend.scss'])
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row">

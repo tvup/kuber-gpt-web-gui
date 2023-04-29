@@ -100,7 +100,7 @@
                         </li>
                     @endguest
                 </ul>
-                @include('partials.language_switcher')
+                @include('partials.language_switcher_bootstrap')
             </div>
         </div>
     </nav>

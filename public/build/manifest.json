@@ -1,0 +1,48 @@
+{
+  "resources/fonts/fontawesome/fa-regular-400.ttf": {
+    "file": "assets/fa-regular-400-12dea17b.ttf",
+    "src": "resources/fonts/fontawesome/fa-regular-400.ttf"
+  },
+  "resources/fonts/fontawesome/fa-regular-400.woff2": {
+    "file": "assets/fa-regular-400-7ba24c41.woff2",
+    "src": "resources/fonts/fontawesome/fa-regular-400.woff2"
+  },
+  "resources/fonts/fontawesome/fa-solid-900.ttf": {
+    "file": "assets/fa-solid-900-67a880b4.ttf",
+    "src": "resources/fonts/fontawesome/fa-solid-900.ttf"
+  },
+  "resources/fonts/fontawesome/fa-solid-900.woff2": {
+    "file": "assets/fa-solid-900-e2c5cf54.woff2",
+    "src": "resources/fonts/fontawesome/fa-solid-900.woff2"
+  },
+  "resources/fonts/inter/inter-v11-latin-300.woff2": {
+    "file": "assets/inter-v11-latin-300-8f400eb2.woff2",
+    "src": "resources/fonts/inter/inter-v11-latin-300.woff2"
+  },
+  "resources/fonts/inter/inter-v11-latin-500.woff2": {
+    "file": "assets/inter-v11-latin-500-aa5a5a7a.woff2",
+    "src": "resources/fonts/inter/inter-v11-latin-500.woff2"
+  },
+  "resources/fonts/inter/inter-v11-latin-600.woff2": {
+    "file": "assets/inter-v11-latin-600-ff769fa6.woff2",
+    "src": "resources/fonts/inter/inter-v11-latin-600.woff2"
+  },
+  "resources/fonts/inter/inter-v11-latin-700.woff2": {
+    "file": "assets/inter-v11-latin-700-3ced3f55.woff2",
+    "src": "resources/fonts/inter/inter-v11-latin-700.woff2"
+  },
+  "resources/fonts/inter/inter-v11-latin-regular.woff2": {
+    "file": "assets/inter-v11-latin-regular-d56fec21.woff2",
+    "src": "resources/fonts/inter/inter-v11-latin-regular.woff2"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-7409038b.js",
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  },
+  "resources/sass/main.scss": {
+    "file": "assets/main-887cd9dd.css",
+    "isEntry": true,
+    "src": "resources/sass/main.scss"
+  }
+}

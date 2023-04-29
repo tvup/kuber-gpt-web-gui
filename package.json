@@ -1,13 +1,8 @@
 {
     "private": true,
     "scripts": {
-        "dev": "npm run development",
-        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "watch": "npm run development -- --watch",
-        "watch-poll": "npm run watch -- --watch-poll",
-        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "prod": "npm run production",
-        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --config=node_modules/laravel-mix/setup/webpack.config.js"
+        "dev": "vite",
+        "build": "vite build"
     },
     "devDependencies": {
         "@types/webpack": "^5.28.1",
@@ -19,12 +14,17 @@
         "cross-env": "^7.0.3",
         "imagemin": "^8.0.1",
         "jquery": "^3.6.4",
-        "laravel-mix": "^6.0.49",
+        "laravel-vite-plugin": "^0.7.4",
         "lodash": "^4.17.21",
         "popper.js": "^1.16.1",
         "resolve-url-loader": "^5.0.0",
         "sass": "^1.62.0",
         "sass-loader": "^13.2.2",
+        "vite": "^4.3.3",
         "webpack": "^5.79.0"
+    },
+    "dependencies": {
+        "@popperjs/core": "^2.11.7",
+        "simplebar": "^6.2.5"
     }
 }

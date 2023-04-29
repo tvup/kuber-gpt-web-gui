@@ -10,4 +10,5 @@ return [
     'weve_put_it_all_together_for_you' => 'Vi har sat det hele sammen for dig',
     'and_weve_really_enjoyed_it_in_the_long_long_time_its_taken' => 'Det har virkelig taget lang tid, men det har virkelig også været sjovt',
     'psst_if_you_are_the_type_who_can_also_spend_day_in_and_day_out_then_maybe_you_should_just_put_the_payment_card_away_and_click_here' => '**psst* hvis du er den type, der også kan være bruge dag ud og ind, så skulle du måske lige lægge betalingskortet væk og klikke her',
+    'sign_up_and_checkout' => 'Et-trins tilmelding og betal',
 ];

@@ -31,7 +31,7 @@
                                 <div class="options-overlay bg-black-75">
                                     <div class="options-overlay-content">
                                         <a class="!bg-slate-100 btn btn-sm btn-alt-secondary" href="{{route('users.create', ['product_id' => $product->price_id])}}">
-                                            <i class="fa fa-plus text-success me-1"></i> Sign up and checkout
+                                            <i class="fa fa-plus text-success me-1"></i> {{ __('products/appetizer.sign_up_and_checkout') }}
                                         </a>
                                         <div class="text-warning mt-3">
                                             <i class="fa fa-star"></i>

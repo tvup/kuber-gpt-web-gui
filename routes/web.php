@@ -12,6 +12,7 @@
 */
 
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
+use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\ConductorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RunSetController;
@@ -56,7 +57,6 @@ Route::middleware(['locale'])->group(function () {
 
 
 
-Auth::routes();
 
 Route::middleware(['locale', 'auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -71,7 +71,10 @@ Route::middleware(['locale', 'auth'])->group(function () {
     Route::resource('run_sets', RunSetController::class);
     Route::post('/launch', 'ConductorController@launch')->name('conductor.launch');
     Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])->name('verification.send');
+    Route::put('/password/reset', [PasswordController::class, 'update'])->name('password.update');
 });
+
+Auth::routes();
 
 Route::middleware(['auth', 'locale'])->group(function () {
     Route::get('/approval', 'HomeController@approval')->name('approval');

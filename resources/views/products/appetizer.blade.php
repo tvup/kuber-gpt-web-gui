@@ -64,7 +64,7 @@
                 @endforeach
             </div>
             <div class="text-end">
-                <a class="fs-sm fw-semibold link-fx" href="be_pages_ecom_store_products.html">{{__('products.with_care')}}</a>
+                {{__('products.with_care')}}
             </div>
         </div>
 

@@ -9,12 +9,12 @@
                 <div class="p-3 py-5">
                     <div class="row mt-2">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h4 class="text-right">{{ __('Delete account') }}</h4>
+                            <h4 class="text-right">{{ __('editprofile.delete_account') }}</h4>
                         </div>
                     </div>
-                    <p>{{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}</p>
+                    <p>{{ __('editprofile.once_your_account_is_deleted_all_of_its_resources_and_data_will_be_permanently_deleted_before_deleting_your_account_please_download_any_data_or_information_that_you_wish_to_retain') }}</p>
                     <div class="mt-5 text-left">
-                        <button  class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAccount">{{ __('Delete account') }}</button>
+                        <button  class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAccount">{{ __('editprofile.delete_account') }}</button>
                     </div>
                     <!-- Modal -->
                     <div class="modal fade" id="deleteAccount" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true" aria-labelledby="deleteAccountLabel">
@@ -24,18 +24,18 @@
                                     @csrf
                                     @method('delete')
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="deleteAccountLabel">Are you sure your want to delete your account?</h5>
+                                        <h5 class="modal-title" id="deleteAccountLabel">{{__('editprofile.are_you_sure_your_want_to_delete_your_account')}}</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.</p>
+                                        <p>{{__('editprofile.once_your_account_is_deleted_all_of_its_resources_and_data_will_be_permanently_deleted_please_enter_your_password_to_confirm_you_would_like_to_permanently_delete_your_account')}}</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <div class="col-md-12"><label class="labels">{{ __('Password') }}</label>
+                                        <div class="col-md-12"><label class="labels">{{ __('editprofile.password') }}</label>
                                             <input type="password" class="form-control" name="password">
                                         </div>
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
-                                        <button type="submit" class="btn btn-danger">{{ __('Delete Account') }}</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('editprofile.close') }}</button>
+                                        <button type="submit" class="btn btn-danger">{{ __('editprofile.delete_account') }}</button>
                                     </div>
                                 </form>
                             </div>

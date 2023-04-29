@@ -45,8 +45,8 @@
                                 <label class="form-check-label" for="localeDaDk">🇩🇰 {{ __('editprofile.danish') }}</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" {{ $user->locale === 'it_IT' ? 'checked' : '' }} id="localeItIt" type="radio" name="locale" value="da_DK">
-                                <label class="form-check-label" for="localeDaDk">🇩🇰 {{ __('editprofile.italian') }}</label>
+                                <input class="form-check-input" {{ $user->locale === 'it_IT' ? 'checked' : '' }} id="localeItIt" type="radio" name="locale" value="it_IT">
+                                <label class="form-check-label" for="localeDaDk">🇮🇹 {{ __('editprofile.italian') }}</label>
                             </div>
                         </div>
                         <div class="mt-5 text-left">

@@ -7,6 +7,7 @@ return [
     'user_list' => 'Brugerliste',
     'ai_and_run_sets' => 'AI- og kørselsanvisninger',
     'login' => 'Log ind',
+    'logout' => 'Log ud',
     'register' => 'Registrer',
     'contact' => 'Kontakt',
     'phone' => 'Telefon',

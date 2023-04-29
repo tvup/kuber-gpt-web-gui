@@ -7,6 +7,7 @@ return [
     'user_list' => 'Negozio di chiavi',
     'ai_and_run_sets' => 'AI- e serie di corse',
     'login' => 'Login',
+    'logout' => 'Disconnettersi',
     'register' => 'Registrati',
     'contact' => 'Contatto',
     'phone' => 'Telefono',

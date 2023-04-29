@@ -33,14 +33,6 @@
                                         <a class="!bg-slate-100 btn btn-sm btn-alt-secondary" href="{{route('users.create', ['product_id' => $product->price_id])}}">
                                             <i class="fa fa-plus text-success me-1"></i> {{ __('products/appetizer.sign_up_and_checkout') }}
                                         </a>
-                                        <div class="text-warning mt-3">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-alt"></i>
-                                            <span class="text-white">(19)</span>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

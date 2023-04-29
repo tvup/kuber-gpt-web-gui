@@ -64,7 +64,7 @@
             </div>
             <div>
                 <p class="font-medium">
-                    {{__('legal')}}
+                    {{__('footer.legal')}}
                 </p>
                 <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
                     <a class="hover:opacity-75" href> {{__('footer.privacy_policy')}} </a>

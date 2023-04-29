@@ -3,7 +3,7 @@
 return [
     'kuber-gpt-ai-hassle-free' => 'kuber-GPT - AI uden besvær',
     'choose_wisely' => 'Du skal vælge...',
-    'with_care' => '..forsigtigt',
+    'with_care' => '..forsigtigt!',
     'bring_you_own_keys' => 'Medbring selv nøgler',
     'we_have_it_all_for_you' => 'Vi har det hele klar',
     'you_can_have_it_all' => 'Så får du da også bare det hele',

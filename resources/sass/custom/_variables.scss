@@ -26,3 +26,8 @@ $spacers:
 $headings-margin-bottom:      0 !default;
 $primary: #000000;
 $enable-important-utilities: false;
+
+$link-color:                              #4b5563;
+$link-decoration:                         none !default;
+$link-shade-percentage:                   20% !default;
+$link-hover-color:                        shift-color($link-color, $link-shade-percentage) !default;

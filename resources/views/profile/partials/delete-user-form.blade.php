@@ -32,7 +32,7 @@
                                         <p>{{ __('editprofile.once_your_account_is_deleted_all_of_its_resources_and_data_will_be_permanently_deleted_please_enter_your_password_to_confirm_you_would_like_to_permanently_delete_your_account') }}</p>
                                         <div class="form-group">
                                             <label for="password">{{ __('editprofile.password') }}</label>
-                                            <input type="password" class="form-control" name="password" id="password">
+                                            <input type="password" class="form-control" name="password" id="password_deletion">
                                         </div>
                                     </div>
                                     <div class="modal-footer">

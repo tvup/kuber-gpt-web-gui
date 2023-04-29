@@ -23,4 +23,9 @@ return [
     'expiration' => 'Expiration',
     'revoke' => 'Revoke',
 
+    'add_a_run_set_to_prepare_the_ai' => 'Add a run set to prepare the AI',
+    'then_click_launch' => 'Then click launch',
+    'hit_that_f5_we_havent_made_the_page_active_yet_youll_be_looking_for_an_ip_address_to_access_your_ai' => 'Hit that F5 - we haven\'t made the page active yet - you\'ll be looking for an IP-address to access your ai',
+    'happy_aiing' => 'Happy ai\'ing',
+
 ];

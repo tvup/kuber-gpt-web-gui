@@ -12,6 +12,7 @@ use Faker\Factory;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Cashier\Cashier;
@@ -83,6 +84,9 @@ class RegisterController extends Controller
         DB::beginTransaction();
 
         event(new Registered($user = $this->create(request()->all())));
+        if (\Illuminate\Support\Facades\Session::has('locale')) {
+            $user->locale = \Illuminate\Support\Facades\Session::get('locale');
+        }
 
         $request = request();
 
@@ -129,6 +133,9 @@ class RegisterController extends Controller
         $user = User::whereStripeId($checkoutSession->customer)->firstOrFail();
         $user->email = $checkoutSession->customer_details->email;
         $user->name = $checkoutSession->customer_details->name;
+        if (\Illuminate\Support\Facades\Session::has('locale')) {
+            $user->locale = \Illuminate\Support\Facades\Session::get('locale');
+        }
         $user->save();
 
 

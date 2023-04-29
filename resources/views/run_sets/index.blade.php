@@ -13,19 +13,17 @@
                 @include('partials.msg')
                 <div>
                     <ul>
-                        <li>Add a run set to prepare the AI</li>
-                        <li>Then click launch</li>
-                        <li>Hit that F5 - we haven't made the page active yet - you'll be looking for an IP-address to
-                            access your ai
-                        </li>
-                        <li>Happy ai'ing</li>
+                        <li>{{__('run_sets/index.add_a_run_set_to_prepare_the_ai')}}</li>
+                        <li>{{__('run_sets/index.then_click_launch')}}</li>
+                        <li>{{__('run_sets/index.hit_that_f5_we_havent_made_the_page_active_yet_youll_be_looking_for_an_ip_address_to_access_your_ai')}}</li>
+                        <li>{{__('run_sets/index.happy_aiing')}}</li>
                     </ul>
                 </div>
                 <div class="card shadow">
                     <div class="card-header bg-primary text-white d-flex align-items-center justify-content-between">
-                        <h4>{{__('index.all_run_sets')}}</h4>
+                        <h4>{{__('run_sets/index.all_run_sets')}}</h4>
                         <a href="{{ route('run_sets.create') }}" class="btn btn-success">
-                            {{__('index.new_run_set')}}
+                            {{__('run_sets/index.new_run_set')}}
                             <i class="fa fa-plus-square" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -33,13 +31,13 @@
                         <table class="table table-responsive-md table-striped table-hover">
                             <thead>
                             <tr>
-                                <th>{{__('index.nick_name')}}</th>
-                                <th>{{__('index.created_at')}}</th>
-                                <th>{{__('index.public_ip')}}</th>
-                                <th>{{__('index.status')}}</th>
-                                <th>{{__('index.tags')}}</th>
-                                <th>{{__('index.action')}}</th>
-                                <th>{{__('index.edit_delete')}}</th>
+                                <th>{{__('run_sets/index.nick_name')}}</th>
+                                <th>{{__('run_sets/index.created_at')}}</th>
+                                <th>{{__('run_sets/index.public_ip')}}</th>
+                                <th>{{__('run_sets/index.status')}}</th>
+                                <th>{{__('run_sets/index.tags')}}</th>
+                                <th>{{__('run_sets/index.action')}}</th>
+                                <th>{{__('run_sets/index.edit_delete')}}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -83,11 +81,11 @@
                                     </td>
                                     <td>
                                         <a href="{{ action('RunSetController@edit', ['run_set' => $runSet]) }}"
-                                           class="btn btn-warning" title="{{__('index.edit_run_set')}}">
+                                           class="btn btn-warning" title="{{__('run_sets/index.edit_run_set')}}">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <a href="{{ action('RunSetController@show', ['run_set' => $runSet]) }}"
-                                           class="btn btn-info" title="{{__('index.show_run_set')}}">
+                                           class="btn btn-info" title="{{__('run_sets/index.show_run_set')}}">
                                             <i class="fas fa-user"></i>
                                         </a>
                                         <form

@@ -12,6 +12,7 @@
 */
 
 use App\Http\Controllers\ConductorController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RunSetController;
 use App\Http\Controllers\UserController;
 
@@ -57,6 +58,9 @@ Route::middleware(['locale'])->group(function () {
 Auth::routes();
 
 Route::middleware(['locale', 'auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/read_index', 'CredentialsController@read_index')->name('readindex');
     Route::get('/download_user_cert', 'UserController@downloadUserCert')->name('user.download-user-cert');

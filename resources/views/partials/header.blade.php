@@ -36,6 +36,7 @@
                     </div>
                 </div>
             </div>
+            @include('partials/language_switcher')
         </nav>
     </div>
 </header>

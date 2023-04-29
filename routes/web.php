@@ -14,6 +14,13 @@
 use App\Http\Controllers\ConductorController;
 use App\Http\Controllers\RunSetController;
 use App\Http\Controllers\UserController;
+
+Route::get('language/{locale}', function ($locale) {
+    app()->setLocale($locale);
+    session()->put('locale', $locale);
+    return redirect()->back();
+});
+
 //"Outside" - beyond authentication
 Route::middleware(['locale'])->group(function () {
     Route::get('/landing-pages', function () {

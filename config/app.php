@@ -97,9 +97,18 @@ return [
 
     'fallback_locale' => 'en',
 
-    'aliases' => [
-      'Form' => Collective\Html\FormFacade::class,
-      'Html' => Collective\Html\HtmlFacade::class,
+    /*
+    |--------------------------------------------------------------------------
+    | Available locales
+    |--------------------------------------------------------------------------
+    |
+    | List all locales that your application works with
+    |
+    */
+    'available_locales' => [
+        'English' => 'en',
+        'Danish' => 'da',
+        'Italian' => 'it',
     ],
 
     'faker_locale' => 'en_US',
@@ -205,9 +214,9 @@ return [
     | the aliases are "lazy" loaded, so they don't hinder performance.
     |
     */
-
     'aliases' => Facade::defaultAliases()->merge([
-        //
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
     ])->toArray(),
 
 ];

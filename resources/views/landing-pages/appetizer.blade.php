@@ -16,7 +16,7 @@
  height:88px !important;
  background-position-y:0%;
  overflow:visible;
- min-height:135px;"><p>DISCLAIMER - This software is to be considered beta!<br/>A lot of these technologies are baby-new and will not work flawlessly or smoothly nor is site or software in a stable release yet.</p></div>
+ min-height:135px;"><p>{!! __('appetizer.disclaimer')!!}</p></div>
         <div class="flex items-center text-center lg:text-left px-8 md:px-12 lg:w-1/2">
             <div>
                 <h2 class="mt-20 text-3xl font-semibold text-gray-800 md:text-4xl">AutoGPT <span class="text-indigo-600">get ready!</span><br/> Your hosted, interactive, and self-reflective AI.

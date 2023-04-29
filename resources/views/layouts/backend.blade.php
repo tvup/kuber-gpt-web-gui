@@ -91,6 +91,9 @@
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('app.logout') }}
                                 </a>
+                                <a class="dropdown-item" href="{{ route('profile.edit') }}">
+                                    {{ __('app.profile_edit') }}
+                                </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                       style="display: none;">
@@ -100,7 +103,9 @@
                         </li>
                     @endguest
                 </ul>
-                @include('partials.language_switcher_bootstrap')
+                @guest
+                    @include('partials.language_switcher_bootstrap')
+                @endguest
             </div>
         </div>
     </nav>

@@ -11,5 +11,6 @@ return [
     'login' => 'Login',
     'forgot_password' => 'Ha dimenticato la password',
     'backend_menu' => 'Menù posteriore',
+    'edit_profile' => 'Modifica Profilo',
     'logout' => 'Disconnettersi',
 ];

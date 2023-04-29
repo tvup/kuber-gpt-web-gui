@@ -11,5 +11,6 @@ return [
     'login' => 'Login',
     'forgot_password' => 'Forgot password',
     'backend_menu' => 'Backend menu',
+    'edit_profile' => 'Edit profile',
     'logout' => 'Logout',
 ];

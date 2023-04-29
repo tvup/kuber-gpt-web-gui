@@ -11,5 +11,6 @@ return [
     'login' => 'Log på',
     'forgot_password' => 'Glemt kodeord',
     'backend_menu' => 'Backend menu',
+    'edit_profile' => 'Rediger profil',
     'logout' => 'Log ud',
 ];

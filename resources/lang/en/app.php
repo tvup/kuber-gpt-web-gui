@@ -8,6 +8,7 @@ return [
     'ai_and_run_sets' => 'AI- and run sets',
     'login' => 'Login',
     'logout' => 'Logout',
+    'profile_edit' => 'Edit profile',
     'register' => 'Register',
     'contact' => 'Contact',
     'phone' => 'Phone',

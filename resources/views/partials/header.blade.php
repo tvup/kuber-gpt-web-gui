@@ -27,6 +27,7 @@
                             <a class="block px-3 py-2 mt-0 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="{{ route('password.request') }}">{{__('navigation.forgot_password')}}</a>
                         @else
                             <a class="block px-3 py-2 mt-0 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="{{ route('home') }}">{{__('navigation.backend_menu')}}</a>
+                            <a class="block px-3 py-2 mt-0 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="{{ route('profile.edit') }}">{{__('navigation.edit_profile')}}</a>
                             <a class="block px-3 py-2 mt-0 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">{{ __('navigation.logout') }}</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -36,7 +37,9 @@
                     </div>
                 </div>
             </div>
-            @include('partials/language_switcher')
+            @guest
+                @include('partials/language_switcher')
+            @endguest
         </nav>
     </div>
 </header>

@@ -8,6 +8,7 @@ return [
     'ai_and_run_sets' => 'AI- og kørselsanvisninger',
     'login' => 'Log ind',
     'logout' => 'Log ud',
+    'profile_edit' => 'Rediger profil',
     'register' => 'Registrer',
     'contact' => 'Kontakt',
     'phone' => 'Telefon',

@@ -8,6 +8,7 @@ return [
     'ai_and_run_sets' => 'AI- e serie di corse',
     'login' => 'Login',
     'logout' => 'Disconnettersi',
+    'profile_edit' => 'Modifica Profilo',
     'register' => 'Registrati',
     'contact' => 'Contatto',
     'phone' => 'Telefono',

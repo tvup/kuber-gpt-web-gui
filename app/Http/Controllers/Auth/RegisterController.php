@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Enums\UserRoleEnum;
 use App\Http\Controllers\Controller;
-use App\Mail\WelcomeMail;
+use App\Mail\WelcomeMailWithPassword;
 use App\Models\Price;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -13,16 +13,12 @@ use Faker\Factory;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Cashier\Cashier;
-use Laravel\Cashier\Checkout;
 use Laravel\Cashier\Exceptions\IncompletePayment;
-use Stripe\Charge;
 use Stripe\Checkout\Session;
-use Stripe\SetupIntent;
 use Stripe\Stripe;
 
 class RegisterController extends Controller
@@ -113,6 +109,12 @@ class RegisterController extends Controller
 
         DB::commit();
 
+//        $mailData = ([
+//            'name' => $user->name,
+//            'locale' => $user->locale,
+//        ]);
+//        Mail::to($user->email)->send(new WelcomeMail($mailData));
+
         $this->guard()->login($user);
         $user->updateStripeCustomer(['name'=>$request->get('name'), 'email' => $request->get('email'), 'address'=>['city'=>$request->get('city'),'line1'=>$request->get('line1'), 'country'=>$request->get('country'),'postal_code'=>$request->get('postal_code')]]);
 
@@ -151,13 +153,12 @@ class RegisterController extends Controller
         }
         $user->save();
 
-        $data = ([
+        $mailData = ([
             'name' => $user->name,
             'password' => $password,
             'locale' => $user->locale,
         ]);
-
-        Mail::to($user->email)->send(new WelcomeMail($data));
+        Mail::to($user->email)->send(new WelcomeMailWithPassword($mailData));
 
 
         $this->guard()->login($user);

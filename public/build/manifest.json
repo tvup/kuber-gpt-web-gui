@@ -36,12 +36,12 @@
     "src": "resources/fonts/inter/inter-v11-latin-regular.woff2"
   },
   "resources/js/app.js": {
-    "file": "assets/app-5db1aaa0.js",
+    "file": "assets/app-f5d16ff7.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },
   "resources/sass/main.scss": {
-    "file": "assets/main-887cd9dd.css",
+    "file": "assets/main-ca96e18e.css",
     "isEntry": true,
     "src": "resources/sass/main.scss"
   }

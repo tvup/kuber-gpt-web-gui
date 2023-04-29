@@ -36,9 +36,19 @@
     "src": "resources/fonts/inter/inter-v11-latin-regular.woff2"
   },
   "resources/js/app.js": {
-    "file": "assets/app-f5d16ff7.js",
+    "file": "assets/app-5db1aaa0.js",
     "isEntry": true,
     "src": "resources/js/app.js"
+  },
+  "resources/sass/app.scss": {
+    "file": "assets/app-a70cdded.css",
+    "isEntry": true,
+    "src": "resources/sass/app.scss"
+  },
+  "resources/sass/landing.scss": {
+    "file": "assets/landing-ba10be3a.css",
+    "isEntry": true,
+    "src": "resources/sass/landing.scss"
   },
   "resources/sass/main.scss": {
     "file": "assets/main-ca96e18e.css",

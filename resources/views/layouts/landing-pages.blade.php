@@ -6,13 +6,12 @@
 
     <title>@yield('title')</title>
 
-    <!-- Fonts -->
-    <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <link rel="icon" type="image/png" href="/media/favicons/favicon.png">
+    <link rel="shortcut icon" href="{{ asset('media/favicons/favicon.png') }}">
+    <link rel="icon" sizes="192x192" type="image/png" href="{{ asset('media/favicons/favicon-192x192.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('media/favicons/apple-touch-icon-180x180.png') }}">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    @vite(['resources/sass/landing.scss',  'resources/js/app.js'])
 </head>
 <body>
 <header class="w-full text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800">

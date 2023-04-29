@@ -127,12 +127,23 @@ class RegisterController extends Controller
 
     public function subscribeGet(Request $request)
     {
+        dump($request->get('session_id'));
         /** @var Session $checkoutSession */
         $checkoutSession = Cashier::stripe()->checkout->sessions->retrieve($request->get('session_id'));
+        dump($checkoutSession);
         /** @var User $user */
-        $user = User::whereStripeId($checkoutSession->customer)->firstOrFail();
+        $user = User::whereStripeId($checkoutSession->customer)->first();
+        if(!$user) {
+            $user = app(User::class);
+        }
         $user->email = $checkoutSession->customer_details->email;
         $user->name = $checkoutSession->customer_details->name;
+        $faker = Factory::create();
+        $password = $faker->password(8);
+        $user->password = Hash::make($password);
+        $user->role = UserRoleEnum::User;
+        $user->allowed_a_is = 1;
+        $user->a_is_running = 0;
         if (\Illuminate\Support\Facades\Session::has('locale')) {
             $user->locale = \Illuminate\Support\Facades\Session::get('locale');
         }

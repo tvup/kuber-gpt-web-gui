@@ -29,12 +29,11 @@ window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-/**
- * Next we will register the CSRF Token as a common header with Axios so that
- * all outgoing HTTP requests automatically have it attached. This is just
- * a simple convenience, so we don't have to attach every token manually.
- */
+import Alpine from 'alpinejs'
 
+window.Alpine = Alpine
+
+Alpine.start()
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

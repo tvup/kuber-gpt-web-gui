@@ -86,9 +86,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('app.login') }}</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('app.register') }}</a>
-                        </li>
                     @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -132,13 +129,13 @@
                     <h4>{{__('app.contact') }}</h4>
                     <ul class="list-unstyled">
                         <li>Dybendal Alle 12, Taastrup</li>
-                        <li>Phone: 77 77 46 63</li>
+                        <li>{{__('app.phone')}}: 77 77 46 63</li>
                         <li>E-mail: contact@torbenit.dk</li>
                     </ul>
                 </div>
                 <div class="col-md-4">
                     <h4>{{__('app.about_the_project')}}</h4>
-                    <p>With great thanks forked from <a href="https://github.com/MaoX17">MaoX17</a>.<br/> The graphics are by ChatGPT4 who has helped and been the driving force behind it.</p>
+                    <p>{{__('app.with_great_thanks_forked_from')}} <a href="https://github.com/MaoX17">MaoX17</a>.<br/> {{__('app.the_graphics_are_by_chatgpt4_who_has_helped_and_been_the_driving_force_behind_it')}}</p>
                 </div>
                 <div class="col-md-4">
                     <h4>{{__('app.follow')}}</h4>
@@ -146,6 +143,7 @@
                         <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                         <li><a href="#"><i class="fab fa-twitter"></i></a></li>
                         <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="https://github.com/tvup/kuber-gpt-web-gui"><i class="fab fa-github"></i></a></li>
                     </ul>
                 </div>
             </div>

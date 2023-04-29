@@ -5,15 +5,15 @@
         <div class="row">
             <div class="col-md-5 offset-md-1">
                 <hr>
-                <h1 class="lead" style="font-size: 1.5em">Checkout</h1>
+                <h1 class="lead" style="font-size: 1.5em">{{__('register.checkout')}}</h1>
                 <hr>
-                <h3 class="lead" style="font-size: 1.2em; margin-bottom: 1.6em;">Billing details</h3>
+                <h3 class="lead" style="font-size: 1.2em; margin-bottom: 1.6em;">{{__('register.billing_details')}}</h3>
                 <form method="POST" action="{{route('subscribe')}}" id="reg-form">
                     @csrf()
                     <div id="address-element"></div>
 
                     <div class="form-group">
-                        <label for="email" class="light-text">Email Address</label>
+                        <label for="email" class="light-text">{{__('register.email_address')}}</label>
                         @guest
                             <input type="text" name="email" class="form-control my-input" id="email" required>
                         @else
@@ -22,11 +22,11 @@
                         @endguest
                     </div>
                     <div class="form-group">
-                        <label for="password" class="light-text">Password</label>
+                        <label for="password" class="light-text">{{__('register.password')}}</label>
                         <input type="password" name="password" class="form-control my-input" required>
                     </div>
                     <div class="form-group">
-                        <label for="password" class="light-text">Confirm password</label>
+                        <label for="password" class="light-text">{{__('register.confirm_password')}}</label>
                         <input type="password" name="password" class="form-control my-input" required>
                     </div>
                     <input type="hidden" id="pmi" name="stripe_price_id" value="{{$stripe_price_id}}">
@@ -39,21 +39,21 @@
                     <input type="hidden" id="city" name="city" value="">
                     <input type="hidden" id="postal_code" name="postal_code" value="">
                     <input type="hidden" id="country" name="country" value="">
-                    <label for="card-element">Credit or debit card:</label><br>
+                    <label for="card-element">{{__('register.credit_or_debit_card')}}:</label><br>
                     <div id="card-element" class="form-control" style='height: 2.4em; padding-top: .7em;'></div>
                     <!-- We'll put the error messages in this element -->
                     <div id="card-errors" role="alert"></div>
 
                     <br>
                     <button id="card-button" class="btn btn-lg btn-primary btn-block"
-                            data-secret="{{ $intent->client_secret }}">Complete order
+                            data-secret="{{ $intent->client_secret }}">{{__('register.pay_now')}}
                     </button>
 
                 </form>
             </div>
             <div class="col-md-5 offset-md-1">
                 <hr>
-                <h3>Your Order</h3>
+                <h3>{{__('register.your_order')}}</h3>
                 <hr>
                 <table class="table table-borderless table-responsive">
                     <tbody>
@@ -79,7 +79,7 @@
                 <hr>
                 <div class="row">
                     <div class="col-md-4">
-                        <span>Total</span>
+                        <span>{{__('app.total')}}</span>
                     </div>
                     <div class="col-md-4 offset-md-4">
                         <span class="text-right" style="display: inline-block">€ {{ $price->amount }}</span>
@@ -162,7 +162,7 @@
             );
 
             if (error) {
-                alert('Something went wrong: ' + error);
+                alert('{{ __('register.something_went_wrong') }}: ' + error);
             } else {
                 document.getElementById('payment_method').value = setupIntent.payment_method;
                 document.getElementById('name').value = address.name;

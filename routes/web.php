@@ -66,8 +66,9 @@ Route::middleware(['locale', 'auth'])->group(function () {
     Route::get('/read_index', 'CredentialsController@read_index')->name('readindex');
     Route::get('/download_user_cert', 'UserController@downloadUserCert')->name('user.download-user-cert');
     Route::get('credentials', 'CredentialsController@index')->name('credentials.index');
-    Route::post('credentials', 'CredentialsController@index')->name('credentials.edit');
-    Route::put('credentials', 'CredentialsController@index')->name('credentials.delete');
+    Route::post('/credentials', 'CredentialsController@store')->name('credentials.store');
+    Route::put('credentials', 'CredentialsController@update')->name('credentials.update');
+    Route::delete('credentials', 'CredentialsController@destroy')->name('credentials.delete');
     Route::resource('run_sets', RunSetController::class);
     Route::post('/launch', 'ConductorController@launch')->name('conductor.launch');
     Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])->name('verification.send');

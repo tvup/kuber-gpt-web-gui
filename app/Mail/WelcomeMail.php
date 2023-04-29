@@ -13,6 +13,7 @@ class WelcomeMail extends Mailable
 {
     use Queueable, SerializesModels;
     public $data;
+    public $subject;
 
     /**
      * Create a new message instance.
@@ -20,6 +21,11 @@ class WelcomeMail extends Mailable
     public function __construct($data)
     {
         $this->data = $data;
+        if(array_key_exists('subject', $data)) {
+            $this->subject = $data['subject'];
+        } else {
+            $this->subject = 'Welcome mail from kuberGPT';
+        }
     }
 
     /**
@@ -28,7 +34,7 @@ class WelcomeMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Welcome Mail',
+            subject: $this->subject,
         );
     }
 

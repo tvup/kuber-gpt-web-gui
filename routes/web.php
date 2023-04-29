@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\ConductorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RunSetController;
@@ -69,6 +70,7 @@ Route::middleware(['locale', 'auth'])->group(function () {
     Route::put('credentials', 'CredentialsController@index')->name('credentials.delete');
     Route::resource('run_sets', RunSetController::class);
     Route::post('/launch', 'ConductorController@launch')->name('conductor.launch');
+    Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])->name('verification.send');
 });
 
 Route::middleware(['auth', 'locale'])->group(function () {

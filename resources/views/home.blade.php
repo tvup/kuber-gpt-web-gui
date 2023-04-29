@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.backend')
 
 @section('content')
     <div class="container">
@@ -8,7 +8,8 @@
                     @if(($role == \App\Enums\UserRoleEnum::Admin) || ($role == \App\Enums\UserRoleEnum::Manager))
                         <div class="card-header bg-primary text-white">{{__('home.main_menu')}} - {{ $role }}</div>
                     @else
-                        <div class="card-header bg-primary text-white">{{__('home.choose_option')}} - {{ $user->name }}</div>
+                        <div class="card-header bg-primary text-white">{{__('home.choose_option')}}
+                            - {{ $user->name }}</div>
                     @endif
 
                     <div class="card-body">
@@ -18,12 +19,14 @@
                             </div>
                         @endif
 
-                            <ul class="list-group list-group-flush">
+                        <ul class="list-group list-group-flush">
 
-                                <li class="list-group-item"><a href={{route('credentials.index')}}> {{ __('home.open_key_store') }}</a></li>
-                                <li class="list-group-item"><a href={{route('run_sets.index')}}> {{ __('home.show_ai_and_run_sets') }}</a></li>
+                            <li class="list-group-item"><a
+                                    href={{route('credentials.index')}}> {{ __('home.open_key_store') }}</a></li>
+                            <li class="list-group-item"><a
+                                    href={{route('run_sets.index')}}> {{ __('home.show_ai_and_run_sets') }}</a></li>
 
-                            </ul>
+                        </ul>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.backend')
 
 @section('content')
     <div class="container">
@@ -45,7 +45,9 @@
                     <div id="card-errors" role="alert"></div>
 
                     <br>
-                        <button id="card-button" class="btn btn-lg btn-primary btn-block" data-secret="{{ $intent->client_secret }}">Complete order</button>
+                    <button id="card-button" class="btn btn-lg btn-primary btn-block"
+                            data-secret="{{ $intent->client_secret }}">Complete order
+                    </button>
 
                 </form>
             </div>
@@ -55,23 +57,23 @@
                 <hr>
                 <table class="table table-borderless table-responsive">
                     <tbody>
-                        <tr>
-                            <td>
+                    <tr>
+                        <td>
 
-                                    <img src="/{{$price->img}}" height="100px" width="100px"></td>
+                            <img src="/{{$price->img}}" height="100px" width="100px"></td>
 
-                            <td>
-                            <td>
+                        <td>
+                        <td>
 
-                                    <h3 class="lead light-text">{{ $price->name }}</h3>
-                                    <p class="light-text">{{ $price->descr }}</p>
-                                    <h3 class="light-text lead text-small">€ {{ $price->amount }}</h3>
+                            <h3 class="lead light-text">{{ $price->name }}</h3>
+                            <p class="light-text">{{ $price->descr }}</p>
+                            <h3 class="light-text lead text-small">€ {{ $price->amount }}</h3>
 
-                            </td>
-                            <td>
-                                <!-- <span class="quantity-square">1</span> -->
-                            </td>
-                        </tr>
+                        </td>
+                        <td>
+                            <!-- <span class="quantity-square">1</span> -->
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
                 <hr>
@@ -115,7 +117,7 @@
             },
 
         };
-        var cardElement = elements.create("card", { style: style, hidePostalCode: true, });
+        var cardElement = elements.create("card", {style: style, hidePostalCode: true,});
 
         cardElement.mount('#card-element');
 
@@ -126,7 +128,7 @@
 
         let address = {};
         const myPromise = addressElement.on('change', (event) => {
-            if (event.complete){
+            if (event.complete) {
                 // Extract potentially complete address
                 address.name = event.value.name;
                 address.city = event.value.address.city;
@@ -145,15 +147,15 @@
                 clientSecret, {
                     payment_method: {
                         card: cardElement,
-                            billing_details: {
-                                name: address.name,
-                                email: emailField.value,
-                                address: {
-                                    line1: address.line1,
-                                    city: address.city,
-                                    postal_code: address.postal_code,
-                                    country: address.country
-                                },
+                        billing_details: {
+                            name: address.name,
+                            email: emailField.value,
+                            address: {
+                                line1: address.line1,
+                                city: address.city,
+                                postal_code: address.postal_code,
+                                country: address.country
+                            },
                         }
                     }
                 }

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.backend')
 
 @section('scripts')
     <script src="https://js.stripe.com/v3/"></script>

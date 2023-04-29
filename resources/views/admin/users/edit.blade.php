@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.backend')
 
 @section('content')
     <style>
@@ -17,16 +17,20 @@
                     <div class="card-header card-header-custom">{{ __('edituser.register') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ action('UserController@update',['user' => $user]) }}" aria-label="{{ __('edituser.save') }}">
+                        <form method="POST" action="{{ action('UserController@update',['user' => $user]) }}"
+                              aria-label="{{ __('edituser.save') }}">
                             @method('PUT')
                             @csrf
 
 
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('edituser.name') }}</label>
+                                <label for="name"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('edituser.name') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ $user->name }}" autofocus>
+                                    <input id="name" type="text"
+                                           class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
+                                           name="name" value="{{ $user->name }}" autofocus>
 
                                     @if ($errors->has('name'))
                                         <span class="invalid-feedback" role="alert">
@@ -37,10 +41,13 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="surname" class="col-md-4 col-form-label text-md-right">{{ __('edituser.surname') }}</label>
+                                <label for="surname"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('edituser.surname') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="surname" type="text" class="form-control{{ $errors->has('surname') ? ' is-invalid' : '' }}" name="surname" value="{{ $user->surname }}" autofocus>
+                                    <input id="surname" type="text"
+                                           class="form-control{{ $errors->has('surname') ? ' is-invalid' : '' }}"
+                                           name="surname" value="{{ $user->surname }}" autofocus>
 
                                     @if ($errors->has('surname'))
                                         <span class="invalid-feedback" role="alert">
@@ -51,10 +58,13 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="vat_number" class="col-md-4 col-form-label text-md-right">{{ __('edituser.vat_number') }}</label>
+                                <label for="vat_number"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('edituser.vat_number') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="vat_number" type="text" class="form-control{{ $errors->has('vat_number') ? ' is-invalid' : '' }}" name="vat_number" value="{{ $user->vat_number }}" autofocus>
+                                    <input id="vat_number" type="text"
+                                           class="form-control{{ $errors->has('vat_number') ? ' is-invalid' : '' }}"
+                                           name="vat_number" value="{{ $user->vat_number }}" autofocus>
 
                                     @if ($errors->has('vat_number'))
                                         <span class="invalid-feedback" role="alert">
@@ -65,10 +75,13 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="company" class="col-md-4 col-form-label text-md-right">{{ __('edituser.company') }}</label>
+                                <label for="company"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('edituser.company') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="company" type="text" class="form-control{{ $errors->has('company') ? ' is-invalid' : '' }}" name="company" value="{{ $user->company }}" autofocus>
+                                    <input id="company" type="text"
+                                           class="form-control{{ $errors->has('company') ? ' is-invalid' : '' }}"
+                                           name="company" value="{{ $user->company }}" autofocus>
 
                                     @if ($errors->has('company'))
                                         <span class="invalid-feedback" role="alert">
@@ -80,10 +93,13 @@
 
 
                             <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('edituser.email_address_unique') }}</label>
+                                <label for="email"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('edituser.email_address_unique') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ $user->email }}"  required readonly>
+                                    <input id="email" type="email"
+                                           class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                           name="email" value="{{ $user->email }}" required readonly>
 
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback" role="alert">
@@ -94,19 +110,20 @@
                             </div>
 
 
-
-
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('edituser.save') }}
                                     </button>
                                     @if(!$user->approved_at)
-                                        <a class="btn btn-primary justify-content-center" href=" {{ route('admin.user.toggle-access', $user->id) }} " > {{__('edituser.toggle_user_access')}}</a>
+                                        <a class="btn btn-primary justify-content-center"
+                                           href=" {{ route('admin.user.toggle-access', $user->id) }} "> {{__('edituser.toggle_user_access')}}</a>
                                     @else
-                                        <a class="btn btn-danger justify-content-center" href=" {{ route('admin.user.toggle-access', $user->id) }} " > {{__('edituser.toggle_user_access')}}</a>
+                                        <a class="btn btn-danger justify-content-center"
+                                           href=" {{ route('admin.user.toggle-access', $user->id) }} "> {{__('edituser.toggle_user_access')}}</a>
                                     @endif
-                                    <a class="btn btn-primary justify-content-center" href=" {{ action('UserController@index') }} "> {{__('edituser.go_back_to_users')}}</a>
+                                    <a class="btn btn-primary justify-content-center"
+                                       href=" {{ action('UserController@index') }} "> {{__('edituser.go_back_to_users')}}</a>
                                 </div>
                             </div>
                         </form>

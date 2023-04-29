@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.backend')
 
 @section('content')
     <div class="container">
@@ -9,7 +9,7 @@
 
                     <div class="card-body">
                         {{ __('approval.account_review') }}
-                        <br />
+                        <br/>
                         {{ __('approval.check_back_later') }}
                     </div>
                 </div>

@@ -1,6 +1,10 @@
-@extends('layouts.landing-pages')
+@extends('layouts.frontend')
 
 @section('title', $title)
+
+@section('css')
+    @vite(['resources/sass/frontend.scss'])
+@endsection
 
 @section('content')
     <div class="flex bg-white" style="height:600px;">

@@ -1,6 +1,10 @@
-@extends('layouts.landing-pages')
+@extends('layouts.frontend')
 
 @section('title', $title)
+
+@section('css')
+    @vite(['resources/sass/frontend.scss'])
+@endsection
 
 @section('content')
 
@@ -15,7 +19,9 @@
             </div>
             <div>
                 <div>
-                    <h2 class="mt-0 text-3xl font-semibold text-gray-800 md:text-4xl">AutoGPT <span class="text-indigo-600">get ready!</span><br/> Your hosted, interactive, and self-reflective AI.
+                    <h2 class="mt-0 text-3xl font-semibold text-gray-800 md:text-4xl">AutoGPT <span
+                            class="text-indigo-600">get ready!</span><br/> Your hosted, interactive, and self-reflective
+                        AI.
                     </h2>
                     <p class="mt-2 text-sm text-gray-500 md:text-base">{{__('appetizer.its-happening-right-now-its-a-hype-and-now-if-you-want-to-to-cut-the-corners-a-see-it-for-your-self-youre-invited')}}</p>
                     <div class="flex justify-center lg:justify-start mt-6">

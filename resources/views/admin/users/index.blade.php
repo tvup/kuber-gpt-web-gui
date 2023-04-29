@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.backend')
 
 @section('content')
     <div class="container">
@@ -52,7 +52,8 @@
                                     </td>
                                     <td>
                                         @if(Auth::user()->isAdmin())
-                                            <form action="{{ action('UserController@destroy', ['user' => $user]) }}" method="POST">
+                                            <form action="{{ action('UserController@destroy', ['user' => $user]) }}"
+                                                  method="POST">
                                                 @method('DELETE')
                                                 @csrf
                                                 <button type="submit" class="btn btn-danger">

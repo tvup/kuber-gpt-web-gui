@@ -1,6 +1,10 @@
-@extends('layouts.products')
+@extends('layouts.frontend')
 
 @section('title', $title)
+
+@section('css')
+    @vite(['resources/sass/frontend-oneui.scss'])
+@endsection
 
 @section('content')
     <main id="main-container">

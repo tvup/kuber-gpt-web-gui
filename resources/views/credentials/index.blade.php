@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.backend')
 
 @section('content')
     <div class="container">
@@ -31,7 +31,7 @@
                                     <tr class="table-success">
                                 @else
                                     <tr class="table-danger">
-                                @endif
+                                        @endif
                                         @php
                                             $credential = $credentials->where('key', $credentialKey)->first();
                                         @endphp
@@ -43,7 +43,7 @@
                                         <td><a href="{{ route('credentials.edit') }} </a></td>
                                         <td><a href="{{ route('credentials.delete') }} </a></td>
                                     </tr>
-                            @endforeach
+                                    @endforeach
                             </tbody>
                         </table>
                     </div>

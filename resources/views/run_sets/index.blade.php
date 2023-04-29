@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.backend')
 
 @section('content')
     <div class="container">
@@ -85,8 +85,8 @@
                                             <i class="fas fa-user"></i>
                                         </a>
                                         <form
-                                            action="{{action([App\Http\Controllers\RunSetController::class, 'destroy'],['run_set' => $runSet])}}"
-                                            method="POST">
+                                                action="{{action([App\Http\Controllers\RunSetController::class, 'destroy'],['run_set' => $runSet])}}"
+                                                method="POST">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                                             <button class="btn btn-danger">

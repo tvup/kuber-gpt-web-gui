@@ -18,10 +18,11 @@ $spacers:
             0: 0,
             1: ($spacer * .25),
             2: ($spacer * .5),
-            3: $spacer,
-            4: ($spacer * 1.5),
+            3: ($spacer * 0.75),
+            4: ($spacer * 1),
             5: ($spacer * 2),
             6: ($spacer * 4.5)
         );
 $headings-margin-bottom:      0 !default;
 $primary: #000000;
+$enable-important-utilities: false;

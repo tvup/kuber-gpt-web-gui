@@ -6,7 +6,7 @@
     <main id="main-container">
         <div class="bg-image" style="background-image: url('/media/photos/photo3@2x.jpg');">
             <div class="bg-primary-dark-op">
-                <div class="content content-full text-center py-6">
+                <div class="content content-full text-center !py-20">
                     <h1 class="h2 text-white mb-2">{{__('products.weve_put_it_all_together_for_you')}}</h1>
                     <h2 class="h4 fw-normal text-white-75 mb-0">{{__('products.and_weve_really_enjoyed_it_in_the_long_long_time_its_taken')}}</h2>
                 </div>

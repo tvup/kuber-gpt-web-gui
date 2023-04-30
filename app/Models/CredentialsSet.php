@@ -80,7 +80,7 @@ class CredentialsSet extends Model
     public const TW_CONSUMER_SECRET = "tw_consumer_secret";
     public const TW_ACCESS_TOKEN = "tw_access_token";
     public const TW_ACCESS_TOKEN_SECRET = "tw_access_token_secret";
-    public const TW_BEARER_TOKEN = "tw_bearer_secret";
+    public const TW_BEARER_TOKEN = "tw_bearer_token";
 
     /**
      * @var array|string[]

@@ -36,7 +36,7 @@
                             @foreach(\App\Models\CredentialsSet::$keys as $credentialKey)
                                 @php
                                     $query = $credentials->where('key', $credentialKey);
-                                    $hit = $query->count() == 1 && !empty($query->first()?->value);
+                                    $hit = $query->count() == 1 && $query->first()?->value!==null;
                                 @endphp
                                 @if($hit)
                                     <tr class="table-success">

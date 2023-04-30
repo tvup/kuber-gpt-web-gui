@@ -158,14 +158,4 @@ class UserController extends Controller
 
     }
 
-    public function running_id($user_id, $running_port) {
-
-        $user = User::find($user_id);
-        if(!$user) {
-            abort(404, 'user not found');
-        }
-
-        $user->running_port = Str::replace('"', '', $running_port);
-        $user->save();
-    }
 }

@@ -25,6 +25,8 @@ class ConductorController extends Controller
 
         $array = [];
         $array['user_id'] = auth()->user()->id;
+        $array['run_set_id'] = $run_set->id;
+        $array['nick_name'] = $run_set->nick_name;
         $array['run_set'] = $run_set->toArray();
         $array['credentials_set'] = $run_set->credentialsSet?->credentials?->toArray();
 

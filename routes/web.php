@@ -70,6 +70,7 @@ Route::middleware(['locale', 'auth'])->group(function () {
     Route::put('credentials', 'CredentialsController@update')->name('credentials.update');
     Route::delete('credentials', 'CredentialsController@destroy')->name('credentials.delete');
     Route::resource('run_sets', RunSetController::class);
+    Route::post('/run_sets/{run_set}/ip', 'RunSetController@');
     Route::post('/launch', 'ConductorController@launch')->name('conductor.launch');
     Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])->name('verification.send');
     Route::put('/password/reset', [PasswordController::class, 'update'])->name('password.update');

@@ -21,6 +21,7 @@
                             <thead>
                             <tr>
                                 <th>{{__('show.id')}}</th>
+                                <th>{{__('show.credentials_set')}}</th>
                                 <th>{{__('show.local_ip')}}</th>
                                 <th>{{__('show.public_ip')}}</th>
                                 <th>{{__('show.applications')}}</th>
@@ -31,6 +32,7 @@
                             <tbody>
                             <tr>
                                 <td scope="row">{{ $run_set->id }}</td>
+                                <td><a href="{{route('credentials.index')}}">{{ $run_set->credentialsSet?->id }}</a> </td>
                                 <td>{{ $run_set->local_ip }} </td>
                                 <td>{{ $run_set->public_ip }} </td>
                                 <td>@json($run_set->applications)</td>

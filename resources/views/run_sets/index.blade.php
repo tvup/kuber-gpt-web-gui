@@ -60,7 +60,7 @@
                                         <a href="{{ action('RunSetController@show', ['run_set' => $runSet]) }}"
                                            class="text-primary font-weight-bold">{{$runSet->nick_name}} </a>
                                     </td>
-                                    <td>{{($runSet->credentialsSet?->id) ? : ' '}}</td>
+                                    <td><a href="{{route('credentials.index')}}">{{($runSet->credentialsSet?->id) ? : ' '}}</a></td>
                                     <td>{{$runSet->created_at}}</td>
                                     <td>
                                         <a href="http://{{auth()->user()->running_port . ':50001'}}">{{auth()->user()->running_port . ':50001'}}</a>

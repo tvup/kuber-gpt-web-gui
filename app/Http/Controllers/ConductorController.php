@@ -14,6 +14,7 @@ class ConductorController extends Controller
      */
     public function launch() {
         $run_set_id = request()->get('run_set');
+        /** @var RunSet $run_set */
         $run_set = RunSet::find($run_set_id);
         //check that the user does not have valid active certificates
         $user = auth()->user();
@@ -21,8 +22,11 @@ class ConductorController extends Controller
 //            return redirect()->back()->with('msg-danger', 'Error: Valid certificate(s) already exist');
 //        }
 
-        $array = $run_set->toArray();
+
+        $array = [];
         $array['user_id'] = auth()->user()->id;
+        $array['run_set'] = $run_set->toArray();
+        $array['credentials_set'] = $run_set->credentialsSet?->credentials?->toArray();
 
         //I proceed if it has no active valid certificates
         Redis::publish(config('database.redis.default.create_channel'), json_encode($array));

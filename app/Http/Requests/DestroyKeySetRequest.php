@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreKeySetRequest extends FormRequest
+class DestroyKeySetRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +23,7 @@ class StoreKeySetRequest extends FormRequest
     {
 
         return [
-            'name' => ['nullable', 'string', 'max:255'],
-            'key' => ['nullable', 'unique:credentials', 'string', 'max:255'],
-            'value' => ['nullable', 'string', 'max:255'],
+            'key' => ['required'],
         ];
     }
 }

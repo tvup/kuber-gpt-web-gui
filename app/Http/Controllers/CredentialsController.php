@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DestroyKeySetRequest;
 use App\Http\Requests\StoreKeySetRequest;
+use App\Http\Requests\UpdateKeySetRequest;
 use App\Models\Credential;
 use App\Models\CredentialsSet;
 use App\Models\User;
@@ -34,6 +36,30 @@ class CredentialsController extends Controller
         $credentialsSet = $user->credentialsSet()->firstOrCreate();
         $credentialsSet->credentials()->create(['name' => Arr::get($validated, 'name'), 'key' => Arr::get($validated, 'key'), 'value' => Arr::get($validated, 'value')]);
         return new JsonResponse($credentialsSet->toJson());
+    }
+
+    public function update(UpdateKeySetRequest $request)
+    {
+        $validated = $request->validated();
+        /** @var User $user */
+        $user = auth()->user();
+        $credentialsSet = $user->credentialsSet()->firstOrFail();
+        $credential = $credentialsSet->credentials()->where('key', Arr::get($validated, 'key'))->first();
+        $credential->name = Arr::get($validated, 'name');
+        $credential->value = Arr::get($validated, 'value');
+        $result = $credential->save();
+        return new JsonResponse($credential->toJson(),$result ? 200 : 422);
+    }
+
+    public function destroy(DestroyKeySetRequest $request)
+    {
+        $validated = $request->validated();
+        /** @var User $user */
+        $user = auth()->user();
+        $credentialsSet = $user->credentialsSet()->firstOrFail();
+        $credentialsSet = $credentialsSet->credentials()->where(['key'=>Arr::get($validated, 'key')]);
+        $result = $credentialsSet->delete();
+        return new JsonResponse($result, $result ? 200 : 422);
     }
 
 }

@@ -119,11 +119,11 @@
                                                 value="{{ \App\Enums\UserRoleEnum::Admin->value }}">{{ __('users/create.'.\App\Enums\UserRoleEnum::Admin->value) }}</option>
                                         <option
                                                 value="{{ \App\Enums\UserRoleEnum::Manager->value }}">{{ __('users/create.'.\App\Enums\UserRoleEnum::Manager->value) }}</option>
-                                        <select>
-                                            @if ($errors->has('role'))
-                                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('role') }}</strong>
-                                    </span>
+                                    </select>
+                                    @if ($errors->has('role'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('role') }}</strong>
+                                        </span>
                                     @endif
                                 </div>
                             </div>

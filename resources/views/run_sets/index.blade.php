@@ -61,11 +61,11 @@
                                         <a href="{{ action('RunSetController@show', ['run_set' => $runSet]) }}"
                                            class="text-primary font-weight-bold">{{$runSet->nick_name}} </a>
                                     </td>
-                                    <td>{{($runSet->credentialsSet?->ai_self_name) ? : ' '}}</td>
-                                    <td><a href="{{route('credentials.index')}}">{{($runSet->credentialsSet?->id) ? : ' '}}</a></td>
+                                    <td>{{($runSet->ai_self_name) ? : ' '}}</td>
+                                    <td><a href="{{route('credentials.index')}}">{{($runSet->id) ? : ' '}}</a></td>
                                     <td>{{$runSet->created_at}}</td>
                                     <td>
-                                        <a href="http://{{auth()->user()->running_port . ':50001'}}">{{auth()->user()->running_port . ':50001'}}</a>
+                                        <a href="http://{{$runSet->public_ip ?: auth()->user()->running_port . ':50001'}}">{{$runSet->public_ip ?: auth()->user()->running_port . ':50001'}}</a>
                                     </td>
                                     <td>{{$runSet->status}}</td>
                                     <td>

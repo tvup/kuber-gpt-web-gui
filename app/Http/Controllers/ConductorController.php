@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\RunSet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Str;
 use RedisException;
 
 class ConductorController extends Controller
@@ -26,7 +27,7 @@ class ConductorController extends Controller
         $array = [];
         $array['user_id'] = auth()->user()->id;
         $array['run_set_id'] = $run_set->id;
-        $array['nick_name'] = $run_set->nick_name;
+        $array['nick_name'] = Str::lower($run_set->nick_name);
         $array['run_set'] = $run_set->toArray();
         $array['credentials_set'] = $run_set->credentialsSet?->credentials?->toArray();
 

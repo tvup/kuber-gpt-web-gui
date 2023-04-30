@@ -23,7 +23,7 @@ class StoreRunSetRequest extends FormRequest
     {
 
         return [
-            'nick_name' => ['nullable', 'string', 'max:255'],
+            'nick_name' => ['nullable', 'string', 'max:53'],
             'local_ip' => ['nullable', 'ipv4'],
             'public_ip' => ['nullable', 'ipv4'],
             'applications' => ['nullable', 'array'],

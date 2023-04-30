@@ -27,7 +27,8 @@ class RunSetController extends Controller
      */
     public function create(): View
     {
-        return view('run_sets.create');
+        $credentialsSets = auth()->user()->credentialsSets;
+        return view('run_sets.create', ['credentials_sets' => $credentialsSets]);
     }
 
     /**
@@ -54,6 +55,7 @@ class RunSetController extends Controller
     {
         $validated = $request->validated();
 
+
         $runSet = app(RunSet::class);
         $runSet->nick_name = Arr::get($validated, 'nick_name');
         $runSet->created_at = Arr::get($validated, 'created_at');
@@ -62,6 +64,15 @@ class RunSetController extends Controller
         /** @var User $user */
         $user = auth()->user();
         $runSet->user()->associate($user);
+
+        $credentialsSetId = Arr::get($validated, 'credentials_set');
+        if($credentialsSetId) {
+            $credentialsSet = CredentialsSet::whereId($credentialsSetId)->first();
+            if($credentialsSet) {
+                $runSet->credentialsSet()->associate($credentialsSet);
+            }
+        }
+
         $runSet->save();
 
 
@@ -87,10 +98,13 @@ class RunSetController extends Controller
         if($credentialsSetId) {
             $credentialsSet = CredentialsSet::whereId($credentialsSetId)->first();
             if($credentialsSet) {
-                $runSet->credentialsSet()->save($credentialsSet);
+                $runSet->credentialsSet()->associate($credentialsSet);
             }
         } else {
-            $runSet->credentials_set_id = null;
+            $credentialsSet = $runSet->credentialsSet;
+            if($credentialsSet) {
+                $runSet->credentialsSet()->dissociate();
+            }
         }
 
         $runSet->save();

@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -14,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property Credential[] $credentials
  * @property Carbon $created_at
  * @property Carbon $updated_at
- * @property RunSet $runSet
+ * @property RunSet[] $runSets
  */
 class CredentialsSet extends Model
 {
@@ -165,11 +166,11 @@ class CredentialsSet extends Model
     }
 
     /**
-     * @return BelongsTo<RunSet, CredentialsSet>
+     * @return HasMany<RunSet, CredentialsSet>
      */
-    public function runSet(): BelongsTo
+    public function runSets(): HasMany
     {
-        return $this->belongsTo(RunSet::class);
+        return $this->hasMany(RunSet::class);
     }
 
 }

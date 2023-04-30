@@ -53,9 +53,11 @@
                                        class="col-md-4 col-form-label text-md-right">{{ __('edit.credential_set') }}</label>
                                 <div class="col-md-6">
                                     <select id="credentials_set" class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" name="credentials_set">
-                                        <option value="">empty</option>
+                                        @if($credentials_sets->count()>0)
+                                            <option value="">empty</option>
+                                        @endif
                                         @forelse($credentials_sets as $credentialsSet)
-                                                <option value="{{$credentialsSet->id}}" @if($credentialsSet->id == $run_set->credentialsSet->id){{ 'selected' }}@endif>{{ '#keys:'.$credentialsSet->credentials->count() . ', created: ' . $credentialsSet->created_at }}</option>
+                                                <option value="{{$credentialsSet->id}}" @if($credentialsSet->id == $run_set->credentialsSet?->id){{ 'selected' }}@endif>{{ '#keys:'.$credentialsSet->credentials->count() . ', created: ' . $credentialsSet->created_at }}</option>
                                         @empty
                                                 <option value="" selected>N/A</option>
                                         @endforelse

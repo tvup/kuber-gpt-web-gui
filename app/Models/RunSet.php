@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
@@ -35,9 +36,9 @@ class RunSet extends BaseModel
     }
 
     /**
-     * @return HasOne<CredentialsSet, RunSet>
+     * @return BelongsTo<CredentialsSet>
      */
-    public function credentialsSet() : HasOne {
-        return $this->hasOne(CredentialsSet::class);
+    public function credentialsSet() : BelongsTo {
+        return $this->belongsTo(CredentialsSet::class);
     }
 }

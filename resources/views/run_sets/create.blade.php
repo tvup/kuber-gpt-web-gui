@@ -31,6 +31,27 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="credentials-set"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('create.credential_set') }}</label>
+                                <div class="col-md-6">
+                                    <select id="credentials_set" class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" name="credentials_set">
+                                        @if($credentials_sets->count()>0)
+                                            <option value="" selected>empty</option>
+                                        @endif
+                                        @forelse($credentials_sets as $credentialsSet)
+                                            <option value="{{$credentialsSet->id}}">{{ '#keys:'.$credentialsSet->credentials->count() . ', created: ' . $credentialsSet->created_at }}</option>
+                                        @empty
+                                            <option value="" selected>N/A</option>
+                                        @endforelse
+                                    </select>
+                                    @if ($errors->has('credentials-set'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('credentials-set') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
 
                             <div class="fields"></div>
                             <div class="tag-fields mt-4"></div>

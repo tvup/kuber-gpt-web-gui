@@ -28,4 +28,7 @@ return [
     'hit_that_f5_we_havent_made_the_page_active_yet_youll_be_looking_for_an_ip_address_to_access_your_ai' => 'Hit that F5 - we haven\'t made the page active yet - you\'ll be looking for an IP-address to access your ai',
     'happy_aiing' => 'Happy ai\'ing',
 
+    'run_set_id' => 'Run set id',
+    'ai_self_name' => 'AI identifies by name as',
+
 ];

@@ -32,6 +32,7 @@
                             <thead>
                             <tr>
                                 <th>{{__('run_sets/index.nick_name')}}</th>
+                                <th>{{__('run_sets/index.ai_self_name')}}</th>
                                 <th>{{__('run_sets/index.run_set_id')}}</th>
                                 <th>{{__('run_sets/index.created_at')}}</th>
                                 <th>{{__('run_sets/index.public_ip')}}</th>
@@ -60,6 +61,7 @@
                                         <a href="{{ action('RunSetController@show', ['run_set' => $runSet]) }}"
                                            class="text-primary font-weight-bold">{{$runSet->nick_name}} </a>
                                     </td>
+                                    <td>{{($runSet->credentialsSet?->ai_self_name) ? : ' '}}</td>
                                     <td><a href="{{route('credentials.index')}}">{{($runSet->credentialsSet?->id) ? : ' '}}</a></td>
                                     <td>{{$runSet->created_at}}</td>
                                     <td>

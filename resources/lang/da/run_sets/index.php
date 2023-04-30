@@ -28,4 +28,7 @@ return [
     'hit_that_f5_we_havent_made_the_page_active_yet_youll_be_looking_for_an_ip_address_to_access_your_ai' => 'Tryk på F5 - vi har ikke skrevet siden sådan endnu, at den selv opdaterer - du leder efter en IP-adresse for at få adgang til din ai',
     'happy_aiing' => 'God fornøjelse',
 
+    'run_set_id' => 'Sæt id',
+    'ai_self_name' => 'AI føler selv, at den hedder',
+
 ];

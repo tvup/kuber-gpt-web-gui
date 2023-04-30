@@ -14,7 +14,7 @@
 
                 <div class="card shadow">
                     <div class="card-header bg-primary text-white">
-                        <h4>{{ __('show.detail') }} - {{ $serverAsset->nick_name }}</h4>
+                        <h4>{{ __('show.detail') }} - {{ $run_set->nick_name }}</h4>
                     </div>
                     <div class="card-body">
                         <table class="table table-responsive-md table-striped">
@@ -30,18 +30,18 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td scope="row">{{ $serverAsset->id }}</td>
-                                <td>{{ $serverAsset->local_ip }} </td>
-                                <td>{{ $serverAsset->public_ip }} </td>
-                                <td>@json($serverAsset->applications)</td>
-                                <td>@json($serverAsset->tags) </td>
+                                <td scope="row">{{ $run_set->id }}</td>
+                                <td>{{ $run_set->local_ip }} </td>
+                                <td>{{ $run_set->public_ip }} </td>
+                                <td>@json($run_set->applications)</td>
+                                <td>@json($run_set->tags) </td>
                                 <td class="d-flex">
                                     @if(Auth::user()->isAdmin())
-                                        <a href="{{ action('RunSetController@edit', ['server_asset' => $serverAsset]) }}"
+                                        <a href="{{ action('RunSetController@edit', ['server_asset' => $run_set]) }}"
                                            class="btn btn-warning mr-2  ">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <form action="{{action([App\Http\Controllers\RunSetController::class, 'destroy'],['server_asset' => $serverAsset])}}"
+                                        <form action="{{action([App\Http\Controllers\RunSetController::class, 'destroy'],['server_asset' => $run_set])}}"
                                               method="POST">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" name="_token" value="{{csrf_token()}}">

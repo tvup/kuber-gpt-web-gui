@@ -17,9 +17,9 @@ class ConductorController extends Controller
         $run_set = RunSet::find($run_set_id);
         //check that the user does not have valid active certificates
         $user = auth()->user();
-        if($user->allowed_a_is <= $user->a_is_running) {
-            return redirect()->back()->with('msg-danger', 'Error: Valid certificate(s) already exist');
-        }
+//        if($user->allowed_a_is <= $user->a_is_running) {
+//            return redirect()->back()->with('msg-danger', 'Error: Valid certificate(s) already exist');
+//        }
 
         $array = $run_set->toArray();
         $array['user_id'] = auth()->user()->id;

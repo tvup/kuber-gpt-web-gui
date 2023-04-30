@@ -29,6 +29,7 @@ class UpdateRunSetRequest extends FormRequest
             //            'applications.*.name' => ['required', 'string', 'max:250'],
             //            'applications.*.url' => ['required', 'url', 'max:250'],
             'tags' => ['nullable', 'array'],
+            'credentials_set' => ['nullable', 'integer'],
         ];
     }
 }

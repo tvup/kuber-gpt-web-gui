@@ -14,7 +14,7 @@
                     <div class="card-header bg-primary text-white">{{ __('edit.register') }}</div>
                     <div class="card-body">
                         <form id="sa-form" method="POST"
-                              action="{{ action([App\Http\Controllers\RunSetController::class, 'update'], ['server_asset' => $serverAsset]) }}"
+                              action="{{ action([App\Http\Controllers\RunSetController::class, 'update'], ['run_set' => $run_set]) }}"
                               aria-label="{{ __('edit.save') }}">
                             <input type="hidden" name="_method" value="PUT">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -25,7 +25,7 @@
                                 <div class="col-md-6">
                                     <input id="nick_name" type="text"
                                            class="form-control{{ $errors->has('nick_name') ? ' is-invalid' : '' }}"
-                                           name="nick_name" value="{{ $serverAsset->nick_name ? : '' }}"
+                                           name="nick_name" value="{{ $run_set->nick_name ? : '' }}"
                                            required autofocus>
                                     @if ($errors->has('nick_name'))
                                         <span class="invalid-feedback" role="alert">
@@ -40,11 +40,30 @@
                                 <div class="col-md-6">
                                     <input id="local_ip" type="text"
                                            class="form-control{{ $errors->has('local_ip') ? ' is-invalid' : '' }}"
-                                           name="local_ip" value="{{ $serverAsset->local_ip }}" autofocus>
+                                           name="local_ip" value="{{ $run_set->local_ip }}" autofocus>
                                     @if ($errors->has('local_ip'))
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('local_ip') }}</strong>
                                     </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="credentials-set"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('edit.credential_set') }}</label>
+                                <div class="col-md-6">
+                                    <select id="credentials_set" class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" name="credentials_set">
+                                        <option value="">empty</option>
+                                        @forelse($credentials_sets as $credentialsSet)
+                                                <option value="{{$credentialsSet->id}}" @if($credentialsSet->id == $run_set->credentialsSet->id){{ 'selected' }}@endif>{{ '#keys:'.$credentialsSet->credentials->count() . ', created: ' . $credentialsSet->created_at }}</option>
+                                        @empty
+                                                <option value="" selected>N/A</option>
+                                        @endforelse
+                                    </select>
+                                    @if ($errors->has('credentials-set'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('credentials-set') }}</strong>
+                                        </span>
                                     @endif
                                 </div>
                             </div>
@@ -54,7 +73,7 @@
                                 <div class="col-md-6">
                                     <input id="public_ip" type="text"
                                            class="form-control{{ $errors->has('public_ip') ? ' is-invalid' : '' }}"
-                                           name="public_ip" value="{{ $serverAsset->public_ip }}" autofocus>
+                                           name="public_ip" value="{{ $run_set->public_ip }}" autofocus>
                                     @if ($errors->has('public_ip'))
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('public_ip') }}</strong>
@@ -65,7 +84,7 @@
                             <div class="border">
                                 <h4>Applications</h4>
                                 @php($countOfApplications=0)
-                                @for ($i = 0; $i < count($serverAsset->applications ? : []); $i++)
+                                @for ($i = 0; $i < count($run_set->applications ? : []); $i++)
                                     @php($countOfApplications++)
                                     <div class="form-group row input-fields">
                                         <label for="applications"
@@ -74,7 +93,7 @@
                                             <input id="applications" type="text"
                                                    class="form-control{{ $errors->has('applications') ? ' is-invalid' : '' }}"
                                                    name="applications[{{$i}}][name]"
-                                                   value="{{$serverAsset->applications[$i]['name']}}" autofocus>
+                                                   value="{{$run_set->applications[$i]['name']}}" autofocus>
                                             @if ($errors->has('applications'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $errors->first('applications') }}</strong>
@@ -87,7 +106,7 @@
                                             <input id="applications" type="text"
                                                    class="form-control{{ $errors->has('applications') ? ' is-invalid' : '' }}"
                                                    name="applications[{{$i}}][url]"
-                                                   value="{{$serverAsset->applications[$i]['url']}}" autofocus>
+                                                   value="{{$run_set->applications[$i]['url']}}" autofocus>
                                             @if ($errors->has('applications'))
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $errors->first('applications') }}</strong>
@@ -110,7 +129,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @forelse(($serverAsset->tags ? : []) as $tag)
+                            @forelse(($run_set->tags ? : []) as $tag)
                                 <div class="form-group row input-tag-fields">
                                     <label for="tags"
                                            class="col-md-4 col-form-label text-md-right">{{ __('edit.tags') }}</label>

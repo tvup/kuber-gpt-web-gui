@@ -33,7 +33,7 @@ class CredentialsController extends Controller
         $validated = $request->validated();
         /** @var User $user */
         $user = auth()->user();
-        $credentialsSet = $user->credentialsSet()->firstOrCreate();
+        $credentialsSet = $user->credentialsSets()->firstOrCreate();
         $credentialsSet->credentials()->create(['name' => Arr::get($validated, 'name'), 'key' => Arr::get($validated, 'key'), 'value' => Arr::get($validated, 'value')]);
         return new JsonResponse($credentialsSet->toJson());
     }

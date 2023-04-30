@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRunSetRequest;
 use App\Http\Requests\UpdateRunSetRequest;
+use App\Models\CredentialsSet;
 use App\Models\RunSet;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -42,7 +43,8 @@ class RunSetController extends Controller
      */
     public function edit(RunSet $runSet): View
     {
-        return view('run_sets.edit', ['serverAsset' => $runSet]);
+        $credentialsSets = auth()->user()->credentialsSets;
+        return view('run_sets.edit', ['run_set' => $runSet, 'credentials_sets' => $credentialsSets]);
     }
 
     /**
@@ -78,7 +80,19 @@ class RunSetController extends Controller
         $runSet->nick_name = Arr::get($validated, 'nick_name');
         $runSet->created_at = Arr::get($validated, 'created_at');
         $runSet->public_ip = Arr::get($validated, 'public_ip');
+        $runSet->local_ip = Arr::get($validated, 'local_ip');
         $runSet->tags = Arr::get($validated, 'tags');
+
+        $credentialsSetId = Arr::get($validated, 'credentials_set');
+        if($credentialsSetId) {
+            $credentialsSet = CredentialsSet::whereId($credentialsSetId)->first();
+            if($credentialsSet) {
+                $runSet->credentialsSet()->save($credentialsSet);
+            }
+        } else {
+            $runSet->credentials_set_id = null;
+        }
+
         $runSet->save();
 
         return redirect('/run_sets')->with(['msg-success' => 'Run set updated']);

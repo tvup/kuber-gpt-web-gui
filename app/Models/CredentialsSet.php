@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property Credential[] $credentials
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @property RunSet $runSet
  */
 class CredentialsSet extends Model
 {
@@ -161,6 +162,14 @@ class CredentialsSet extends Model
     public function credentials(): HasMany
     {
         return $this->hasMany(Credential::class);
+    }
+
+    /**
+     * @return BelongsTo<RunSet, CredentialsSet>
+     */
+    public function runSet(): BelongsTo
+    {
+        return $this->belongsTo(RunSet::class);
     }
 
 }

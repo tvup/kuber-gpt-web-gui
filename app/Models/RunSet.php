@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property int $id
@@ -15,6 +16,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property User $user
+ * @property CredentialsSet $credentialsSet
  */
 class RunSet extends BaseModel
 {
@@ -25,7 +27,17 @@ class RunSet extends BaseModel
         'tags' => 'array',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User, RunSet>
+     */
     public function user() {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @return HasOne<CredentialsSet, RunSet>
+     */
+    public function credentialsSet() : HasOne {
+        return $this->hasOne(CredentialsSet::class);
     }
 }

@@ -131,11 +131,11 @@
             });
 
 
-            var run_set_id = '';
             $('.launch-button').each(function( index, element )  {
                 $(element).on('click', function (e) {
                     e.preventDefault();
-                    run_set_id = $(this).data('run_set_id');
+
+                    var run_set_id = $(this).data('run_set_id');
 
                     $('#show_public_ip').text('');
                     $('#show_public_ip').prepend('<i class="fa fa-spinner fa-spin"></i>');

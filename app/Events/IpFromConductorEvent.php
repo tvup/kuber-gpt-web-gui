@@ -15,9 +15,9 @@ class IpFromConductorEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $ip;
+    public array $ip;
 
-    public function __construct($ip)
+    public function __construct(array $ip)
     {
         $this->broadcastVia('pusher');
         $this->ip = $ip;

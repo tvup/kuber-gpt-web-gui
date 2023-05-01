@@ -104,3 +104,10 @@ Route::post('/tokens/create', function (Request $request) {
 
     return ['token' => $token->plainTextToken];
 });
+
+Route::get('/event', function () {
+    $array = ['ip' => '1.2.3.4']; //data we want to pass
+    event(new \App\Events\IpFromConductorEvent($array));
+
+    return 'done';
+});

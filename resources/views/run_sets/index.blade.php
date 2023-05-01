@@ -128,39 +128,38 @@
             $('.launch-button').each(function( index, element )  {
                 $(element).on('click', function (e) {
                     run_set_id = $(this).data('run_set_id');
+                    e.preventDefault();
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $('#show_public_ip').text('');
+                    $('#show_public_ip').prepend('<i class="fa fa-spinner fa-spin"></i>');
+                    $.ajax({
+                        type: "POST",
+                        url: '{{route('conductor.launch')}}',
+                        data: {run_set: run_set_id},
+                        success: function () {
+                            Swal.fire(
+                                'AutoGPT is on the way!',
+                                'It might take 5-10 minutes to become ready. You can see the IP on this page, when it\'s ready',
+                                'success'
+                            )
+                        },
+                        error: function () {
+                            Swal.fire(
+                                'Techsolutionstuff!',
+                                'Something went to wrong. Please Try again later...!',
+                                'error'
+                            )
+                        }
+                    });
                 });
             } );
 
-            $('#launch-button').on('click', function (e) {
-                e.preventDefault();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $('#show_public_ip').text('');
-                $('#show_public_ip').prepend('<i class="fa fa-spinner fa-spin"></i>');
-                $.ajax({
-                    type: "POST",
-                    url: '{{route('conductor.launch')}}',
-                    data: {run_set: run_set_id},
-                    success: function () {
-                        Swal.fire(
-                            'AutoGPT is on the way!',
-                            'It might take 5-10 minutes to become ready. You can see the IP on this page, when it\'s ready',
-                            'success'
-                        )
-                    },
-                    error: function () {
-                        Swal.fire(
-                            'Techsolutionstuff!',
-                            'Something went to wrong. Please Try again later...!',
-                            'error'
-                        )
-                    }
-                });
 
-            });
+
         });
 
     </script>

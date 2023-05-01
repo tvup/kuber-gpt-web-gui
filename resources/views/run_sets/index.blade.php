@@ -65,7 +65,7 @@
                                     <td><a href="{{route('credentials.index')}}">{{($runSet->id) ? : ' '}}</a></td>
                                     <td>{{$runSet->created_at}}</td>
                                     <td>
-                                        <a href="http://{{$runSet->public_ip ? $runSet->public_ip . ':50001' : auth()->user()->running_port . ':50001'}}">{{$runSet->public_ip ? $runSet->public_ip . ':50001' : auth()->user()->running_port . ':50001'}}</a>
+                                        <a id="show_public_ip" href="http://{{$runSet->public_ip ? $runSet->public_ip . ':50001' : auth()->user()->running_port . ':50001'}}">{{$runSet->public_ip ? $runSet->public_ip . ':50001' : auth()->user()->running_port . ':50001'}}</a>
                                     </td>
                                     <td>{{$runSet->status}}</td>
                                     <td>
@@ -120,6 +120,7 @@
             console.log(data.ip)
             console.log(data)
             alert(JSON.stringify(data))
+            $('#show_public_ip').text();
         });
     </script>
 @endsection

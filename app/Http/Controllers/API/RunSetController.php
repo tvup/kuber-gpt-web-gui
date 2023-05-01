@@ -11,7 +11,7 @@ use Illuminate\Http\JsonResponse;
 class RunSetController extends Controller
 {
     public function ip(StorePublicIPForRunSetRequest $request, RunSet $run_set) {
-        $ip = $request->get('ip');
+        $ip = $request->input('ip');
 
         $run_set->public_ip = $ip;
         $run_set->save();

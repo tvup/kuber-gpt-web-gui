@@ -14,8 +14,8 @@ class IpFromConductorEvent implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
 
-    private int $user_id;
-    private string $ip;
+    public int $user_id;
+    public string $ip;
 
     public function __construct(array $message)
     {

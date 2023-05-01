@@ -126,6 +126,7 @@
 
             $('#launch-button').on('click', function (e) {
                 $('#show_public_ip').prepend('<i class="fa fa-spinner fa-spin"></i>');
+                $('#show_public_ip').text('');
             });
         });
 

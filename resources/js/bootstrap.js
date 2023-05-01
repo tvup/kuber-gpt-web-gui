@@ -39,7 +39,7 @@ window.Swal = Swal;
 
 import Pusher from 'pusher-js';
 
-let backendBaseUrl = import.meta.env.BASE_URL;
+let backendBaseUrl = "https://kuber-gpt.com";
 
 var pusher = new Pusher(import.meta.env.VITE_PUSHER_APP_KEY, {
     cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,

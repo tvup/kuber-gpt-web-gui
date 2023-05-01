@@ -77,7 +77,7 @@
                                     <td>
                                         <form action="#" method="POST">
                                             <input type="hidden" name="run_set_id" value="{{$runSet->id}}">
-                                            <button class="btn btn-danger launch-button" data-delete_key="{{ $credentialKey }}">
+                                            <button class="btn btn-danger launch-button" data-run_set_id="{{ $runSet->id }}">
                                                 <i class="fas fa-user-times">LAUNCH</i>
                                             </button>
                                         </form>

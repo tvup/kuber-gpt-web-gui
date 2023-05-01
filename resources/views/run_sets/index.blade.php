@@ -123,21 +123,25 @@
 
 
             var channel = Pusher.subscribe('private-App.User.{{auth()->user()->id}}');
-            channel.bind('ip-from-conductor-event', function (data, data2) {
-                console.log(data);
-                console.log(data2);
+            channel.bind('ip-from-conductor-event', function (data) {
                 var newUrl = 'http://' + data.ip + ':50001';
                 $('#show_public_ip').attr("href", newUrl);
                 $('#show_public_ip').text(newUrl);
                 $("#show_public_ip").find(".fa-spinner").remove();
                 Swal.fire({
                     title: '<strong>AutoGPT is ready!</strong>',
+                    html: 'Click button below to access it directly at <a href="' + newUrl + '">' + newUrl + '</a>',
                     icon: 'success',
-                    html: 'Click button below to access it directly',
+                    showCancelButton: true,
                     showCloseButton: true,
-                    confirmButtonText: '<a href="'+newUrl+'">'+newUrl+'</a>',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, hit it',
+                    cancelButtonText: 'No, not now'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.open(newUrl);
+                    }
                 })
-            });
 
 
             $('.launch-button').each(function( index, element )  {

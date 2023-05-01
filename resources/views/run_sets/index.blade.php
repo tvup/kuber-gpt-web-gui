@@ -117,10 +117,7 @@
     <script type="module">
         var channel = Pusher.subscribe('private-my-channel');
         channel.bind('ip-from-conductor-event', function(data) {
-            console.log(data.ip)
-            console.log(data)
-            alert(JSON.stringify(data))
-            $('#show_public_ip').text();
+            $('#show_public_ip').text(data.ip);
         });
     </script>
 @endsection

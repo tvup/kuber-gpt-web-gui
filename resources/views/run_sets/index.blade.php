@@ -124,12 +124,11 @@
 
             var channel = Pusher.subscribe('private-App.User.{{auth()->user()->id}}');
             channel.bind('ip-from-conductor-event', function (data) {
-                console.log(data.ip);
+                console.log(data);
                 var newUrl = 'http://' + data.ip + ':50001';
                 $('#show_public_ip').attr("href", newUrl);
                 $('#show_public_ip').text(newUrl);
                 $("#show_public_ip").find(".fa-spinner").remove();
-                console.log(data.ip.ip);
             });
 
 

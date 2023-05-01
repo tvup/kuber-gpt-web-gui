@@ -76,8 +76,8 @@
                                     </td>
                                     <td>
                                         <form action="#" method="POST">
-                                            <input type="hidden" id="name" name="_token" value="{{csrf_token()}}">
-                                            <button class="btn btn-danger" id="launch-button">
+                                            <input type="hidden" data-run_set_id="{{$runSet->id}}" name="run_set_id" value="{{$runSet->id}}">
+                                            <button class="btn btn-danger launch-button">
                                                 <i class="fas fa-user-times">LAUNCH</i>
                                             </button>
                                         </form>
@@ -114,14 +114,7 @@
 
 @section('scripts')
     <script type="module">
-        var laravelObject = @json($run_sets);
-    </script>
-    <script type="module">
         document.addEventListener("DOMContentLoaded", () => {
-            console.log(laravelObject);
-            console.log(laravelObject[0]);
-            console.log(laravelObject[0].id);
-
             var channel = Pusher.subscribe('private-my-channel');
             channel.bind('ip-from-conductor-event', function (data) {
                 var newUrl = 'http://' + data.ip + ':50001';
@@ -129,6 +122,14 @@
                 $('#show_public_ip').text(newUrl);
                 $("#show_public_ip").find(".fa-spinner").remove();
             });
+
+
+            var run_set_id = '';
+            $('.launch-button').each(function( index, element )  {
+                $(element).on('click', function (e) {
+                    run_set_id = $(this).data('run_set_id');
+                });
+            } );
 
             $('#launch-button').on('click', function (e) {
                 e.preventDefault();
@@ -139,13 +140,10 @@
                 });
                 $('#show_public_ip').text('');
                 $('#show_public_ip').prepend('<i class="fa fa-spinner fa-spin"></i>');
-
                 $.ajax({
                     type: "POST",
                     url: '{{route('conductor.launch')}}',
-                    data: JSON.stringify(laravelObject),
-                    contentType: 'application/json',
-                    dataType: 'json',
+                    data: {run_set: run_set_id},
                     success: function () {
                         Swal.fire(
                             'AutoGPT is on the way!',

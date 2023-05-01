@@ -123,17 +123,20 @@
 
 
             var channel = Pusher.subscribe('private-App.User.{{auth()->user()->id}}');
-            channel.bind('ip-from-conductor-event', function (data) {
+            channel.bind('ip-from-conductor-event', function (data, data2) {
                 console.log(data);
+                console.log(data2);
                 var newUrl = 'http://' + data.ip + ':50001';
                 $('#show_public_ip').attr("href", newUrl);
                 $('#show_public_ip').text(newUrl);
                 $("#show_public_ip").find(".fa-spinner").remove();
-                Swal.fire(
-                    'AutoGPT is ready!',
-                    'Click here to access to directly: ',
-                    'success'
-                )
+                Swal.fire({
+                    title: '<strong>AutoGPT is ready!</strong>',
+                    icon: 'success',
+                    html: 'Click button below to access it directly',
+                    showCloseButton: true,
+                    confirmButtonText: '<a href="'+newUrl+'">'+newUrl+'</a>',
+                })
             });
 
 

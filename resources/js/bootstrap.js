@@ -55,14 +55,6 @@ var pusher = new Pusher(import.meta.env.VITE_PUSHER_APP_KEY, {
 
 
 
-var channel = pusher.subscribe('private-my-channel');
-channel.bind('ip-from-conductor-event', function(data) {
-//if you will console.log(message) at this point you will see the data
-//that was sent from your controller is available here please consume as you may like
-    console.log(data)
-    alert(JSON.stringify(data))
-});
-
 window.Pusher = pusher;
 
 

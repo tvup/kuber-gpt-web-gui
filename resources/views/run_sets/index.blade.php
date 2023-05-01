@@ -112,3 +112,13 @@
         </div>
     </div>
 @endsection
+
+@section('scripts')
+    <script type="module">
+        var channel = window.pusher.subscribe('private-my-channel');
+        channel.bind('ip-from-conductor-event', function(data) {
+        console.log(data)
+        alert(JSON.stringify(data))
+        });
+    </script>
+@endsection

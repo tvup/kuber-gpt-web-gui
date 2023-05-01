@@ -142,6 +142,7 @@
                         window.open(newUrl);
                     }
                 })
+            });
 
 
             $('.launch-button').each(function( index, element )  {

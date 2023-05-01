@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\RunSet;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Str;
 use RedisException;
@@ -32,8 +33,8 @@ class ConductorController extends Controller
         $array['credentials_set'] = $run_set->credentialsSet?->credentials?->toArray();
 
         //I proceed if it has no active valid certificates
-        Redis::publish(config('database.redis.default.create_channel'), json_encode($array));
+        $listeners = Redis::publish(config('database.redis.default.create_channel'), json_encode($array));
 
-        return redirect()->back()->with('msg-success', 'AI created!');
+        return new JsonResource(['active_listeners'=>$listeners]);
     }
 }

@@ -14,7 +14,5 @@
 use App\Models\User;
 
 Broadcast::channel('App.User.{id}', function ($user, $id) {
-    logger()->info('Auth channel: ' . $user->id . ' ' . $id);
-    logger()->info('Authenticated? ' . ((int) $user->id === (int) $id) ? 'true' : 'false');
     return (int) $user->id === (int) $id;
 });

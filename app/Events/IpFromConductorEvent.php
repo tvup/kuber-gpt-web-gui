@@ -13,11 +13,14 @@ class IpFromConductorEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public array $ip;
 
-    public function __construct(array $ip)
+    private int $user_id;
+    private string $ip;
+
+    public function __construct(array $message)
     {
-        $this->ip = $ip;
+        $this->user_id = $message['user_id'];
+        $this->ip = $message['ip'];
     }
 
     /**
@@ -28,7 +31,7 @@ class IpFromConductorEvent implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('App.User.{id}'),
+            new PrivateChannel('App.User.'.$this->user_id),
         ];
     }
 

@@ -78,7 +78,7 @@
                                         <form action="{{route('conductor.launch',['run_set' => $runSet])}}"
                                               method="POST">
                                             <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                            <button class="btn btn-danger">
+                                            <button class="btn btn-danger" id="launch-button">
                                                 <i class="fas fa-user-times">LAUNCH</i>
                                             </button>
                                         </form>
@@ -115,9 +115,19 @@
 
 @section('scripts')
     <script type="module">
-        var channel = Pusher.subscribe('private-my-channel');
-        channel.bind('ip-from-conductor-event', function(data) {
-            $('#show_public_ip').text(data.ip);
+        document.addEventListener("DOMContentLoaded", () => {
+            var channel = Pusher.subscribe('private-my-channel');
+            channel.bind('ip-from-conductor-event', function (data) {
+                var newUrl = 'http://' + data.ip + ':50001';
+                $('#show_public_ip').attr("href", newUrl);
+                $('#show_public_ip').text(newUrl);
+                $("#show_public_ip").find(".fa-spinner").remove();
+            });
+
+            $('#launch-button').on('click', function (e) {
+                $('#show_public_ip').prepend('<i class="fa fa-spinner fa-spin"></i>');
+            });
         });
+
     </script>
 @endsection

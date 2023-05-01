@@ -118,6 +118,10 @@
     </script>
     <script type="module">
         document.addEventListener("DOMContentLoaded", () => {
+            console.log(laravelObject);
+            console.log(laravelObject[0]);
+            console.log(laravelObject[0].id);
+
             var channel = Pusher.subscribe('private-my-channel');
             channel.bind('ip-from-conductor-event', function (data) {
                 var newUrl = 'http://' + data.ip + ':50001';

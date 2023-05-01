@@ -129,6 +129,11 @@
                 $('#show_public_ip').attr("href", newUrl);
                 $('#show_public_ip').text(newUrl);
                 $("#show_public_ip").find(".fa-spinner").remove();
+                Swal.fire(
+                    'AutoGPT is ready!',
+                    'Click here to access to directly: ',
+                    'success'
+                )
             });
 
 

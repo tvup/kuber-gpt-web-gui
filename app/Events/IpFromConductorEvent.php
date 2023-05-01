@@ -28,7 +28,7 @@ class IpFromConductorEvent implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('my-channel'),
+            new PrivateChannel('users.{$userId}'),
         ];
     }
 

@@ -17,6 +17,9 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
-Broadcast::channel('my-channel', function (User $user) {
-    return true;
+Broadcast::channel('users.{$userId}', function (User $user, int $runSetId) {
+    /** @var User $user */
+    $user= User::find($user->id);
+    $runSetIds = $user->runSets->pluck('id')->toArray();
+    return in_array($runSetId, $runSetIds);
 });

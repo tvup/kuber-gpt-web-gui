@@ -122,7 +122,7 @@
             });
 
 
-            var channel = Pusher.subscribe('private-my-channel');
+            var channel = Pusher.subscribe('private-user.{{ auth()->user()->id }}');
             channel.bind('ip-from-conductor-event', function (data) {
                 console.log(data.ip);
                 var newUrl = 'http://' + data.ip + ':50001';

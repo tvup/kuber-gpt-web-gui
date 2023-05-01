@@ -124,10 +124,12 @@
 
             var channel = Pusher.subscribe('private-my-channel');
             channel.bind('ip-from-conductor-event', function (data) {
+                console.log(data.ip);
                 var newUrl = 'http://' + data.ip + ':50001';
                 $('#show_public_ip').attr("href", newUrl);
                 $('#show_public_ip').text(newUrl);
                 $("#show_public_ip").find(".fa-spinner").remove();
+                console.log(data.ip.ip);
             });
 
 
@@ -136,7 +138,7 @@
                     e.preventDefault();
 
                     var run_set_id = $(this).data('run_set_id');
-                    $('#show_public_ip').text('');
+                        $('#show_public_ip').text('');
                     $('#show_public_ip').prepend('<i class="fa fa-spinner fa-spin"></i>');
 
                     $.ajax({

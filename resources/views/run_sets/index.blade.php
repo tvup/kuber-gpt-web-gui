@@ -136,6 +136,7 @@
                     e.preventDefault();
 
                     var run_set_id = $(this).data('run_set_id');
+                    console.log(run_set_id);
 
                     $('#show_public_ip').text('');
                     $('#show_public_ip').prepend('<i class="fa fa-spinner fa-spin"></i>');

@@ -39,9 +39,21 @@ window.Swal = Swal;
 
 import Pusher from 'pusher-js';
 
+Pusher.logToConsole = true;
+
+let backendBaseUrl = "https://kuber-gpt.com";
+
 var pusher = new Pusher(import.meta.env.VITE_PUSHER_APP_KEY, {
     cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER
+    authEndpoint: `${backendBaseUrl}/broadcasting/auth`,
+    auth: {
+        headers: {
+            "Authorization": "Bearer TOKEN",
+        }
+    }
 })
+
+
 
 var channel = pusher.subscribe('my-channel');
 channel.bind('my-channel', function(message) {

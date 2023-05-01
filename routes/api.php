@@ -19,3 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::post('/run_sets/{run_set}/ip', 'API\RunSetController@ip');
+
+Broadcast::routes(['middleware' => ['auth:sanctum']]);

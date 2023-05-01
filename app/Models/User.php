@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Laravel\Cashier\Billable;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  * @property int $id
@@ -33,6 +34,7 @@ class User extends Authenticatable
 {
     use Notifiable;
     use HasFactory;
+    use HasApiTokens;
     use Billable;
 
     protected $casts = [

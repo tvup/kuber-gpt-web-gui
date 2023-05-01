@@ -75,9 +75,8 @@
                                         @endforeach
                                     </td>
                                     <td>
-                                        <form action="{{route('conductor.launch',['run_set' => $runSet])}}"
-                                              method="POST">
-                                            <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                        <form action="#" method="POST">
+                                            <input type="hidden" id="name" name="_token" value="{{csrf_token()}}">
                                             <button class="btn btn-danger" id="launch-button">
                                                 <i class="fas fa-user-times">LAUNCH</i>
                                             </button>
@@ -125,8 +124,40 @@
             });
 
             $('#launch-button').on('click', function (e) {
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
                 $('#show_public_ip').text('');
                 $('#show_public_ip').prepend('<i class="fa fa-spinner fa-spin"></i>');
+
+                var laravelObject = {};
+                laravelObject = @json($runSet);
+
+                $.ajax({
+                    type: "POST",
+                    url: '{{route('conductor.launch')}}',
+                    data: JSON.stringify(laravelObject),
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function () {
+                        Swal.fire(
+                            'AutoGPT is on the way!',
+                            'It might take 5-10 minutes to become ready. You can see the IP on this page, when it\'s ready',
+                            'success'
+                        )
+                    },
+                    error: function () {
+                        Swal.fire(
+                            'Techsolutionstuff!',
+                            'Something went to wrong. Please Try again later...!',
+                            'error'
+                        )
+                    }
+                });
+
             });
         });
 

@@ -13,7 +13,7 @@ use Illuminate\Queue\SerializesModels;
 
 class IpFromConductorEvent implements ShouldBroadcast
 {
-    use InteractsWithBroadcasting;
+    use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $ip;
 
@@ -33,6 +33,11 @@ class IpFromConductorEvent implements ShouldBroadcast
         return [
             new PrivateChannel('my-channel'),
         ];
+    }
+
+    public function broadcastAs()
+    {
+        return 'ip-from-conductor-event';
     }
 }
 

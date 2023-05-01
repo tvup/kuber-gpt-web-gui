@@ -48,15 +48,15 @@ var pusher = new Pusher(import.meta.env.VITE_PUSHER_APP_KEY, {
     authEndpoint: `${backendBaseUrl}/broadcasting/auth`,
     auth: {
         headers: {
-            "Authorization": "Bearer TOKEN",
+            "Authorization": "Bearer bPOZyMpJ1GDsS8cAO3ZmM8zJEwz0RXE1sAHWyqSb",
         }
     }
 })
 
 
 
-var channel = pusher.subscribe('my-channel');
-channel.bind('my-channel', function(message) {
+var channel = pusher.subscribe('private-my-channel');
+channel.bind('ip-from-conductor-event', function(message) {
 //if you will console.log(message) at this point you will see the data
 //that was sent from your controller is available here please consume as you may like
     console.log(message);

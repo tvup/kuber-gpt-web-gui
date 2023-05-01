@@ -114,6 +114,9 @@
 
 @section('scripts')
     <script type="module">
+        var laravelObject = @json($run_sets);
+    </script>
+    <script type="module">
         document.addEventListener("DOMContentLoaded", () => {
             var channel = Pusher.subscribe('private-my-channel');
             channel.bind('ip-from-conductor-event', function (data) {
@@ -132,9 +135,6 @@
                 });
                 $('#show_public_ip').text('');
                 $('#show_public_ip').prepend('<i class="fa fa-spinner fa-spin"></i>');
-
-                var laravelObject = {};
-                laravelObject = @json($runSet);
 
                 $.ajax({
                     type: "POST",

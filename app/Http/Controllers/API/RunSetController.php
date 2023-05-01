@@ -18,7 +18,7 @@ class RunSetController extends Controller
         $run_set->save();
 
         $array = ['user_id'=>auth()->user()->id, 'ip' => $ip]; //data we want to pass
-        event(new \App\Events\IpFromConductorEvent($array));
+        IpFromConductorEvent::dispatch($array);
 
         return new JsonResponse($run_set);
     }

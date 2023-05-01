@@ -37,6 +37,22 @@ Alpine.start()
 import Swal from 'sweetalert2';
 window.Swal = Swal;
 
+import Pusher from 'pusher-js';
+
+var pusher = new Pusher(import.meta.env.VITE_PUSHER_APP_KEY, {
+    cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER
+})
+
+var channel = pusher.subscribe('my-channel');
+channel.bind('my-channel', function(message) {
+//if you will console.log(message) at this point you will see the data
+//that was sent from your controller is available here please consume as you may like
+    console.log(message);
+});
+
+window.Pusher = pusher;
+
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -44,9 +60,6 @@ window.Swal = Swal;
  */
 
 // import Echo from 'laravel-echo'
-
-// import Pusher from 'pusher-js';
-// window.Pusher = Pusher;
 
 // window.Echo = new Echo({
 //     broadcaster: 'pusher',

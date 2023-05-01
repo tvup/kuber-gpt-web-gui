@@ -27,6 +27,7 @@
         "bootstrap": "^4.6.2",
         "jquery": "^3.6.4",
         "laravel-vite-plugin": "^0.7.4",
+        "pusher-js": "^8.0.2",
         "simplebar": "^6.2.5",
         "sweetalert2": "^11.7.3",
         "tailwindcss": "^3.3.2",

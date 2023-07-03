@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
@@ -121,6 +122,11 @@ class RunSetController extends Controller
      */
     public function destroy(RunSet $runSet): RedirectResponse
     {
+        $array = [];
+        $array['nickname'] = Str::lower($runSet->nick_name);
+
+        Redis::publish(config('database.redis.default.revoke_channel'), json_encode($array));
+
         $runSet->delete();
 
         return redirect('/run_sets')->with(['msg-danger' => 'Run set deleted']);

@@ -58,7 +58,7 @@
                             @foreach($run_sets as $runSet)
                                 <tr>
                                     <td>
-                                        <a href="{{ action('RunSetController@show', ['run_set' => $runSet]) }}"
+                                        <a href="{{ route('run_sets.show', ['run_set' => $runSet]) }}"
                                            class="text-primary font-weight-bold">{{$runSet->nick_name}} </a>
                                     </td>
                                     <td>{{($runSet->ai_self_name) ? : ' '}}</td>
@@ -83,16 +83,16 @@
                                         </form>
                                     </td>
                                     <td>
-                                        <a href="{{ action('RunSetController@edit', ['run_set' => $runSet]) }}"
+                                        <a href="{{ route('run_sets.edit', ['run_set' => $runSet]) }}"
                                            class="btn btn-warning" title="{{__('run_sets/index.edit_run_set')}}">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="{{ action('RunSetController@show', ['run_set' => $runSet]) }}"
+                                        <a href="{{ route('run_sets.show', ['run_set' => $runSet]) }}"
                                            class="btn btn-info" title="{{__('run_sets/index.show_run_set')}}">
                                             <i class="fas fa-user"></i>
                                         </a>
                                         <form
-                                                action="{{action([App\Http\Controllers\RunSetController::class, 'destroy'],['run_set' => $runSet])}}"
+                                                action="{{ route('run_sets.destroy', ['run_set' => $runSet]) }}"
                                                 method="POST">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" name="_token" value="{{csrf_token()}}">

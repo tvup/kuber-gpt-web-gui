@@ -141,8 +141,7 @@ return [
                 [
                     'name' => 'Bronze',
                     'short_description' => 'This is a short, human friendly description of the plan.',
-                    'monthly_id' => 'price_1N1SGpJsg0XlNoye3XUnntnt',
-                    'yearly_id' => 'price_1NPxWUJsg0XlNoye0TVq8yVW',
+                    'monthly_id' => env('BRONZE_MONTHLY_PRODUCT_PRICE_ID', 'price_1N1SGpJsg0XlNoye3XUnntnt'),
                     'features' => [
                         '"Meter billing"',
                         'Billed as you use - after first hour which will be billed for 1 hour no matter what, but afterwards, you can turn on/off as you wish',
@@ -154,8 +153,8 @@ return [
                 [
                     'name' => 'Silver',
                     'short_description' => 'This is a short, human friendly description of the plan.',
-                    'monthly_id' => 'price_1N1SG9Jsg0XlNoyeqplHQcDX',
-                    'yearly_id' => 'price_1NPxY7Jsg0XlNoyeMTwzuvnA',
+                    'monthly_id' => env('SILVER_MONTHLY_PRODUCT_PRICE_ID', 'price_1N1SG9Jsg0XlNoyeqplHQcDX'),
+                    'yearly_id' => env('SILVER_YEARLY_PRODUCT_PRICE_ID', 'price_1NPxY7Jsg0XlNoyeMTwzuvnA'),
                     'features' => [
                         'Pay in advance',
                         'Runs for a month',
@@ -164,8 +163,8 @@ return [
                 [
                     'name' => 'Gold',
                     'short_description' => 'This is a short, human friendly description of the plan.',
-                    'monthly_id' => 'price_1N1SFIJsg0XlNoyecJVC5ksZ',
-                    'yearly_id' => 'price_1NPxYkJsg0XlNoyeGD6Dqnqo',
+                    'monthly_id' => env('GOLD_MONTHLY_PRODUCT_PRICE_ID', 'price_1N1SFIJsg0XlNoyecJVC5ksZ'),
+                    'yearly_id' => env('GOLD_YEARLY_PRODUCT_PRICE_ID', 'price_1NPxYkJsg0XlNoyeGD6Dqnqo'),
                     'features' => [
                         'Then you just get the whole chew-bang',
                         'Bring nothing - just start the window and you\'re on',

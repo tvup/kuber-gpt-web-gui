@@ -17,6 +17,7 @@ class RunSetController extends Controller
         $run_set->public_ip = $ip;
         $run_set->save();
 
+        logger()->info('Received message. Content is for the user with id: ' . auth()->user()->id);
         $array = ['user_id'=>auth()->user()->id, 'ip' => $ip, 'run_set_id' => $run_set->id]; //data we want to pass
         IpFromConductorEvent::dispatch($array);
 

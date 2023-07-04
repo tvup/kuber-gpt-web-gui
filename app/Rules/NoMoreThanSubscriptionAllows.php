@@ -41,7 +41,7 @@ class NoMoreThanSubscriptionAllows implements ValidationRule
         }
 
         $subscriptions = $user->subscriptions;
-        if(!$subscriptions) {
+        if(!$subscriptions || $subscriptions->count() === 0) {
             return 0;
         }
 

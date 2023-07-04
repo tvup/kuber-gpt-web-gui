@@ -6,6 +6,7 @@ use App\Http\Requests\LaunchRunSetRequest;
 use App\Models\Credential;
 use App\Models\CredentialsSet;
 use App\Models\RunSet;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Redis;
@@ -32,16 +33,24 @@ class ConductorController extends Controller
 //        }
 
         $credentialsSetId = $run_set->credentialsSet?->id;
-
+        /** @var Collection $credentialsCollection */
+        $credentialsCollection = Credential::whereCredentialsSetId($credentialsSetId)->get();
         $credentialsArray = [];
         foreach (CredentialsSet::$keys as $key) {
-            $credential = Credential::whereCredentialsSetId($credentialsSetId)->where('key', $key)->first();
+            $credential = $credentialsCollection->where('key', $key)->first();
             if(!$credential) {
                 $credential = new Credential();
                 $credential->key = $key;
                 $credential->value = CredentialsSet::$defaultValues[$key];
                 $credential->credentials_set_id = $credentialsSetId;
+                $credential->save();
+            } else {
+                $credentialsCollection->pull($credential->id);
             }
+            $credentialsArray[] = $credential;
+        }
+
+        foreach ($credentialsCollection as $credential) {
             $credentialsArray[] = $credential;
         }
 

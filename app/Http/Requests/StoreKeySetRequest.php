@@ -24,7 +24,7 @@ class StoreKeySetRequest extends FormRequest
 
         return [
             'name' => ['nullable', 'string', 'max:255'],
-            'key' => ['nullable', 'unique:credential_sets', 'string', 'max:255'],
+            'key' => ['nullable', 'unique:credentials_sets', 'string', 'max:255'],
             'value' => ['nullable', 'string', 'max:255'],
         ];
     }

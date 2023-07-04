@@ -18,6 +18,7 @@ class NoMoreThanSubscriptionAllows implements ValidationRule
         $subscriptionItem = Auth::user()->subscriptions->first()?->items->first();
         $allowedQuantityPerProduct = ['prod_Nn2LFeAVDg4INl'=> 1, 'prod_Nn2KRZrCEJ37Uu' => 1, 'prod_Nn2JPI08USBQEV' => 2];
         $runningAisOfUser = Auth::user()->runSets->whereNotNull('public_ip')->count();
+        logger()->info('Product id: '.$subscriptionItem->product_id);
         if($runningAisOfUser+1 > $allowedQuantityPerProduct[$subscriptionItem->product_id]) {
             $fail('You have exceeded the number of run sets allowed by your subscription.');
         }

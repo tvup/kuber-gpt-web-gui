@@ -80,7 +80,7 @@
                                     <td>
                                         <form action="#" method="POST">
                                             <input type="hidden" name="run_set_id" value="{{$runSet->id}}">
-                                            <button class="btn btn-danger launch-button" data-run_set_id="{{ $runSet->id }}">
+                                            <button class="btn btn-danger launch-button" data-name="{{ $runSet->nick_name }}" data-run_set_id="{{ $runSet->id }}"{{ array_key_exists('is-submitted', ((is_array($runSet->tags)?$runSet->tags:json_decode($runSet->tags, true)))) ?  ' disabled ':''}}>
                                                 <i class="fas fa-user-times">LAUNCH</i>
                                             </button>
                                         </form>
@@ -151,15 +151,17 @@
             $('.launch-button').each(function( index, element )  {
                 $(element).on('click', function (e) {
                     e.preventDefault();
+                    $('.launch-button').prop('disabled', true);
 
                     var run_set_id = $(this).data('run_set_id');
+                    var name = $(this).data('name');
                         $('#show_public_ip').text('');
                     $('#show_public_ip').prepend('<i class="fa fa-spinner fa-spin"></i>');
 
                     $.ajax({
                         type: "POST",
                         url: '{{route('conductor.launch')}}',
-                        data: {run_set: run_set_id},
+                        data: {run_set: run_set_id, name: name},
                         success: function () {
                             Swal.fire(
                                 'AutoGPT is on the way!',
@@ -176,6 +178,7 @@
                             )
                             $('#name_label').css("display", "block");
                             $('#name_label').find(">:first-child").append(JSON.parse(xhr.responseText).message);
+                            $('.launch-button').prop('disabled', false);
                         }
                     });
                 });

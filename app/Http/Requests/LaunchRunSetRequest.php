@@ -23,7 +23,8 @@ class LaunchRunSetRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'run_set' => [new NotNumeric,'nullable'],
+            'run_set' => ['required'],
+            'name' => ['nullable', new NotNumeric],
         ];
     }
 }

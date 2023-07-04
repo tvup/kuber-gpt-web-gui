@@ -21,6 +21,8 @@ class ConductorController extends Controller
         $run_set_id = request()->get('run_set');
         /** @var RunSet $run_set */
         $run_set = RunSet::find($run_set_id);
+        $this->markAsLaunched($run_set);
+
         //check that the user does not have valid active certificates
         $user = auth()->user();
 //        if($user->allowed_a_is <= $user->a_is_running) {
@@ -39,5 +41,17 @@ class ConductorController extends Controller
         $listeners = Redis::publish(config('database.redis.default.create_channel'), json_encode($array));
 
         return new JsonResource(['active_listeners'=>$listeners]);
+    }
+
+    /**
+     * @param RunSet $run_set
+     * @return void
+     */
+    public function markAsLaunched(RunSet $run_set): void
+    {
+        $tags = $run_set->tags;
+        array_push($tags, 'is-submitted');
+        $run_set->update(['tags' => $tags]);
+        $run_set->save();
     }
 }

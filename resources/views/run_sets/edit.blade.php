@@ -131,9 +131,8 @@
                                     </div>
                                 </div>
                             </div>
-                            @forelse(($run_set->tags ? : []) as $tag)
-                       $('#loading').addClass('loading');
-        $('#loading-content').addClass('loading-content');         <div class="form-group row input-tag-fields">
+                            @forelse((json_decode($run_set->tags, true) ? : []) as $tag)
+                                <div class="form-group row input-tag-fields">
                                     <label for="tags"
                                            class="col-md-4 col-form-label text-md-right">{{ __('edit.tags') }}</label>
                                     <div class="col-md-6">

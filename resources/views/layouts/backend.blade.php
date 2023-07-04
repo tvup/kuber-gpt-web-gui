@@ -19,6 +19,11 @@
 </head>
 <body>
 <div class="wrapper">
+    @if (Auth::user()->onTrial())
+        <div style="background-color: #E0E7FF;" class="py-3 text-primary text-sm border-bottom border-secondary text-center">
+            Enjoy your free trial! Don't forget to <a href="/billing" class="font-weight-bold text-decoration-none text-info"><u>choose a subscription plan</u></a> if you like our product
+        </div>
+    @endif
     <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}" style="display: flex; align-items: center;">

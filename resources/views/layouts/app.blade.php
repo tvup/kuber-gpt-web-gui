@@ -17,6 +17,11 @@
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">
+            @if (Auth::user()->onTrial())
+                <div class="py-3 bg-indigo-100 text-indigo-700 text-sm border-b border-indigo-200 text-center">
+                    Enjoy your free trial! Don't forget to <a href="/billing" class="font-semibold underline">choose a subscription plan</a> if you like our product
+                </div>
+            @endif
             @include('layouts.navigation')
 
             <!-- Page Heading -->

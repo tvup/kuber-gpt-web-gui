@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LaunchRunSetRequest;
+use App\Models\Credential;
+use App\Models\CredentialsSet;
 use App\Models\RunSet;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -29,13 +31,26 @@ class ConductorController extends Controller
 //            return redirect()->back()->with('msg-danger', 'Error: Valid certificate(s) already exist');
 //        }
 
+        $credentialsSetId = $run_set->credentialsSet?->id;
+
+        $credentialsArray = [];
+        foreach (CredentialsSet::$keys as $key) {
+            $credential = Credential::whereCredentialsSetId($credentialsSetId)->where('key', $key)->first();
+            if(!$credential) {
+                $credential = new Credential();
+                $credential->key = $key;
+                $credential->value = CredentialsSet::$defaultValues[$key];
+                $credential->credentials_set_id = $credentialsSetId;
+            }
+            $credentialsArray[] = $credential;
+        }
 
         $array = [];
         $array['user_id'] = auth()->user()->id;
         $array['run_set_id'] = $run_set->id;
         $array['nick_name'] = Str::lower($run_set->nick_name);
         $array['run_set'] = $run_set->toArray();
-        $array['credentials_set'] = $run_set->credentialsSet?->credentials?->toArray();
+        $array['credentials_set'] = $credentialsArray;
 
         //I proceed if it has no active valid certificates
         $listeners = Redis::publish(config('database.redis.default.create_channel'), json_encode($array));

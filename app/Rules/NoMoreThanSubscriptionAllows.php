@@ -15,7 +15,7 @@ class NoMoreThanSubscriptionAllows implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $subscriptionItem = Auth::user()->subscriptions?->items->first();
+        $subscriptionItem = Auth::user()->subscriptions->first()?->items->first();
         $allowedQuantityPerProduct = ['prod_Nn2LFeAVDg4INl'=> 1, 'prod_Nn2KRZrCEJ37Uu' => 1, 'prod_Nn2JPI08USBQEV' => 2];
         $runningAisOfUser = Auth::user()->runSets->whereNotNull('public_ip')->count();
         if($runningAisOfUser+1 > $allowedQuantityPerProduct[$subscriptionItem->product_id]) {

@@ -55,12 +55,13 @@ if (poken) {
             }
         }
     })
+    window.Pusher = pusher;
 }
 
 
 
 
-window.Pusher = pusher;
+
 
 
 /**

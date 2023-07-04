@@ -124,28 +124,29 @@
                 }
             });
 
-
-            var channel = Pusher.subscribe('private-App.User.{{auth()->user()->id}}');
-            channel.bind('ip-from-conductor-event', function (data) {
-                var newUrl = 'http://' + data.ip + ':50001';
-                $('#show_public_ip'+data.run_set_id).attr("href", newUrl);
-                $('#show_public_ip'+data.run_set_id).text(newUrl);
-                $("#show_public_ip"+data.run_set_id).find(".fa-spinner").remove();
-                Swal.fire({
-                    title: '<strong>AutoGPT is ready!</strong>',
-                    html: 'Click button below to access it directly at <a href="' + newUrl + '">' + newUrl + '</a>',
-                    icon: 'success',
-                    showCancelButton: true,
-                    showCloseButton: true,
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Yes, hit it',
-                    cancelButtonText: 'No, not now'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.open(newUrl);
-                    }
-                })
-            });
+            if(Pusher) {
+                var channel = Pusher.subscribe('private-App.User.{{auth()->user()->id}}');
+                channel.bind('ip-from-conductor-event', function (data) {
+                    var newUrl = 'http://' + data.ip + ':50001';
+                    $('#show_public_ip' + data.run_set_id).attr("href", newUrl);
+                    $('#show_public_ip' + data.run_set_id).text(newUrl);
+                    $("#show_public_ip" + data.run_set_id).find(".fa-spinner").remove();
+                    Swal.fire({
+                        title: '<strong>AutoGPT is ready!</strong>',
+                        html: 'Click button below to access it directly at <a href="' + newUrl + '">' + newUrl + '</a>',
+                        icon: 'success',
+                        showCancelButton: true,
+                        showCloseButton: true,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Yes, hit it',
+                        cancelButtonText: 'No, not now'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.open(newUrl);
+                        }
+                    })
+                });
+            }
 
 
             $('.launch-button').each(function( index, element )  {

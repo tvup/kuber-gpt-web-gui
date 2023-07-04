@@ -80,7 +80,7 @@
                                     <td>
                                         <form action="#" method="POST">
                                             <input type="hidden" name="run_set_id" value="{{$runSet->id}}">
-                                            <button class="btn btn-danger launch-button" data-name="{{ $runSet->nick_name }}" data-run_set_id="{{ $runSet->id }}"{{ array_key_exists('is-submitted', ((is_array($runSet->tags)?$runSet->tags:json_decode($runSet->tags, true)))) ?  ' disabled ':''}}>
+                                            <button class="btn btn-danger launch-button" data-name="{{ $runSet->nick_name }}" data-run_set_id="{{ $runSet->id }}"{{ ($runSet->tags && array_key_exists('submitted', $runSet->tags) && $runSet->tags['submitted'] == true) ? 'disabled' : '' }}>
                                                 <i class="fas fa-user-times">LAUNCH</i>
                                             </button>
                                         </form>

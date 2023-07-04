@@ -21,7 +21,7 @@ class ConductorController extends Controller
         $run_set_id = request()->get('run_set');
         /** @var RunSet $run_set */
         $run_set = RunSet::find($run_set_id);
-        $this->markAsLaunched($run_set);
+        $run_set->update(['tags->submitted' => true]);
 
         //check that the user does not have valid active certificates
         $user = auth()->user();
@@ -43,15 +43,4 @@ class ConductorController extends Controller
         return new JsonResource(['active_listeners'=>$listeners]);
     }
 
-    /**
-     * @param RunSet $run_set
-     * @return void
-     */
-    public function markAsLaunched(RunSet $run_set): void
-    {
-        $tags = $run_set->tags;
-        array_push($tags, 'is-submitted');
-        $run_set->update(['tags' => $tags]);
-        $run_set->save();
-    }
 }

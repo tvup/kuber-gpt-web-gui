@@ -5,7 +5,6 @@ namespace App\Rules;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Cashier\Subscription;
 
 class NoMoreThanSubscriptionAllows implements ValidationRule
 {
@@ -16,9 +15,9 @@ class NoMoreThanSubscriptionAllows implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $subscriptionItem = Auth::user()->subscription()->items->first();
+        $subscriptionItem = Auth::user()->subscriptions?->items->first();
         $allowedQuantityPerProduct = ['prod_Nn2LFeAVDg4INl'=> 1, 'prod_Nn2KRZrCEJ37Uu' => 1, 'prod_Nn2JPI08USBQEV' => 2];
-        $runningAisOfUser = Auth::user()->runSets()->whereNotNull('public_ip')->count();
+        $runningAisOfUser = Auth::user()->runSets->whereNotNull('public_ip')->count();
         if($runningAisOfUser+1 > $allowedQuantityPerProduct[$subscriptionItem->product_id]) {
             $fail('You have exceeded the number of run sets allowed by your subscription.');
         }

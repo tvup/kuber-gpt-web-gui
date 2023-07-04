@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
-use Laravel\Cashier\Billable;
 use Laravel\Sanctum\HasApiTokens;
+use Spark\Billable;
 
 /**
  * @property int $id

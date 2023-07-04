@@ -1,183 +1,45 @@
-@extends('layouts.backend')
+<x-guest-layout>
+    <x-authentication-card>
+        <x-slot name="logo">
+            <x-authentication-card-logo />
+        </x-slot>
 
-@section('title', $title)
+        <x-validation-errors class="mb-4" />
 
-@section('css')
-    @vite(['resources/sass/backend.scss'])
-@endsection
+        <form method="POST" action="{{ route('register') }}">
+            @csrf
 
-@section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-5 offset-md-1">
-                <hr>
-                <h1 class="lead" style="font-size: 1.5em">{{__('register.checkout')}}</h1>
-                <hr>
-                <h3 class="lead" style="font-size: 1.2em; margin-bottom: 1.6em;">{{__('register.billing_details')}}</h3>
-                <form method="POST" action="{{route('subscribe')}}" id="reg-form">
-                    @csrf()
-                    <div id="address-element"></div>
-
-                    <div class="form-group">
-                        <label for="email" class="light-text">{{__('register.email_address')}}</label>
-                        @guest
-                            <input type="text" name="email" class="form-control my-input" id="email" required>
-                        @else
-                            <input type="text" name="email" class="form-control my-input" id="email"
-                                   value="{{ auth()->user()->email }}" readonly required>
-                        @endguest
-                    </div>
-                    <div class="form-group">
-                        <label for="password" class="light-text">{{__('register.password')}}</label>
-                        <input type="password" name="password" class="form-control my-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password" class="light-text">{{__('register.confirm_password')}}</label>
-                        <input type="password" name="password" class="form-control my-input" required>
-                    </div>
-                    <input type="hidden" id="pmi" name="stripe_price_id" value="{{$stripe_price_id}}">
-                    <input type="hidden" id="payment_method" name="payment_method" value="">
-                    <input type="hidden" name="role" value="user">
-                    <input type="hidden" name="allowed_a_is" value="1">
-                    <input type="hidden" name="a_is_running" value="0">
-                    <input type="hidden" id="name" name="name" value="">
-                    <input type="hidden" id="line1" name="line1" value="">
-                    <input type="hidden" id="city" name="city" value="">
-                    <input type="hidden" id="postal_code" name="postal_code" value="">
-                    <input type="hidden" id="country" name="country" value="">
-                    <label for="card-element">{{__('register.credit_or_debit_card')}}:</label><br>
-                    <div id="card-element" class="form-control" style='height: 2.4em; padding-top: .7em;'></div>
-                    <!-- We'll put the error messages in this element -->
-                    <div id="card-errors" role="alert"></div>
-
-                    <br>
-                    <button id="card-button" class="btn btn-lg btn-primary btn-block"
-                            data-secret="{{ $intent->client_secret }}">{{__('register.pay_now')}}
-                    </button>
-
-                </form>
+            <div>
+                <x-label for="name" value="{{ __('Name') }}" />
+                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             </div>
-            <div class="col-md-5 offset-md-1">
-                <hr>
-                <h3>{{__('register.your_order')}}</h3>
-                <hr>
-                <table class="table table-borderless table-responsive">
-                    <tbody>
-                    <tr>
-                        <td>
 
-                            <img src="/{{$price->img}}" height="100px" width="100px"></td>
-
-                        <td>
-                        <td>
-
-                            <h3 class="lead light-text">{{ __('products/products.'.$price->name) }}</h3>
-                            <p class="light-text">{{ __('products/products.'.$price->descr) }}</p>
-                            <h3 class="light-text lead text-small">€ {{ $price->amount }}</h3>
-
-                        </td>
-                        <td>
-                            <!-- <span class="quantity-square">1</span> -->
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <hr>
-                <div class="row">
-                    <div class="col-md-4">
-                        <span>{{__('app.total')}}</span>
-                    </div>
-                    <div class="col-md-4 offset-md-4">
-                        <span class="text-right" style="display: inline-block">€ {{ $price->amount }}</span>
-                    </div>
-                </div>
-                <hr>
+            <div class="mt-4">
+                <x-label for="email" value="{{ __('Email') }}" />
+                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             </div>
-        </div>
 
-    </div>
-@endsection
+            <div class="mt-4">
+                <x-label for="password" value="{{ __('Password') }}" />
+                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+            </div>
 
-@section('scripts')
-    <script src="https://js.stripe.com/v3/"></script>
-    <script type="module">
-        const stripe = Stripe('{{ config('cashier.key') }}');
+            <div class="mt-4">
+                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
+                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+            </div>
 
-        const elements = stripe.elements();
 
-        var style = {
-            base: {
-                lineHeight: '1.35',
-                fontSize: "16px",
-                color: '#495057',
-                fontFamily: 'apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif',
-                fontSmoothing: "antialiased",
-                "::placeholder": {
-                    color: "#32325d"
-                }
-            },
-            invalid: {
-                fontFamily: 'Arial, sans-serif',
-                color: "#fa755a",
-                iconColor: "#fa755a"
-            },
 
-        };
-        var cardElement = elements.create("card", {style: style, hidePostalCode: true,});
+            <div class="flex items-center justify-end mt-4">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+                    {{ __('Already registered?') }}
+                </a>
 
-        cardElement.mount('#card-element');
-
-        const addressElement = elements.create("address", {
-            mode: "billing"
-        });
-        addressElement.mount("#address-element");
-
-        let address = {};
-        const myPromise = addressElement.on('change', (event) => {
-            if (event.complete) {
-                // Extract potentially complete address
-                address.name = event.value.name;
-                address.city = event.value.address.city;
-                address.country = event.value.address.country;
-                address.line1 = event.value.address.line1;
-                address.postal_code = event.value.address.postal_code;
-            }
-        })
-        const emailField = document.getElementById('email');
-        let cardButton = document.getElementById('card-button');
-        let clientSecret = cardButton.dataset.secret;
-
-        cardButton.addEventListener('click', async (e) => {
-            e.preventDefault();
-            const {setupIntent, error} = await stripe.confirmCardSetup(
-                clientSecret, {
-                    payment_method: {
-                        card: cardElement,
-                        billing_details: {
-                            name: address.name,
-                            email: emailField.value,
-                            address: {
-                                line1: address.line1,
-                                city: address.city,
-                                postal_code: address.postal_code,
-                                country: address.country
-                            },
-                        }
-                    }
-                }
-            );
-
-            if (error) {
-                alert('{{ __('register.something_went_wrong') }}: ' + error);
-            } else {
-                document.getElementById('payment_method').value = setupIntent.payment_method;
-                document.getElementById('name').value = address.name;
-                document.getElementById('line1').value = address.line1;
-                document.getElementById('city').value = address.city;
-                document.getElementById('postal_code').value = address.postal_code;
-                document.getElementById('country').value = address.country;
-                document.getElementById("reg-form").submit();
-            }
-        });
-    </script>
-@endsection
+                <x-button class="ml-4">
+                    {{ __('Register') }}
+                </x-button>
+            </div>
+        </form>
+    </x-authentication-card>
+</x-guest-layout>

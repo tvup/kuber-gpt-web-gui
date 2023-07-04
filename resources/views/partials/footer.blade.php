@@ -49,7 +49,7 @@
                     Services
                 </p>
                 <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-                    <a class="hover:opacity-75" href="{{ route('products.index') }}"> {{__('footer.autogpt_saas')}} </a>
+                    <a class="hover:opacity-75" href="{{ url('billing') }}"> {{__('footer.autogpt_saas')}} </a>
                 </nav>
             </div>
             <div>

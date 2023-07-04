@@ -25,7 +25,7 @@
                     <p class="mt-2 text-sm text-gray-600 md:text-base">{{__('appetizer.its-happening-right-now-its-a-hype-and-now-if-you-want-to-to-cut-the-corners-a-see-it-for-your-self-youre-invited')}}</p>
                     <div class="flex justify-center lg:justify-start mt-6">
                         <a class="px-4 py-3 bg-gray-900 text-gray-200 text-xs font-semibold rounded hover:bg-gray-800"
-                           href="{{ route('products.index') }}">{{__('appetizer.get_started')}}</a>
+                           href="{{ url('billing') }}">{{__('appetizer.get_started')}}</a>
                         <a class="mx-4 px-4 py-3 bg-gray-300 text-gray-900 text-xs font-semibold rounded hover:bg-gray-400"
                            href="{{ route('about') }}">{{__('appetizer.learn_more')}}</a>
                     </div>

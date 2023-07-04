@@ -1,3 +1,7 @@
+import defaultTheme from 'tailwindcss/defaultTheme';
+import forms from '@tailwindcss/forms';
+import typography from '@tailwindcss/typography';
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: [
@@ -6,10 +10,14 @@ module.exports = {
         "./resources/**/*.vue",
         "./resources/**/*.woff2",
         "./resources/**/*.ttf",
+        './storage/framework/views/*.php',
     ],
     theme: {
-        extend: {},
+        extend: {
+            fontFamily: {
+                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+            },
+        },
     },
-    plugins: [],
+    plugins: [forms, typography],
 }
-

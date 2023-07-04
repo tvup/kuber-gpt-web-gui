@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
 
         $token = $request->user()->createToken('poken')->plainTextToken;
 
-        $request->session()->put('poken_pia', $token);
+        $request->session()->put('poken_ipa', $token);
 
         $request->session()->regenerate();
 

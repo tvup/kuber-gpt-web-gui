@@ -39,11 +39,9 @@ window.Swal = Swal;
 
 import Pusher from 'pusher-js';
 
-let backendBaseUrl = "{{ config('app.url') }}";
-
 var pusher = new Pusher(import.meta.env.VITE_PUSHER_APP_KEY, {
     cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
-    authEndpoint: `${backendBaseUrl}/broadcasting/auth`,
+    authEndpoint: `${import.meta.env.BASE_URL}/broadcasting/auth`,
     auth: {
         headers: {
             "Authorization": "Bearer bPOZyMpJ1GDsS8cAO3ZmM8zJEwz0RXE1sAHWyqSb",

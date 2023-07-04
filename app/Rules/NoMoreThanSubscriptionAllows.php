@@ -15,13 +15,51 @@ class NoMoreThanSubscriptionAllows implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        logger()->info('Validating user with id ' . Auth::user()->id . ' actions');
-        $subscriptionItem = Auth::user()->subscriptions->first()?->items->first();
-        $allowedQuantityPerProduct = ['prod_Nn2LFeAVDg4INl'=> 1, 'prod_Nn2KRZrCEJ37Uu' => 1, 'prod_Nn2JPI08USBQEV' => 2];
-        $runningAisOfUser = Auth::user()->runSets->whereNotNull('public_ip')->count();
-        logger()->info('Product id: '.$subscriptionItem->stripe_product);
-        if($runningAisOfUser+1 > $allowedQuantityPerProduct[$subscriptionItem->stripe_product]) {
+        $user = Auth::user();
+        if(!$user) {
+            $fail('System error');
+        }
+        $numberOfAllowedInstances = $this->getAllowedNumberOfRunningInstancesOfUser($user);
+        $numberOfAllowedRunningInstances = $this->getNumberOfRunningInstancesOfUser($user);
+
+
+        if($numberOfAllowedRunningInstances+1 > $numberOfAllowedInstances) {
             $fail('You have exceeded the number of run sets allowed by your subscription.');
         }
+    }
+
+    private function getAllowedNumberOfRunningInstancesOfUser(\App\Models\User|\Illuminate\Contracts\Auth\Authenticatable $user) : int
+    {
+        $allowedQuantityPerProduct = [
+            config('products.bronze.id')=> 1,
+            config('products.silver.id') => 2,
+            config('products.gold.id') => 3
+        ];
+
+        if($user->onTrial()) {
+            return 1;
+        }
+
+        $subscriptions = $user->subscriptions;
+        if(!$subscriptions) {
+            return 0;
+        }
+
+        $sumOfAllowedRunningInstances = 0;
+
+        $activeSubscriptions = $subscriptions->active() ;
+        foreach ($activeSubscriptions as $activeSubscription) {
+            $subscriptionItems = $activeSubscription->items;
+            foreach ($subscriptionItems as $subscriptionItem) {
+                $sumOfAllowedRunningInstances += $allowedQuantityPerProduct[$subscriptionItem->stripe_product];
+            }
+        }
+
+        return $sumOfAllowedRunningInstances;
+    }
+
+    private function getNumberOfRunningInstancesOfUser(\App\Models\User|\Illuminate\Contracts\Auth\Authenticatable $user)
+    {
+        return $user->runSets->whereNotNull('public_ip')->count();
     }
 }

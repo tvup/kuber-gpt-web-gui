@@ -60,6 +60,9 @@
                                     <td>
                                         <a href="{{ route('run_sets.show', ['run_set' => $runSet]) }}"
                                            class="text-primary font-weight-bold">{{$runSet->nick_name}} </a>
+                                        <span id="name_label" class="invalid-feedback" role="alert" style="display: none;">
+                                            <strong></strong>
+                                        </span>
                                     </td>
                                     <td>{{($runSet->ai_self_name) ? : ' '}}</td>
                                     <td><a href="{{route('credentials.index')}}">{{($runSet->id) ? : ' '}}</a></td>
@@ -164,12 +167,15 @@
                                 'success'
                             )
                         },
-                        error: function () {
+                        error: function (xhr, status, error) {
+
                             Swal.fire(
                                 'Techsolutionstuff!',
                                 'Something went to wrong. Please Try again later...!',
                                 'error'
                             )
+                            $('#name_label').css("display", "block");
+                            $('#name_label').find(">:first-child").append(JSON.parse(xhr.responseText).message);
                         }
                     });
                 });

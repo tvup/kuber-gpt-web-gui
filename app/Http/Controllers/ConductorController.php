@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LaunchRunSetRequest;
 use App\Models\RunSet;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -14,7 +15,9 @@ class ConductorController extends Controller
     /**
      * @throws RedisException
      */
-    public function launch() {
+    public function launch(LaunchRunSetRequest $request) {
+        $request->validate($request->rules());
+
         $run_set_id = request()->get('run_set');
         /** @var RunSet $run_set */
         $run_set = RunSet::find($run_set_id);

@@ -74,6 +74,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('run_sets.index') }}">{{__('app.ai_and_run_sets')}}</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/billing') }}">{{__('app.billing')}}</a>
+                    </li>
                     @endguest
                 </ul>
 

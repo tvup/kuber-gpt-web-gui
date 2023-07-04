@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\NoMoreThanSubscriptionAllows;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRunSetRequest extends FormRequest
@@ -30,7 +31,7 @@ class StoreRunSetRequest extends FormRequest
             'applications.*.name' => ['required', 'string', 'max:250'],
             'applications.*.url' => ['required', 'url', 'max:250'],
             'tags' => ['nullable', 'array'],
-            'credentials_set' => ['nullable', 'integer'],
+            [new NoMoreThanSubscriptionAllows],
         ];
     }
 }

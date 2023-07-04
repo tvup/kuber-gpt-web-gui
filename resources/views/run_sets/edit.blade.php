@@ -131,7 +131,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @forelse((json_decode($run_set->tags, true) ? : []) as $tag)
+                            @forelse(($run_set->tags ? : []) as $tag)
                                 <div class="form-group row input-tag-fields">
                                     <label for="tags"
                                            class="col-md-4 col-form-label text-md-right">{{ __('edit.tags') }}</label>

@@ -16,11 +16,13 @@ class IpFromConductorEvent implements ShouldBroadcast
 
     public int $user_id;
     public string $ip;
+    public int $run_set_id;
 
     public function __construct(array $message)
     {
         $this->user_id = $message['user_id'];
         $this->ip = $message['ip'];
+        $this->run_set_id = $message['run_set_id'];
     }
 
     /**

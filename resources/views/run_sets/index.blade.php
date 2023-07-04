@@ -68,7 +68,7 @@
                                     <td><a href="{{route('credentials.index')}}">{{($runSet->id) ? : ' '}}</a></td>
                                     <td>{{$runSet->created_at}}</td>
                                     <td>
-                                        <a id="show_public_ip" href="http://{{$runSet->public_ip ? $runSet->public_ip . ':50001' : auth()->user()->running_port . ':50001'}}">{{$runSet->public_ip ? $runSet->public_ip . ':50001' : auth()->user()->running_port . ':50001'}}</a>
+                                        <a id="show_public_ip{{$runSet->id}}" href="http://{{$runSet->public_ip ? $runSet->public_ip . ':50001' : auth()->user()->running_port . ':50001'}}">{{$runSet->public_ip ? $runSet->public_ip . ':50001' : auth()->user()->running_port . ':50001'}}</a>
                                     </td>
                                     <td>{{$runSet->status}}</td>
                                     <td>
@@ -128,9 +128,9 @@
             var channel = Pusher.subscribe('private-App.User.{{auth()->user()->id}}');
             channel.bind('ip-from-conductor-event', function (data) {
                 var newUrl = 'http://' + data.ip + ':50001';
-                $('#show_public_ip').attr("href", newUrl);
-                $('#show_public_ip').text(newUrl);
-                $("#show_public_ip").find(".fa-spinner").remove();
+                $('#show_public_ip'+data.run_set_id).attr("href", newUrl);
+                $('#show_public_ip'+data.run_set_id).text(newUrl);
+                $("#show_public_ip"+data.run_set_id).find(".fa-spinner").remove();
                 Swal.fire({
                     title: '<strong>AutoGPT is ready!</strong>',
                     html: 'Click button below to access it directly at <a href="' + newUrl + '">' + newUrl + '</a>',
@@ -155,8 +155,8 @@
 
                     var run_set_id = $(this).data('run_set_id');
                     var name = $(this).data('name');
-                        $('#show_public_ip').text('');
-                    $('#show_public_ip').prepend('<i class="fa fa-spinner fa-spin"></i>');
+                    $('#show_public_ip'+run_set_id).text('');
+                    $('#show_public_ip'+run_set_id).prepend('<i class="fa fa-spinner fa-spin"></i>');
 
                     $.ajax({
                         type: "POST",

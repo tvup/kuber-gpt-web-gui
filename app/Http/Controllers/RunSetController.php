@@ -58,7 +58,7 @@ class RunSetController extends Controller
      */
     public function store(StoreRunSetRequest $request): RedirectResponse
     {
-        $validated = $request->validated();
+        $validated = $request->validate($request->rules());
 
 
         $runSet = app(RunSet::class);

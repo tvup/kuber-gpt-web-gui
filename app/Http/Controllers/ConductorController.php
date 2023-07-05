@@ -7,6 +7,7 @@ use App\Http\Requests\LaunchRunSetRequest;
 use App\Models\Credential;
 use App\Models\CredentialsSet;
 use App\Models\RunSet;
+use App\Models\User;
 use Faker\Factory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -74,20 +75,23 @@ class ConductorController extends Controller
     public function megaLaunch(LaunchMegaRunSetRequest $request) {
         $validated = $request->validate($request->rules());
 
-        /** @var RunSet $run_set */
+        /** @var User $user */
         $user = auth()->user();
+
+        /** @var RunSet $run_set */
         $run_set = $user->runSets()->create();
-        $run_set->update(['tags->submitted' => true]);
-        $faker = Factory::create();
-        $run_set->nick_name = Str::lower($faker->firstName());
+        $run_set->update(['tags->submitted' => true, 'nick_name' => $this->createFakeFirstName()]);
+
 
         /** @var CredentialsSet $credentialsSet */
         $credentialsSet = app(CredentialsSet::class);
         $credentialsSet->save();
+
+        //Make sure relationship is set
         $run_set->credentialsSet()->associate($credentialsSet);
         $run_set->save();
 
-
+        //Make sure relationship is set
         $credentialsSet->user()->associate($user);
         $credentialsSet->save();
 
@@ -104,6 +108,9 @@ class ConductorController extends Controller
 
 
         foreach (CredentialsSet::$keys as $key) {
+            if($key == 'OPENAI_API_KEY') {
+                continue;
+            }
             $credential = new Credential();
             $credential->key = $key;
             $credential->value = CredentialsSet::$defaultValues[$key];
@@ -130,6 +137,16 @@ class ConductorController extends Controller
         $listeners = Redis::publish(config('database.redis.default.create_channel'), json_encode($array));
 
         return view('run_sets.index', compact('run_sets'))->with('msg-success', 'Run set submitted successfully');
+    }
+
+    /**
+     * @return string
+     */
+    public function createFakeFirstName(): string
+    {
+        $faker = Factory::create();
+        $lower = Str::lower($faker->firstName());
+        return $lower;
     }
 
 }

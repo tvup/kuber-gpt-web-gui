@@ -83,7 +83,7 @@ class ConductorController extends Controller
 
         /** @var CredentialsSet $credentialsSet */
         $credentialsSet = app(CredentialsSet::class);
-        $runSet->credentialsSet()->attach($credentialsSet);
+        $runSet->credentialsSet()->associate($credentialsSet);
 
         $credentialsSet->user()->associate($user);
         $credentialsSet->save();

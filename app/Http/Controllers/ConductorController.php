@@ -74,18 +74,18 @@ class ConductorController extends Controller
     public function megaLaunch(LaunchMegaRunSetRequest $request) {
         $validated = $request->validate($request->rules());
 
-        /** @var RunSet $runSet */
+        /** @var RunSet $run_set */
         $user = auth()->user();
-        $runSet = $user->runSets()->create();
-        $runSet->update(['tags->submitted' => true]);
+        $run_set = $user->runSets()->create();
+        $run_set->update(['tags->submitted' => true]);
         $faker = Factory::create();
-        $runSet->nick_name = Str::lower($faker->firstName());
+        $run_set->nick_name = Str::lower($faker->firstName());
 
         /** @var CredentialsSet $credentialsSet */
         $credentialsSet = app(CredentialsSet::class);
         $credentialsSet->save();
-        $runSet->credentialsSet()->associate($credentialsSet);
-        $runSet->save();
+        $run_set->credentialsSet()->associate($credentialsSet);
+        $run_set->save();
 
 
         $credentialsSet->user()->associate($user);
@@ -114,17 +114,17 @@ class ConductorController extends Controller
 
         $array = [];
         $array['user_id'] = $user->id;
-        $array['run_set_id'] = $runSet->id;
-        $array['nick_name'] = Str::lower($runSet->nick_name);
-        $array['run_set'] = $runSet->toArray();
+        $array['run_set_id'] = $run_set->id;
+        $array['nick_name'] = Str::lower($run_set->nick_name);
+        $array['run_set'] = $run_set->toArray();
         $array['credentials_set'] = $credentialsArray;
 
-        $runSet->save();
+        $run_set->save();
 
         //I proceed if it has no active valid certificates
         $listeners = Redis::publish(config('database.redis.default.create_channel'), json_encode($array));
 
-        return new JsonResource(['active_listeners'=>$listeners]);
+        return view('run_sets.index', compact('run_set'))->with('msg-success', 'Run set submitted successfully');
     }
 
 }

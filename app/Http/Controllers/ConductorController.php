@@ -82,7 +82,9 @@ class ConductorController extends Controller
         $runSet->nick_name = Str::lower($faker->firstName());
 
         /** @var CredentialsSet $credentialsSet */
-        $credentialsSet = $runSet->credentialsSet()->create();
+        $credentialsSet = app(CredentialsSet::class);
+        $runSet->credentialsSet()->save();
+
         $credentialsSet->user()->associate($user);
         $credentialsSet->save();
 

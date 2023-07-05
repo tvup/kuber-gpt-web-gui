@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\NotNumeric;
+use App\Rules\NoMoreThanSubscriptionAllows;
 use Illuminate\Foundation\Http\FormRequest;
 
 class LaunchMegaRunSetRequest extends FormRequest
@@ -23,7 +23,7 @@ class LaunchMegaRunSetRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'token' => ['required'],
+            'token' => ['required', new NoMoreThanSubscriptionAllows],
         ];
     }
 }

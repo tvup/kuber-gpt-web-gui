@@ -29,7 +29,7 @@
 </head>
 @if (Auth::user()->onTrial())
     <div class="py-3 bg-indigo-100 text-indigo-700 text-lg border-b border-indigo-200 text-center">
-        Or simply enjoy your free trial and  <a href="/billing" class="font-semibold underline">click here</a> to go directly to creation of your own AutoGPT while you can
+        Or simply enjoy your free trial and  <a href="{{route('castle')}}" class="font-semibold underline">click here</a> to go directly to creation of your own AutoGPT while you can
     </div>
 @endif
 @inertiaHead

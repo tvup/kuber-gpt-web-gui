@@ -78,9 +78,9 @@
                         </style>
 
                         <div class="d-flex justify-content-center mb-3">
-                            <a class="btn btn-success btn-xxl btn-shiny" href="{{ route('home') }}">
+                            <button type="submit" class="btn btn-success btn-xxl btn-shiny" href="{{ route('home') }}">
                                 <span class="btn-text">{{__('GO GO GO!')}}</span>
-                            </a>
+                            </button>
                         </div>
                     </form>
 

@@ -79,9 +79,10 @@ class ConductorController extends Controller
         $runSet->update(['tags->submitted' => true]);
         $runSet->nick_name = '';
 
+        /** @var CredentialsSet $credentialsSet */
         $credentialsSet = $runSet->credentialsSet()->create();
-        $credentialsSet->associate($runSet);
-        $credentialsSet->associate($user);
+        $credentialsSet->runSets()->attach($runSet);
+        $credentialsSet->user()->associate($user);
         $credentialsSet->save();
         /** @var Collection $credentialsCollection */
         $credentialsCollection = Credential::whereCredentialsSetId($credentialsSet->id)->get();

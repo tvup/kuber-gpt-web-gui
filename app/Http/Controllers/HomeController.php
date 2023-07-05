@@ -29,6 +29,27 @@ class HomeController extends Controller
         return view('home')->with(['user' => $user, 'role' => $role]);
     }
 
+    /**
+     * Show the application dashboard.
+     */
+    public function castle(): View
+    {
+        $user = Auth::user();
+        if ($user) {
+            if ($user->role == UserRoleEnum::Admin) {
+                $role = UserRoleEnum::Admin;
+            } elseif ($user->role == UserRoleEnum::Manager) {
+                $role = UserRoleEnum::Manager;
+            } else {
+                $role = UserRoleEnum::User;
+            }
+        } else {
+            $role = UserRoleEnum::User;
+        }
+
+        return view('castle')->with(['user' => $user, 'role' => $role]);
+    }
+
     public function approval(): View
     {
         return view('auth.approval');

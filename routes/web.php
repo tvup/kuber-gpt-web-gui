@@ -34,6 +34,7 @@ Route::get('/contact', function () { return view('/landing-pages/contact')->with
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/castle', 'HomeController@castle')->name('castle');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

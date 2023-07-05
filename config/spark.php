@@ -140,29 +140,25 @@ return [
             'plans' => [
                 [
                     'name' => 'Bronze',
-                    'short_description' => 'This is a short, human friendly description of the plan.',
+                    'short_description' => 'Here\'s an opening! And it\'s not too expensive! Move into this highly customizable environment and bring with you everything aquired' ,
                     'monthly_id' => env('BRONZE_MONTHLY_PRODUCT_PRICE_ID', 'price_1N1SGpJsg0XlNoye3XUnntnt'),
                     'features' => [
-                        '"Meter billing"',
-                        'Billed as you use - after first hour which will be billed for 1 hour no matter what, but afterwards, you can turn on/off as you wish',
-                        'You can "pause" for up to 1 week.',
                         'Bring your own tokens/keys',
-                        'Each hour after 24 hours will be settled at € 0.5 /hour',
                     ],
                 ],
                 [
                     'name' => 'Silver',
-                    'short_description' => 'This is a short, human friendly description of the plan.',
+                    'short_description' => 'This \'apartment\' is a bit more expensive, but you get a lot more for it! For the time being, there\'s room for having two AI-instances running. You\'ll find that a bit more than basic affordments are present - in fact if you can make do with our prefilled stuff, you can get started right away and explore tweaks as time is progressing.',
                     'monthly_id' => env('SILVER_MONTHLY_PRODUCT_PRICE_ID', 'price_1N1SG9Jsg0XlNoyeqplHQcDX'),
                     'yearly_id' => env('SILVER_YEARLY_PRODUCT_PRICE_ID', 'price_1NPxY7Jsg0XlNoyeMTwzuvnA'),
                     'features' => [
-                        'Pay in advance',
-                        'Runs for a month',
+                        'Up to two instances at the same time',
+                        'Lot\'s of api-keys are pre-filled and ready for your use',
                     ],
                 ],
                 [
                     'name' => 'Gold',
-                    'short_description' => 'This is a short, human friendly description of the plan.',
+                    'short_description' => 'Wooowhooo! You are really going for it!',
                     'monthly_id' => env('GOLD_MONTHLY_PRODUCT_PRICE_ID', 'price_1N1SFIJsg0XlNoyecJVC5ksZ'),
                     'yearly_id' => env('GOLD_YEARLY_PRODUCT_PRICE_ID', 'price_1NPxYkJsg0XlNoyeGD6Dqnqo'),
                     'features' => [

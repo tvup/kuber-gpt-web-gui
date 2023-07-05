@@ -9,6 +9,7 @@ use App\Models\RunSet;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Str;
 use RedisException;
@@ -60,6 +61,64 @@ class ConductorController extends Controller
         $array['nick_name'] = Str::lower($run_set->nick_name);
         $array['run_set'] = $run_set->toArray();
         $array['credentials_set'] = $credentialsArray;
+
+        //I proceed if it has no active valid certificates
+        $listeners = Redis::publish(config('database.redis.default.create_channel'), json_encode($array));
+
+        return new JsonResource(['active_listeners'=>$listeners]);
+    }    /**
+     * @throws RedisException
+     */
+    public function megaLaunch(LaunchRunSetRequest $request) {
+        $validated = $request->validate($request->rules());
+
+        /** @var RunSet $runSet */
+        $user = auth()->user();
+        $runSet = $user->runSets()->create();
+        $runSet->update(['tags->submitted' => true]);
+        $runSet->nick_name = '';
+
+        $credentialsSet = $runSet->credentialsSet()->create();
+        $credentialsSet->associate($runSet);
+        $credentialsSet->associate($user);
+        $credentialsSet->save();
+        /** @var Collection $credentialsCollection */
+        $credentialsCollection = Credential::whereCredentialsSetId($credentialsSet->id)->get();
+        $credentialsArray = [];
+
+        $credential = new Credential();
+        $credential->key = 'OPENAI_API_KEY';
+        $credential->value = Arr::get($validated, 'token');
+        $credential->credentials_set_id = $credentialsSet->id;
+        $credential->save();
+
+
+        foreach (CredentialsSet::$keys as $key) {
+            $credential = $credentialsCollection->where('key', $key)->first();
+            if(!$credential) {
+                $credential = new Credential();
+                $credential->key = $key;
+                $credential->value = CredentialsSet::$defaultValues[$key];
+                $credential->credentials_set_id = $credentialsSet->id;
+                $credential->save();
+            } else {
+                $credentialsCollection->pull($credential->id);
+            }
+            $credentialsArray[] = $credential;
+        }
+
+        foreach ($credentialsCollection as $credential) {
+            $credentialsArray[] = $credential;
+        }
+
+        $array = [];
+        $array['user_id'] = $user->id;
+        $array['run_set_id'] = $runSet->id;
+        $array['nick_name'] = Str::lower($runSet->nick_name);
+        $array['run_set'] = $runSet->toArray();
+        $array['credentials_set'] = $credentialsArray;
+
+        $runSet->save();
 
         //I proceed if it has no active valid certificates
         $listeners = Redis::publish(config('database.redis.default.create_channel'), json_encode($array));

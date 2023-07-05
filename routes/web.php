@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('run_sets', RunSetController::class);
 
     Route::post('/launch', 'ConductorController@launch')->name('conductor.launch');
+    Route::post('/mega_launch', 'ConductorController@megaLaunch')->name('conductor.mega_launch');
 });
 
 require __DIR__.'/auth.php';

@@ -7,6 +7,7 @@ use App\Http\Requests\LaunchRunSetRequest;
 use App\Models\Credential;
 use App\Models\CredentialsSet;
 use App\Models\RunSet;
+use Faker\Factory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -77,7 +78,8 @@ class ConductorController extends Controller
         $user = auth()->user();
         $runSet = $user->runSets()->create();
         $runSet->update(['tags->submitted' => true]);
-        $runSet->nick_name = '';
+        $faker = Factory::create();
+        $runSet->nick_name = Str::lower($faker->firstName());
 
         /** @var CredentialsSet $credentialsSet */
         $credentialsSet = $runSet->credentialsSet()->create();
@@ -92,6 +94,8 @@ class ConductorController extends Controller
         $credential->value = Arr::get($validated, 'token');
         $credential->credentials_set_id = $credentialsSet->id;
         $credential->save();
+        $credentialsArray[] = $credential;
+        unset($credential);
 
 
         foreach (CredentialsSet::$keys as $key) {

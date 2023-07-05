@@ -83,10 +83,10 @@ class ConductorController extends Controller
 
         /** @var CredentialsSet $credentialsSet */
         $credentialsSet = $runSet->credentialsSet()->create();
-        $credentialsSet->user()->associate($user);
+        $user->credentialsSets()->attach($credentialsSet);
         $credentialsSet->save();
-        /** @var Collection $credentialsCollection */
-        $credentialsCollection = Credential::whereCredentialsSetId($credentialsSet->id)->get();
+
+
         $credentialsArray = [];
 
         $credential = new Credential();
@@ -99,20 +99,11 @@ class ConductorController extends Controller
 
 
         foreach (CredentialsSet::$keys as $key) {
-            $credential = $credentialsCollection->where('key', $key)->first();
-            if(!$credential) {
-                $credential = new Credential();
-                $credential->key = $key;
-                $credential->value = CredentialsSet::$defaultValues[$key];
-                $credential->credentials_set_id = $credentialsSet->id;
-                $credential->save();
-            } else {
-                $credentialsCollection->pull($credential->id);
-            }
-            $credentialsArray[] = $credential;
-        }
-
-        foreach ($credentialsCollection as $credential) {
+            $credential = new Credential();
+            $credential->key = $key;
+            $credential->value = CredentialsSet::$defaultValues[$key];
+            $credential->credentials_set_id = $credentialsSet->id;
+            $credential->save();
             $credentialsArray[] = $credential;
         }
 

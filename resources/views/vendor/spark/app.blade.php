@@ -28,8 +28,8 @@
     @inertiaHead
 </head>
 @if (Auth::user()->onTrial())
-    <div class="py-3 bg-indigo-100 text-indigo-700 text-sm border-b border-indigo-200 text-center">
-        Enjoy your free trial! Don't forget to <a href="/billing" class="font-semibold underline">choose a subscription plan</a> if you like our product
+    <div class="py-3 bg-indigo-100 text-indigo-700 text-lg border-b border-indigo-200 text-center">
+        Or simply enjoy your free trial and  <a href="/billing" class="font-semibold underline">click here</a> to go directly to creation of your own AutoGPT while you can
     </div>
 @endif
 @inertiaHead

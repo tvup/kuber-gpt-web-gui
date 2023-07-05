@@ -21,7 +21,7 @@
                                 <div class="col">
                                     <input id="token" type="text"
                                            class="form-control{{ $errors->has('token') ? ' is-invalid' : '' }}"
-                                           name="token" value="{{ $user->token }}" autofocus>
+                                           name="token" autofocus>
 
                                     @if ($errors->has('token'))
                                         <span class="invalid-feedback" role="alert">

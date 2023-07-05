@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property Carbon $updated_at
  * @property RunSet[] $runSets
  */
-class CredentialsSet extends Model
+class CredentialsSet extends BaseModel
 {
     public const OPENAI_API_KEY = "openai_api_key";
     public const ELEVENLABS_API_KEY = "elevenlabs_api_key";

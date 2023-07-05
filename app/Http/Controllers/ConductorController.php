@@ -99,7 +99,7 @@ class ConductorController extends Controller
         $credentialsArray = [];
 
         $credential = new Credential();
-        $credential->key = 'OPENAI_API_KEY';
+        $credential->key = 'openai_api_key';
         $credential->value = Arr::get($validated, 'token');
         $credential->credentials_set_id = $credentialsSet->id;
         $credential->save();
@@ -108,7 +108,7 @@ class ConductorController extends Controller
 
 
         foreach (CredentialsSet::$keys as $key) {
-            if($key == 'OPENAI_API_KEY') {
+            if($key == 'openai_api_key') {
                 continue;
             }
             $credential = new Credential();

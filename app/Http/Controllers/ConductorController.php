@@ -83,7 +83,7 @@ class ConductorController extends Controller
 
         /** @var CredentialsSet $credentialsSet */
         $credentialsSet = $runSet->credentialsSet()->create();
-        $user->credentialsSet->update(['tags->submitted' => true]);
+        $credentialsSet->update(['tags->submitted' => true]);
         $credentialsSet->user()->associate($user);
         $credentialsSet->save();
 

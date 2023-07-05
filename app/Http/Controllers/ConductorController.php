@@ -81,8 +81,8 @@ class ConductorController extends Controller
 
         /** @var CredentialsSet $credentialsSet */
         $credentialsSet = $runSet->credentialsSet()->create();
-        $credentialsSet->runSets()->attach($runSet);
-        $credentialsSet->user()->associate($user);
+        $credentialsSet->runSets()->associate($runSet);
+        $credentialsSet->user()->attach($user);
         $credentialsSet->save();
         /** @var Collection $credentialsCollection */
         $credentialsCollection = Credential::whereCredentialsSetId($credentialsSet->id)->get();

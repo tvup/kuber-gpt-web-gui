@@ -67,7 +67,7 @@ class ConductorController extends Controller
         //I proceed if it has no active valid certificates
         $listeners = Redis::publish(config('database.redis.default.create_channel'), json_encode($array));
 
-        return new JsonResource(['active_listeners'=>$listeners]);
+        return view('run_sets.index', compact('run_set'))->with('msg-success', 'Run set submitted successfully');
     }    /**
      * @throws RedisException
      */

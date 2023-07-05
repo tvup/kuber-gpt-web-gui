@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LaunchMegaRunSetRequest;
 use App\Http\Requests\LaunchRunSetRequest;
 use App\Models\Credential;
 use App\Models\CredentialsSet;
@@ -69,7 +70,7 @@ class ConductorController extends Controller
     }    /**
      * @throws RedisException
      */
-    public function megaLaunch(LaunchRunSetRequest $request) {
+    public function megaLaunch(LaunchMegaRunSetRequest $request) {
         $validated = $request->validate($request->rules());
 
         /** @var RunSet $runSet */

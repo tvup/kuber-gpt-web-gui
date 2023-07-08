@@ -45,6 +45,10 @@ class CredentialsSet extends BaseModel
     public const HUGGINGFACE_AUDIO_TO_TEXT_MODEL = "huggingface_audio_to_text_model";
     public const GITHUB_API_KEY = "github_api_key";
     public const GITHUB_USERNAME = "github_username";
+    public const APCA_API_KEY_ID = "apca_api_key_id";
+    public const APCA_API_SECRET_KEY = "apca_api_secret_key";
+    public const APCA_PAPER = "apca_paper";
+    public const APCA_SAFE = "apca_safe";
 
     /**
      * @var array|string[]
@@ -76,6 +80,10 @@ class CredentialsSet extends BaseModel
         self::HUGGINGFACE_AUDIO_TO_TEXT_MODEL,
         self::GITHUB_API_KEY,
         self::GITHUB_USERNAME,
+        self::APCA_API_KEY_ID,
+        self::APCA_API_SECRET_KEY,
+        self::APCA_PAPER,
+        self::APCA_SAFE,
     ];
 
     /**
@@ -108,6 +116,10 @@ class CredentialsSet extends BaseModel
         self::HUGGINGFACE_AUDIO_TO_TEXT_MODEL=>'CompVis/stable-diffusion-v1-4',
         self::GITHUB_API_KEY=>null,
         self::GITHUB_USERNAME=>null,
+        self::APCA_API_KEY_ID=>null,
+        self::APCA_API_SECRET_KEY=>null,
+        self::APCA_PAPER=>null,
+        self::APCA_SAFE=>null,
     ];
 
     use HasFactory;

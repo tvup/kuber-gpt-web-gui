@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,7 @@ Route::get('language/{locale}', function ($locale) {
     if (app()->isDownForMaintenance()) {
         setcookie('locale', $locale, time() + (60 * 60 * 24 * 30), '/'); // Sætter cookie til at udløbe om 30 dage
     } else {
-        Cookie::queue(Cookie::make('locale', $locale, 60));
+        Session::put('locale', $locale);
     }
 
     return redirect()->back();

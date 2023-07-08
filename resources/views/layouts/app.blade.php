@@ -15,6 +15,15 @@
         @vite(['resources/js/app.js'])
         @vite(['resources/sass/app.scss'])
     </head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4EZJ12DDEQ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-4EZJ12DDEQ');
+    </script>
     <body>
         <div class="font-sans text-gray-900 antialiased">
             @if (Auth::user()->onTrial())

@@ -18,6 +18,15 @@
     @vite(['resources/js/app.js'])
     @yield('css')
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4EZJ12DDEQ"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-4EZJ12DDEQ');
+</script>
 <body>
 <div class="wrapper">
     @if (Auth::user()->onTrial())

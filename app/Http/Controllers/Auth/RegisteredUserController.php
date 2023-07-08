@@ -49,6 +49,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(url('billing'));
+        return redirect(route('castle'));
     }
 }

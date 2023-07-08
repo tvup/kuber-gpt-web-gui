@@ -29,6 +29,11 @@ class HomeController extends Controller
         return view('home')->with(['user' => $user, 'role' => $role]);
     }
 
+    public function index2(): View
+    {
+        return view('auth.register2');
+    }
+
     /**
      * Show the application dashboard.
      */

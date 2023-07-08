@@ -43,6 +43,7 @@ Route::get('/news', function () { return view('/landing-pages/news')->with('titl
 Route::get('/its-free', function () { return view('/landing-pages/its-free')->with('title',  config('app.name', 'Laravel') );})->name('its-free');
 Route::get('/contact', function () { return view('/landing-pages/contact')->with('title',  config('app.name', 'Laravel') );})->name('contact');
 
+Route::get('/home2', 'HomeController@index2')->name('home2');
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');

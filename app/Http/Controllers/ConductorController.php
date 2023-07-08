@@ -106,17 +106,9 @@ class ConductorController extends Controller
         $credentialsArray[] = $credential;
         unset($credential);
 
-        $credential = new Credential();
-        $credential->key = 'command_line_params';
-        $credential->value = '--install-plugin-deps';
-        $credential->credentials_set_id = $credentialsSet->id;
-        $credential->save();
-        $credentialsArray[] = $credential;
-        unset($credential);
-
 
         foreach (CredentialsSet::$keys as $key) {
-            if($key == 'openai_api_key' || $key == 'command_line_params') {
+            if($key == 'openai_api_key') {
                 continue;
             }
             $credential = new Credential();

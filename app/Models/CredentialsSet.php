@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class CredentialsSet extends BaseModel
 {
     public const OPENAI_API_KEY = "openai_api_key";
+    public const COMMAND_LINE_PARAMS = "command_line_params";
     public const ELEVENLABS_API_KEY = "elevenlabs_api_key";
     public const ELEVENLABS_VOICE_ID = "elevenlabs_voice_id";
     public const SMART_LLM_MODEL = "smart_llm_model";
@@ -56,6 +57,7 @@ class CredentialsSet extends BaseModel
      */
     public static array $keys = [
         self::OPENAI_API_KEY,
+        self::COMMAND_LINE_PARAMS,
         self::ELEVENLABS_API_KEY,
         self::ELEVENLABS_VOICE_ID,
         self::SMART_LLM_MODEL,
@@ -93,6 +95,7 @@ class CredentialsSet extends BaseModel
      */
     public static array $defaultValues = [
         self::OPENAI_API_KEY=>'your-openai-api-key',
+        self::COMMAND_LINE_PARAMS=>'--install-plugin-deps',
         self::ELEVENLABS_API_KEY=>null,
         self::ELEVENLABS_VOICE_ID=>null,
         self::SMART_LLM_MODEL=>'gpt-3.5-turbo',

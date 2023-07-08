@@ -14,6 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('language/{locale}', function ($locale) {
+    app()->setLocale($locale);
+    if (app()->isDownForMaintenance()) {
+        setcookie('locale', $locale, time() + (60 * 60 * 24 * 30), '/'); // Sætter cookie til at udløbe om 30 dage
+    } else {
+        Cookie::queue(Cookie::make('locale', $locale, 60));
+    }
+
+    return redirect()->back();
+});
+
 Route::get('/home', function () {
     return redirect('/');
 })->name('home');

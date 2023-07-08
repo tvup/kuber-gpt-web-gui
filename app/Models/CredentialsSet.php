@@ -49,6 +49,7 @@ class CredentialsSet extends BaseModel
     public const APCA_API_SECRET_KEY = "apca_api_secret_key";
     public const APCA_PAPER = "apca_paper";
     public const APCA_SAFE = "apca_safe";
+    public const NEWSAPI_API_KEY = "newsapi_api_key";
 
     /**
      * @var array|string[]
@@ -84,6 +85,7 @@ class CredentialsSet extends BaseModel
         self::APCA_API_SECRET_KEY,
         self::APCA_PAPER,
         self::APCA_SAFE,
+        self::NEWSAPI_API_KEY,
     ];
 
     /**
@@ -120,6 +122,7 @@ class CredentialsSet extends BaseModel
         self::APCA_API_SECRET_KEY=>null,
         self::APCA_PAPER=>null,
         self::APCA_SAFE=>null,
+        self::NEWSAPI_API_KEY=>null,
     ];
 
     use HasFactory;

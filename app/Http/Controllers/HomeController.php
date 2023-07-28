@@ -70,6 +70,16 @@ class HomeController extends Controller
         return view('pages.about-'.app()->getLocale());
     }
 
+    public function itsFree(): View
+    {
+        return view('pages.its-free-'.app()->getLocale());
+    }
+
+    public function news(): View
+    {
+        return view('pages.news-'.app()->getLocale());
+    }
+
     public function approval(): View
     {
         return view('auth.approval');

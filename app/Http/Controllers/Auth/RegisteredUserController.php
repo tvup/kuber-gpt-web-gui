@@ -42,6 +42,7 @@ class RegisteredUserController extends Controller
             'allowed_a_is' => 1,
             'a_is_running' => 0,
             'email' => $request->email,
+            'locale' => app()->getLocale(),
             'password' => Hash::make($request->password),
         ]);
 
@@ -49,6 +50,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(url('billing'));
+        return redirect(route('castle'));
     }
 }

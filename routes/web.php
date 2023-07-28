@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,17 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('language/{locale}', function ($locale) {
+    app()->setLocale($locale);
+    if (app()->isDownForMaintenance()) {
+        setcookie('locale', $locale, time() + (60 * 60 * 24 * 30), '/'); // Sætter cookie til at udløbe om 30 dage
+    } else {
+        Session::put('locale', $locale);
+    }
+
+    return redirect()->back();
+});
 
 Route::get('/home', function () {
     return redirect('/');
@@ -31,9 +43,11 @@ Route::get('/news', function () { return view('/landing-pages/news')->with('titl
 Route::get('/its-free', function () { return view('/landing-pages/its-free')->with('title',  config('app.name', 'Laravel') );})->name('its-free');
 Route::get('/contact', function () { return view('/landing-pages/contact')->with('title',  config('app.name', 'Laravel') );})->name('contact');
 
+Route::get('/home2', 'HomeController@index2')->name('home2');
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/castle', 'HomeController@castle')->name('castle');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -47,6 +61,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('run_sets', RunSetController::class);
 
     Route::post('/launch', 'ConductorController@launch')->name('conductor.launch');
+    Route::post('/mega_launch', 'ConductorController@megaLaunch')->name('conductor.mega_launch');
 });
 
 require __DIR__.'/auth.php';

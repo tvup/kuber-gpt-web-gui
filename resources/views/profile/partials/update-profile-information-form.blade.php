@@ -45,6 +45,17 @@
                     @endif
                 </div>
             @endif
+            <div class="col-md-12">
+                <label class="labels mt-2">{{ __('Language') }}</label>
+                <div class="form-check form-check">
+                    <label class="form-check-label" for="localEnUs">🇺🇸 {{ __('English') }}</label>
+                    <input class="form-check-input" {{ $user->locale === 'en' ? 'checked' : '' }} id="localEnUs" type="radio" name="locale" value="en">
+                </div>
+                <div class="form-check form-check">
+                    <label class="form-check-label" for="localeDaDk">🇩🇰 {{ __('Danish') }}</label>
+                    <input class="form-check-input" {{ $user->locale === 'da' ? 'checked' : '' }} id="localeDaDk" type="radio" name="locale" value="da">
+                </div>
+            </div>
         </div>
 
         <div class="flex items-center gap-4">

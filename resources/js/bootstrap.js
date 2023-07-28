@@ -37,21 +37,31 @@ Alpine.start()
 import Swal from 'sweetalert2';
 window.Swal = Swal;
 
+let poken = document.querySelector('meta[name="poken_ipa"]')?.getAttribute('content');
+if (poken) {
+    localStorage.setItem('poken_ipa', poken);
+}
+
 import Pusher from 'pusher-js';
 
-var pusher = new Pusher(import.meta.env.VITE_PUSHER_APP_KEY, {
-    cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
-    authEndpoint: `broadcasting/auth`,
-    auth: {
-        headers: {
-            "Authorization": "Bearer bPOZyMpJ1GDsS8cAO3ZmM8zJEwz0RXE1sAHWyqSb",
+poken = localStorage.getItem('poken_ipa');
+if (poken) {
+    let pusher = new Pusher(import.meta.env.VITE_PUSHER_APP_KEY, {
+        cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
+        authEndpoint: `broadcasting/auth`,
+        auth: {
+            headers: {
+                "Authorization": "Bearer " + poken,
+            }
         }
-    }
-})
+    })
+    window.Pusher = pusher;
+}
 
 
 
-window.Pusher = pusher;
+
+
 
 
 /**

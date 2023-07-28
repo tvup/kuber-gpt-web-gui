@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ __('landing-pages.meta-description') }}">
+    <meta name="poken_ipa" content="{{ session('poken_ipa') }}">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -17,6 +18,15 @@
     @vite(['resources/js/app.js'])
     @yield('css')
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4EZJ12DDEQ"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-4EZJ12DDEQ');
+</script>
 <body>
 <div class="wrapper">
     @if (Auth::user()->onTrial())
@@ -72,6 +82,9 @@
                     @endif
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('run_sets.index') }}">{{__('app.ai_and_run_sets')}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/billing') }}">{{__('app.billing')}}</a>
                     </li>
                     @endguest
                 </ul>

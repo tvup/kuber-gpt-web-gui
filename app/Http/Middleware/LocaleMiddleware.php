@@ -20,6 +20,10 @@ class LocaleMiddleware
             App::setLocale(Str::before($user->locale, '_'));
         } else if (Session::has('locale')) {
             App::setLocale(Session::get('locale'));
+        } else {
+            $preferredLanguage = $request->getPreferredLanguage(config('app.available_locales'));
+            App::setLocale($preferredLanguage);
+            Session::put('locale', $preferredLanguage);
         }
 
         return $next($request);

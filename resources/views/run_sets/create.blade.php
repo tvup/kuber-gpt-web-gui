@@ -37,10 +37,10 @@
                                 <div class="col-md-6">
                                     <select id="credentials_set" class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" name="credentials_set">
                                         @if($credentials_sets->count()>0)
-                                            <option value="" selected>empty</option>
+                                            <option value="">empty</option>
                                         @endif
                                         @forelse($credentials_sets as $credentialsSet)
-                                            <option value="{{$credentialsSet->id}}">{{ '#keys:'.$credentialsSet->credentials->count() . ', created: ' . $credentialsSet->created_at }}</option>
+                                            <option value="{{$credentialsSet->id}}" @if($loop->first) selected @endif>{{ '#keys:'.$credentialsSet->credentials->count() . ', created: ' . $credentialsSet->created_at }}</option>
                                         @empty
                                             <option value="" selected>N/A</option>
                                         @endforelse

@@ -17,12 +17,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property Carbon $updated_at
  * @property RunSet[] $runSets
  */
-class CredentialsSet extends Model
+class CredentialsSet extends BaseModel
 {
     public const OPENAI_API_KEY = "openai_api_key";
+    public const COMMAND_LINE_PARAMS = "command_line_params";
     public const ELEVENLABS_API_KEY = "elevenlabs_api_key";
-    public const ELEVENLABS_VOICE_1_ID = "elevenlabs_voice_1_id";
-    public const ELEVENLABS_VOICE_2_ID = "elevenlabs_voice_2_id";
+    public const ELEVENLABS_VOICE_ID = "elevenlabs_voice_id";
     public const SMART_LLM_MODEL = "smart_llm_model";
     public const FAST_LLM_MODEL = "fast_llm_model";
     public const GOOGLE_API_KEY = "google_api_key";
@@ -37,7 +37,6 @@ class CredentialsSet extends Model
     public const EXECUTE_LOCAL_COMMANDS = "execute_local_commands";
     public const RESTRICT_TO_WORKSPACE = "restrict_to_workspace";
     public const BROWSE_CHUNK_MAX_LENGTH = "browse_chunk_max_length";
-    public const BROWSE_SUMMARY_MAX_TOKEN = "browse_summary_max_token";
     public const USER_AGENT = "user_agent";
     public const AI_SETTINGS_FILE = "ai_settings_file";
     public const USE_WEB_BROWSER = "use_web_browser";
@@ -47,15 +46,20 @@ class CredentialsSet extends Model
     public const HUGGINGFACE_AUDIO_TO_TEXT_MODEL = "huggingface_audio_to_text_model";
     public const GITHUB_API_KEY = "github_api_key";
     public const GITHUB_USERNAME = "github_username";
+    public const APCA_API_KEY_ID = "apca_api_key_id";
+    public const APCA_API_SECRET_KEY = "apca_api_secret_key";
+    public const APCA_PAPER = "apca_paper";
+    public const APCA_SAFE = "apca_safe";
+    public const NEWSAPI_API_KEY = "newsapi_api_key";
 
     /**
      * @var array|string[]
      */
     public static array $keys = [
         self::OPENAI_API_KEY,
+        self::COMMAND_LINE_PARAMS,
         self::ELEVENLABS_API_KEY,
-        self::ELEVENLABS_VOICE_1_ID,
-        self::ELEVENLABS_VOICE_2_ID,
+        self::ELEVENLABS_VOICE_ID,
         self::SMART_LLM_MODEL,
         self::FAST_LLM_MODEL,
         self::GOOGLE_API_KEY,
@@ -70,7 +74,6 @@ class CredentialsSet extends Model
         self::EXECUTE_LOCAL_COMMANDS,
         self::RESTRICT_TO_WORKSPACE,
         self::BROWSE_CHUNK_MAX_LENGTH,
-        self::BROWSE_SUMMARY_MAX_TOKEN,
         self::USER_AGENT,
         self::AI_SETTINGS_FILE,
         self::USE_WEB_BROWSER,
@@ -80,6 +83,49 @@ class CredentialsSet extends Model
         self::HUGGINGFACE_AUDIO_TO_TEXT_MODEL,
         self::GITHUB_API_KEY,
         self::GITHUB_USERNAME,
+        self::APCA_API_KEY_ID,
+        self::APCA_API_SECRET_KEY,
+        self::APCA_PAPER,
+        self::APCA_SAFE,
+        self::NEWSAPI_API_KEY,
+    ];
+
+    /**
+     * @var array|string[]
+     */
+    public static array $defaultValues = [
+        self::OPENAI_API_KEY=>'your-openai-api-key',
+        self::COMMAND_LINE_PARAMS=>'--install-plugin-deps',
+        self::ELEVENLABS_API_KEY=>null,
+        self::ELEVENLABS_VOICE_ID=>null,
+        self::SMART_LLM_MODEL=>'gpt-3.5-turbo',
+        self::FAST_LLM_MODEL=>'gpt-3.5-turbo',
+        self::GOOGLE_API_KEY=>null,
+        self::GOOLE_CUSTOM_SEARCH_ENGINE_ID=>null,
+        self::USE_AZURE=>'False',
+        self::IMAGE_PROVIDER=>'dalle',
+        self::MEMORY_BACKEND=>'json_file',
+        self::REDIS_HOST=>'localhost',
+        self::REDIS_PORT=>'6379',
+        self::REDIS_PASSWORD=>'',
+        self::WIPE_REDIS_ON_START=>'True',
+        self::EXECUTE_LOCAL_COMMANDS=>'False',
+        self::RESTRICT_TO_WORKSPACE=>'True',
+        self::BROWSE_CHUNK_MAX_LENGTH=>'3000',
+        self::USER_AGENT=>'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36',
+        self::AI_SETTINGS_FILE=>'ai_settings.yaml',
+        self::USE_WEB_BROWSER=>'chrome',
+        self::TEMPERATURE=>0,
+        self::MEMORY_INDEX=>'auto-gpt',
+        self::HUGGINGFACE_API_TOKEN=>null,
+        self::HUGGINGFACE_AUDIO_TO_TEXT_MODEL=>'CompVis/stable-diffusion-v1-4',
+        self::GITHUB_API_KEY=>null,
+        self::GITHUB_USERNAME=>null,
+        self::APCA_API_KEY_ID=>null,
+        self::APCA_API_SECRET_KEY=>null,
+        self::APCA_PAPER=>null,
+        self::APCA_SAFE=>null,
+        self::NEWSAPI_API_KEY=>null,
     ];
 
     use HasFactory;

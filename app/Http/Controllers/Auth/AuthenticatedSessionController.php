@@ -27,6 +27,10 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        $token = $request->user()->createToken('poken')->plainTextToken;
+
+        $request->session()->put('poken_ipa', $token);
+
         $request->session()->regenerate();
 
         return redirect()->intended(RouteServiceProvider::HOME);

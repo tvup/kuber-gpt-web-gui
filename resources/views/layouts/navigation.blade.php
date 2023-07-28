@@ -30,6 +30,9 @@
                         <x-nav-link :href="route('run_sets.index')" :active="request()->routeIs('run_sets.index')" class="font-medium">
                             {{__('app.ai_and_run_sets')}}
                         </x-nav-link>
+                        <x-nav-link :href="url('/billing')" class="font-medium">
+                            {{__('app.billing')}}
+                        </x-nav-link>
                     @endguest
                 </div>
             </div>

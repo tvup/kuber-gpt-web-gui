@@ -60,12 +60,15 @@
                                     <td>
                                         <a href="{{ route('run_sets.show', ['run_set' => $runSet]) }}"
                                            class="text-primary font-weight-bold">{{$runSet->nick_name}} </a>
+                                        <span id="name_label" class="invalid-feedback" role="alert" style="display: none;">
+                                            <strong></strong>
+                                        </span>
                                     </td>
                                     <td>{{($runSet->ai_self_name) ? : ' '}}</td>
                                     <td><a href="{{route('credentials.index')}}">{{($runSet->id) ? : ' '}}</a></td>
                                     <td>{{$runSet->created_at}}</td>
                                     <td>
-                                        <a id="show_public_ip" href="http://{{$runSet->public_ip ? $runSet->public_ip . ':50001' : auth()->user()->running_port . ':50001'}}">{{$runSet->public_ip ? $runSet->public_ip . ':50001' : auth()->user()->running_port . ':50001'}}</a>
+                                        <a id="show_public_ip{{$runSet->id}}" href="http://{{$runSet->public_ip ? $runSet->public_ip . ':50001' : auth()->user()->running_port . ':50001'}}">{{$runSet->public_ip ? $runSet->public_ip . ':50001' : auth()->user()->running_port . ':50001'}}</a>
                                     </td>
                                     <td>{{$runSet->status}}</td>
                                     <td>
@@ -77,7 +80,7 @@
                                     <td>
                                         <form action="#" method="POST">
                                             <input type="hidden" name="run_set_id" value="{{$runSet->id}}">
-                                            <button class="btn btn-danger launch-button" data-run_set_id="{{ $runSet->id }}">
+                                            <button class="btn btn-danger launch-button" data-name="{{ $runSet->nick_name }}" data-run_set_id="{{ $runSet->id }}"{{ ($runSet->tags && array_key_exists('submitted', $runSet->tags) && $runSet->tags['submitted'] == true) ? 'disabled' : '' }}>
                                                 <i class="fas fa-user-times">LAUNCH</i>
                                             </button>
                                         </form>
@@ -121,42 +124,45 @@
                 }
             });
 
-
-            var channel = Pusher.subscribe('private-App.User.{{auth()->user()->id}}');
-            channel.bind('ip-from-conductor-event', function (data) {
-                var newUrl = 'http://' + data.ip + ':50001';
-                $('#show_public_ip').attr("href", newUrl);
-                $('#show_public_ip').text(newUrl);
-                $("#show_public_ip").find(".fa-spinner").remove();
-                Swal.fire({
-                    title: '<strong>AutoGPT is ready!</strong>',
-                    html: 'Click button below to access it directly at <a href="' + newUrl + '">' + newUrl + '</a>',
-                    icon: 'success',
-                    showCancelButton: true,
-                    showCloseButton: true,
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Yes, hit it',
-                    cancelButtonText: 'No, not now'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.open(newUrl);
-                    }
-                })
-            });
+            if(Pusher != undefined) {
+                var channel = Pusher.subscribe('private-App.User.{{auth()->user()->id}}');
+                channel.bind('ip-from-conductor-event', function (data) {
+                    var newUrl = 'http://' + data.ip + ':50001';
+                    $('#show_public_ip' + data.run_set_id).attr("href", newUrl);
+                    $('#show_public_ip' + data.run_set_id).text(newUrl);
+                    $("#show_public_ip" + data.run_set_id).find(".fa-spinner").remove();
+                    Swal.fire({
+                        title: '<strong>AutoGPT is ready!</strong>',
+                        html: 'Click button below to access it directly at <a href="' + newUrl + '">' + newUrl + '</a>',
+                        icon: 'success',
+                        showCancelButton: true,
+                        showCloseButton: true,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Yes, hit it',
+                        cancelButtonText: 'No, not now'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.open(newUrl);
+                        }
+                    })
+                });
+            }
 
 
             $('.launch-button').each(function( index, element )  {
                 $(element).on('click', function (e) {
                     e.preventDefault();
+                    $('.launch-button').prop('disabled', true);
 
                     var run_set_id = $(this).data('run_set_id');
-                        $('#show_public_ip').text('');
-                    $('#show_public_ip').prepend('<i class="fa fa-spinner fa-spin"></i>');
+                    var name = $(this).data('name');
+                    $('#show_public_ip'+run_set_id).text('');
+                    $('#show_public_ip'+run_set_id).prepend('<i class="fa fa-spinner fa-spin"></i>');
 
                     $.ajax({
                         type: "POST",
                         url: '{{route('conductor.launch')}}',
-                        data: {run_set: run_set_id},
+                        data: {run_set: run_set_id, name: name},
                         success: function () {
                             Swal.fire(
                                 'AutoGPT is on the way!',
@@ -164,12 +170,16 @@
                                 'success'
                             )
                         },
-                        error: function () {
+                        error: function (xhr, status, error) {
+
                             Swal.fire(
                                 'Techsolutionstuff!',
                                 'Something went to wrong. Please Try again later...!',
                                 'error'
                             )
+                            $('#name_label').css("display", "block");
+                            $('#name_label').find(">:first-child").append(JSON.parse(xhr.responseText).message);
+                            $('.launch-button').prop('disabled', false);
                         }
                     });
                 });

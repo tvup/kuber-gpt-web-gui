@@ -27,7 +27,16 @@
     @endif
     @inertiaHead
 </head>
-
+@if (Auth::user()->onTrial())
+    <div class="py-3 bg-indigo-100 text-indigo-700 text-lg border-b border-indigo-200 text-center">
+        Or simply enjoy your free trial and  <a href="{{route('castle')}}" class="font-semibold underline">click here</a> to go directly to creation of your own AutoGPT while you can
+    </div>
+@endif
+@if (!Auth::user()->onTrial() && ((Auth::user()->subscriptions->count()>0 && Auth::user()->subscriptions->active()->count() <1) || (Auth::user()->subscriptions->count() == 0)))
+    <div class="py-3 bg-indigo-100 text-indigo-700 text-lg border-b border-indigo-200 text-center">
+        Or you can <a href="https://buy.stripe.com/14k17L59U6rO43S6oo" class="font-semibold underline">click this secret link</a> to buy one day of extension
+    </div>
+@endif
 @inertiaHead
 
 <body class="font-sans antialiased">

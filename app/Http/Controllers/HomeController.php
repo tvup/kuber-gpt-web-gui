@@ -55,6 +55,11 @@ class HomeController extends Controller
         return view('castle')->with(['user' => $user, 'role' => $role]);
     }
 
+    public function readMore(): View
+    {
+        return view('pages.read-more-'.app()->getLocale());
+    }
+
     public function approval(): View
     {
         return view('auth.approval');

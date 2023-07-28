@@ -38,7 +38,9 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::get('/read-more', 'HomeController@readMore')->name('read-more');
 Route::get('/about', function () { return view('/landing-pages/about')->with('title',  config('app.name', 'Laravel') );})->name('about');
+Route::get('/team', function () { return view('/landing-pages/team')->with('title',  config('app.name', 'Laravel') );})->name('team');
 Route::get('/news', function () { return view('/landing-pages/news')->with('title',  config('app.name', 'Laravel') );})->name('news');
 Route::get('/its-free', function () { return view('/landing-pages/its-free')->with('title',  config('app.name', 'Laravel') );})->name('its-free');
 Route::get('/terms', 'HomeController@terms')->name('terms');

@@ -38,18 +38,8 @@
                     {{__('footer.company')}}
                 </p>
                 <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-                    <a class="hover:opacity-75" href> {{__('footer.about')}} </a>
-                    <a class="hover:opacity-75" href> {{__('footer.meet_the_team') }} </a>
-                    <a class="hover:opacity-75" href> {{__('footer.history')}} </a>
-                    <a class="hover:opacity-75" href> {{__('footer.careers')}} </a>
-                </nav>
-            </div>
-            <div>
-                <p class="font-medium">
-                    Services
-                </p>
-                <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-                    <a class="hover:opacity-75" href="{{ url('billing') }}"> {{__('footer.autogpt_saas')}} </a>
+                    <a class="hover:opacity-75" href="{{ route('about') }}"> {{__('footer.about')}} </a>
+                    <a class="hover:opacity-75" href="{{ route('team') }}"> {{__('footer.meet_the_team') }} </a>
                 </nav>
             </div>
             <div>
@@ -58,7 +48,6 @@
                 </p>
                 <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
                     <a class="hover:opacity-75" href="{{ route('contact') }}"> {{__('footer.contact')}} </a>
-                    <a class="hover:opacity-75" href> {{__('footer.faqs')}} </a>
                     <a class="hover:opacity-75" href="https://tawk.to/chat/64c4243e94cf5d49dc671005/1h6f2r62o" target="_blank"> {{__('footer.live_chat')}} </a>
                 </nav>
             </div>

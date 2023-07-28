@@ -7,13 +7,13 @@
 @endsection
 
 @section('content')
-    <div class="flex bg-white" style="height:600px;">
+    <div class="flex bg-white" >
         <div class="flex items-center text-center lg:text-left px-8 md:px-12 lg:w-1/2">
-            <div>
-                <p>
-                    About
-                </p>
-            </div>
+
+            <article id="post-180" class="post-180 page type-page status-publish hentry">
+
+            </article>
+
         </div>
         <div class="hidden lg:block lg:w-1/2" style="clip-path:polygon(10% 0, 100% 0%, 100% 100%, 0 100%)">
             <div class="h-full object-cover"

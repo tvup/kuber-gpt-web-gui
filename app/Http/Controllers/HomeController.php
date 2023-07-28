@@ -59,4 +59,14 @@ class HomeController extends Controller
     {
         return view('auth.approval');
     }
+
+    public function terms(): View
+    {
+        return view('pages.terms-'.app()->getLocale());
+    }
+
+    public function privacy(): View
+    {
+        return view('pages.privacy-'.app()->getLocale());
+    }
 }

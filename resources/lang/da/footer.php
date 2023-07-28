@@ -14,9 +14,7 @@ return [
     'faqs' => 'Ofte stillede spørgsmål',
     'live_chat' => 'Live Chat',
     'legal' => 'Jura',
-    'privacy_policy' => 'Fortrolighedspolitik',
-    'terms_conditions' => 'Vilkår og Betingelser',
-    'returns_policy' => 'Returpolitik',
-    'accessibility' => 'Tilgængelighed',
+    'privacy_policy' => 'Privatlivspolitik',
+    'terms_conditions' => 'Vilkår og betingelser',
 
 ];

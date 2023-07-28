@@ -42,6 +42,8 @@ Route::get('/about', function () { return view('/landing-pages/about')->with('ti
 Route::get('/news', function () { return view('/landing-pages/news')->with('title',  config('app.name', 'Laravel') );})->name('news');
 Route::get('/its-free', function () { return view('/landing-pages/its-free')->with('title',  config('app.name', 'Laravel') );})->name('its-free');
 Route::get('/contact', function () { return view('/landing-pages/contact')->with('title',  config('app.name', 'Laravel') );})->name('contact');
+Route::get('/terms', 'HomeController@terms')->name('terms');
+Route::get('/privacy', 'HomeController@privacy')->name('privacy');
 
 Route::get('/home2', 'HomeController@index2')->name('home2');
 

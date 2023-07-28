@@ -57,9 +57,9 @@
                     {{__('footer.helpful_links')}}
                 </p>
                 <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-                    <a class="hover:opacity-75" href> {{__('footer.contact')}} </a>
+                    <a class="hover:opacity-75" href="{{ route('contact') }}"> {{__('footer.contact')}} </a>
                     <a class="hover:opacity-75" href> {{__('footer.faqs')}} </a>
-                    <a class="hover:opacity-75" href> {{__('footer.live_chat')}} </a>
+                    <a class="hover:opacity-75" href="https://tawk.to/chat/64c4243e94cf5d49dc671005/1h6f2r62o" target="_blank"> {{__('footer.live_chat')}} </a>
                 </nav>
             </div>
             <div>

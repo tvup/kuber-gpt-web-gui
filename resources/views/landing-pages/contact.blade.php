@@ -7,14 +7,25 @@
 @endsection
 
 @section('content')
-    <div class="flex bg-white" style="height:600px;">
-        <div class="flex items-center text-center lg:text-left px-8 md:px-12 lg:w-1/2">
-            <div>
-                <p>
-                    For the moment by email:
-                    contact@kuber-gpt.com
-                </p>
+    @if(session('message'))
+        <div class='alert alert-success'>
+            {{ session('message') }}
+        </div>
+    @endif
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
+    <div class="flex bg-white">
+        <div class="flex items-center text-center lg:text-left px-8 md:px-12 lg:w-1/2">
+            <div class="col-12 col-md-6">
+                @include('landing-pages.contact.form')
             </div>
         </div>
         <div class="hidden lg:block lg:w-1/2" style="clip-path:polygon(10% 0, 100% 0%, 100% 100%, 0 100%)">

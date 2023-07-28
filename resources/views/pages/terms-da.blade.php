@@ -15,7 +15,7 @@
                 <div class="page-content">
                     <h2 class="text-2xl font-bold">Abonnementsvilkår</h2>
                     <ol class="list-decimal list-inside ml-6">
-                        <li>Disse vilkår gælder for WooInvoice, herefter benævnt "platformen".</li>
+                        <li>Disse vilkår gælder for kuber-gpt.com, herefter benævnt "platformen".</li>
                         <li>Tilmelding til en plan:
                             <ol class="list-decimal list-inside ml-6">
                                 <li>Abonnementet oprettes ved at gennemføre en ordre på hjemmesiden https://kuber-gpt.com, herefter benævnt "hjemmesiden".</li>

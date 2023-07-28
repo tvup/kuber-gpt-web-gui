@@ -15,7 +15,7 @@
                 <div class="page-content">
                     <h2 class="text-2xl font-bold">Subscription Terms</h2>
                     <ol class="list-decimal list-inside ml-6">
-                        <li>These terms apply to WooInvoice, hereafter referred to as the "platform."</li>
+                        <li>These terms apply to kuber-gpt.com, hereafter referred to as the "platform."</li>
                         <li>Subscribing to a plan:
                             <ol class="list-decimal list-inside ml-6">
                                 <li>The subscription is created by completing an order on the website https://kuber-gpt.com, hereafter referred to as the "website."</li>

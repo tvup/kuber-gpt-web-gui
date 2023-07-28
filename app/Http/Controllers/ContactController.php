@@ -14,6 +14,6 @@ class ContactController extends Controller
     {
         $recipient->notify(new ContactFormMessage($message));
 
-        return redirect()->back()->with('message', 'Thanks for your message! We will get back to you soon!');
+        return redirect()->back()->with('message', __('contact.success_message'));
     }
 }

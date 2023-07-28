@@ -8,12 +8,12 @@
 
 @section('content')
     @if(session('message'))
-        <div class='alert alert-success'>
+        <div class='bg-green-500 text-white p-4'>
             {{ session('message') }}
         </div>
     @endif
     @if($errors->any())
-        <div class="alert alert-danger">
+        <div class="bg-red-500 text-white p-4">
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -36,3 +36,4 @@
         </div>
     </div>
 @endsection
+

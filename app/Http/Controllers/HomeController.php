@@ -65,6 +65,11 @@ class HomeController extends Controller
         return view('pages.team-'.app()->getLocale());
     }
 
+    public function about(): View
+    {
+        return view('pages.about-'.app()->getLocale());
+    }
+
     public function approval(): View
     {
         return view('auth.approval');

@@ -67,10 +67,8 @@
                     {{__('footer.legal')}}
                 </p>
                 <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-                    <a class="hover:opacity-75" href> {{__('footer.privacy_policy')}} </a>
-                    <a class="hover:opacity-75" href> {{__('footer.terms_conditions')}} </a>
-                    <a class="hover:opacity-75" href> {{__('footer.returns_policy')}} </a>
-                    <a class="hover:opacity-75" href> {{__('footer.accessibility')}} </a>
+                    <a class="hover:opacity-75" href="{{ route('privacy') }}"> {{__('footer.privacy_policy')}} </a>
+                    <a class="hover:opacity-75" href="{{ route('terms') }}"> {{__('footer.terms_conditions')}} </a>
                 </nav>
             </div>
         </div>

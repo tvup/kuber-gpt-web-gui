@@ -11,8 +11,14 @@
         <div class="flex items-center text-center lg:text-left px-8 md:px-12 lg:w-1/2">
             <div>
                 <p>
-                    Meet the owner: <a href="https://www.linkedin.com/in/taastruptorben/">https://www.linkedin.com/in/taastruptorben/</a>
+                    Det er ingen hemmelighed - vores software stammer fra open source - og vores software er også open source.
                 </p>
+                <p>Faktisk kunne du kopiere hele balladen fra GitHub og blive en konkurrerende hjemmeside.</p>
+                <p>Vi udfordrer dig - gå videre :) Klik på nedenstående links</p>
+                <a href="https://github.com/tvup/kuber-gpt-web-gui"> kuber-gpt-web-gui: GUI'en du oplever lige nu</a><br/>
+                <a href="https://github.com/tvup/autogpt-docker"> autogpt-docker (forgaffet og kraftigt redigeret): Docker,
+                    docker-compose, kubernetes, helm - alt til at køre en automatiseret opsætning</a><br/>
+                <a href="https://github.com/tvup/Auto-GPT"> Auto-GPT (gaffet): Det er det hele handler om</a>
             </div>
         </div>
         <div class="hidden lg:block lg:w-1/2" style="clip-path:polygon(10% 0, 100% 0%, 100% 100%, 0 100%)">

@@ -27,7 +27,7 @@
                         <a class="px-4 py-3 bg-gray-900 text-gray-200 text-xs font-semibold rounded hover:bg-gray-800"
                            href="{{ route('register') }}">{{__('appetizer.get_started')}}</a>
                         <a class="mx-4 px-4 py-3 bg-gray-300 text-gray-900 text-xs font-semibold rounded hover:bg-gray-400"
-                           href="{{ route('about') }}">{{__('appetizer.learn_more')}}</a>
+                           href="{{ route('read-more') }}">{{__('appetizer.learn_more')}}</a>
                     </div>
                 </div>
             </div>

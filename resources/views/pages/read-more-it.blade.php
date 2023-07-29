@@ -7,26 +7,13 @@
 @endsection
 
 @section('content')
-    @if(session('message'))
-        <div class='bg-green-500 text-white p-4'>
-            {{ session('message') }}
-        </div>
-    @endif
-    @if($errors->any())
-        <div class="bg-red-500 text-white p-4">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-    <div class="flex bg-white">
+    <div class="flex bg-white" >
         <div class="flex items-center text-center lg:text-left px-8 md:px-12 lg:w-1/2">
-            <div class="col-12 col-md-6">
-                @include('landing-pages.contact.form')
-            </div>
+
+            <article id="post-180" class="post-180 page type-page status-publish hentry">
+
+            </article>
+
         </div>
         <div class="hidden lg:block lg:w-1/2" style="clip-path:polygon(10% 0, 100% 0%, 100% 100%, 0 100%)">
             <div class="h-full object-cover"
@@ -36,4 +23,3 @@
         </div>
     </div>
 @endsection
-

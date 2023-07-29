@@ -36,4 +36,8 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'incident_server' => [
+        'url' => env('INCIDENT_SERVER_URL'),
+    ],
+
 ];

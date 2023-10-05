@@ -20,6 +20,5 @@ class IsAdmin
         }
 
         return redirect('/login');
-
     }
 }

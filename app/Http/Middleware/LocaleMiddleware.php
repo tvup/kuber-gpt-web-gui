@@ -18,7 +18,7 @@ class LocaleMiddleware
     {
         if ($user = Auth::user()) {
             App::setLocale(Str::before($user->locale, '_'));
-        } else if (Session::has('locale')) {
+        } elseif (Session::has('locale')) {
             App::setLocale(Session::get('locale'));
         } else {
             $preferredLanguage = $request->getPreferredLanguage(array_values(config('app.available_locales')));

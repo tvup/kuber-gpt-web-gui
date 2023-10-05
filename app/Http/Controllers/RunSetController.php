@@ -12,7 +12,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Redis;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -24,6 +23,7 @@ class RunSetController extends Controller
     public function index(): View
     {
         $runSets = auth()->user()->runSets;
+
         return view('run_sets.index', ['run_sets' => $runSets]);
     }
 
@@ -33,6 +33,7 @@ class RunSetController extends Controller
     public function create(): View
     {
         $credentialsSets = auth()->user()->credentialsSets;
+
         return view('run_sets.create', ['credentials_sets' => $credentialsSets]);
     }
 
@@ -50,6 +51,7 @@ class RunSetController extends Controller
     public function edit(RunSet $runSet): View
     {
         $credentialsSets = auth()->user()->credentialsSets;
+
         return view('run_sets.edit', ['run_set' => $runSet, 'credentials_sets' => $credentialsSets]);
     }
 
@@ -59,7 +61,6 @@ class RunSetController extends Controller
     public function store(StoreRunSetRequest $request): RedirectResponse
     {
         $validated = $request->validate($request->rules());
-
 
         $runSet = app(RunSet::class);
         $runSet->nick_name = Arr::get($validated, 'nick_name');
@@ -71,19 +72,16 @@ class RunSetController extends Controller
         $runSet->user()->associate($user);
 
         $credentialsSetId = Arr::get($validated, 'credentials_set');
-        if($credentialsSetId) {
+        if ($credentialsSetId) {
             $credentialsSet = CredentialsSet::whereId($credentialsSetId)->first();
-            if($credentialsSet) {
+            if ($credentialsSet) {
                 $runSet->credentialsSet()->associate($credentialsSet);
             }
         }
 
         $runSet->save();
 
-
-
         return redirect('/run_sets')->with(['msg-success' => 'Run set stored']);
-
     }
 
     /**
@@ -100,14 +98,14 @@ class RunSetController extends Controller
         $runSet->tags = Arr::get($validated, 'tags');
 
         $credentialsSetId = Arr::get($validated, 'credentials_set');
-        if($credentialsSetId) {
+        if ($credentialsSetId) {
             $credentialsSet = CredentialsSet::whereId($credentialsSetId)->first();
-            if($credentialsSet) {
+            if ($credentialsSet) {
                 $runSet->credentialsSet()->associate($credentialsSet);
             }
         } else {
             $credentialsSet = $runSet->credentialsSet;
-            if($credentialsSet) {
+            if ($credentialsSet) {
                 $runSet->credentialsSet()->dissociate();
             }
         }
@@ -132,7 +130,8 @@ class RunSetController extends Controller
         return redirect('/run_sets')->with(['msg-danger' => 'Run set deleted']);
     }
 
-    public function ip(StorePublicIPForRunSetRequest $request, RunSet $run_set) {
+    public function ip(StorePublicIPForRunSetRequest $request, RunSet $run_set)
+    {
         $ip = $request->get('ip');
 
         $run_set->public_ip = $ip;

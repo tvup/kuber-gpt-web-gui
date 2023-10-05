@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -39,7 +38,6 @@ class UserController extends Controller
         $users = User::all();
 
         return view('admin.users.index', ['users' => $users]);
-
     }
 
     public function create(string $name = null): View
@@ -67,7 +65,6 @@ class UserController extends Controller
         }
 
         return view('admin.users.show', ['user' => $user]);
-
     }
 
     /**
@@ -117,7 +114,6 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->back()->with('msg-success', 'Profile updated!');
-
     }
 
     public function destroy(User $user): RedirectResponse
@@ -136,14 +132,13 @@ class UserController extends Controller
         $fileName = sprintf('%s.ovpn', $user->strippedUserName);
 
         return Storage::disk('pki')->download($fileName);
-
     }
 
     public function toggleAccess(string $id): View
     {
         $user = User::find($id);
-        if (! $user) {
-            throw new Exception('User not found with id: '.$id);
+        if (!$user) {
+            throw new Exception('User not found with id: ' . $id);
         }
         if ($user->approved_at) {
             $user->approved_at = null;
@@ -155,7 +150,5 @@ class UserController extends Controller
         $user->save();
 
         return view('admin.users.edit', ['user' => $user])->with('msg-success', $text);
-
     }
-
 }

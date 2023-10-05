@@ -73,7 +73,7 @@ class UserControllerTest extends TestCase
         $user->approved_at = Carbon::now('Europe/Copenhagen');
         $user->save();
 
-        $response = $this->actingAs($user)->get('admin/users/'.$user->id);
+        $response = $this->actingAs($user)->get('admin/users/' . $user->id);
 
         $response->assertViewIs('admin.users.show');
         $response->assertViewHas('user');
@@ -90,7 +90,7 @@ class UserControllerTest extends TestCase
         $user->approved_at = Carbon::now('Europe/Copenhagen');
         $user->save();
 
-        $response = $this->actingAs($user)->get('/admin/users/'.$user->id.'/edit');
+        $response = $this->actingAs($user)->get('/admin/users/' . $user->id . '/edit');
 
         $response->assertViewIs('admin.users.edit');
         $response->assertViewHas('user');
@@ -114,9 +114,9 @@ class UserControllerTest extends TestCase
             'company' => fake()->company,
         ];
         //Pro forma
-        $this->actingAs($user)->get('admin/users/'.$user->id);
+        $this->actingAs($user)->get('admin/users/' . $user->id);
 
-        $response = $this->actingAs($user)->put('admin/users/'.$user->id, $updatedData);
+        $response = $this->actingAs($user)->put('admin/users/' . $user->id, $updatedData);
 
         $response->assertSessionHas('msg-success', 'Profile updated!');
 

@@ -11,7 +11,7 @@ class ProductDisplayController extends Controller
     {
         return view('products.appetizer', [
             'title' => config('app.name', 'Laravel'),
-            'products' => Price::whereEnvironment(config('app.simulate'))->orderBy('order')->get()
+            'products' => Price::whereEnvironment(config('app.simulate'))->orderBy('order')->get(),
         ]);
     }
 

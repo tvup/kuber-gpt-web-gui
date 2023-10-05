@@ -49,8 +49,8 @@ class Handler extends ExceptionHandler
                     $this->fejlvarp_exception_handler($e);
                 }
             } catch (\Exception $fejlVarpException) {
-                logger()->error('Couldn\'t report to fejlvarp: '.$fejlVarpException->getMessage());
-                logger()->error('Original error: '.$e->getMessage());
+                logger()->error('Couldn\'t report to fejlvarp: ' . $fejlVarpException->getMessage());
+                logger()->error('Original error: ' . $e->getMessage());
             }
         });
     }
@@ -90,7 +90,7 @@ class Handler extends ExceptionHandler
                             ],
                         ], JSON_THROW_ON_ERROR),
                     ]
-                ),],
+                ), ],
         ];
         $context = stream_context_create($opts);
         /** @var string $incidentServerUrl */

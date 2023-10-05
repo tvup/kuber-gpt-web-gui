@@ -4,7 +4,6 @@ namespace App\Notifications;
 
 use App\Http\Requests\ContactFormRequest;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -38,11 +37,11 @@ class ContactFormMessage extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject(config('recipient.name') . ", you have a new message!")
-            ->greeting(" ")
-            ->salutation(" ")
+            ->subject(config('recipient.name') . ', you have a new message!')
+            ->greeting(' ')
+            ->salutation(' ')
             ->from(config('mail.from.address'), config('mail.from.name'))
-            ->line('From: ' . $this->message->name . ' <' . $this->message->email.'>')
+            ->line('From: ' . $this->message->name . ' <' . $this->message->email . '>')
             ->line($this->message->message);
     }
 

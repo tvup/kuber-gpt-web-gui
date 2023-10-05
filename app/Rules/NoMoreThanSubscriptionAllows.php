@@ -16,14 +16,13 @@ class NoMoreThanSubscriptionAllows implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         $user = Auth::user();
-        if(!$user) {
+        if (!$user) {
             $fail('System error');
         }
         $numberOfAllowedInstances = $this->getAllowedNumberOfRunningInstancesOfUser($user);
         $numberOfAllowedRunningInstances = $this->getNumberOfRunningInstancesOfUser($user);
 
-
-        if($numberOfAllowedRunningInstances+1 > $numberOfAllowedInstances) {
+        if ($numberOfAllowedRunningInstances + 1 > $numberOfAllowedInstances) {
             $fail('You have exceeded the number of run sets allowed by your subscription.');
         }
     }
@@ -33,21 +32,21 @@ class NoMoreThanSubscriptionAllows implements ValidationRule
         $allowedQuantityPerProduct = [
             config('products.bronze.id')=> 1,
             config('products.silver.id') => 2,
-            config('products.gold.id') => 3
+            config('products.gold.id') => 3,
         ];
 
-        if($user->onTrial()) {
+        if ($user->onTrial()) {
             return 1;
         }
 
         $subscriptions = $user->subscriptions;
-        if(!$subscriptions || $subscriptions->count() === 0) {
+        if (!$subscriptions || $subscriptions->count() === 0) {
             return 0;
         }
 
         $sumOfAllowedRunningInstances = 0;
 
-        $activeSubscriptions = $subscriptions->active() ;
+        $activeSubscriptions = $subscriptions->active();
         foreach ($activeSubscriptions as $activeSubscription) {
             $subscriptionItems = $activeSubscription->items;
             foreach ($subscriptionItems as $subscriptionItem) {

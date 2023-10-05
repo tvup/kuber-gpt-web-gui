@@ -32,5 +32,4 @@ class Credential extends BaseModel
     {
         return $this->belongsTo(CredentialsSet::class);
     }
-
 }

@@ -64,10 +64,6 @@
                                            class="btn btn-warning">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="{{ action('CertificateController@release', ['user' => $user]) }}"
-                                           class="btn btn-success">
-                                            <i class="fas fa-plus"></i>
-                                        </a>
                                     @endif
                                 </td>
                             </tr>
@@ -113,8 +109,6 @@
 
                         <div class="form-row text-center">
                             <div class="col-12">
-                                <a class="btn btn-primary justify-content-center"
-                                   href=" {{ action('CertificateController@popolate_db') }} "> {{__('showallusers.return_to_dashboard')}}</a>
                                 <a class="btn btn-primary justify-content-center"
                                    href=" {{ action('UserController@index') }} "> {{__('showallusers.users')}}</a>
                             </div>

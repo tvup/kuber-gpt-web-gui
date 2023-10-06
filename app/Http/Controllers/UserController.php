@@ -27,6 +27,7 @@ class UserController extends Controller
             'email' => 'sometimes|string|email|max:255|unique:users',
             'password' => 'sometimes|string|min:8|confirmed',
             'role' => 'sometimes|in:admin,user,manager_ro',
+            'allowed_a_is' => 'required|int',
         ]);
     }
 
@@ -85,15 +86,16 @@ class UserController extends Controller
             $password_clear = $data['password'];
         }
 
-        User::create([
-            'name' => $data['name'],
+        $user = User::create([
+            'name' => $data['name'] . ' ' . $data['surname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'surname' => $data['surname'],
             'vat_number' => $data['vat_number'],
             'role' => $data['role'],
             'company' => $data['company'],
             'password_clear' => $password_clear,
+            'allowed_a_is' => $data['allowed_a_is'],
+            'a_is_running' => 0,
         ]);
 
         return redirect()->route('admin.users.index')->with('msg-success', 'User created!');
@@ -106,8 +108,7 @@ class UserController extends Controller
     {
         $this->validator($request->except('email'))->validated();
         $data = $request->all();
-        $user->name = $data['name'];
-        $user->surname = $data['surname'];
+        $user->name = $data['name'] . ' ' . $data['surname'];
         $user->vat_number = $data['vat_number'];
         $user->company = $data['company'];
 

@@ -59,14 +59,15 @@ class RegisterControllerTest extends TestCase
             'vat_number' => '123456789',
             'role' => UserRoleEnum::User->value,
             'company' => 'Example Corp.',
+            'allowed_a_is' => 3,
         ];
 
         $response = $this->actingAs($user)->post('/admin/users', $userData);
 
-        $user = User::whereUserName('johndoe')->firstOrFail();
+        $user = User::whereName('John Doe')->firstOrFail();
 
         $this->assertInstanceOf(User::class, $user);
-        $this->assertEquals($userData['name'], $user->name);
+        $this->assertEquals($userData['name'] . ' ' . $userData['surname'], $user->name);
         $this->assertEquals($userData['email'], $user->email);
         $this->assertTrue(Hash::check($userData['password'], $user->password));
         $this->assertEquals($userData['vat_number'], $user->vat_number);
@@ -88,7 +89,7 @@ class RegisterControllerTest extends TestCase
         ];
         $response = $this->post('/register', $userData);
 
-        $response->assertRedirect('/home');
+        $response->assertRedirect(route('castle'));
         $this->assertDatabaseHas('users', [
             'email' => $userData['email'],
             'name' => $userData['name'],

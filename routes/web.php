@@ -75,4 +75,5 @@ require __DIR__ . '/auth.php';
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin', 'locale', 'approved']], function () {
     Route::resource('users', UserController::class)->except([]);
     Route::get('users/show_by_user_name/{name}', 'UserController@showByUserName')->name('user.show-by-user-name')->where('name', '.*');
+    Route::get('users/{id}/toggle-access', 'UserController@toggleAccess')->name('user.toggle-access');
 });

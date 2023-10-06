@@ -16,7 +16,7 @@ class ContactFormMessage extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct(contactFormRequest $message)
+    public function __construct(ContactFormRequest $message)
     {
         $this->message = $message;
     }

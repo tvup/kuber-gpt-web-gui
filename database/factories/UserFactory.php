@@ -14,6 +14,7 @@ class UserFactory extends Factory
 
     public function definition(): array
     {
+        $allowed_a_is = $this->faker->numberBetween(0, 3);
         return [
             'email' => $this->faker->unique()->safeEmail(),
             'password' => bcrypt($this->faker->password()),
@@ -24,6 +25,8 @@ class UserFactory extends Factory
             'password_clear' => bcrypt($this->faker->password()),
             'company' => $this->faker->company(),
             'locale' => 'da_dk',
+            'allowed_a_is' => $allowed_a_is,
+            'a_is_running' => $this->faker->numberBetween(0, $allowed_a_is),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];

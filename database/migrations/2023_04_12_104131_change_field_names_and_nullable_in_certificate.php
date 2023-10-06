@@ -12,8 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('certificates', function (Blueprint $table) {
-            $table->renameColumn('stato', 'status');
-            $table->renameColumn('dt_scadenza', 'expires_at');
+            $table->renameColumn('stato', 'status');});
+        Schema::table('certificates', function (Blueprint $table) {
+            $table->renameColumn('dt_scadenza', 'expires_at');});
+        Schema::table('certificates', function (Blueprint $table) {
             $table->renameColumn('dt_revoca', 'revoked_at');
         });
     }
@@ -24,8 +26,10 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('certificates', function (Blueprint $table) {
-            $table->renameColumn('status', 'stato');
-            $table->renameColumn('expires_at', 'dt_scadenza');
+            $table->renameColumn('status', 'stato');});
+        Schema::table('certificates', function (Blueprint $table) {
+            $table->renameColumn('expires_at', 'dt_scadenza');});
+        Schema::table('certificates', function (Blueprint $table) {
             $table->renameColumn('revoked_at', 'dt_revoca');
         });
     }

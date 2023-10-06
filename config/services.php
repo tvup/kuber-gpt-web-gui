@@ -39,5 +39,22 @@ return [
     'incident_server' => [
         'url' => env('INCIDENT_SERVER_URL'),
     ],
+    'ai' => [
+        'openai' => [
+            'model' => env('OPENAI_MODEL'),
+            'roles' => [
+                'system' => [
+                    'locale' => [
+                        'en' => [
+                            'spam_checker' => env('SERVICES_AI_OPENAI_ROLES_SYSTEM_EN_SPAM_CHECKER', 'You are spamCheckerGPT - A ChatGPT clone with speciality in checking contact form content for spam. You reply with either "true" if the content is spam or "false" if it\'s not'),
+                        ],
+                        'da' => [
+                            'spam_checker' => env('SERVICES_AI_OPENAI_ROLES_SYSTEM_DA_SPAM_CHECKER', 'Du er spamCheckerGPT - En ChatGPT klon med speciale i at tjekke indhold fra kontaktformularer for spam. Du svarer med enten "sandt" hvis indholdet er spam eller "falsk" hvis det ikke er.'),
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
 
 ];

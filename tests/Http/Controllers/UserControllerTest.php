@@ -27,6 +27,37 @@ class UserControllerTest extends TestCase
             'name' => fake()->name,
             'email' => fake()->email,
             'role' => fake()->randomElement([UserRoleEnum::User->value, UserRoleEnum::Manager->value, UserRoleEnum::Admin->value]),
+            'allowed_a_is' => fake()->numberBetween(1, 100),
+        ];
+        $validator = $method->invokeArgs($userController, [$validData]);
+        $this->assertFalse($validator->fails());
+
+        // Test with invalid data
+        $invalidData = [
+            'name' => '',
+            'email' => 'aa',
+            'role' => '',
+            'allowed_a_is' => 'z',
+        ];
+        $validator = $method->invokeArgs($userController, [$invalidData]);
+        $this->assertTrue($validator->fails());
+    }
+
+    /**
+     * @throws \ReflectionException
+     */
+    public function testValidatorFailsMissingField()
+    {
+        $userController = new UserController();
+        $reflection = new \ReflectionClass($userController);
+        $method = $reflection->getMethod('validator');
+
+        // Test with valid data
+        $validData = [
+            'name' => fake()->name,
+            'email' => fake()->email,
+            'role' => fake()->randomElement([UserRoleEnum::User->value, UserRoleEnum::Manager->value, UserRoleEnum::Admin->value]),
+            'allowed_a_is' => fake()->numberBetween(1, 100),
         ];
         $validator = $method->invokeArgs($userController, [$validData]);
         $this->assertFalse($validator->fails());
@@ -121,8 +152,7 @@ class UserControllerTest extends TestCase
         $response->assertSessionHas('msg-success', 'Profile updated!');
 
         $updatedUser = User::find($user->id);
-        $this->assertEquals($updatedData['name'], $updatedUser->name);
-        $this->assertEquals($updatedData['surname'], $updatedUser->surname);
+        $this->assertEquals($updatedData['name'] . ' ' . $updatedData['surname'], $updatedUser->name);
         $this->assertEquals($updatedData['vat_number'], $updatedUser->vat_number);
         $this->assertEquals($updatedData['company'], $updatedUser->company);
     }

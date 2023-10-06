@@ -168,7 +168,7 @@ class CredentialsSet extends BaseModel
     }
 
     /**
-     * @return HasMany<Credential::class>
+     * @return HasMany<Credential>
      */
     public function credentials(): HasMany
     {
@@ -176,7 +176,7 @@ class CredentialsSet extends BaseModel
     }
 
     /**
-     * @return HasMany<RunSet, CredentialsSet>
+     * @return HasMany<RunSet>
      */
     public function runSets(): HasMany
     {

@@ -41,6 +41,7 @@ class ConductorController extends Controller
         $credentialsCollection = Credential::whereCredentialsSetId($credentialsSetId)->get();
         $credentialsArray = [];
         foreach (CredentialsSet::$keys as $key) {
+            /** @var Credential $credential */
             $credential = $credentialsCollection->where('key', $key)->first();
             if (!$credential) {
                 $credential = new Credential();
@@ -128,7 +129,6 @@ class ConductorController extends Controller
 
         $run_set->save();
 
-        unset($run_sets);
         $run_sets = [];
         $run_sets[] = $run_set;
 

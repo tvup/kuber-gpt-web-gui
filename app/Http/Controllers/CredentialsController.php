@@ -57,7 +57,7 @@ class CredentialsController extends Controller
         $validated = $request->validated();
         /** @var User $user */
         $user = auth()->user();
-        $credentialsSet = $user->credentialsSet()->firstOrFail();
+        $credentialsSet = $user->credentialsSets()->firstOrFail();
         $credentialsSet = $credentialsSet->credentials()->where(['key'=>Arr::get($validated, 'key')]);
         $result = $credentialsSet->delete();
 

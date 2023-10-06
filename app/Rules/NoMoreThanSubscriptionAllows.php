@@ -5,6 +5,7 @@ namespace App\Rules;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Cashier\Subscription;
 
 class NoMoreThanSubscriptionAllows implements ValidationRule
 {
@@ -39,6 +40,11 @@ class NoMoreThanSubscriptionAllows implements ValidationRule
             return 1;
         }
 
+        if (!$user instanceof \App\Models\User) {
+            $user = \App\Models\User::find($user->getAuthIdentifier());
+        }
+
+        /** @var \Illuminate\Database\Eloquent\Collection<int, Subscription> $subscriptions */
         $subscriptions = $user->subscriptions;
         if (!$subscriptions || $subscriptions->count() === 0) {
             return 0;
@@ -46,9 +52,14 @@ class NoMoreThanSubscriptionAllows implements ValidationRule
 
         $sumOfAllowedRunningInstances = 0;
 
-        $activeSubscriptions = $subscriptions->active();
+        $activeSubscriptions = $subscriptions->filter(function (Subscription $subscription) {
+            return $subscription->active();
+        });
+
         foreach ($activeSubscriptions as $activeSubscription) {
             $subscriptionItems = $activeSubscription->items;
+
+            /** @var \Laravel\Cashier\SubscriptionItem $subscriptionItem */
             foreach ($subscriptionItems as $subscriptionItem) {
                 $sumOfAllowedRunningInstances += $allowedQuantityPerProduct[$subscriptionItem->stripe_product];
             }
@@ -59,6 +70,10 @@ class NoMoreThanSubscriptionAllows implements ValidationRule
 
     private function getNumberOfRunningInstancesOfUser(\App\Models\User|\Illuminate\Contracts\Auth\Authenticatable $user)
     {
-        return $user->runSets->whereNotNull('public_ip')->count();
+        if (!$user instanceof \App\Models\User) {
+            $user = \App\Models\User::find($user->getAuthIdentifier());
+        }
+
+        return $user->runSets()->whereNotNull('public_ip')->count();
     }
 }

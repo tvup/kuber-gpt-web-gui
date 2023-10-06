@@ -36,7 +36,7 @@ class RunSet extends BaseModel
     }
 
     /**
-     * @return BelongsTo<CredentialsSet>
+     * @return BelongsTo<CredentialsSet, RunSet>
      */
     public function credentialsSet() : BelongsTo
     {

@@ -50,5 +50,7 @@ jobs:
       - name: PHPUnit Tests
         run: |
           ./vendor/bin/pest
+      - name: Static analysis
+        run: ./bin/phpstan
       - name: PSR
         run: ./bin/style --dry-run

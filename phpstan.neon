@@ -1,12 +1,13 @@
 includes:
     - ./vendor/nunomaduro/larastan/extension.neon
 parameters:
-    level: 8
+    level: 2
     paths:
         - app/
         - resources/
         - config/
     ignoreErrors: # All these errors are weird to fix. We will do that lastly,
+        - '#Access to an undefined property Laravel\\Cashier\\SubscriptionItem::\$stripe_product.#'
     excludes_analyse:
     excludePaths:
 

@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Services\Interfaces\ContactFormSpamCheckerInterface;
-use Illuminate\Support\Str;
 use OpenAI\Laravel\Facades\OpenAI;
 
 class OpenAiContactFormSpamChecker implements ContactFormSpamCheckerInterface
@@ -28,7 +27,14 @@ class OpenAiContactFormSpamChecker implements ContactFormSpamCheckerInterface
         logger()->info('Received from ' . $model . ' :' . json_encode($response, JSON_PRETTY_PRINT));
 
         $content = $response->choices[0]->message->content;
+        if (!empty($content)) {
+            return match ($content) {
+                'true' => true,
+                'false' => false,
+                default => null,
+            };
+        }
 
-        return !empty($content) ? boolval(Str::lower($content)) : null;
+        return null;
     }
 }

@@ -13,6 +13,13 @@ class ContactFormSpamCheckerMock implements ContactFormSpamCheckerInterface
      */
     public function isContactFormContentSpam(string $content, string $locale): bool|null
     {
-        return boolval(rand(0, 1));
+        switch($content) {
+            case 'Hi! Need help!':
+                return false;
+            case 'SPAM!':
+                return true;
+            default:
+                return boolval(rand(0, 1));
+        }
     }
 }

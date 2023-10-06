@@ -20,7 +20,7 @@ class ContactController extends Controller
 
     public function mailContactForm(ContactFormRequest $message, Recipient $recipient)
     {
-        if ($this->spamChecker->isContactFormContentSpam($message->validated('content'), app()->getLocale())) {
+        if ($this->spamChecker->isContactFormContentSpam($message->validated('message'), app()->getLocale())) {
             return redirect()->back()->with('message', __('contact.spam_message'));
         }
 

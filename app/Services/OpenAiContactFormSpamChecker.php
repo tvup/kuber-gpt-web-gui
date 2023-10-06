@@ -15,10 +15,16 @@ class OpenAiContactFormSpamChecker implements ContactFormSpamCheckerInterface
 
         $messages[] = ['role' => 'user', 'content' => $content];
 
+        $model = config('services.ai.openai.model');
+
+        logger()->info('Sent to ' . $model . ' :' . json_encode($messages, JSON_PRETTY_PRINT));
+
         $response = OpenAI::chat()->create([
-            'model' => config('services.ai.openai.model'),
+            'model' => $model,
             'messages' => $messages,
         ]);
+
+        logger()->info('Received from ' . $model . ' :' . json_encode($response, JSON_PRETTY_PRINT));
 
         $content = $response->choices[0]->message->content;
 

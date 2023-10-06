@@ -3,9 +3,18 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAL\Types\StringType;
 
 class AddRuleToUsersTable extends Migration
 {
+    public function __construct()
+    {
+        if (! Type::hasType('enum')) {
+            Type::addType('enum', StringType::class);
+        }
+        DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
+    }
     /**
      * Run the migrations.
      *

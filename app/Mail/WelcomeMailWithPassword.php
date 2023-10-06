@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -12,7 +11,9 @@ use Illuminate\Queue\SerializesModels;
 class WelcomeMailWithPassword extends Mailable
 {
     use Queueable, SerializesModels;
+
     public $data;
+
     public $subject;
 
     /**
@@ -21,7 +22,7 @@ class WelcomeMailWithPassword extends Mailable
     public function __construct($data)
     {
         $this->data = $data;
-        if(array_key_exists('subject', $data)) {
+        if (array_key_exists('subject', $data)) {
             $this->subject = $data['subject'];
         } else {
             $this->subject = 'Welcome mail from kuberGPT';

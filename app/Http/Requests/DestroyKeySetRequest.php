@@ -21,7 +21,6 @@ class DestroyKeySetRequest extends FormRequest
      */
     public function rules(): array
     {
-
         return [
             'key' => ['required'],
         ];

@@ -10,7 +10,6 @@ use App\Models\RunSet;
 use App\Models\User;
 use Faker\Factory;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Redis;
@@ -22,7 +21,8 @@ class ConductorController extends Controller
     /**
      * @throws RedisException
      */
-    public function launch(LaunchRunSetRequest $request) {
+    public function launch(LaunchRunSetRequest $request)
+    {
         $request->validate($request->rules());
 
         $run_set_id = request()->get('run_set');
@@ -41,8 +41,9 @@ class ConductorController extends Controller
         $credentialsCollection = Credential::whereCredentialsSetId($credentialsSetId)->get();
         $credentialsArray = [];
         foreach (CredentialsSet::$keys as $key) {
+            /** @var Credential $credential */
             $credential = $credentialsCollection->where('key', $key)->first();
-            if(!$credential) {
+            if (!$credential) {
                 $credential = new Credential();
                 $credential->key = $key;
                 $credential->value = CredentialsSet::$defaultValues[$key];
@@ -69,10 +70,13 @@ class ConductorController extends Controller
         $listeners = Redis::publish(config('database.redis.default.create_channel'), json_encode($array));
 
         return new JsonResource(['active_listeners'=>$listeners]);
-    }    /**
+    }
+
+    /**
      * @throws RedisException
      */
-    public function megaLaunch(LaunchMegaRunSetRequest $request) {
+    public function megaLaunch(LaunchMegaRunSetRequest $request)
+    {
         $validated = $request->validate($request->rules());
 
         /** @var User $user */
@@ -81,7 +85,6 @@ class ConductorController extends Controller
         /** @var RunSet $run_set */
         $run_set = $user->runSets()->create();
         $run_set->update(['tags->submitted' => true, 'nick_name' => $this->createFakeFirstName()]);
-
 
         /** @var CredentialsSet $credentialsSet */
         $credentialsSet = app(CredentialsSet::class);
@@ -95,7 +98,6 @@ class ConductorController extends Controller
         $credentialsSet->user()->associate($user);
         $credentialsSet->save();
 
-
         $credentialsArray = [];
 
         $credential = new Credential();
@@ -106,9 +108,8 @@ class ConductorController extends Controller
         $credentialsArray[] = $credential;
         unset($credential);
 
-
         foreach (CredentialsSet::$keys as $key) {
-            if($key == 'openai_api_key') {
+            if ($key == 'openai_api_key') {
                 continue;
             }
             $credential = new Credential();
@@ -128,10 +129,8 @@ class ConductorController extends Controller
 
         $run_set->save();
 
-        unset($run_sets);
         $run_sets = [];
-        $run_sets[]=$run_set;
-
+        $run_sets[] = $run_set;
 
         //I proceed if it has no active valid certificates
         $listeners = Redis::publish(config('database.redis.default.create_channel'), json_encode($array));
@@ -146,7 +145,7 @@ class ConductorController extends Controller
     {
         $faker = Factory::create();
         $lower = Str::lower($faker->firstName());
+
         return $lower;
     }
-
 }

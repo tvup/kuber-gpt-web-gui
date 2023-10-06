@@ -4,9 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -19,38 +17,69 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class CredentialsSet extends BaseModel
 {
-    public const OPENAI_API_KEY = "openai_api_key";
-    public const COMMAND_LINE_PARAMS = "command_line_params";
-    public const ELEVENLABS_API_KEY = "elevenlabs_api_key";
-    public const ELEVENLABS_VOICE_ID = "elevenlabs_voice_id";
-    public const SMART_LLM_MODEL = "smart_llm_model";
-    public const FAST_LLM_MODEL = "fast_llm_model";
-    public const GOOGLE_API_KEY = "google_api_key";
-    public const GOOLE_CUSTOM_SEARCH_ENGINE_ID = "google_custom_search_engine_id";
-    public const USE_AZURE = "use_azure";
-    public const IMAGE_PROVIDER = "image_provider";
-    public const MEMORY_BACKEND = "memory_backend";
-    public const REDIS_HOST = "redis_host";
-    public const REDIS_PORT = "redis_port";
-    public const REDIS_PASSWORD = "redis_password";
-    public const WIPE_REDIS_ON_START = "wipe_redis_on_start";
-    public const EXECUTE_LOCAL_COMMANDS = "execute_local_commands";
-    public const RESTRICT_TO_WORKSPACE = "restrict_to_workspace";
-    public const BROWSE_CHUNK_MAX_LENGTH = "browse_chunk_max_length";
-    public const USER_AGENT = "user_agent";
-    public const AI_SETTINGS_FILE = "ai_settings_file";
-    public const USE_WEB_BROWSER = "use_web_browser";
-    public const TEMPERATURE = "temperature";
-    public const MEMORY_INDEX = "memory_index";
-    public const HUGGINGFACE_API_TOKEN = "huggingface_api_token";
-    public const HUGGINGFACE_AUDIO_TO_TEXT_MODEL = "huggingface_audio_to_text_model";
-    public const GITHUB_API_KEY = "github_api_key";
-    public const GITHUB_USERNAME = "github_username";
-    public const APCA_API_KEY_ID = "apca_api_key_id";
-    public const APCA_API_SECRET_KEY = "apca_api_secret_key";
-    public const APCA_PAPER = "apca_paper";
-    public const APCA_SAFE = "apca_safe";
-    public const NEWSAPI_API_KEY = "newsapi_api_key";
+    public const OPENAI_API_KEY = 'openai_api_key';
+
+    public const COMMAND_LINE_PARAMS = 'command_line_params';
+
+    public const ELEVENLABS_API_KEY = 'elevenlabs_api_key';
+
+    public const ELEVENLABS_VOICE_ID = 'elevenlabs_voice_id';
+
+    public const SMART_LLM_MODEL = 'smart_llm_model';
+
+    public const FAST_LLM_MODEL = 'fast_llm_model';
+
+    public const GOOGLE_API_KEY = 'google_api_key';
+
+    public const GOOLE_CUSTOM_SEARCH_ENGINE_ID = 'google_custom_search_engine_id';
+
+    public const USE_AZURE = 'use_azure';
+
+    public const IMAGE_PROVIDER = 'image_provider';
+
+    public const MEMORY_BACKEND = 'memory_backend';
+
+    public const REDIS_HOST = 'redis_host';
+
+    public const REDIS_PORT = 'redis_port';
+
+    public const REDIS_PASSWORD = 'redis_password';
+
+    public const WIPE_REDIS_ON_START = 'wipe_redis_on_start';
+
+    public const EXECUTE_LOCAL_COMMANDS = 'execute_local_commands';
+
+    public const RESTRICT_TO_WORKSPACE = 'restrict_to_workspace';
+
+    public const BROWSE_CHUNK_MAX_LENGTH = 'browse_chunk_max_length';
+
+    public const USER_AGENT = 'user_agent';
+
+    public const AI_SETTINGS_FILE = 'ai_settings_file';
+
+    public const USE_WEB_BROWSER = 'use_web_browser';
+
+    public const TEMPERATURE = 'temperature';
+
+    public const MEMORY_INDEX = 'memory_index';
+
+    public const HUGGINGFACE_API_TOKEN = 'huggingface_api_token';
+
+    public const HUGGINGFACE_AUDIO_TO_TEXT_MODEL = 'huggingface_audio_to_text_model';
+
+    public const GITHUB_API_KEY = 'github_api_key';
+
+    public const GITHUB_USERNAME = 'github_username';
+
+    public const APCA_API_KEY_ID = 'apca_api_key_id';
+
+    public const APCA_API_SECRET_KEY = 'apca_api_secret_key';
+
+    public const APCA_PAPER = 'apca_paper';
+
+    public const APCA_SAFE = 'apca_safe';
+
+    public const NEWSAPI_API_KEY = 'newsapi_api_key';
 
     /**
      * @var array|string[]
@@ -139,7 +168,7 @@ class CredentialsSet extends BaseModel
     }
 
     /**
-     * @return HasMany<Credential::class>
+     * @return HasMany<Credential>
      */
     public function credentials(): HasMany
     {
@@ -147,11 +176,10 @@ class CredentialsSet extends BaseModel
     }
 
     /**
-     * @return HasMany<RunSet, CredentialsSet>
+     * @return HasMany<RunSet>
      */
     public function runSets(): HasMany
     {
         return $this->hasMany(RunSet::class);
     }
-
 }

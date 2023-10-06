@@ -15,7 +15,7 @@ class CheckApproved
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (! auth()->user()?->approved_at) {
+        if (!auth()->user()?->approved_at) {
             return redirect()->route('approval');
         }
 

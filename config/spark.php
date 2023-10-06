@@ -140,7 +140,7 @@ return [
             'plans' => [
                 [
                     'name' => 'Bronze',
-                    'short_description' => 'Here\'s an opening! And it\'s not too expensive! Move into this highly customizable environment and bring with you everything aquired' ,
+                    'short_description' => 'Here\'s an opening! And it\'s not too expensive! Move into this highly customizable environment and bring with you everything aquired',
                     'monthly_id' => env('BRONZE_MONTHLY_PRODUCT_PRICE_ID', 'price_1N1SGpJsg0XlNoye3XUnntnt'),
                     'features' => [
                         'Bring your own tokens/keys',

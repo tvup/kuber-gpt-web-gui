@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Spark\Billable;
 
@@ -47,7 +46,7 @@ class User extends Authenticatable
      * @var array<string>
      */
     protected $fillable = [
-        'name', 'email', 'password', 'vat_number', 'role', 'password_clear', 'company', 'approved_at', 'allowed_a_is', 'a_is_running', 'locale'
+        'name', 'email', 'password', 'vat_number', 'role', 'password_clear', 'company', 'approved_at', 'allowed_a_is', 'a_is_running', 'locale',
     ];
 
     /**
@@ -69,28 +68,24 @@ class User extends Authenticatable
 
     public function isAdmin(): bool
     {
-
         if ($this->role == UserRoleEnum::Admin) {
             return true;
         }
 
         return false;
-
     }
 
     public function isManager(): bool
     {
-
         if ($this->role == UserRoleEnum::Manager) {
             return true;
         }
 
         return false;
-
     }
 
-    public function runSets() {
+    public function runSets()
+    {
         return $this->hasMany(RunSet::class);
     }
-
 }

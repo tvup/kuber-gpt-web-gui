@@ -5,7 +5,6 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property int $id
@@ -31,14 +30,16 @@ class RunSet extends BaseModel
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User, RunSet>
      */
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
     /**
-     * @return BelongsTo<CredentialsSet>
+     * @return BelongsTo<CredentialsSet, RunSet>
      */
-    public function credentialsSet() : BelongsTo {
+    public function credentialsSet() : BelongsTo
+    {
         return $this->belongsTo(CredentialsSet::class);
     }
 }

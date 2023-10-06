@@ -21,7 +21,6 @@ class UpdateKeySetRequest extends FormRequest
      */
     public function rules(): array
     {
-
         return [
             'name' => ['nullable', 'string', 'max:255'],
             'key' => ['required', 'string', 'max:255'],

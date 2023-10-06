@@ -22,7 +22,6 @@ class StoreRunSetRequest extends FormRequest
      */
     public function rules(): array
     {
-
         return [
             'nick_name' => ['nullable', 'string', 'max:53', new NoMoreThanSubscriptionAllows],
             'local_ip' => ['nullable', 'ipv4'],

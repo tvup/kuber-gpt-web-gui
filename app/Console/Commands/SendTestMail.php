@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Mailgun\HttpClient\HttpClientConfigurator;
-use Mailgun\Hydrator\ArrayHydrator;
 use Mailgun\Hydrator\NoopHydrator;
 use Mailgun\Mailgun;
 
@@ -36,13 +35,12 @@ class SendTestMail extends Command
 
         $mgClient = new Mailgun($configurator, new NoopHydrator());
         $domain = config('services.mailgun.domain');
-        # Make the call to the client.
+        // Make the call to the client.
         $return = $mgClient->messages()->send($domain, [
-            'from'	=> 'Excited User <mailgun@'.$domain.'>',
+            'from'	=> 'Excited User <mailgun@' . $domain . '>',
             'to'	=> 'Torben Evald Hansen <test-945wx4dbx@srv1.mail-tester.com>',
             'subject' => 'Hello',
-            'text'	=> 'Testing some Mailgun awesomeness!'
+            'text'	=> 'Testing some Mailgun awesomeness!',
         ]);
-
     }
 }

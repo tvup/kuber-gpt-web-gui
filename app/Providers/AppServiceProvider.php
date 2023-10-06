@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Services\Interfaces\ContactFormSpamCheckerInterface;
+use App\Services\Mocks\ContactFormSpamCheckerMock;
+use App\Services\OpenAiContactFormSpamChecker;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Cashier\Cashier;
 use Stripe\Stripe;
@@ -33,6 +36,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        if (app()->environment('production') || app()->environment('staging')) {
+            $this->app->bind(ContactFormSpamCheckerInterface::class, OpenAiContactFormSpamChecker::class);
+        } else {
+            $this->app->bind(ContactFormSpamCheckerInterface::class, ContactFormSpamCheckerMock::class);
+        }
     }
 }

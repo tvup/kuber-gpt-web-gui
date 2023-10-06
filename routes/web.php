@@ -31,7 +31,7 @@ Route::get('/home', function () {
 })->name('home');
 
 Route::get('/', function () {
-    return view('/landing-pages/appetizer')->with('title',  config('app.name', 'Laravel'));
+    return view('/landing-pages/appetizer')->with('title', config('app.name', 'Laravel'));
 })->name('welcome');
 
 Route::get('/dashboard', function () {
@@ -46,7 +46,7 @@ Route::get('/team', 'HomeController@team')->name('team');
 Route::get('/terms', 'HomeController@terms')->name('terms');
 Route::get('/privacy', 'HomeController@privacy')->name('privacy');
 
-Route::get('/contact', 'ContactController@show')->name('contact');;
+Route::get('/contact', 'ContactController@show')->name('contact');
 Route::post('/contact', 'ContactController@mailContactForm');
 
 Route::get('/home2', 'HomeController@index2')->name('home2');
@@ -70,10 +70,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/mega_launch', 'ConductorController@megaLaunch')->name('conductor.mega_launch');
 });
 
-require __DIR__.'/auth.php';
-
+require __DIR__ . '/auth.php';
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin', 'locale', 'approved']], function () {
     Route::resource('users', UserController::class)->except([]);
     Route::get('users/show_by_user_name/{name}', 'UserController@showByUserName')->name('user.show-by-user-name')->where('name', '.*');
+    Route::get('users/{id}/toggle-access', 'UserController@toggleAccess')->name('user.toggle-access');
 });

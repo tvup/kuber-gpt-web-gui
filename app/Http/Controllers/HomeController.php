@@ -57,27 +57,27 @@ class HomeController extends Controller
 
     public function readMore(): View
     {
-        return view('pages.read-more-'.app()->getLocale());
+        return view('pages.read-more-' . app()->getLocale());
     }
 
     public function team(): View
     {
-        return view('pages.team-'.app()->getLocale());
+        return view('pages.team-' . app()->getLocale());
     }
 
     public function about(): View
     {
-        return view('pages.about-'.app()->getLocale());
+        return view('pages.about-' . app()->getLocale());
     }
 
     public function itsFree(): View
     {
-        return view('pages.its-free-'.app()->getLocale());
+        return view('pages.its-free-' . app()->getLocale());
     }
 
     public function news(): View
     {
-        return view('pages.news-'.app()->getLocale());
+        return view('pages.news-' . app()->getLocale());
     }
 
     public function approval(): View
@@ -87,11 +87,11 @@ class HomeController extends Controller
 
     public function terms(): View
     {
-        return view('pages.terms-'.app()->getLocale());
+        return view('pages.terms-' . app()->getLocale());
     }
 
     public function privacy(): View
     {
-        return view('pages.privacy-'.app()->getLocale());
+        return view('pages.privacy-' . app()->getLocale());
     }
 }

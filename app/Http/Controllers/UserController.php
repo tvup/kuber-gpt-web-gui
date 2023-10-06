@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -28,6 +27,7 @@ class UserController extends Controller
             'email' => 'sometimes|string|email|max:255|unique:users',
             'password' => 'sometimes|string|min:8|confirmed',
             'role' => 'sometimes|in:admin,user,manager_ro',
+            'allowed_a_is' => 'required|int',
         ]);
     }
 
@@ -39,7 +39,6 @@ class UserController extends Controller
         $users = User::all();
 
         return view('admin.users.index', ['users' => $users]);
-
     }
 
     public function create(string $name = null): View
@@ -67,7 +66,6 @@ class UserController extends Controller
         }
 
         return view('admin.users.show', ['user' => $user]);
-
     }
 
     /**
@@ -88,15 +86,16 @@ class UserController extends Controller
             $password_clear = $data['password'];
         }
 
-        User::create([
-            'name' => $data['name'],
+        $user = User::create([
+            'name' => $data['name'] . ' ' . $data['surname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'surname' => $data['surname'],
             'vat_number' => $data['vat_number'],
             'role' => $data['role'],
             'company' => $data['company'],
             'password_clear' => $password_clear,
+            'allowed_a_is' => $data['allowed_a_is'],
+            'a_is_running' => 0,
         ]);
 
         return redirect()->route('admin.users.index')->with('msg-success', 'User created!');
@@ -109,15 +108,13 @@ class UserController extends Controller
     {
         $this->validator($request->except('email'))->validated();
         $data = $request->all();
-        $user->name = $data['name'];
-        $user->surname = $data['surname'];
+        $user->name = $data['name'] . ' ' . $data['surname'];
         $user->vat_number = $data['vat_number'];
         $user->company = $data['company'];
 
         $user->save();
 
         return redirect()->back()->with('msg-success', 'Profile updated!');
-
     }
 
     public function destroy(User $user): RedirectResponse
@@ -136,14 +133,13 @@ class UserController extends Controller
         $fileName = sprintf('%s.ovpn', $user->strippedUserName);
 
         return Storage::disk('pki')->download($fileName);
-
     }
 
     public function toggleAccess(string $id): View
     {
         $user = User::find($id);
-        if (! $user) {
-            throw new Exception('User not found with id: '.$id);
+        if (!$user) {
+            throw new Exception('User not found with id: ' . $id);
         }
         if ($user->approved_at) {
             $user->approved_at = null;
@@ -155,7 +151,5 @@ class UserController extends Controller
         $user->save();
 
         return view('admin.users.edit', ['user' => $user])->with('msg-success', $text);
-
     }
-
 }

@@ -21,7 +21,6 @@ class StorePublicIPForRunSetRequest extends FormRequest
      */
     public function rules(): array
     {
-
         return [
             'ip' => ['required', 'ipv4'],
         ];

@@ -20,11 +20,14 @@ class ContactController extends Controller
 
     public function mailContactForm(ContactFormRequest $message, Recipient $recipient)
     {
-        if ($this->spamChecker->isContactFormContentSpam($message->validated('message'), app()->getLocale())) {
+        $content = $message->validated('message');
+        if ($content == cache('last_contact_form_message') || $this->spamChecker->isContactFormContentSpam($content, app()->getLocale())) {
             return redirect()->back()->with('message', __('contact.spam_message'));
         }
 
         $recipient->notify(new ContactFormMessage($message));
+
+        cache(['last_contact_form_message' => $content], now()->addMinutes(10));
 
         return redirect()->back()->with('message', __('contact.success_message'));
     }

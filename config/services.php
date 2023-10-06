@@ -49,7 +49,7 @@ return [
                             'spam_checker' => env('SERVICES_AI_OPENAI_ROLES_SYSTEM_EN_SPAM_CHECKER', 'You are spamCheckerGPT - A ChatGPT clone with speciality in checking contact form content for spam. You reply with either "true" if the content is spam or "false" if it\'s not'),
                         ],
                         'da' => [
-                            'spam_checker' => env('SERVICES_AI_OPENAI_ROLES_SYSTEM_DA_SPAM_CHECKER', 'Du er spamCheckerGPT - En ChatGPT klon med speciale i at tjekke indhold fra kontaktformularer for spam. Du svarer med enten "sandt" hvis indholdet er spam eller "falsk" hvis det ikke er.'),
+                            'spam_checker' => env('SERVICES_AI_OPENAI_ROLES_SYSTEM_DA_SPAM_CHECKER', 'Du er spamCheckerGPT - En ChatGPT klon med speciale i at tjekke indhold fra kontaktformularer for spam. Du svarer med enten "true" hvis indholdet er spam eller "false" hvis det ikke er.'),
                         ],
                     ],
                 ],

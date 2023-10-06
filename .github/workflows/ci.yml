@@ -21,7 +21,7 @@ jobs:
       - uses: php-actions/composer@v6
         with:
           php_version: "8.2"
-          php_extensions: intl mbstring redis
+          php_extensions: intl mbstring redis bcmath soap
       - name: Create Directories
         run: mkdir -p storage/framework/cache  && mkdir -p storage/framework/views && mkdir -p storage/framework/sessions
       - name: Directory Permissions

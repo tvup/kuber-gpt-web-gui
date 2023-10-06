@@ -15,6 +15,8 @@
         "ext-intl": "*",
         "ext-mbstring": "*",
         "ext-redis": "*",
+        "ext-bcmath": "*",
+        "ext-soap": "*",
         "fakerphp/faker": "^1.21",
         "friendsofphp/php-cs-fixer": "^3.34",
         "guzzlehttp/psr7": "^2.5",

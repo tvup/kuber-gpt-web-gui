@@ -22,6 +22,7 @@ class ContactController extends Controller
     {
         $content = $message->validated('message');
         if ($content == cache('last_contact_form_message') || $this->spamChecker->isContactFormContentSpam($content, app()->getLocale())) {
+            logger()->info('SPAM DETECTED - ' . json_encode($message, JSON_PRETTY_PRINT));
             return redirect()->back()->with('message', __('contact.spam_message'));
         }
 

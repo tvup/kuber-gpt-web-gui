@@ -3,12 +3,17 @@
 namespace App\Services;
 
 use App\Services\Interfaces\ContactFormSpamCheckerInterface;
+use Illuminate\Support\Str;
 use OpenAI\Laravel\Facades\OpenAI;
 
 class OpenAiContactFormSpamChecker implements ContactFormSpamCheckerInterface
 {
     public function isContactFormContentSpam(string $content, string $locale): bool|null
     {
+        $wordCount = Str::wordCount($content);
+        if($wordCount===1) {
+            return true;
+        }
         $messages = [
             ['role' => 'system', 'content' => config('services.ai.openai.roles.system.locale.' . $locale . '.spam_checker', 'You are spamCheckerGPT - A ChatGPT clone with speciality in checking contact form content for spam. You reply with either "true" if the content is spam or "false" if it\'s not')],
         ];

@@ -1,21 +1,15 @@
 # kuber-gpt-web-gui
 
-This is a web GUI built with Laravel to interact with kuber-gpt.
+This was a web GUI built with Laravel to interact with kuber-gpt.
+
+Project is closed - a redirect to something else is shown to user.
 
 ## Table of Contents
 
-- [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
-- [Support](#support)
-
-## Features
-
-- **Laravel Backend**: A robust backend built with Laravel 10
-- **Sail Integration**: Easy setup and deployment using Sail.
-- **Multilingual Support**: Supports multiple languages including English, Italian, and Danish.
 
 ## Installation
 <p>It's strongly recommended that you add an alias to your bash/zsh config</p>
@@ -83,9 +77,3 @@ We welcome contributions from the community! Please see our [contribution guide]
 ## License
 
 This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
-## Support
-
-If you find this project useful, consider supporting the developer:
-
-<a href="https://www.buymeacoffee.com/tvup"> <img align="left" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" alt="MaoX17" /></a>

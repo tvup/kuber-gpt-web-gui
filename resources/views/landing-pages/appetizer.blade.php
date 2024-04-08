@@ -1,10 +1,6 @@
-@extends('layouts.frontend')
+@extends('layouts.app')
 
 @section('title', $title)
-
-@section('css')
-    @vite(['resources/sass/frontend.scss'])
-@endsection
 
 @section('content')
 
@@ -13,22 +9,21 @@
             <div class="disclaimer-container">
                 <div class="disclaimer-box p-4 m-4 bg-yellow-300 text-2xl rounded-md">
                     <p>
-                        {!! __('appetizer.disclaimer')!!}
+                        Project has ceased
                     </p>
                 </div>
             </div>
             <div>
                 <div>
-                    <h2 class="mt-0 text-3xl font-semibold text-gray-800 md:text-4xl">AutoGPT <span
-                            class="text-indigo-600">get ready!</span><br/> {{__('appetizer.hosted_interactive_self_reflective')}}
-                    </h2>
-                    <p class="mt-2 text-sm text-gray-600 md:text-base">{{__('appetizer.its-happening-right-now-its-a-hype-and-now-if-you-want-to-to-cut-the-corners-a-see-it-for-your-self-youre-invited')}}</p>
-                    <div class="flex justify-center lg:justify-start mt-6">
-                        <a class="px-4 py-3 bg-gray-900 text-gray-200 text-xs font-semibold rounded hover:bg-gray-800"
-                           href="{{ route('register') }}">{{__('appetizer.get_started')}}</a>
-                        <a class="mx-4 px-4 py-3 bg-gray-300 text-gray-900 text-xs font-semibold rounded hover:bg-gray-400"
-                           href="{{ route('read-more') }}">{{__('appetizer.learn_more')}}</a>
+                    <h1>Just a moment...</h1>
+                    <div class="slider">
+                        <div class="line"></div>
+                        <div class="break dot1"></div>
+                        <div class="break dot2"></div>
+                        <div class="break dot3"></div>
                     </div>
+                    <p>We're redirecting you to another project - "Artificial Kurt" instead in <span id="countdown">7</span> seconds</p>
+                    <p class="text-sm">Not working? <a href="https://kunstigekurt.dk">Click here.</a></p>
                 </div>
             </div>
         </div>
@@ -39,4 +34,25 @@
             </video>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        var seconds = 7;
+
+        function updateCountDown()
+        {
+            seconds--;
+            document.getElementById('countdown').innerHTML = seconds;
+            if (seconds <= 0) {
+                window.location="https://kunstigekurt.dk";
+            }
+        }
+
+        window.onload = function() {
+            document.getElementById('countdown').innerHTML = seconds;
+            setInterval(updateCountDown, 1000);
+        };
+
+    </script>
 @endsection

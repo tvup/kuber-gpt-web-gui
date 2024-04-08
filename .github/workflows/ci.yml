@@ -11,7 +11,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
-          extensions: intl, mbstring, redis, bcmath, soap
+          extensions: mbstring, bcmath
 
       - uses: actions/checkout@v3
 
@@ -27,9 +27,7 @@ jobs:
       - uses: php-actions/composer@v6
         with:
           php_version: "8.2"
-          php_extensions: intl mbstring redis bcmath soap
-        env:
-          COMPOSER_AUTH: '{"http-basic": {"spark.laravel.com": {"username": "${{ secrets.SPARK_USERNAME }}", "password": "${{ secrets.SPARK_API_PASSWORD }}" }} }'
+          php_extensions: mbstring bcmath
       - name: Create Directories
         run: mkdir -p storage/framework/cache  && mkdir -p storage/framework/views && mkdir -p storage/framework/sessions
       - name: Directory Permissions
@@ -49,7 +47,7 @@ jobs:
           php artisan view:clear
       - name: PHPUnit Tests
         run: |
-          ./vendor/bin/pest
+          ./vendor/bin/phpunit
       - name: Static analysis
         run: ./bin/phpstan
       - name: PSR

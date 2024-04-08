@@ -51,11 +51,6 @@ return [
             'root' => storage_path('app'),
         ],
 
-        'pki' => [
-            'driver' => 'local',
-            'root' => env('PKI_PATH'),
-        ],
-
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

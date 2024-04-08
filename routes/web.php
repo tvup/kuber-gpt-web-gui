@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,17 +13,6 @@ use Illuminate\Support\Facades\Session;
 |
 */
 
-Route::get('language/{locale}', function ($locale) {
-    app()->setLocale($locale);
-    if (app()->isDownForMaintenance()) {
-        setcookie('locale', $locale, time() + (60 * 60 * 24 * 30), '/'); // Sætter cookie til at udløbe om 30 dage
-    } else {
-        Session::put('locale', $locale);
-    }
-
-    return redirect()->back();
-});
-
 Route::get('/home', function () {
     return redirect('/');
 })->name('home');
@@ -33,47 +20,3 @@ Route::get('/home', function () {
 Route::get('/', function () {
     return view('/landing-pages/appetizer')->with('title', config('app.name', 'Laravel'));
 })->name('welcome');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
-Route::get('/read-more', 'HomeController@readMore')->name('read-more');
-Route::get('/news', 'HomeController@news')->name('news');
-Route::get('/its-free', 'HomeController@itsFree')->name('its-free');
-Route::get('/about', 'HomeController@about')->name('about');
-Route::get('/team', 'HomeController@team')->name('team');
-Route::get('/terms', 'HomeController@terms')->name('terms');
-Route::get('/privacy', 'HomeController@privacy')->name('privacy');
-
-Route::get('/contact', 'ContactController@show')->name('contact');
-Route::post('/contact', 'ContactController@mailContactForm');
-
-Route::get('/home2', 'HomeController@index2')->name('home2');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/castle', 'HomeController@castle')->name('castle');
-
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    Route::get('credentials', 'CredentialsController@index')->name('credentials.index');
-    Route::post('/credentials', 'CredentialsController@store')->name('credentials.store');
-    Route::put('credentials', 'CredentialsController@update')->name('credentials.update');
-    Route::delete('credentials', 'CredentialsController@destroy')->name('credentials.delete');
-
-    Route::resource('run_sets', RunSetController::class);
-
-    Route::post('/launch', 'ConductorController@launch')->name('conductor.launch');
-    Route::post('/mega_launch', 'ConductorController@megaLaunch')->name('conductor.mega_launch');
-});
-
-require __DIR__ . '/auth.php';
-
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin', 'locale', 'approved']], function () {
-    Route::resource('users', UserController::class)->except([]);
-    Route::get('users/show_by_user_name/{name}', 'UserController@showByUserName')->name('user.show-by-user-name')->where('name', '.*');
-    Route::get('users/{id}/toggle-access', 'UserController@toggleAccess')->name('user.toggle-access');
-});
